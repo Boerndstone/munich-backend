@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}Fels bearbeiten{% endblock %}
+
+{% block body %}
+
+    <div class="container pt-12 pb-2">
+
+
+
+
+
+    <h1>Fels {{ rock.name }} bearbeiten</h1>
+
+    {{ include('rock/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('rock_index') }}">back to list</a>
+
+    {{ include('rock/_delete_form.html.twig') }}
+
+
+    </div>
+{% endblock %}

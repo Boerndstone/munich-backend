@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+
+body {
+    @apply 
+        text-black
+        text-sm
+        font-sans
+        bg-white
+        leading-normal
+        font-normal
+    ;
+}
+
+.badgetailwind {
+    @apply 
+        bg-black 
+        rounded 
+        p-1 
+        font-semibold
+        text-white
+        text-sm
+    ;
+}
+
+
+
+
+h1 {
+    @apply
+        text-xl 
+        text-black 
+        font-semibold 
+    ;
+}
+
+h2 {
+    @apply
+        text-xl 
+        text-black 
+        font-semibold 
+    ;
+}
+
+
+
+h3 {
+    @apply
+        text-gray-900
+    ;
+}
+
+.paragraph {
+    @apply
+        text-black 
+        text-sm 
+        font-semibold
+    ;
+}
+
+@screen md {
+    h1 {
+        @apply
+            text-2xl
+        ;
+    }
+    .badgetailwind {
+        @apply 
+            text-xs
+        ;
+    } 
+}
+
+@tailwind utilities;

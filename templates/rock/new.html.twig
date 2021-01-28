@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Rock{% endblock %}
+
+{% block body %}
+    <h1>Create new Rock</h1>
+
+    {{ include('rock/_form.html.twig') }}
+
+    <a href="{{ path('rock_index') }}">back to list</a>
+{% endblock %}
