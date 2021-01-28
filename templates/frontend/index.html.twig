@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FrontendController!{% endblock %}
+
+{% block body %}
+		<div 
+			class="container pb-2" 
+			style="padding-top: 40px;"
+		>
+
+
+			<div id="main" class="mt-3">
+				<div class="bg-white p-3 mb-4 flex items-center justify-between shadow">
+					<h1 class="tracking-wide w-full">Klettergebiete um München</h1>
+				</div>
+
+
+				<div class="grid grid-cols-3 gap-4">
+					<div class="col-span-3 md:col-span-2">
+
+							<a 
+								href="" 
+								title="" 
+								data-area="" 
+								class="hover:bg-gray-100 block w-full bg-white shadow rounded mb-4 mr-2 p-2"
+							> 
+
+								<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+									<div>
+										
+											<img
+												class="lazy"  
+												src=""
+												data-src=""
+
+												alt="Übersicht Klettergebiete " />
+												
+			   	
+										
+												<svg class="fill-current inline-block text-black w-100" style="height: 177px;">
+													<use xlink:href="<?php echo BASE_URL_NEW ?>public/images/icons/sprite.svg#picture"/> 
+												</svg>
+										
+									</div>
+									<div>
+								
+										<h2 class="mb-3"></h2>
+
+										<hr class="my-1" />
+
+										<div class="flex items-center">
+											<p class="paragraph mb-0 mr-3">Felsen</p>
+											<span class="badgetailwind"></span>
+										</div>
+
+										<hr class="my-1" />
+
+										<div class="flex items-center">
+											<p class="paragraph mb-0 mr-3">Touren</p>
+											<span class="badgetailwind"></span>
+										</div>
+
+										<hr class="my-2" />
+									
+										<div class="flex flex-row justify-between">
+											
+											<div class="d-flex flex-col">
+												<div class="text-center bg- px-2 py-1 md:text-xs text-sm text-white"></div>
+												<div class="text-center md:text-xs text-sm text-white bg-gray-400 mt-1">
+													<div class="bg- px-2 py-1" style="width: %">
+														
+													</div>
+												</div>	
+											</div>
+											
+										</div>
+									</div>
+								</div>
+							</a>
+
+					</div>
+					<div class="col-span-3 md:col-span-1">
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	
+{% endblock %}
