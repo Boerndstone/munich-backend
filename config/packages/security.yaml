@@ -1,4 +1,10 @@
 security:
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+            # argon2i ist besser, noch einmal checken bevor deployment
+            # cost macht passwörter schwerer zu entschlüsseln!!!
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         # used to reload user from session & other features (e.g. switch_user)
@@ -6,6 +12,8 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_ADMIN_AREA, ROLE_ADMIN_ROCKS, ROLE_ADMIN_ROUTES]
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -14,6 +22,16 @@ security:
             anonymous: true
             lazy: true
             provider: app_user_provider
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
+
+            logout: 
+                path: app_logout
+
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 2592000 # 30 days in seconds
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -24,5 +42,5 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/area, roles: ROLE_ADMIN }
+        - { path: ^/rock, roles: ROLE_ADMIN }

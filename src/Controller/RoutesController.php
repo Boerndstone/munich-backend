@@ -6,6 +6,7 @@ use App\Entity\Routes;
 use App\Form\RoutesType;
 use App\Repository\RoutesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,9 +18,13 @@ class RoutesController extends AbstractController
 {
     /**
      * @Route("/", name="routes_index", methods={"GET"})
+     * @IsGranted("ROLE_USER")
      */
     public function index(RoutesRepository $RoutesRepository): Response
     {
+        // One way to solve access control!!!!
+        //$this->denyAccessUnlessGranted('ROLE_USER');
+
         return $this->render('routes/index.html.twig', [
             'routes' => $RoutesRepository->findAll(),
         ]);

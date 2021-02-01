@@ -31,6 +31,19 @@ class AreaRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * @return Area[] Returns an array of Area objects
+     */
+    public function findAllAreasFrontend ()
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.sequence', 'ASC')
+            ->where('a.online = 1')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Area[] Returns an array of Area objects
     //  */
