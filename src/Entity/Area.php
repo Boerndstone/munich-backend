@@ -43,6 +43,11 @@ class Area
      */
     private $rocks;
 
+     /**
+     * @ORM\OneToMany(targetEntity=Routes::class, mappedBy="areaId")
+     */
+    private $routes;
+
     /**
      * @ORM\Column(type="smallint", nullable=true)
      */

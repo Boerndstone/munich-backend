@@ -19,6 +19,17 @@ class RoutesRepository extends ServiceEntityRepository
         parent::__construct($registry, Routes::class);
     }
 
+
+    public function countNumberPrintedForCategory(Area $area)
+    {
+        return $this->createQueryBuilder('fc')
+            ->andWhere('fc.area = :area')
+            ->setParameter('area', $area)
+            //->select('SUM(fc.numberPrinted) as fortunesPrinted, AVG(fc.numberPrinted) as fortunesAverage, cat.name')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     // /**
     //  * @return Routes[] Returns an array of Routes objects
     //  */

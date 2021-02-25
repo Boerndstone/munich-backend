@@ -6,7 +6,7 @@
         "@tailwindcss/forms": "^0.2.1",
         "@tailwindcss/postcss7-compat": "^2.0.2",
         "autoprefixer": "^9",
-        "bootstrap": "^4.5.3",
+        "bootstrap": "^5.0.0-beta1",
         "core-js": "^3.0.0",
         "font-awesome": "^4.7.0",
         "jquery": "^3.5.1",

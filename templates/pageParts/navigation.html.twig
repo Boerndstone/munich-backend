@@ -18,23 +18,24 @@
 
             <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
             <div class="hidden md:flex md:items-center md:justify-between flex-1">
-                {% if is_granted('ROLE_USER') %}
+                
                 <div class="flex flex-col -mx-4 md:flex-row md:items-center md:mx-8">
-                    <a href="{{ path('area_index') }}" class="mx-2 mt-2 md:mt-0 px-2 py-1 text-sm text-gray-700 dark:text-gray-200 font-medium rounded-md hover:bg-gray-300 dark:hover:bg-gray-700">Gebiete</a>
-                    <a href="{{ path('rock_index') }}" class="mx-2 mt-2 md:mt-0 px-2 py-1 text-sm text-gray-700 dark:text-gray-200 font-medium rounded-md hover:bg-gray-300 dark:hover:bg-gray-700">Felsen</a>
-                    <a href="{{ path('routes_index') }}" class="mx-2 mt-2 md:mt-0 px-2 py-1 text-sm text-gray-700 dark:text-gray-200 font-medium rounded-md hover:bg-gray-300 dark:hover:bg-gray-700">Touren</a>
+                    {% if is_granted('ROLE_USER') %}
+                        <a href="{{ path('area_index') }}" class="mx-2 mt-2 md:mt-0 px-2 py-1 text-sm text-gray-700 dark:text-gray-200 font-medium rounded-md hover:bg-gray-300 dark:hover:bg-gray-700">Gebiete</a>
+                        <a href="{{ path('rock_index') }}" class="mx-2 mt-2 md:mt-0 px-2 py-1 text-sm text-gray-700 dark:text-gray-200 font-medium rounded-md hover:bg-gray-300 dark:hover:bg-gray-700">Felsen</a>
+                        <a href="{{ path('routes_index') }}" class="mx-2 mt-2 md:mt-0 px-2 py-1 text-sm text-gray-700 dark:text-gray-200 font-medium rounded-md hover:bg-gray-300 dark:hover:bg-gray-700">Touren</a>
+                    {% endif %}
                 </div>
-                {% endif %}
-
+                
                 {% if is_granted('ROLE_USER') %}
                     <div class="flex items-center mt-4 md:mt-0">
                         <a href="{{ path('user_index') }}" class="mx-2 mt-2 md:mt-0 px-2 py-1 text-sm text-gray-700 dark:text-gray-200 font-medium rounded-md hover:bg-gray-300 dark:hover:bg-gray-700">user</a>
                         <a href="{{ path('app_logout') }}" class="mx-2 mt-2 md:mt-0 px-2 py-1 text-sm text-gray-700 dark:text-gray-200 font-medium rounded-md hover:bg-gray-300 dark:hover:bg-gray-700">LOGOUT</a>
                     </div>
                 {% else %}
-                <div class="flex items-center mt-4 md:mt-0">
-                    <a href="{{ path('app_login') }}" class="mx-2 mt-2 md:mt-0 px-2 py-1 text-sm text-gray-700 dark:text-gray-200 font-medium rounded-md hover:bg-gray-300 dark:hover:bg-gray-700">LOGIN</a>
-                </div>
+                    <div class="flex items-center mt-4 md:mt-0">
+                        <a href="{{ path('app_login') }}" class="mx-2 mt-2 md:mt-0 px-2 py-1 text-sm text-gray-700 dark:text-gray-200 font-medium rounded-md hover:bg-gray-300 dark:hover:bg-gray-700">LOGIN</a>
+                    </div>
                 {% endif %}
             </div>
         </div>

@@ -1,4 +1,27 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div class="grid grid-cols-12 gap-4">
+        {{ form_row(form.name) }}
+        {#{ form_row(form.areaRelation) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.slug) }}
+        {{ form_row(form.nr) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.access) }}
+        {{ form_row(form.nature) }}
+        {{ form_row(form.zone) }}
+        {{ form_row(form.banned) }}
+        {{ form_row(form.height) }}
+        {{ form_row(form.orientation) }}
+        {{ form_row(form.season) }}
+        {{ form_row(form.child_friendly) }}
+        {{ form_row(form.sunny) }}
+        {{ form_row(form.rain) }}
+        {{ form_row(form.image) }}
+        {{ form_row(form.header_image) }}
+        {{ form_row(form.topo) }}
+        {{ form_row(form.lat) }}
+        {{ form_row(form.lng) }}
+        {{ form_row(form.online) }#}
+    </div>
+    <button class="inline-flex items-center h-10 px-5 text-white transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

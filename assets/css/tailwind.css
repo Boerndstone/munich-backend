@@ -71,4 +71,8 @@ h3 {
     } 
 }
 
+.collapse:not(.show) {
+    display: none;
+}
+
 @tailwind utilities;

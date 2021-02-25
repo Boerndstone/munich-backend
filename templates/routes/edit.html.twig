@@ -3,11 +3,23 @@
 {% block title %}Edit Route{% endblock %}
 
 {% block body %}
-    <h1>Edit Route</h1>
 
-    {{ include('routes/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="container pt-12 pb-2">
 
-    <a href="{{ path('routes_index') }}">back to list</a>
+        <h1 class="mb-5">Route {{ routes.name }} bearbeiten</h1>
 
-    {{ include('routes/_delete_form.html.twig') }}
+        {{ include('routes/_form.html.twig', {'button_label': 'aktualisieren'}) }}
+
+
+        <div class="flex items-center my-5">
+            <a 
+                class="inline-flex items-center h-10 px-5 text-white transition-colors duration-150 bg-yellow-400 rounded-lg focus:shadow-outline hover:bg-yellow-500 mr-5"
+                role="button"
+                href="{{ path('rock_index') }}"
+            >zurück zur Übersicht</a>
+
+            {{ include('routes/_delete_form.html.twig') }}
+        </div>
+
+    </div>
 {% endblock %}

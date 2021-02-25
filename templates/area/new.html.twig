@@ -1,11 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Area{% endblock %}
+{% block title %}Neues Gebiet anlegen{% endblock %}
 
 {% block body %}
-    <h1>Create new Area</h1>
 
-    {{ include('area/_form.html.twig') }}
+    <div class="container pt-12 pb-2">
+        <h1 class="mb-5">Neues Gebiet anlegen</h1>
 
-    <a href="{{ path('area_index') }}">back to list</a>
+        {{ include('area/_form.html.twig') }}
+
+        <div class="flex items-center my-5">
+            <a 
+                class="inline-flex items-center h-10 px-5 text-white transition-colors duration-150 bg-yellow-400 rounded-lg focus:shadow-outline hover:bg-yellow-500 mr-5"
+                role="button"
+                href="{{ path('area_index') }}"
+            >zurück zur Übersicht</a>
+
+        </div>
+    </div>
 {% endblock %}

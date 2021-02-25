@@ -18,9 +18,9 @@
 				<div class="grid grid-cols-3 gap-4">
 					<div class="col-span-3 md:col-span-2">
 
-						{% for area in areas %}
+						{#% for area in areas %}
 							<a 
-								href="" 
+								href="{{ path('show_rocks', { slug: area.slug }) }}" 
 								title="" 
 								data-area="" 
 								class="hover:bg-gray-100 block w-full bg-white shadow rounded mb-4 mr-2 p-2"
@@ -51,14 +51,14 @@
 
 										<div class="flex items-center">
 											<p class="paragraph mb-0 mr-3">Felsen</p>
-											<span class="badgetailwind"></span>
+											<span class="badgetailwind">{{ area.rocks|length }}</span>
 										</div>
 
 										<hr class="my-1" />
 
 										<div class="flex items-center">
 											<p class="paragraph mb-0 mr-3">Touren</p>
-											<span class="badgetailwind"></span>
+											<span class="badgetailwind">{{ area.routes|length }}</span>
 										</div>
 
 										<hr class="my-2" />
@@ -78,7 +78,7 @@
 									</div>
 								</div>
 							</a>
-						{% endfor %}
+						{% endfor %#}
 					</div>
 					<div class="col-span-3 md:col-span-1">
 					</div>

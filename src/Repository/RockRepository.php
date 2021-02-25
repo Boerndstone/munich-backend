@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Area;
 use App\Entity\Rock;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -36,15 +37,51 @@ class RockRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Rock
+    
+    public function findAllRocksFromAreaFrontend(int $areaRelation)
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
+        /*return $this->createQueryBuilder('r')
+            ->andWhere('r.areaRelation = :val')
+            ->setParameter('rocks', $value)
             ->getQuery()
             ->getOneOrNullResult()
-        ;
+        ;*/
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT a, r
+            FROM App\Entity\Area a
+            JOIN a.rocks r
+            WHERE a.id = :rocks'
+        )->setParameter('rocks', $areaRelation);
+
+        return $query->getResult();
     }
-    */
+
+    public function getAreaRockCountFrontend(int $areaRelation)
+    {
+        /*return $this->createQueryBuilder('r')
+            ->andWhere('r.areaRelation = :val')
+            ->setParameter('rocks', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;*/
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT count(r.id)
+            FROM App\Entity\Area a
+            JOIN a.rocks r
+            WHERE a.id = :rocks'
+        )->setParameter('rocks', $areaRelation);
+
+        return $query->getResult();
+    }
+
+
+
+
+    
 }
