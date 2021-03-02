@@ -33,6 +33,8 @@ security:
                 secret:   '%kernel.secret%'
                 lifetime: 2592000 # 30 days in seconds
 
+            access_denied_handler: App\Security\AccessDeniedHandler
+
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
