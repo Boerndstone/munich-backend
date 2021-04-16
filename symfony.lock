@@ -29,6 +29,9 @@
     "doctrine/dbal": {
         "version": "2.12.1"
     },
+    "doctrine/deprecations": {
+        "version": "v0.5.3"
+    },
     "doctrine/doctrine-bundle": {
         "version": "2.0",
         "recipe": {
@@ -96,6 +99,9 @@
     "fzaninotto/faker": {
         "version": "v1.9.2"
     },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.2.0"
+    },
     "monolog/monolog": {
         "version": "2.1.1"
     },
@@ -107,15 +113,6 @@
     },
     "php": {
         "version": "7.3"
-    },
-    "phpdocumentor/reflection-common": {
-        "version": "2.2.0"
-    },
-    "phpdocumentor/reflection-docblock": {
-        "version": "5.2.2"
-    },
-    "phpdocumentor/type-resolver": {
-        "version": "1.4.0"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -353,10 +350,7 @@
         "version": "v5.2.2"
     },
     "symfony/serializer": {
-        "version": "v5.2.2"
-    },
-    "symfony/serializer-pack": {
-        "version": "v1.0.4"
+        "version": "v5.2.4"
     },
     "symfony/service-contracts": {
         "version": "v2.2.0"
@@ -466,9 +460,6 @@
     },
     "twig/twig": {
         "version": "v3.1.1"
-    },
-    "webmozart/assert": {
-        "version": "1.9.1"
     },
     "zendframework/zend-code": {
         "version": "3.4.1"
