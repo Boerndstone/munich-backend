@@ -48,6 +48,15 @@ class FrontendController extends AbstractController
         ]);
     }
 
+
+    /**
+     * @Route("/frontend/create-topo", name="create_topo")
+     */
+    public function create() : Response
+    {
+        return $this->render('frontend/create.topo.html.twig', []);
+    }
+
     /**
      * @Route("/frontend/{slug}", name="show_rocks")
      */
