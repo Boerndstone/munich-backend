@@ -131,6 +131,14 @@ class Area
     }
 
     /**
+     * @return Collection|Routes[]
+     */
+    public function getRoutes(): Collection
+    {
+        return $this->routes;
+    }
+
+    /**
      * @return Collection|Rock[]
      */
     public function getRocks(): Collection

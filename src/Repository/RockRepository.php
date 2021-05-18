@@ -20,22 +20,22 @@ class RockRepository extends ServiceEntityRepository
         parent::__construct($registry, Rock::class);
     }
 
-    // /**
-    //  * @return Rock[] Returns an array of Rock objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Rock[] Returns an array of Rock objects
+     */
+    
+    public function findByAreaId($amount_rocks) : array
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'SELECT * FROM area INNER JOIN rock ON area.id = rock.area_relation_id WHERE area_relation_id = :amountRocks';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['amount_rocks' => $amount_rocks]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $stmt->fetchAllAssociative();
     }
-    */
+    
 
     
     public function findAllRocksFromAreaFrontend(int $areaRelation)
@@ -57,6 +57,15 @@ class RockRepository extends ServiceEntityRepository
         )->setParameter('rocks', $areaRelation);
 
         return $query->getResult();
+    }
+
+    public function amountRocks($amount_rocks) {
+        $sql = 'SELECT * FROM area INNER JOIN rock ON area.id = rock.area_relation_id WHERE area_relation_id = :amountRocks';
+        $query = $this->pdo->prepare($sql);
+        $query->bindParam(':amountRocks', $amount_rocks);
+        $query->execute();
+        $rocks = $query->rowCount();
+        return $rocks;
     }
 
     public function getAreaRockCountFrontend(int $areaRelation)

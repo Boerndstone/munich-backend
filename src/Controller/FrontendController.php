@@ -35,10 +35,11 @@ class FrontendController extends AbstractController
 
         //dd($areas);
 
-        /*$amountRocks = $this->getDoctrine()
-            ->getRepository('App:Rock')
-            ->countRocks($areaRelation)
-        ;*/
+        //print_r($areas->getRocks());
+
+        //$amountRocks = $this->getDoctrine()->getRepository(Area::class)->countRoutesForArea($areas);
+
+        //var_dump($amountRocks);die;
 
         return $this->render('frontend/index.html.twig', [
             'areas' => $areas,

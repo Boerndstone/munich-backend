@@ -26,10 +26,31 @@ class AreaRepository extends ServiceEntityRepository
      */
     public function findAllAreasAlphabetical ()
     {
-        return $this->createQueryBuilder('a')
-            ->orderBy('a.sequence', 'ASC')
+        return $this->createQueryBuilder('area')
+            ->orderBy('area.sequence', 'ASC')
+            ->where('area.online = 1')
+            /*->innerJoin('area.rocks', 'rocks')
+            ->innerJoin('area.routes', 'routes')
+            ->addSelect('area.name as areaName')
+            ->addSelect('area.slug as areaSlug')
+            ->addSelect('area.image as areaImage')
+            ->addSelect('rocks.name as rocksName')
+            ->addSelect('rocks.id as rocksID')*/
+            //->addSelect('routes.name as routesName')
+            
+            //->addSelect("COUNT(rocks.areaRelation) as amountRocks")
+           
+            //->addSelect("COUNT(routes.id) as amountRoutes")
+            
+
+            //->groupBy('rocks.areaRelation')
+            //->addGroupBy('routes.id')
+            //->addSelect('rocks.name as areaRocks')
+            
+
             ->getQuery()
             ->getResult()
+            
         ;
 
         // Das wäre dann der inner join!!!!!

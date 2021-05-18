@@ -74,7 +74,7 @@ class RoutesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoutes('routes_index');
+            return $this->redirectToRoute('routes_index');
         }
 
         return $this->render('routes/edit.html.twig', [
@@ -94,6 +94,6 @@ class RoutesController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoutes('Routes_index');
+        return $this->redirectToRoute('routes_index');
     }
 }

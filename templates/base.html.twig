@@ -10,12 +10,20 @@
             {{ encore_entry_link_tags('tailwind') }}
         {% endblock %}
 
+
+
+        
+
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body class="sidebar-mini" style="height: auto;">
-
+    <body 
+        class="skin-blue sidebar-mini" 
+        style="height: auto; min-height: 100%;"
+    >
+        {#{ include('pageParts/main.header.html.twig') }#}
+        {#{ include('pageParts/sidebar.navigation.html.twig') }#}
         {{ include('pageParts/navigation.html.twig') }}
 
         {% for message in app.flashes('success') %}
@@ -28,7 +36,6 @@
 
 
         {{ include('pageParts/footer.html.twig') }}
-
 
     </body>
 </html>
