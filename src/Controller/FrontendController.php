@@ -59,7 +59,7 @@ class FrontendController extends AbstractController
     }
 
     /**
-     * @Route("/frontend/{slug}", name="show_rocks")
+     * @Route("/klettergebiet/{slug}", name="show_rocks")
      */
     public function show($slug,  CacheInterface $cache)
     {

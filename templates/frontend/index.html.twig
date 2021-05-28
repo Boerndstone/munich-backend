@@ -44,7 +44,7 @@
 											{% if area.image %}
 												<img
 													class="lazy"  
-													src="{{ asset('build/images/areas/' ~ area.image) }}"
+													src="{{ asset('build/images/areas/' ~ area.image ~ '.jpg') }}"
 													data-src=""
 													alt="Übersicht Klettergebiete {{ area.name }}" 
 												/>
@@ -76,20 +76,51 @@
 											<hr class="my-2" />
 										
 											<div class="flex flex-row justify-between">
-												
-												<div class="d-flex flex-col">
-													<div class="text-center bg- px-2 py-1 md:text-xs text-sm text-white"></div>
-													<div class="text-center md:text-xs text-sm text-white bg-gray-400 mt-1">
-														<div class="bg- px-2 py-1" style="width: %">
-															{#{ area.grade }#}
-														</div>
-													</div>	
-												</div>
-												
+{#}
+foreach ($online as $key) {
+								$prozent 	= 100/$routes->amountRoutesArea($key['areaId']);
+								$easy 		= $prozent * $routes->getRoutesGrade($key['areaId'], 0, 15);
+								$middle 	= $prozent * $routes->getRoutesGrade($key['areaId'], 15, 29);
+								$hard 		= $prozent * $routes->getRoutesGrade($key['areaId'], 29, 60);
+								$project 	= $prozent * $routes->projects($key['areaId']);
+
+								$grading = array(
+													'easy' 		=> array("green", "1 - 5", $easy, 0, 15),
+													'middle' 	=> array("blue", "6 - 7", $middle, 15, 29),
+													'hard' 		=> array("red", "8 - 11", $hard, 29, 60),
+													'project' 	=> array("black", "Proj.", $project),
+												);
+												foreach($grading as $i => $value) {
+
+#}
+													{% set prozent = 100/area.routes|length %}
+													
+
+{#{ prozent }#}
+
+												{% for route in area.routes %}
+
+													{#% set easy = prozent * route.gradeNo < 15 %#}
+
+													{#{ easy }#}
+
+													<div class="d-flex flex-col">
+														<div class="text-center bg- px-2 py-1 md:text-xs text-sm text-white"></div>
+														<div class="text-center md:text-xs text-sm text-white bg-gray-400 mt-1">
+															<div class="bg- px-2 py-1" style="width: %">
+																{#{ dump(route.gradeNo) }#}
+															</div>
+														</div>	
+													</div>
+												{% endfor %}
 											</div>
 										</div>
 									</div>
 								</a>
+
+								
+
+								
 
 							{% endfor %}
 						</div>

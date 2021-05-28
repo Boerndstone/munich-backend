@@ -16,6 +16,8 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\FormErrorIterator;
+
 
 class AreaType extends AbstractType
 {
@@ -33,6 +35,11 @@ class AreaType extends AbstractType
                         'label_attr' => [
                             'class' => 'text-gray-700 font-medium'
                         ],
+                        'help' => 'Name des Gebiets',
+                        'help_attr' => [
+                            'class' => 'text-xs text-gray-700 mt-2 ml-2'
+                        ],
+                        'invalid_message' => 'Symfony is too smart for your hacking!'
                         
                     ]
             )
@@ -46,21 +53,32 @@ class AreaType extends AbstractType
                         'label_format' => 'URL',
                         'label_attr' => [
                             'class' => 'text-gray-700 font-medium'
+                        ],
+                        'help' => 'URL des Gebiets soll keine Umlaute haben',
+                        'help_attr' => [
+                            'class' => 'text-xs text-gray-700 mt-2 ml-2'
                         ]
                         
                     ]
             )
             ->add('orientation',
-                TextType::class,
+                ChoiceType::class,
                     [
                         'row_attr' => ['class' => 'my-4'],
                         'attr' => [
                             'class' => 'mt-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-2 px-4 block w-full focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring',
+                            'style' => 'height: 42px;'
                         ],
                         'label_format' => 'Wo im Umkreis von München',
                         'label_attr' => [
                             'class' => 'text-gray-700 font-medium'
-                        ]
+                        ],
+                        'choices'  => [
+                            'Norden' => 'north',
+                            'Ost' => 'east',
+                            'Süden' => 'south',
+                            'Westen' => 'west',
+                        ],
                         
                     ]
             )
@@ -83,7 +101,7 @@ class AreaType extends AbstractType
                     'row_attr' => ['class' => 'my-4'],
                     'attr' => [
                         'class' => 'mt-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-2 px-4 block w-full focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring',
-                        'style' => 'height: 39px;'
+                        'style' => 'height: 42px;'
                     ],
                     'label_format' => 'Online',
                     'label_attr' => [

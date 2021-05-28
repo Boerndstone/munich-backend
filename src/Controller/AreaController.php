@@ -63,6 +63,8 @@ class AreaController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Gebiet wurde erfolgreich aktualisiert');
+
             return $this->redirectToRoute('area_index');
         }
 

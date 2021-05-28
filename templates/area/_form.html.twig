@@ -1,8 +1,16 @@
-{{ form_start(form) }}
+{{ form_start(form, {attr: {'novalidate': 'novalidate'}}) }}
 
     {#{ form_widget(form) }#}
     <div class="grid grid-cols-2 gap-4">
         {{ form_row(form.name) }}
+        {{ form_errors(form.name) }}
+
+        {#{ form_label(form.name, 'Test')}}
+        {{ form_errors(form.name)}}
+        {{ form_widget(form.name)}}
+        {{ form_help(form.name)}#}
+
+
         {{ form_row(form.slug) }}
         {{ form_row(form.orientation) }}
         {{ form_row(form.sequence) }}

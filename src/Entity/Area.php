@@ -24,7 +24,14 @@ class Area
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Get creative and think of a title!")
+     * @Assert\NotNull(message="Get creative and think of a title!")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Your first name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     * )
      */
     private $name;
 
@@ -263,7 +270,7 @@ class Area
     {
         if (stripos($this->getName(), 'the borg') !== false) {
             $context->buildViolation('Um.. the Bork kinda makes us nervous')
-                ->atPath('title')
+                ->atPath('name')
                 ->addViolation();
         }
     }
