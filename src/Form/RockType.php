@@ -40,6 +40,7 @@ class RockType extends AbstractType
                         'label_attr' => [
                             'class' => 'text-gray-700 font-medium'
                         ],
+                        'mapped' => false,
                         
                     ]
             )

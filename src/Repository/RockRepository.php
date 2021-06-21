@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Area;
 use App\Entity\Rock;
+use App\Entity\Routes;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -87,6 +88,21 @@ class RockRepository extends ServiceEntityRepository
         )->setParameter('rocks', $areaRelation);
 
         return $query->getResult();
+    }
+
+    public function findRoutesRelatedToRock()
+    {
+        $qb = $this->createQueryBuilder('rock')
+            ->innerJoin('rock.routes', 'routes')
+        ;
+
+        //dd($qb);
+
+        return $qb
+            //->orderBy('routes.name', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
 

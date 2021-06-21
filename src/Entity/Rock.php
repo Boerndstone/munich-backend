@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\RockRepository;
+use App\Repository\RoutesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,6 +17,7 @@ class Rock
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @ORM\OneToMany(targetEntity=Routes::class, mappedBy="rock")
      */
     private $id;
 

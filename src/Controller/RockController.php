@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Rock;
+use App\Entity\Area;
+use App\Entity\Routes;
 use App\Form\RockType;
 use App\Repository\RockRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -66,6 +68,8 @@ class RockController extends AbstractController
         $form = $this->createForm(RockType::class, $rock);
         $form->handleRequest($request);
 
+        $routes = $this->getDoctrine()->getRepository(Rock::class)->findRoutesRelatedToRock();
+
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
@@ -74,6 +78,7 @@ class RockController extends AbstractController
 
         return $this->render('rock/edit.html.twig', [
             'rock' => $rock,
+            'routes' => $routes,
             'form' => $form->createView(),
         ]);
     }

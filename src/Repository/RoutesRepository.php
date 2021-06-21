@@ -20,15 +20,18 @@ class RoutesRepository extends ServiceEntityRepository
     }
 
 
-    public function countNumberPrintedForCategory(Area $area)
+    public function countRoutes()
     {
-        return $this->createQueryBuilder('fc')
-            ->andWhere('fc.area = :area')
-            ->setParameter('area', $area)
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.routes = :routes')
+            //->setParameter('rock', $rock)
             //->select('SUM(fc.numberPrinted) as fortunesPrinted, AVG(fc.numberPrinted) as fortunesAverage, cat.name')
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getResult()
+        ;
     }
+
+    
 
     // /**
     //  * @return Routes[] Returns an array of Routes objects

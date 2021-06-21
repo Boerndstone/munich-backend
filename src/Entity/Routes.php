@@ -29,7 +29,8 @@ class Routes
     private $areaId;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Rock::class)
+     * @ORM\ManyToOne(targetEntity=Rock::class, inversedBy="routes")
+     * @ORM\JoinColumn(name="rock_id_id", referencedColumnName="id")
      */
     private $rockId;
 
