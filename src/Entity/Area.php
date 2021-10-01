@@ -46,7 +46,7 @@ class Area
     private $orientation;
 
     /**
-     * @ORM\OneToMany(targetEntity=Rock::class, mappedBy="areaRelation")
+     * @ORM\OneToMany(targetEntity=Rock::class, mappedBy="area")
      */
     private $rocks;
 
@@ -157,7 +157,7 @@ class Area
     {
         if (!$this->rocks->contains($rock)) {
             $this->rocks[] = $rock;
-            $rock->setAreaRelation($this);
+            $rock->setarea($this);
         }
 
         return $this;
@@ -167,8 +167,8 @@ class Area
     {
         if ($this->rocks->removeElement($rock)) {
             // set the owning side to null (unless already changed)
-            if ($rock->getAreaRelation() === $this) {
-                $rock->setAreaRelation(null);
+            if ($rock->getarea() === $this) {
+                $rock->setarea(null);
             }
         }
 

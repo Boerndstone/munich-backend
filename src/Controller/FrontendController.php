@@ -26,7 +26,7 @@ class FrontendController extends AbstractController
 
         //$areas = $areaRepository->findAll();
 
-        $areas = $this->getDoctrine()->getRepository(Area::class)->findAllAreasAlphabetical();
+        $areas = $this->getDoctrine()->getRepository(Area::class)->getAreasFrontend();
         
         //$user = $this->getDoctrine()->getRepository(Area::class)->getId();
 

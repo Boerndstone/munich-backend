@@ -7,6 +7,11 @@
     <div class="container pt-12 pb-2">
         
         <h1 class="mb-5">Gebiet: {{ area.name }}</h1>
+{#{dump(area.name)}#}
+{{area.rocks|length}}
+        {% for rock in area.rocks %}
+         {{ rock.name }}
+        {% endfor %}
 
         <table class="min-w-full leading-normal mb-10">
             <thead>

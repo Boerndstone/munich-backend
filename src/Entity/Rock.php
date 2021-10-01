@@ -30,7 +30,7 @@ class Rock
      * @ORM\ManyToOne(targetEntity=Area::class, inversedBy="rocks")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $areaRelation;
+    private $area;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -144,14 +144,14 @@ class Rock
         return $this;
     }
 
-    public function getAreaRelation(): ?Area
+    public function getArea(): ?Area
     {
-        return $this->areaRelation;
+        return $this->area;
     }
 
-    public function setAreaRelation(?Area $areaRelation): self
+    public function setArea(?Area $area): self
     {
-        $this->areaRelation = $areaRelation;
+        $this->area = $area;
 
         return $this;
     }

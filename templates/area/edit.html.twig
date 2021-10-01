@@ -7,19 +7,17 @@
         
         <h1 class="mb-5">{{ area.name }} aktualisieren</h1>
 
-        {{dump(area.rocks)}}
-
 
         {% for rock in area.rocks %}
             {{rock.name}}
         {% endfor %}
 <br />
-        {{area.routes|length}}
+        {{area.rocks|length}}
 <br />
-        {% for route in area.routes %}
+        {#% for route in area.routes %}
             {{route.name|length}}
             {{route.name}}
-        {% endfor %}
+        {% endfor %#}
 
         {{ include('area/_form.html.twig', {'button_label': 'aktualisieren'}) }}
 

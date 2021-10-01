@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Area;
-use App\Entity\Rock;
 use App\Form\AreaType;
 use App\Repository\AreaRepository;
 use App\Repository\RockRepository;
+use App\Service\MarkdownHelper;
+use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -53,10 +55,55 @@ class AreaController extends AbstractController
     }
 
     /**
+     * @Route("/{slug}", name="area_show")
+     */
+    public function show(Area $area, RockRepository $rockRepository)
+    {
+        
+        //dd($area);
+        //$rocks = $rockRepository->findBy(['area' => $area]);
+        //$rocks = $rockRepository->findBy(['area' => $area]);
+        //dd($rocks);
+        //$rocks = $area->getRocks();
+        //dd($rocks);
+
+        return $this->render('area/show.html.twig', [
+            'area' => $area,
+            //'rocks' => $rocks,
+        ]);
+    }
+
+    /**
+     * @Route("/questions/{slug}", name="app_question_show")
+     */
+    /*public function show(Question $question, AnswerRepository $answerRepository)
+    {
+        if ($this->isDebug) {
+            $this->logger->info('We are in debug mode!');
+        }
+
+        $answers = $answerRepository->findBy(['question' => $question]);
+
+        dd($answers);
+
+        $answers = [
+            'Make sure your cat is sitting `purrrfectly` still 🤣',
+            'Honestly, I like furry shoes better than MY cat',
+            'Maybe... try saying the spell backwards?',
+        ];
+
+        return $this->render('question/show.html.twig', [
+            'question' => $question,
+            'answers' => $answers,
+        ]);
+    }*/
+
+    /**
      * @Route("/{id}/edit", name="area_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Area $area): Response
+    public function edit(Request $request, Area $area, RockRepository $rockRepository): Response
     {
+        
         $form = $this->createForm(AreaType::class, $area);
         $form->handleRequest($request);
 
