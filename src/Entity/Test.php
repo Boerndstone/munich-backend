@@ -22,6 +22,11 @@ class Test
      */
     private $name;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $super;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +40,18 @@ class Test
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSuper(): ?string
+    {
+        return $this->super;
+    }
+
+    public function setSuper(string $super): self
+    {
+        $this->super = $super;
 
         return $this;
     }

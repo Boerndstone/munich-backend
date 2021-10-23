@@ -6,20 +6,14 @@
         {{ form_row(form.grade) }}
         {{ form_row(form.climbed) }}
         {{ form_row(form.firstAscent) }}
-        {#{ form_row(form.zone) }}
-        {{ form_row(form.banned) }}
-        {{ form_row(form.height) }}
-        {{ form_row(form.orientation) }}
-        {{ form_row(form.season) }}
-        {{ form_row(form.child_friendly) }}
-        {{ form_row(form.sunny) }}
-        {{ form_row(form.rain) }}
-        {{ form_row(form.image) }}
-        {{ form_row(form.header_image) }}
-        {{ form_row(form.topo) }}
-        {{ form_row(form.lat) }}
-        {{ form_row(form.lng) }}
-        {{ form_row(form.online) }#}
+        {{ form_row(form.yearFirstAscent) }}
+        {{ form_row(form.protection) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.scale) }}
+        {{ form_row(form.gradeNo) }}
+        {{ form_row(form.rating) }}
+        {{ form_row(form.topoId) }}
+        {{ form_row(form.nr) }}
     </div>
     <button class="inline-flex items-center h-10 px-5 text-white transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
