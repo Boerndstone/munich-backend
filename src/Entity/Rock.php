@@ -17,7 +17,6 @@ class Rock
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @ORM\OneToMany(targetEntity=Routes::class, mappedBy="rock")
      */
     private $id;
 
@@ -27,7 +26,13 @@ class Rock
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Area::class, inversedBy="rocks")
+     * @ORM\OneToMany(targetEntity=Routes::class, mappedBy="rock", fetch="EXTRA_LAZY")
+     * * @ORM\OrderBy({"nr" = "ASC"})
+     */
+    private $routes;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Area::class, inversedBy="rocks", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(nullable=false)
      */
     private $area;
@@ -386,6 +391,19 @@ class Rock
         $this->online = $online;
 
         return $this;
+    }
+
+    public function __construct()
+    {
+        $this->routes = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection|Routes[]
+     */
+    public function getRoutes(): Collection
+    {
+        return $this->routes;
     }
 
 }

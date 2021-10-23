@@ -1,14 +1,12 @@
 {{ form_start(form) }}
     <div class="grid grid-cols-12 gap-4">
         {{ form_row(form.name) }}
-        {#{ form_row(form.areaRelation) }}
-        {{ form_row(form.name) }}
-        {{ form_row(form.slug) }}
-        {{ form_row(form.nr) }}
-        {{ form_row(form.description) }}
-        {{ form_row(form.access) }}
-        {{ form_row(form.nature) }}
-        {{ form_row(form.zone) }}
+        {{ form_row(form.area) }}
+        {{ form_row(form.rock) }}
+        {{ form_row(form.grade) }}
+        {{ form_row(form.climbed) }}
+        {{ form_row(form.firstAscent) }}
+        {#{ form_row(form.zone) }}
         {{ form_row(form.banned) }}
         {{ form_row(form.height) }}
         {{ form_row(form.orientation) }}

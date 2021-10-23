@@ -36,29 +36,6 @@ class RockRepository extends ServiceEntityRepository
         // returns an array of arrays (i.e. a raw data set)
         return $stmt->fetchAllAssociative();
     }
-    
-
-    
-    public function findAllRocksFromAreaFrontend(int $areaRelation)
-    {
-        /*return $this->createQueryBuilder('r')
-            ->andWhere('r.areaRelation = :val')
-            ->setParameter('rocks', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;*/
-
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT a, r
-            FROM App\Entity\Area a
-            JOIN a.rocks r
-            WHERE a.id = :rocks'
-        )->setParameter('rocks', $areaRelation);
-
-        return $query->getResult();
-    }
 
     public function amountRocks($amount_rocks) {
         $sql = 'SELECT * FROM area INNER JOIN rock ON area.id = rock.area_relation_id WHERE area_relation_id = :amountRocks';
@@ -69,40 +46,24 @@ class RockRepository extends ServiceEntityRepository
         return $rocks;
     }
 
-    public function getAreaRockCountFrontend(int $areaRelation)
+    /**
+     * @return Rocks[] Returns an array of Rocks objects
+     */
+    public function findSearchTerm(string $search = null): array
     {
-        /*return $this->createQueryBuilder('r')
-            ->andWhere('r.areaRelation = :val')
-            ->setParameter('rocks', $value)
+        $queryBuilder = $this->createQueryBuilder('rock')
+            //->addCriteria(self::createApprovedCriteria())
+            ->orderBy('rock.id', 'ASC')
+            //->innerJoin('routes.rock_id', 'rock')
+            ->addSelect('rock');
+        if ($search) {
+            $queryBuilder->andWhere('rock.name LIKE :searchTerm')
+                ->setParameter('searchTerm', '%'.$search.'%');
+        }
+        return $queryBuilder
+            //->setMaxResults(10)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;*/
-
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT count(r.id)
-            FROM App\Entity\Area a
-            JOIN a.rocks r
-            WHERE a.id = :rocks'
-        )->setParameter('rocks', $areaRelation);
-
-        return $query->getResult();
-    }
-
-    public function findRoutesRelatedToRock()
-    {
-        $qb = $this->createQueryBuilder('rock')
-            ->innerJoin('rock.routes', 'routes')
-        ;
-
-        //dd($qb);
-
-        return $qb
-            //->orderBy('routes.name', 'DESC')
-            ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
 

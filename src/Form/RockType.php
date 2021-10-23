@@ -44,7 +44,7 @@ class RockType extends AbstractType
                         
                     ]
             )
-            ->add('areaRelation', EntityType::class, [
+            ->add('area', EntityType::class, [
                 'class' => Area::class,
                 'row_attr' => ['class' => 'my-4 col-span-12'],
                 'attr' => [

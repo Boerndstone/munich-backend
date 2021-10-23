@@ -20,10 +20,15 @@ class RockController extends AbstractController
     /**
      * @Route("/", name="rock_index", methods={"GET"})
      */
-    public function index(RockRepository $rockRepository): Response
+    public function index(RockRepository $rockRepository, Request $request): Response
     {
+
+        $rocks = $rockRepository->findSearchTerm(
+            $request->query->get('q')
+        );
+
         return $this->render('rock/index.html.twig', [
-            'rocks' => $rockRepository->findAll(),
+            'rocks' => $rocks,
         ]);
     }
 
@@ -55,8 +60,24 @@ class RockController extends AbstractController
      */
     public function show(Rock $rock): Response
     {
+        $routes = $rock->getRoutes();
+
         return $this->render('rock/show.html.twig', [
             'rock' => $rock,
+            'routes' => $routes
+        ]);
+    }
+
+    /**
+     * @Route("rock/routes", name="rock_search_routes", requirements={"id":"\d+"}))
+     */
+    public function searchRoutes(RockRepository $rockRepository, Request $request)
+    {
+        $routes = $rockRepository->findSearchTerm(
+            $request->query->get('q')
+        );
+        return $this->render('routes/search.html.twig', [
+            'routes' => $routes
         ]);
     }
 
@@ -65,10 +86,12 @@ class RockController extends AbstractController
      */
     public function edit(Request $request, Rock $rock): Response
     {
+        $area = $rock->getArea();
+        $routes = $rock->getRoutes();
+
         $form = $this->createForm(RockType::class, $rock);
         $form->handleRequest($request);
 
-        $routes = $this->getDoctrine()->getRepository(Rock::class)->findRoutesRelatedToRock();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
@@ -78,7 +101,7 @@ class RockController extends AbstractController
 
         return $this->render('rock/edit.html.twig', [
             'rock' => $rock,
-            'routes' => $routes,
+            'area' => $area,
             'form' => $form->createView(),
         ]);
     }

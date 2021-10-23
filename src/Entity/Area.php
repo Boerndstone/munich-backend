@@ -46,12 +46,12 @@ class Area
     private $orientation;
 
     /**
-     * @ORM\OneToMany(targetEntity=Rock::class, mappedBy="area")
+     * @ORM\OneToMany(targetEntity=Rock::class, mappedBy="area", fetch="EXTRA_LAZY")
      */
     private $rocks;
 
      /**
-     * @ORM\OneToMany(targetEntity=Routes::class, mappedBy="areaId")
+     * @ORM\OneToMany(targetEntity=Routes::class, mappedBy="area", fetch="EXTRA_LAZY")
      */
     private $routes;
 

@@ -27,8 +27,8 @@ class AreaRepository extends ServiceEntityRepository
     public function findAllAreasAlphabetical ()
     {
         return $this->createQueryBuilder('area')
-            ->orderBy('area.sequence', 'ASC')
-            ->where('area.online = 1')
+            ->orderBy('area.id', 'ASC')
+            //->where('area.online = 1')
             /*->innerJoin('area.rocks', 'rocks')
             ->innerJoin('area.routes', 'routes')
             ->addSelect('area.name as areaName')
@@ -143,6 +143,28 @@ class AreaRepository extends ServiceEntityRepository
             ->leftJoin('area.routes', 'area_routes')
             ->getQuery()
             ->execute()
+        ;
+
+    }
+
+    /**
+     * @return RoutesLowerFiveteen[]
+     */
+
+    public function getRocksLowerFiveteen ($value) : array
+    {
+        $entityManager = $this->getEntityManager();
+
+        return $this->createQueryBuilder('area')
+            //->where('routes.gradeNo < 15')
+            //->setParameter('routes.areaId', $grade)
+            ->andWhere('area.id = :val')
+            ->setParameter('val', $value)
+            ->innerJoin('area.routes', 'routes')
+            ->addSelect('routes.gradeNo')
+            ->where('routes.gradeNo < 15')
+            ->getQuery()
+            ->getResult()
         ;
 
     }

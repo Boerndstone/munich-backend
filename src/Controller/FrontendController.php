@@ -27,6 +27,11 @@ class FrontendController extends AbstractController
         //$areas = $areaRepository->findAll();
 
         $areas = $this->getDoctrine()->getRepository(Area::class)->getAreasFrontend();
+
+        //dd($areas->getId());
+        //$amount = $this->getDoctrine()->getRepository(Area::class)->getRocksLowerFiveteen($areas->getId());
+
+        
         
         //$user = $this->getDoctrine()->getRepository(Area::class)->getId();
 
@@ -43,6 +48,7 @@ class FrontendController extends AbstractController
 
         return $this->render('frontend/index.html.twig', [
             'areas' => $areas,
+            //'amount' => $amount
             //'amountRocks' => $amountRocks
             //'rocks' => $rocks,
             //'routes' => $routes,

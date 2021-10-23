@@ -7,31 +7,23 @@
         
         <h1 class="mb-5">{{ area.name }} aktualisieren</h1>
 
-
-        {% for rock in area.rocks %}
-            {{rock.name}}
-        {% endfor %}
-<br />
-        {{area.rocks|length}}
-<br />
-        {#% for route in area.routes %}
-            {{route.name|length}}
-            {{route.name}}
-        {% endfor %#}
-
         {{ include('area/_form.html.twig', {'button_label': 'aktualisieren'}) }}
 
         <div class="flex items-center my-5">
             <a 
-                class="inline-flex items-center h-10 px-5 text-white transition-colors duration-150 bg-yellow-400 rounded-lg focus:shadow-outline hover:bg-yellow-500 mr-5"
+                class="inline-flex items-center bg-yellow-500 text-white active:bg-yellow-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
                 role="button"
                 href="{{ path('area_index') }}"
-            >zurück zur Übersicht</a>
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+                zurück zur Übersicht
+            </a>
 
             {{ include('area/_delete_form.html.twig') }}
         </div>
-
-        
 
     </div>
 {% endblock %}

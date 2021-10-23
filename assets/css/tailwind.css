@@ -6,7 +6,7 @@ body {
         text-black
         text-sm
         font-sans
-        bg-white
+        to-white
         leading-normal
         font-normal
     ;
@@ -14,7 +14,7 @@ body {
 
 .badgetailwind {
     @apply 
-        bg-black 
+        to-black 
         rounded 
         p-1 
         font-semibold
@@ -213,5 +213,52 @@ h3 {
 .modal-backdrop.show {
     opacity: .5;
 }*/
+
+tbody tr:nth-child(odd) {
+    @apply 
+        bg-gray-50
+    ;
+}
+
+.btn-edit {
+    @apply
+        inline-flex 
+        items-center 
+        bg-teal-500 
+        text-white 
+        font-bold 
+        uppercase 
+        text-xs 
+        px-4 
+        py-2 
+        rounded 
+        shadow  
+        outline-none 
+        mr-1 
+        mb-1 
+        ease-linear 
+        transition-all 
+        duration-150
+}
+
+.btn-edit:focus {
+    @apply
+        outline-none
+    ;
+}
+
+.btn-edit:hover {
+    @apply
+        shadow-md
+    ;
+}
+
+.btn-edit:active {
+    @apply
+        bg-teal-600
+    ;
+}
+
+
 
 @tailwind utilities;

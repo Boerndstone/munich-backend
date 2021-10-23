@@ -24,8 +24,11 @@ class AreaController extends AbstractController
      */
     public function index(AreaRepository $areaRepository): Response
     {
+        //$test = $areaRepository->getRocksLowerFiveteen();
+
         return $this->render('area/index.html.twig', [
-            'areas' => $areaRepository->findAll(),
+            'areas' => $areaRepository->findAllAreasAlphabetical(),
+            //'test' => $test
         ]);
     }
 
@@ -60,7 +63,7 @@ class AreaController extends AbstractController
     public function show(Area $area, RockRepository $rockRepository)
     {
         
-        //dd($area);
+        dd($area);
         //$rocks = $rockRepository->findBy(['area' => $area]);
         //$rocks = $rockRepository->findBy(['area' => $area]);
         //dd($rocks);

@@ -15,19 +15,6 @@
 			</div>
 
 
-					<div data-controller="counter">
-						<button 
-							data-action="counter#increment"
-							class="btn btn-block btn-primary">
-							Click me!
-						</button>
-						<br>
-                
-						I have been clicked
-						<span data-counter-target="count">0</span>
-						times!
-					</div>
-
 					<div class="grid grid-cols-3 gap-4">
 						<div class="col-span-3 md:col-span-2">
 							{% for area in areas %}
@@ -73,6 +60,8 @@
 												<span class="badgetailwind">{{ area.routes|length }}</span>
 											</div>
 
+											{#{dump(amount)}#}
+
 											<hr class="my-2" />
 										
 											<div class="flex flex-row justify-between">
@@ -93,26 +82,23 @@ foreach ($online as $key) {
 												foreach($grading as $i => $value) {
 
 #}
-													{% set prozent = 100/area.routes|length %}
+													{#% set prozent = 100/area.routes|length %#}
 													
 
 {#{ prozent }#}
 
-												{% for route in area.routes %}
+												{#% for route in area.routes %}
 
-													{#% set easy = prozent * route.gradeNo < 15 %#}
 
-													{#{ easy }#}
 
 													<div class="d-flex flex-col">
 														<div class="text-center bg- px-2 py-1 md:text-xs text-sm text-white"></div>
 														<div class="text-center md:text-xs text-sm text-white bg-gray-400 mt-1">
 															<div class="bg- px-2 py-1" style="width: %">
-																{#{ dump(route.gradeNo) }#}
 															</div>
 														</div>	
 													</div>
-												{% endfor %}
+												{% endfor %#}
 											</div>
 										</div>
 									</div>

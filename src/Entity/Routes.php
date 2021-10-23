@@ -23,16 +23,16 @@ class Routes
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Area::class, inversedBy="routes")
+     * @ORM\ManyToOne(targetEntity=Area::class, inversedBy="routes" , fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $areaId;
+    private $area;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Rock::class, inversedBy="routes")
-     * @ORM\JoinColumn(name="rock_id_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity=Rock::class, inversedBy="routes", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $rockId;
+    private $rock;
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
@@ -106,26 +106,26 @@ class Routes
         return $this;
     }
 
-    public function getAreaId(): ?Area
+    public function getArea(): ?Area
     {
-        return $this->areaId;
+        return $this->area;
     }
 
-    public function setAreaId(?Area $areaId): self
+    public function setArea(?Area $area): self
     {
-        $this->areaId = $areaId;
+        $this->area = $area;
 
         return $this;
     }
 
-    public function getRockId(): ?Rock
+    public function getRock(): ?Rock
     {
-        return $this->rockId;
+        return $this->rock;
     }
 
-    public function setRockId(?Rock $rockId): self
+    public function setRock(?Rock $rock): self
     {
-        $this->rockId = $rockId;
+        $this->rock = $rock;
 
         return $this;
     }

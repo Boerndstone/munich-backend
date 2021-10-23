@@ -6,16 +6,30 @@ module.exports = {
   corePlugins: {
   },
   theme: {
-
-    /*colors: {
-      black: '#000',
-      white: '#fff',
-      gray: colors.blueGray,
-      blue: '#2c5282',
-      yellow: '#d69e2e',
-      red: '#c53030',
-      green: '#2f855a'
-    },*/
+    colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      black: colors.black,
+      white: colors.white,
+      gray: colors.trueGray,
+      green: colors.green,
+      indigo: colors.indigo,
+      red: colors.red,
+      yellow: colors.amber,
+      teal: colors.teal,
+    },
+    backgroundColor: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      black: colors.black,
+      white: colors.white,
+      gray: colors.trueGray,
+      green: colors.green,
+      indigo: colors.indigo,
+      red: colors.red,
+      yellow: colors.amber,
+      teal: colors.teal,
+    },
     listStyleType: {
         square: 'square'
     },
@@ -35,7 +49,7 @@ module.exports = {
     cursor: ['responsive', 'hover', 'focus'],
     display: ['responsive', 'hover', 'focus'],
     width: ['responsive'],
-    backgroundColor: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
+    backgroundColor: ['active', 'responsive', 'odd', 'even', 'hover', 'focus'],
     borderRadius: ['responsive', 'hover', 'focus'],
     padding: ['responsive', 'hover', 'focus'],
     position: ['responsive', 'hover', 'focus'],
