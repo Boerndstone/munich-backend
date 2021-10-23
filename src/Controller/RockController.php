@@ -69,19 +69,6 @@ class RockController extends AbstractController
     }
 
     /**
-     * @Route("rock/routes", name="rock_search_routes", requirements={"id":"\d+"}))
-     */
-    public function searchRoutes(RockRepository $rockRepository, Request $request)
-    {
-        $routes = $rockRepository->findSearchTerm(
-            $request->query->get('q')
-        );
-        return $this->render('routes/search.html.twig', [
-            'routes' => $routes
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="rock_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Rock $rock): Response
@@ -95,6 +82,8 @@ class RockController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'Fels wurde erfolgreich aktualisiert');
 
             return $this->redirectToRoute('rock_index');
         }
