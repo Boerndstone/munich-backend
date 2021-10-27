@@ -220,6 +220,10 @@ tbody tr:nth-child(odd) {
     ;
 }
 
+
+
+
+
 .btn-edit {
     @apply
         inline-flex 

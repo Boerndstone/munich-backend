@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Area;
+use App\Entity\Rock;
 use App\Entity\Routes;
 use App\Repository\AreaRepository;
+use App\Repository\RockRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -14,9 +16,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RoutesType extends AbstractType
 {
-    public function __construct(AreaRepository $areaRepository)
+    public function __construct(AreaRepository $areaRepository, RockRepository $rockRepository)
     {
         $this->areaRepository = $areaRepository;
+        $this->rockRepository = $rockRepository;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -53,7 +56,24 @@ class RoutesType extends AbstractType
                     'choices' => $this->areaRepository->findAllAreasAlphabetical(),
                 ]
             )
-            ->add('rock')
+            ->add('rock',
+                ChoiceType::class,
+                [
+                    'row_attr' => ['class' => 'my-4 col-span-4'],
+                    'attr' => [
+                        'class' => 'mt-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-2 px-4 block w-full focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring',
+                        'style' => 'height: 42px;'
+                    ],
+                    'label_format' => 'Fels',
+                    'label_attr' => [
+                        'class' => 'text-gray-700 font-medium'
+                    ],
+                    'choice_label' => function(Rock $rock) {
+                        return sprintf('(%d) %s', $rock->getOnline(), $rock->getName() );
+                    },
+                    'choices' => $this->rockRepository->findAllRocksAlphabetical(),
+                ]
+            )
             ->add('grade',
                 TextType::class,
                     [

@@ -66,6 +66,19 @@ class RockRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * @return Rocks[] Returns an array of Rocks objects
+     */
+    public function findAllRocksAlphabetical ()
+    {
+        return $this->createQueryBuilder('rock')
+            ->orderBy('rock.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+            
+        ;
+    }
+
 
 
 
