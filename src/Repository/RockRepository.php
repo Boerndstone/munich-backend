@@ -54,10 +54,10 @@ class RockRepository extends ServiceEntityRepository
         $queryBuilder = $this->createQueryBuilder('rock')
             //->addCriteria(self::createApprovedCriteria())
             ->orderBy('rock.id', 'ASC')
-            //->innerJoin('routes.rock_id', 'rock')
+            ->innerJoin('rock.area', 'area')
             ->addSelect('rock');
         if ($search) {
-            $queryBuilder->andWhere('rock.name LIKE :searchTerm')
+            $queryBuilder->andWhere('rock.name LIKE :searchTerm OR area.name LIKE :searchTerm')
                 ->setParameter('searchTerm', '%'.$search.'%');
         }
         return $queryBuilder
