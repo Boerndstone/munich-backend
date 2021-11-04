@@ -15,7 +15,7 @@
         </div>
 
         <div class="grid grid-cols-12 gap-4 mb-5">
-            <div class="col-span-8">
+            <div class="col-span-12 md:col-span-8">
                 <form action="{{ path('rock_index') }}">
                     <input
                         type="search"
@@ -27,9 +27,9 @@
                     >
                 </form>
             </div>
-            <div class="col-span-4">
+            <div class="col-span-12 md:col-span-4">
                 <a 
-                    class="inline-flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+                    class="btn btn-edit"
                     role="button"
                     href="{{ path('rock_new') }}"
                 >
@@ -96,8 +96,7 @@
                         {#<div id="edit-button"></div>#}
                         
                         <a 
-                            {#class="inline-flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"#}
-                            class="btn-edit"
+                            class="btn btn-edit"
                             role="button"
                             href="{{ path('rock_edit', {'id': rock.id}) }}"
                         >
@@ -106,7 +105,7 @@
                         </a>
 
                         <a 
-                            class="inline-flex items-center bg-yellow-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" 
+                            class="btn btn-show"
                             role="button"
                             href="{{ path('rock_show', {'id': rock.id}) }}"
                         >

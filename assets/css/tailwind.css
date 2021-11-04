@@ -41,8 +41,6 @@ h2 {
     ;
 }
 
-
-
 h3 {
     @apply
         text-gray-900
@@ -220,14 +218,10 @@ tbody tr:nth-child(odd) {
     ;
 }
 
-
-
-
-.btn-edit {
+.btn {
     @apply
         inline-flex 
         items-center 
-        bg-teal-500 
         text-white 
         font-bold 
         uppercase 
@@ -242,6 +236,19 @@ tbody tr:nth-child(odd) {
         ease-linear 
         transition-all 
         duration-150
+    ;
+}
+
+.btn-edit {
+    @apply 
+        bg-teal-500
+    ;
+}
+
+.btn-show {
+    @apply 
+        bg-yellow-500
+    ;
 }
 
 .btn-edit:focus {
@@ -250,9 +257,10 @@ tbody tr:nth-child(odd) {
     ;
 }
 
-.btn-edit:hover {
+.btn-edit:hover, .btn-show:hover {
     @apply
         shadow-md
+        text-white
     ;
 }
 
@@ -262,6 +270,10 @@ tbody tr:nth-child(odd) {
     ;
 }
 
-
+.btn-show:active {
+    @apply
+        bg-teal-600
+    ;
+}
 
 @tailwind utilities;
