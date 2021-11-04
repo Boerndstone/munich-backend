@@ -18,7 +18,7 @@ import './styles/app.css';
 //import 'admin-lte';
 
 // start the Stimulus application
-import './bootstrap';
+//import './bootstrap';
 //import 'admin-lte';
 
 

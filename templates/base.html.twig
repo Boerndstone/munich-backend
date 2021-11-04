@@ -2,21 +2,23 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spartan&display=swap">
             <link href='https://fonts.googleapis.com/css?family=Chelsea+Market' rel='stylesheet' type='text/css'>
             {{ encore_entry_link_tags('app') }}
             {{ encore_entry_link_tags('tailwind') }}
+
+            
+
         {% endblock %}
 
 
 
         
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+        
 
          <style>
 
@@ -69,7 +71,6 @@
         style="height: auto; min-height: 100%;"
     >
         {#{ include('pageParts/main.header.html.twig') }#}
-        {#{ include('pageParts/sidebar.navigation.html.twig') }#}
         {{ include('pageParts/navigation.html.twig') }}
 
         {% for message in app.flashes('success') %}
@@ -90,6 +91,13 @@
 
 
         {{ include('pageParts/footer.html.twig') }}
+
+        {% block javascripts %}
+            {#{ encore_entry_script_tags('app') }#}
+            {#{ encore_entry_script_tags('global_react') }#}
+        {% endblock %}
+
+        
 
     </body>
 </html>
