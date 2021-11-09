@@ -3,4 +3,4 @@ import { render } from 'react-dom';
 import Buttons from './Buttons/EditButton';
 
 
-render(<Buttons />, document.getElementById('edit-button'));
+render(<Buttons />, document.getElementById('btn-edit'));

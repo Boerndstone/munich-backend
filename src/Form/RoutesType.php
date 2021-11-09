@@ -115,7 +115,8 @@ class RoutesType extends AbstractType
                     'label_format' => 'Erstbegeher',
                     'label_attr' => [
                         'class' => 'text-gray-700 font-medium'
-                    ]
+                    ],
+                    'required' => false,
                 ]
             )
             ->add('yearFirstAscent',

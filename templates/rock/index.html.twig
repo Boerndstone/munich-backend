@@ -96,6 +96,7 @@
                         {#<div id="edit-button"></div>#}
                         
                         <a 
+                            {#id="btn-edit"#}
                             class="btn btn-edit"
                             role="button"
                             href="{{ path('rock_edit', {'id': rock.id}) }}"
@@ -128,4 +129,9 @@
         </table>
 
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('buttons') }}
 {% endblock %}
