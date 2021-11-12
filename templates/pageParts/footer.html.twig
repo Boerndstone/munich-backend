@@ -1,16 +1,23 @@
-<footer class="mt-5 p-3 text-center">
-            <footer class="bg-blue p-3 mt-2 flex flex-wrap justify-start">
-	<section class="container mx-auto bg-blue flex flex-wrap justify-start">
+<footer class="bg-sky-800 mt-5 p-3 ">
+	<section class="container mx-auto flex flex-wrap justify-start">
 		<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 			<div class="col-span-2">
-				<h3 class="font-semibold text-white tracking-wider uppercase mb-2">Gebiete um München</h3>
+				<h3 class="font-semibold text-white tracking-wider uppercase mb-3">Gebiete um München</h3>
 				<div class="flex flex-wrap">
-					
-					
+					{% for area in areas %}
+					<a 
+						class="hover:underline text-white pt-1 pb-2 text-sm leading-snug w-full sm:w-1/2 truncate"
+						href="{{ path('show_rocks', { slug: area.slug }) }}" 
+						title="Klettergebiet {{ area.name }}"
+						data-area="{{ area.name }}"
+					>
+						{{ area.name }}
+					</a>
+					{% endfor %}
 				</div>
 			</div>
 			<div class="col-span-3 md:col-span-1">
-				<h3 class="font-semibold text-white tracking-widest">munichclimbs</h3>
+				<h3 class="font-semibold text-white tracking-widest mb-3">munichclimbs</h3>
 				<div class="flex flex-wrap">
 					<a class="hover:underline text-white pt-1 pb-2  text-sm leading-snug w-full truncate" href="<?php echo BASE_URL; ?>Datenschutz">Datenschutz</a></li>
 					<a class="hover:underline text-white pt-1 pb-2  text-sm leading-snug w-full truncate" href="<?php echo BASE_URL; ?>Impressum">Impressum</a></li>
@@ -23,9 +30,5 @@
 		<div class="w-full">
 			<p class="text-white text-center text-sm mb-0">Copyright © <?php echo date("Y"); ?>  munichclimbs. Alle Rechte vorbehalten.</p>
 		</div>
-		
 	</section>
-	
 </footer>
-
-<div id="back_to_top_button" class="fixed border-solid border-white border outline-none bg-blue shadow-xl cursor-pointer p-2 rounded-lg" style="display: none; bottom: 20px; right: 30px; z-index: 99;"><svg class="stroke-current text-white h-8 w-8" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" fill="none" viewBox="0 0 24 24"><path d="M5 15l7-7 7 7"></path></svg></div>

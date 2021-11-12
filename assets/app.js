@@ -11,7 +11,7 @@ import './styles/app.css';
 
 import './js/global.js';
 
-//require('bootstrap');
+require('bootstrap');
 
 //import $ from 'jquery';
 

@@ -1,4 +1,7 @@
 {
+    "babdev/pagerfanta-bundle": {
+        "version": "v3.4.0"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.1"
     },
@@ -119,6 +122,15 @@
     },
     "ocramius/proxy-manager": {
         "version": "2.2.3"
+    },
+    "pagerfanta/core": {
+        "version": "v3.3.1"
+    },
+    "pagerfanta/doctrine-orm-adapter": {
+        "version": "v3.3.1"
+    },
+    "pagerfanta/twig": {
+        "version": "v3.3.1"
     },
     "php": {
         "version": "7.3"

@@ -13,6 +13,7 @@ use App\Repository\RoutesRepository;
 use Symfony\Contracts\Cache\CacheInterface;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -65,13 +66,17 @@ class FrontendController extends AbstractController
     }
 
     /**
-     * @Route("/klettergebiet/{slug}", name="show_rocks")
+     * @Route("/Klettergebiet/{slug}", name="show_rocks")
      */
-    public function show($slug,  CacheInterface $cache)
+    public function show($slug,  CacheInterface $cache, Request $request)
     {
-        $rock = 'servus';
+        $areas = $this->getDoctrine()->getRepository(Area::class)->getAreasFrontend();
+        $rocks = $this->getDoctrine()->getRepository(Rock::class)->findRocksArea($slug);
+        //dd($rocks);
+
         return $this->render('frontend/rocks.html.twig', [
-            'rock' => $rock,
+            'areas' => $areas,
+            'rocks' => $rocks,
         ]);
     }
 

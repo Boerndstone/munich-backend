@@ -17,6 +17,7 @@ module.exports = {
       red: colors.red,
       yellow: colors.amber,
       teal: colors.teal,
+      sky: colors.sky,
     },
     backgroundColor: {
       transparent: 'transparent',
@@ -29,6 +30,7 @@ module.exports = {
       red: colors.red,
       yellow: colors.amber,
       teal: colors.teal,
+      sky: colors.sky,
     },
     listStyleType: {
         square: 'square'

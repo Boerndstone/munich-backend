@@ -14,7 +14,7 @@ body {
 
 .badgetailwind {
     @apply 
-        to-black 
+        bg-black 
         rounded 
         p-1 
         font-semibold
@@ -22,8 +22,6 @@ body {
         text-sm
     ;
 }
-
-
 
 h1 {
     @apply
@@ -211,6 +209,10 @@ h3 {
 .modal-backdrop.show {
     opacity: .5;
 }*/
+
+
+
+
 
 tbody tr:nth-child(odd) {
     @apply 
