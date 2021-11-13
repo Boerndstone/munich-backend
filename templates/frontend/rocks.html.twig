@@ -96,4 +96,18 @@
 </div>
 		</div>
 	
+    {{ include('pageParts/footer.html.twig') }}
+
+
+        <div 
+            id="back_to_top_button" 
+            class="fixed border-solid border-white border outline-none bg-sky-800 shadow-xl cursor-pointer p-2 rounded-lg" 
+            style="display: none; bottom: 20px; right: 30px; z-index: 99;"
+        ><svg class="stroke-current text-white h-8 w-8" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" fill="none" viewBox="0 0 24 24"><path d="M5 15l7-7 7 7"></path></svg></div>
+
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            {#{ encore_entry_script_tags('global_react') }#}
+        {% endblock %}
 {% endblock %}
