@@ -107,7 +107,7 @@
 
 
         {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-            {#{ encore_entry_script_tags('global_react') }#}
+			    {{ parent() }}
         {% endblock %}
+        
 {% endblock %}

@@ -35,7 +35,7 @@ class AreaController extends AbstractController
     /**
      * @Route("/new", name="area_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, AreaRepository $areaRepository): Response
     {
         $area = new Area();
         $form = $this->createForm(AreaType::class, $area);
@@ -52,13 +52,14 @@ class AreaController extends AbstractController
         return $this->render('area/new.html.twig', [
             'area' => $area,
             'form' => $form->createView(),
+            'areas' => $areaRepository->findAllAreasAlphabetical(),
         ]);
     }
 
     /**
      * @Route("/{id}/edit", name="area_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Area $area, RockRepository $rockRepository): Response
+    public function edit(Request $request, Area $area, AreaRepository $areaRepository, RockRepository $rockRepository): Response
     {
         
         $form = $this->createForm(AreaType::class, $area);
@@ -75,6 +76,7 @@ class AreaController extends AbstractController
         return $this->render('area/edit.html.twig', [
             'area' => $area,
             'form' => $form->createView(),
+            'areas' => $areaRepository->findAllAreasAlphabetical(),
         ]);
     }
 

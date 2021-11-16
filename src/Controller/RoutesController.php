@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Routes;
 use App\Form\RoutesType;
+use App\Repository\AreaRepository;
 use App\Repository\RoutesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -20,20 +21,21 @@ class RoutesController extends AbstractController
      * @Route("/", name="routes_index", methods={"GET"})
      * @IsGranted("ROLE_USER")
      */
-    public function index(RoutesRepository $RoutesRepository): Response
+    public function index(RoutesRepository $RoutesRepository, AreaRepository $areaRepository): Response
     {
         // One way to solve access control!!!!
         //$this->denyAccessUnlessGranted('ROLE_USER');
 
         return $this->render('routes/index.html.twig', [
             'routes' => $RoutesRepository->findAll(),
+            'areas' => $areaRepository->findAllAreasAlphabetical(),
         ]);
     }
 
     /**
      * @Route("/new", name="routes_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, AreaRepository $areaRepository): Response
     {
         $routes = new Routes();
         $form = $this->createForm(RoutesType::class, $routes);
@@ -50,23 +52,25 @@ class RoutesController extends AbstractController
         return $this->render('Routes/new.html.twig', [
             'routes' => $routes,
             'form' => $form->createView(),
+            'areas' => $areaRepository->findAllAreasAlphabetical(),
         ]);
     }
 
     /**
      * @Route("/{id}", name="routes_show", methods={"GET"})
      */
-    public function show(Routes $routes): Response
+    public function show(Routes $routes, AreaRepository $areaRepository): Response
     {
         return $this->render('routes/show.html.twig', [
             'routes' => $routes,
+            'areas' => $areaRepository->findAllAreasAlphabetical(),
         ]);
     }
 
     /**
      * @Route("/{id}/edit", name="routes_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Routes $routes): Response
+    public function edit(Request $request, Routes $routes, AreaRepository $areaRepository): Response
     {
         $form = $this->createForm(RoutesType::class, $routes);
         $form->handleRequest($request);
@@ -80,6 +84,7 @@ class RoutesController extends AbstractController
         return $this->render('routes/edit.html.twig', [
             'routes' => $routes,
             'form' => $form->createView(),
+            'areas' => $areaRepository->findAllAreasAlphabetical(),
         ]);
     }
 

@@ -29,4 +29,4 @@ require('bootstrap');
 // start the Stimulus application
 //
 
-import { Collapse, Modal } from 'bootstrap';
+import { Collapse, Modal, Dropdown } from 'bootstrap';

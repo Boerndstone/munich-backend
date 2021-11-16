@@ -6,6 +6,7 @@ use App\Entity\Rock;
 use App\Entity\Area;
 use App\Entity\Routes;
 use App\Form\RockType;
+use App\Repository\AreaRepository;
 use App\Repository\RockRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +21,7 @@ class RockController extends AbstractController
     /**
      * @Route("/", name="rock_index", methods={"GET"})
      */
-    public function index(RockRepository $rockRepository, Request $request): Response
+    public function index(RockRepository $rockRepository, Request $request, AreaRepository $areaRepository): Response
     {
 
         $rocks = $rockRepository->findSearchTerm(
@@ -29,13 +30,14 @@ class RockController extends AbstractController
 
         return $this->render('rock/index.html.twig', [
             'rocks' => $rocks,
+            'areas' => $areaRepository->findAllAreasAlphabetical(),
         ]);
     }
 
     /**
      * @Route("/new", name="rock_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, AreaRepository $areaRepository): Response
     {
         $rock = new Rock();
         $form = $this->createForm(RockType::class, $rock);
@@ -52,26 +54,28 @@ class RockController extends AbstractController
         return $this->render('rock/new.html.twig', [
             'rock' => $rock,
             'form' => $form->createView(),
+            'areas' => $areaRepository->findAllAreasAlphabetical(),
         ]);
     }
 
     /**
      * @Route("/{id}", name="rock_show", methods={"GET"})
      */
-    public function show(Rock $rock): Response
+    public function show(Rock $rock, AreaRepository $areaRepository): Response
     {
         $routes = $rock->getRoutes();
 
         return $this->render('rock/show.html.twig', [
             'rock' => $rock,
-            'routes' => $routes
+            'routes' => $routes,
+            'areas' => $areaRepository->findAllAreasAlphabetical(),
         ]);
     }
 
     /**
      * @Route("/{id}/edit", name="rock_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Rock $rock): Response
+    public function edit(Request $request, Rock $rock, AreaRepository $areaRepository): Response
     {
         $area = $rock->getArea();
         $routes = $rock->getRoutes();
@@ -92,6 +96,7 @@ class RockController extends AbstractController
             'rock' => $rock,
             'area' => $area,
             'form' => $form->createView(),
+            'areas' => $areaRepository->findAllAreasAlphabetical(),
         ]);
     }
 
