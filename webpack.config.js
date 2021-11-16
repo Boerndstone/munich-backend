@@ -21,9 +21,11 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
+    .addEntry('backend', './assets/backend.js')
+    .addEntry('frontend', './assets/js/frontend.js')
     .addEntry('global_react', './assets/js/global_react.js')
-    .addEntry('buttons', './assets/js/buttons.js')
     .addStyleEntry('tailwind', './assets/css/tailwind.css')
+    .addStyleEntry('materialize', './assets/css/app.scss')
     // enable post css loader
     .enablePostCssLoader((options) => {
         options.postcssOptions = {
@@ -74,7 +76,7 @@ Encore
     })
 
     // enables Sass/SCSS support
-    //.enableSassLoader()
+    .enableSassLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()

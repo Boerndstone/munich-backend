@@ -4,6 +4,19 @@
 
 {% block body %}
 
+
+
+
+  {# Soll dann als React Component ankommen #}
+  <div id="test">bernd</div>
+
+  <div class="like_button_container" data-commentid="3"></div>
+
+
+
+
+
+
     <div 
         class="container pb-2" 
 		style="padding-top: 60px;"
@@ -108,4 +121,13 @@
         </table>
 
     </div>
+
+
+        
+{% block javascripts %}
+{#{ encore_entry_script_tags('backend') }#}
+{#{ encore_entry_script_tags('buttons') }#}
+{{ encore_entry_script_tags('global_react') }}
 {% endblock %}
+{% endblock %}
+

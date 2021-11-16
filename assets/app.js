@@ -9,7 +9,8 @@
 import './css/app.scss';
 import './styles/app.css';
 
-import './js/global.js';
+//import './js/global.js';
+//import './js/backend.js';
 
 require('bootstrap');
 
@@ -28,3 +29,4 @@ require('bootstrap');
 // start the Stimulus application
 //
 
+import { Collapse, Modal } from 'bootstrap';

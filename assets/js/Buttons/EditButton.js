@@ -1,14 +1,20 @@
-import React, { Component } from 'react';
+import React from "react";
+import Button from "@material-tailwind/react/Button";
 
-export default class EditButton extends Component {
-    render() {
-        
-        return (
-            <span>
-                <svg className="w-4 h-4 mr-3 fill-current" viewBox="0 0 20 20"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" clipRule="evenodd" fillRule="evenodd"></path></svg>
-                <span>bearbeiten</span>
-            </span>
-
-        );
-    }
+export default function EditButton() {
+    return (
+        <Button
+            color="lightBlue"
+            buttonType="filled"
+            size="regular"
+            rounded={false}
+            block={false}
+            iconOnly={false}
+            ripple="light"
+        >
+            Button
+        </Button>
+    )
 }
+
+console.log('test');

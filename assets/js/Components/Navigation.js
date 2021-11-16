@@ -1,7 +1,4 @@
-
-
 import React, { useState } from "react";
-import ReactDOM from 'react-dom';
 import Navbar from "@material-tailwind/react/Navbar";
 import NavbarContainer from "@material-tailwind/react/NavbarContainer";
 import NavbarWrapper from "@material-tailwind/react/NavbarWrapper";
@@ -50,9 +47,3 @@ export default function Navigation() {
     </Navbar>
   );
 }
-
-ReactDOM.render(<Navigation />, document.getElementById('test'));
-
-
-
-console.log('hallo');

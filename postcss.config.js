@@ -23,6 +23,7 @@ module.exports = {
       require('@fullhuman/postcss-purgecss')({
         content: [
             './templates/**/*.html.twig',
+            './assets/js/**/*.js',
             './src/Form/**/*.php',
         ],
         defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || []

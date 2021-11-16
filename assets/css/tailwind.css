@@ -279,3 +279,5 @@ tbody tr:nth-child(odd) {
 }
 
 @tailwind utilities;
+
+@import '@material-tailwind/react/tailwind.css';
