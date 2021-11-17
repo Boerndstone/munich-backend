@@ -74,6 +74,8 @@ class FrontendController extends AbstractController
         $rocks = $this->getDoctrine()->getRepository(Rock::class)->findRocksArea($slug);
 
         //$areaName = $this->getDoctrine()->getRepository(Rock::class)->findRocksAreaName($slug);
+        //$areaName = $area->getName();
+        //$areaName = $rock->getArea();
         //dd($rocks);
 
         return $this->render('frontend/rocks.html.twig', [

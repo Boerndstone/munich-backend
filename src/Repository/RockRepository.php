@@ -86,14 +86,14 @@ class RockRepository extends ServiceEntityRepository
     /**
      * @return AreaName[] Returns an array of Rocks objects
      */
-    public function findRocksAreaName($areaName): array
+    public function findRocksAreaName($areaSlug): array
     {
         $queryBuilder = $this->createQueryBuilder('rock')
             //->orderBy('rock.id', 'ASC')
             ->leftJoin('rock.area', 'area')
             ->addSelect('rock')
-            ->where('area.name LIKE :areaName')
-            ->setParameter('areaName', $areaName)
+            ->where('area.slug LIKE :areaSlug')
+            ->setParameter('areaSlug', $areaSlug)
             ->getQuery()
             ->getResult();
 
