@@ -5,6 +5,7 @@ module.exports = {
   important: true,
   corePlugins: {
   },
+  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     colors: {
       transparent: 'transparent',

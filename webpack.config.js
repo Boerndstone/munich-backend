@@ -21,6 +21,7 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
+    .addEntry('areas', './assets/js/areas.js')
     .addEntry('global', './assets/js/global.js')
     .addEntry('backend', './assets/backend.js')
     .addEntry('frontend', './assets/js/frontend.js')
@@ -78,6 +79,7 @@ Encore
 
     // enables Sass/SCSS support
     .enableSassLoader()
+    .enableVueLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
