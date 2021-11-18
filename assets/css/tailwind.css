@@ -84,6 +84,7 @@ h3 {
 
 
 
+
 /* ### Bootstrap Classes for Functionality ### */
 .collapsing {
     @apply 
@@ -212,10 +213,6 @@ h3 {
     opacity: .5;
 }*/
 
-
-
-
-
 tbody tr:nth-child(odd) {
     @apply 
         bg-gray-50
@@ -227,7 +224,7 @@ tbody tr:nth-child(odd) {
         inline-flex 
         items-center 
         text-white 
-        font-bold 
+        font-medium 
         uppercase 
         text-xs 
         px-4 
