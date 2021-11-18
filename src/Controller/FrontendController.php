@@ -68,7 +68,7 @@ class FrontendController extends AbstractController
     /**
      * @Route("/Klettergebiet/{slug}", name="show_rocks")
      */
-    public function show($slug,  CacheInterface $cache, Request $request)
+    public function showRocksArea($slug,  CacheInterface $cache, Request $request)
     {
         $areas = $this->getDoctrine()->getRepository(Area::class)->getAreasFrontend();
         $rocks = $this->getDoctrine()->getRepository(Rock::class)->findRocksArea($slug);
@@ -85,35 +85,17 @@ class FrontendController extends AbstractController
         ]);
     }
 
-     /**
-     * @Route("/questions/{slug}", name="app_question_show")
+    /**
+     * @Route("/Kletterfels/{slug}", name="show_rock")
      */
-    /*public function show($slug, MarkdownParserInterface $markdownParser, CacheInterface $cache)
+    public function showRock($slug,  CacheInterface $cache, Request $request)
     {
-        $answers = [
-            'Answer 1',
-            'Answer 2',
-            'Answer 3'
-        ];
-        $questionText = 'I\'ve been turned into a cat, any thoughts on how to turn back? While I\'m **adorable**, I don\'t really care for cat food.';
-        $parsedQuestionText = $cache->get('markdown_'.md5($questionText), function() use ($questionText, $markdownParser) {
-            return $markdownParser->transformMarkdown($questionText);
-        });
+        $areas = $this->getDoctrine()->getRepository(Area::class)->getAreasFrontend();
+        $rock = $this->getDoctrine()->getRepository(Rock::class)->findRockName($slug);
 
-        // This creates an responde object
-        return $this->render('question/show.html.twig', [
-
-            'answers' => $answers,
-            'question' => 'Servus',
-            'questionText' => $parsedQuestionText
-
+        return $this->render('frontend/rock.html.twig', [
+            'areas' => $areas,
+            'rock' => $rock,
         ]);
-    }*/
+    }
 }
-
-
-
-
-/**
-     * @Route("/questions/{slug}", name="app_question_show")
-     */

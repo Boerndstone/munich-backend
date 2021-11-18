@@ -113,6 +113,21 @@ class RockRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * @return RockName[] Returns an array of Rocks objects
+     */
+    public function findRockName($rockSlug): array
+    {
+        $queryBuilder = $this->createQueryBuilder('rock')
+            ->select('rock')
+            ->where('rock.slug LIKE :rockSlug')
+            ->setParameter('rockSlug', $rockSlug)
+            ->getQuery()
+            ->getResult();
+
+            return $queryBuilder;
+    }
+
 
 
 
