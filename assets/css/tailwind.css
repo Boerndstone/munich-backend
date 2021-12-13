@@ -213,6 +213,7 @@ h3 {
     opacity: .5;
 }*/
 
+
 tbody tr:nth-child(odd) {
     @apply 
         bg-gray-50

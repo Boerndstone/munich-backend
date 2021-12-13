@@ -14,15 +14,8 @@ import './styles/app.css';
 
 require('bootstrap');
 
-//import $ from 'jquery';
-
-//import 'jquery';
-//import 'bootstrap';
-//import 'admin-lte';
-
 // start the Stimulus application
 //import './bootstrap';
-//import 'admin-lte';
 
 
 

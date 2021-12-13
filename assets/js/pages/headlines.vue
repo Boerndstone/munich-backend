@@ -10,7 +10,7 @@
     // props to components like arguments to a function
     // props are there to receive data, not to modify it!!!
 
-    import headlineComponent from '../components/headline';
+    import headlineComponent from '@/components/headline';
 
     export default ({
         name: 'Gebiete',

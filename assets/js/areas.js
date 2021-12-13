@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import App from './pages/headlines';
+import App from '@/pages/headlines';
 
 new Vue({
     //el: '#app', => old version
