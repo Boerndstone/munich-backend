@@ -24,11 +24,8 @@ Encore
     .addEntry('app', './assets/app.js')
     .addEntry('areas', './assets/js/areas.js')
     .addEntry('global', './assets/js/global.js')
-    .addEntry('backend', './assets/backend.js')
     .addEntry('frontend', './assets/js/frontend.js')
-    .addEntry('global_react', './assets/js/global_react.js')
     .addStyleEntry('tailwind', './assets/css/tailwind.css')
-    .addStyleEntry('materialize', './assets/css/app.scss')
     // enable post css loader
     .enablePostCssLoader((options) => {
         options.postcssOptions = {

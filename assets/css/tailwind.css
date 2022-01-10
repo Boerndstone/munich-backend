@@ -66,6 +66,8 @@ h3 {
     } 
 }
 
+
+
 /* ### NAVIGATION ### */
 .sidenav-munich {
     @apply
@@ -81,8 +83,6 @@ h3 {
     flex-direction: column;
     background: white;
 }
-
-
 
 
 /* ### Bootstrap Classes for Functionality ### */
@@ -280,4 +280,4 @@ tbody tr:nth-child(odd) {
 
 @tailwind utilities;
 
-@import '@material-tailwind/react/tailwind.css';
+/*@import '@material-tailwind/react/tailwind.css';*/

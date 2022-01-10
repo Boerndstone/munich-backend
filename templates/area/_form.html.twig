@@ -1,29 +1,28 @@
-{{ form_start(form, {attr: {'novalidate': 'novalidate'}}) }}
+{#% form_theme form 'form/theme.html.twig' %#}
+{% form_theme form 'form/my_theme.html.twig' %}
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {{ form_row(form.name) }}
-        {{ form_errors(form.name) }}
-        {{ form_row(form.slug) }}
-        {{ form_row(form.orientation) }}
-        {{ form_row(form.sequence) }}
-        {{ form_row(form.online) }}
-        {{ form_row(form.image) }}
-        {{ form_row(form.header_image) }}
-        {{ form_row(form.lat) }}
-        {{ form_row(form.lng) }}
-        {{ form_row(form.zoom) }}
-
-        <div class="col-span-2">
-            <button 
-                class="inline-flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" 
-                role="button"
-            >
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-3 stroke-current" fill="none" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
-                </svg>
-                {{ button_label|default('Save') }}
-            </button>
-        </div>
+{{ form_start(form, {attr: {'novalidate': 'novalidate', 'class': 'grid grid-cols-1 md:grid-cols-2 gap-4'}}) }}
+    
+    {{ form_row(form.name) }}
+    {{ form_row(form.slug) }}
+    {{ form_row(form.orientation) }}
+    {{ form_row(form.sequence) }}
+    {{ form_row(form.online) }}
+    {{ form_row(form.image) }}
+    {{ form_row(form.header_image) }}
+    {{ form_row(form.lat) }}
+    {{ form_row(form.lng) }}
+    {{ form_row(form.zoom) }}
+    
+    <div class="col-span-2">
+        <button 
+            class="inline-flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" 
+            role="button"
+        >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-3 stroke-current" fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+            </svg>
+            {{ button_label|default('Save') }}
+        </button>
     </div>
-
 {{ form_end(form) }}

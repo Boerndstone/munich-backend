@@ -5,14 +5,18 @@ module.exports = {
   important: true,
   corePlugins: {
   },
-  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  //purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  content: [
+    "./assets/**/*.{vue,js,ts,jsx,tsx}",
+    "./templates/**/*.{html,twig}",
+],
   theme: {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
       black: colors.black,
       white: colors.white,
-      gray: colors.trueGray,
+      gray: colors.neutral,
       green: colors.green,
       indigo: colors.indigo,
       red: colors.red,
@@ -25,7 +29,7 @@ module.exports = {
       current: 'currentColor',
       black: colors.black,
       white: colors.white,
-      gray: colors.trueGray,
+      gray: colors.neutral,
       green: colors.green,
       indigo: colors.indigo,
       red: colors.red,
@@ -45,22 +49,8 @@ module.exports = {
       center: true,
       padding: '.5rem',
     },
-    extend: {}
-  },
-  variants: {
-    container: ['responsive'],
-    cursor: ['responsive', 'hover', 'focus'],
-    display: ['responsive', 'hover', 'focus'],
-    width: ['responsive'],
-    backgroundColor: ['active', 'responsive', 'odd', 'even', 'hover', 'focus'],
-    borderRadius: ['responsive', 'hover', 'focus'],
-    padding: ['responsive', 'hover', 'focus'],
-    position: ['responsive', 'hover', 'focus'],
-    tableLayout: ['responsive', 'hover', 'focus'],
-    gridColumn: ['responsive', 'hover'],
-    gridColumnStart: ['responsive', 'hover'],
-    gridColumnStartEnd: ['responsive', 'hover'],
-    whitespace: ['responsive', 'hover', 'focus'],
+    extend: {
+    }
   },
   plugins: [
     require('@tailwindcss/forms'),

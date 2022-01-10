@@ -17,8 +17,8 @@
         
         {{ include('area/_form.html.twig', {'button_label': 'aktualisieren'}) }}
 
-        <div class="grid grid-cols-12 gap-4 mt-5">
-            <div class="col-span-3">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+            <div class="col-span-2 md:col-span-1">
                 <a 
                     class="inline-flex items-center bg-yellow-500 text-white active:bg-yellow-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
                     role="button"
@@ -31,7 +31,7 @@
                     zurück zur Übersicht
                 </a>
             </div>
-            <div class="col-span-9">
+            <div class="col-span-2 md:col-span-1">
                 {{ include('area/_delete_form.html.twig') }}
             </div>
         </div>
