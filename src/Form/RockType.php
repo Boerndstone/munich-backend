@@ -69,12 +69,18 @@ class RockType extends AbstractType
             ->add('description',
                 TextareaType::class,
                     [
+                        'attr' => [
+                            'rows' => 5
+                        ],
                         'label_format' => 'Beschreibung',
                     ]
             )
             ->add('access',
                 TextareaType::class,
                     [
+                        'attr' => [
+                            'rows' => 5
+                        ],
                         'label_format' => 'Zugang',
                     ]
             )
