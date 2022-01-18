@@ -4,51 +4,54 @@
             <button id="side_nav"> 
                 <svg class="fill-current text-black cursor-pointer h-8 w-8 mr-5 md:mr-3"  stroke-width="1" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
             </button>
-            <div class="text-xl font-semibold text-gray-700">
+            <div class="text-xl font-semibold text-black">
                 <a class="text-gray-800 text-xl font-bold md:text-2xl" href="/" style="font-family: 'Chelsea Market', cursive;">munichclimbs</a>
             </div>
         </div>
         <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
         {% if is_granted('ROLE_USER') %}
 
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle text-black" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li class="">
-                        <a href="{{ path('area_index') }}" class="flex items-center px-4 py-2 text-black transition-colors duration-200 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700">Gebiete</a>
-                    </li>
-                    <li class="">
-                        <a href="{{ path('rock_index') }}" class="flex items-center px-4 py-2 text-black transition-colors duration-200 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700">Felsen</a>
-                    </li>
-                    <li class="">
-                        <a href="{{ path('routes_index') }}" class="flex items-center px-4 py-2 text-black transition-colors duration-200 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700">Touren</a>
-                    </li>
-                    <li class="">
-                        <a href="https://www.munichclimbs.de/draw-topo/src/" target="_blank" class="flex items-center px-4 py-2 text-black transition-colors duration-200 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700">Topo erstellen</a>
-                    </li>
-                    <li class="">
-                        <a 
-                            href="{{ path('app_logout') }}" 
-                            class="flex items-center mx-2 px-2 py-1 text-sm text-gray-700 dark:text-gray-200 font-medium rounded-md hover:bg-gray-300 dark:hover:bg-gray-700"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                            </svg>
-                            Logout
-                        </a>
-                    </li>
-                </ul>
+
+            <!-- This example requires Tailwind CSS v2.0+ -->
+            <div class="relative inline-block text-left">
+                <div class="dropdown">
+                    <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-black hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                        Admin
+                        <!-- Heroicon name: solid/chevron-down -->
+                        <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <ul class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none dropdown-menu" role="menu" aria-labelledby="dropdownMenuButton2">
+                        <li class="">
+                            <a href="{{ path('area_index') }}" class="flex items-center px-4 py-2 text-black transition-colors duration-200 transform hover:bg-gray-200 ">Gebiete</a>
+                        </li>
+                        <li class="">
+                            <a href="{{ path('rock_index') }}" class="flex items-center px-4 py-2 text-black transition-colors duration-200 transform hover:bg-gray-200 ">Felsen</a>
+                        </li>
+                        <li class="">
+                            <a href="https://www.munichclimbs.de/draw-topo/src/" target="_blank" class="flex items-center px-4 py-2 text-black transition-colors duration-200 transform hover:bg-gray-200 ">Topo erstellen</a>
+                        </li>
+                        <li class="">
+                            <a 
+                                href="{{ path('app_logout') }}" 
+                                class="flex items-center mx-2 px-2 py-1 text-sm text-black font-medium rounded-md hover:bg-gray-300 "
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                </svg>
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
         {% else %}
             <div class="flex items-center">
                 <a 
                     href="{{ path('app_login') }}" 
-                    class="mx-2 px-2 py-1 text-sm text-gray-700 dark:text-gray-200 font-medium rounded-md hover:bg-gray-300 dark:hover:bg-gray-700"
+                    class="mx-2 px-2 py-1 text-sm text-black dark:text-gray-200 font-medium rounded-md hover:bg-gray-300 "
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
@@ -61,12 +64,12 @@
 <div id="mySidenav" class="sidenav-munich">
     <div class="flex flex-col w-64 h-full py-4 bg-white border-r dark:bg-gray-800 dark:border-gray-600"> 
         
-        <h2 href="/" class="text-gray-800 dark:text-white text-xl font-bold md:text-2xl hover:text-gray-700 dark:hover:text-gray-300 px-2" style="font-family: 'Chelsea Market', cursive;">munichclimbs</h2>
+        <h2 href="/" class="text-gray-800 dark:text-white text-xl font-bold md:text-2xl hover:text-black dark:hover:text-gray-300 px-2" style="font-family: 'Chelsea Market', cursive;">munichclimbs</h2>
     
         <div class="flex flex-col justify-between flex-1 mt-6">
             <nav>
                 
-                <a class="flex items-center px-4 py-2 text-black transition-colors duration-200 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700" href="/">
+                <a class="flex items-center px-4 py-2 text-black transition-colors duration-200 transform hover:bg-gray-200 " href="/">
 
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                     <span class="mx-4 font-medium block truncate" style="max-width: 150px;">Home</span>
@@ -96,7 +99,7 @@
 
                 {% for area in areas %}
 					<a 
-                    class="flex items-center px-4 py-2 text-black transition-colors duration-200 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700" 
+                    class="flex items-center px-4 py-2 text-black transition-colors duration-200 transform hover:bg-gray-200 " 
 						href="{{ path('show_rocks', { slug: area.slug }) }}" 
 						title="Klettergebiet {{ area.name }}"
 						data-area="{{ area.name }}"
@@ -122,13 +125,13 @@
 
                 <hr class="my-3 dark:border-gray-600" />
 
-                <a class="flex items-center px-4 py-2 text-black transition-colors duration-200 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700" href="<?php echo BASE_URL; ?>Datenschutz">
+                <a class="flex items-center px-4 py-2 text-black transition-colors duration-200 transform hover:bg-gray-200 " href="<?php echo BASE_URL; ?>Datenschutz">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                     <span class="mx-4 font-medium">Datenschutz</span>
                 </a>
 
-                <a class="flex items-center px-4 py-2 text-black transition-colors duration-200 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700" href="<?php echo BASE_URL; ?>Impressum">
+                <a class="flex items-center px-4 py-2 text-black transition-colors duration-200 transform hover:bg-gray-200 " href="<?php echo BASE_URL; ?>Impressum">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     <span class="mx-4 font-medium">Impressum</span>
