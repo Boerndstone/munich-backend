@@ -28,28 +28,13 @@ class RoutesType extends AbstractType
             ->add('name',
                 TextType::class,
                     [
-                        'row_attr' => ['class' => 'my-4 col-span-4'],
-                        'attr' => [
-                            'class' => 'mt-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-2 px-4 block w-full focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring',
-                        ],
                         'label_format' => 'Name der Tour',
-                        'label_attr' => [
-                            'class' => 'text-gray-700 font-medium'
-                        ]
                     ]
             )
             ->add('area',
                 ChoiceType::class,
                 [
-                    'row_attr' => ['class' => 'my-4 col-span-4'],
-                    'attr' => [
-                        'class' => 'mt-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-2 px-4 block w-full focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring',
-                        'style' => 'height: 42px;'
-                    ],
                     'label_format' => 'Gebiet',
-                    'label_attr' => [
-                        'class' => 'text-gray-700 font-medium'
-                    ],
                     'choice_label' => function(Area $area) {
                         return sprintf('(%d) %s', $area->getOnline(), $area->getName() );
                     },
@@ -59,15 +44,7 @@ class RoutesType extends AbstractType
             ->add('rock',
                 ChoiceType::class,
                 [
-                    'row_attr' => ['class' => 'my-4 col-span-4'],
-                    'attr' => [
-                        'class' => 'mt-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-2 px-4 block w-full focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring',
-                        'style' => 'height: 42px;'
-                    ],
                     'label_format' => 'Fels',
-                    'label_attr' => [
-                        'class' => 'text-gray-700 font-medium'
-                    ],
                     'choice_label' => function(Rock $rock) {
                         return sprintf('(%d) %s', $rock->getOnline(), $rock->getName() );
                     },
@@ -77,142 +54,65 @@ class RoutesType extends AbstractType
             ->add('grade',
                 TextType::class,
                     [
-                        'row_attr' => ['class' => 'my-4 col-span-4'],
-                        'attr' => [
-                            'class' => 'mt-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-2 px-4 block w-full focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring tinymce',
-                        ],
                         'label_format' => 'Schwierigkeitsgrad',
-                        'label_attr' => [
-                            'class' => 'text-gray-700 font-medium'
-                        ],
-                        
                     ]
             )
             ->add('climbed', 
                 ChoiceType::class, [
-                    'row_attr' => ['class' => 'my-4 col-span-4'],
-                    'attr' => [
-                        'class' => 'mt-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-2 px-4 block w-full focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring',
-                        'style' => 'height: 39px;'
-                    ],
                     'label_format' => 'Bereits geklettert',
-                    'label_attr' => [
-                        'class' => 'text-gray-700 font-medium'
-                    ],
                     'choices'  => [
                         'Nein' => 0,
                         'Ja' => 1,
                     ],
-                    'invalid_message' => 'Symfony is too smart for your hacking!'
                 ]
             )
             ->add('firstAscent',
                 TextType::class, [
-                    'row_attr' => ['class' => 'my-4 col-span-4'],
-                    'attr' => [
-                        'class' => 'mt-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-2 px-4 block w-full focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring',
-                    ],
                     'label_format' => 'Erstbegeher',
-                    'label_attr' => [
-                        'class' => 'text-gray-700 font-medium'
-                    ],
                     'required' => false,
                 ]
             )
             ->add('yearFirstAscent',
                 TextType::class, [
-                    'row_attr' => ['class' => 'my-4 col-span-4'],
-                    'attr' => [
-                        'class' => 'mt-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-2 px-4 block w-full focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring',
-                    ],
                     'label_format' => 'Jahr der Erstbegehung',
-                    'label_attr' => [
-                        'class' => 'text-gray-700 font-medium'
-                    ]
                 ]
             )
             ->add('protection',
                 TextType::class, [
-                    'row_attr' => ['class' => 'my-4 col-span-4'],
-                    'attr' => [
-                        'class' => 'mt-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-2 px-4 block w-full focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring',
-                    ],
                     'label_format' => 'Absicherung',
-                    'label_attr' => [
-                        'class' => 'text-gray-700 font-medium'
-                    ]
                 ]
             )
             ->add('description',
                 TextareaType::class, [
-                    'row_attr' => ['class' => 'my-4 col-span-4'],
                     'attr' => [
-                        'class' => 'mt-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-2 px-4 block w-full focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring',
+                        'rows' => 5
                     ],
                     'label_format' => 'Beschreibung',
-                    'label_attr' => [
-                        'class' => 'text-gray-700 font-medium'
-                    ]
                 ]
             )
             ->add('scale',
                 TextType::class, [
-                    'row_attr' => ['class' => 'my-4 col-span-4'],
-                    'attr' => [
-                        'class' => 'mt-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-2 px-4 block w-full focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring',
-                    ],
                     'label_format' => 'Skala',
-                    'label_attr' => [
-                        'class' => 'text-gray-700 font-medium'
-                    ]
                 ]
             )
             ->add('gradeNo',
                 TextType::class, [
-                    'row_attr' => ['class' => 'my-4 col-span-4'],
-                    'attr' => [
-                        'class' => 'mt-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-2 px-4 block w-full focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring',
-                    ],
                     'label_format' => 'Grad',
-                    'label_attr' => [
-                        'class' => 'text-gray-700 font-medium'
-                    ]
                 ]
             )
             ->add('rating',
                 TextType::class, [
-                    'row_attr' => ['class' => 'my-4 col-span-4'],
-                    'attr' => [
-                        'class' => 'mt-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-2 px-4 block w-full focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring',
-                    ],
                     'label_format' => 'Schönheit',
-                    'label_attr' => [
-                        'class' => 'text-gray-700 font-medium'
-                    ]
                 ]
             )
             ->add('topoId',
                 TextType::class, [
-                    'row_attr' => ['class' => 'my-4 col-span-4'],
-                    'attr' => [
-                        'class' => 'mt-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-2 px-4 block w-full focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring',
-                    ],
                     'label_format' => 'Topo ID',
-                    'label_attr' => [
-                        'class' => 'text-gray-700 font-medium'
-                    ]
                 ]
             )
             ->add('nr',
                 TextType::class, [
-                    'row_attr' => ['class' => 'my-4 col-span-4'],
-                    'attr' => [
-                        'class' => 'mt-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-2 px-4 block w-full focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring',
-                    ],
                     'label_format' => 'Nummer',
-                    'label_attr' => [
-                        'class' => 'text-gray-700 font-medium'
-                    ]
                 ]
             )
         ;

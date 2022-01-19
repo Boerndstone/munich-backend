@@ -24,19 +24,21 @@ class Area
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Get creative and think of a title!")
-     * @Assert\NotNull(message="Get creative and think of a title!")
+     * @Assert\NotNull(message="Gebietsname darf nicht leer sein!")
      * @Assert\Length(
      *      min = 2,
-     *      max = 50,
-     *      minMessage = "Your first name must be at least {{ limit }} characters long",
-     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     *      minMessage = "Gebietsname sollte mehr als zwei Zeichen enthalten!",
      * )
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="URL darf nicht leer sein und darf keine Umlaute enthalten!")
+     * @Assert\Length(
+     *      min = 2,
+     *      minMessage = "URL sollte mehr als zwei Zeichen enthalten!",
+     * )
      */
     private $slug;
 
