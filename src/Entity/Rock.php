@@ -7,6 +7,8 @@ use App\Repository\RoutesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @ORM\Entity(repositoryClass=RockRepository::class)
@@ -22,6 +24,11 @@ class Rock
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="Felsname darf nicht leer sein!")
+     * @Assert\Length(
+     *      min = 2,
+     *      minMessage = "Felsname sollte mehr als zwei Zeichen enthalten!",
+     * )
      */
     private $name;
 
@@ -39,6 +46,11 @@ class Rock
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="URL darf nicht leer sein und darf keine Umlaute enthalten!")
+     * @Assert\Length(
+     *      min = 2,
+     *      minMessage = "URL sollte mehr als zwei Zeichen enthalten!",
+     * )
      */
     private $slug;
 
