@@ -49,7 +49,7 @@ class RoutesController extends AbstractController
             return $this->redirectToRoute('rock_index');
         }
 
-        return $this->render('Routes/new.html.twig', [
+        return $this->render('routes/new.html.twig', [
             'routes' => $routes,
             'form' => $form->createView(),
             'areas' => $areaRepository->findAllAreasAlphabetical(),
