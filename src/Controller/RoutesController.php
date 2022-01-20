@@ -46,23 +46,12 @@ class RoutesController extends AbstractController
             $entityManager->persist($routes);
             $entityManager->flush();
 
-            return $this->redirectToRoute('routes_index');
+            return $this->redirectToRoute('rock_index');
         }
 
         return $this->render('Routes/new.html.twig', [
             'routes' => $routes,
             'form' => $form->createView(),
-            'areas' => $areaRepository->findAllAreasAlphabetical(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="routes_show", methods={"GET"})
-     */
-    public function show(Routes $routes, AreaRepository $areaRepository): Response
-    {
-        return $this->render('routes/show.html.twig', [
-            'routes' => $routes,
             'areas' => $areaRepository->findAllAreasAlphabetical(),
         ]);
     }
@@ -78,7 +67,7 @@ class RoutesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('routes_index');
+            return $this->redirectToRoute('rock_index');
         }
 
         return $this->render('routes/edit.html.twig', [
@@ -99,6 +88,6 @@ class RoutesController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('routes_index');
+        return $this->redirectToRoute('rock_index');
     }
 }
