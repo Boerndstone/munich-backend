@@ -46,10 +46,10 @@ class RoutesController extends AbstractController
             $entityManager->persist($routes);
             $entityManager->flush();
 
-            return $this->redirectToRoute('rock_index');
+            return $this->redirectToRoute('routes_index');
         }
 
-        return $this->render('routes/new.html.twig', [
+        return $this->render('Routes/new.html.twig', [
             'routes' => $routes,
             'form' => $form->createView(),
             'areas' => $areaRepository->findAllAreasAlphabetical(),
@@ -67,7 +67,7 @@ class RoutesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('rock_index');
+            return $this->redirect($request->request->get('referer'));
         }
 
         return $this->render('routes/edit.html.twig', [
