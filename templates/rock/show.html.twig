@@ -40,7 +40,7 @@
                                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                                     <th class="py-3 px-6 text-left">Nr.</th>
                                     <th class="py-3 px-6 text-left">Name</th>
-                                    <th class="py-3 px-6 text-left">Schwierigkeitsgrad</th>
+                                    <th class="py-3 px-6 text-left">Grad</th>
                                     <th class="py-3 px-6 text-left">Geklettert</th>
                                     <th class="py-3 px-6 text-center">Action</th>
                                 </tr>
@@ -88,7 +88,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex items-center mb-5">
+        <div class="flex items-center my-5">
             <a 
                 class="inline-flex items-center bg-yellow-500 text-white active:bg-yellow-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" 
                 role="button"
@@ -99,14 +99,6 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                 </svg>
                 zurück zur Übersicht
-            </a>
-            <a 
-                class="inline-flex items-center bg-teal-500 text-white active:bg-teal-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" 
-                role="button"
-                href="{{ path('rock_edit', {'id': rock.id}) }}"
-            >
-                <svg class="w-4 h-4 mr-3 fill-current" viewBox="0 0 20 20"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
-                <span>bearbeiten</span>
             </a>
         </div>
         {{ include('rock/_delete_form.html.twig') }}
