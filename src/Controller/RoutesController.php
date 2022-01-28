@@ -19,7 +19,6 @@ class RoutesController extends AbstractController
 {
     /**
      * @Route("/", name="routes_index", methods={"GET"})
-     * @IsGranted("ROLE_USER")
      */
     public function index(RoutesRepository $RoutesRepository, AreaRepository $areaRepository): Response
     {

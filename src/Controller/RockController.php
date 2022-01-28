@@ -6,6 +6,7 @@ use App\Entity\Rock;
 use App\Entity\Area;
 use App\Entity\Routes;
 use App\Form\RockType;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\AreaRepository;
 use App\Repository\RockRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,7 +26,7 @@ class RockController extends AbstractController
     {
 
         $rocks = $rockRepository->findSearchTerm(
-            $request->query->get('q')
+            $request->get('q')
         );
 
         return $this->render('rock/index.html.twig', [

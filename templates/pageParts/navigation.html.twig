@@ -9,7 +9,7 @@
             </div>
         </div>
         <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
-        {% if is_granted('ROLE_USER') %}
+        {#% if is_granted('ROLE_USER') %#}
 
 
             <!-- This example requires Tailwind CSS v2.0+ -->
@@ -34,7 +34,7 @@
                         </li>
                         <li class="">
                             <a 
-                                href="{{ path('app_logout') }}" 
+                                href="{#{ path('app_logout') }#}" 
                                 class="flex items-center px-4 py-2 text-black transition-colors duration-200 transform hover:bg-gray-200 "
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -47,10 +47,10 @@
                 </div>
             </div>
 
-        {% else %}
+        {#% else %#}
             <div class="flex items-center">
                 <a 
-                    href="{{ path('app_login') }}" 
+                    href="{#{ path('app_login') }#}" 
                     class="mx-2 px-2 py-1 text-sm text-black dark:text-gray-200 font-medium rounded-md hover:bg-gray-300 "
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -58,7 +58,7 @@
                     </svg>
                 </a>
             </div>
-        {% endif %}
+        {#% endif %#}
     </div>
 </nav>
 <div id="mySidenav" class="sidenav-munich">
