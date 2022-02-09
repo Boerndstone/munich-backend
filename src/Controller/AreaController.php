@@ -8,6 +8,7 @@ use App\Repository\AreaRepository;
 use App\Repository\RockRepository;
 use App\Service\MarkdownHelper;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,25 +25,22 @@ class AreaController extends AbstractController
      */
     public function index(AreaRepository $areaRepository): Response
     {
-        //$test = $areaRepository->getRocksLowerFiveteen();
-
         return $this->render('area/index.html.twig', [
             'areas' => $areaRepository->findAllAreasAlphabetical(),
-            //'test' => $test
         ]);
     }
 
     /**
      * @Route("/new", name="area_new", methods={"GET","POST"})
      */
-    public function new(Request $request, AreaRepository $areaRepository): Response
+    public function new(ManagerRegistry $doctrine, Request $request, AreaRepository $areaRepository): Response
     {
         $area = new Area();
         $form = $this->createForm(AreaType::class, $area);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->persist($area);
             $entityManager->flush();
 
@@ -59,14 +57,14 @@ class AreaController extends AbstractController
     /**
      * @Route("/{id}/edit", name="area_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Area $area, AreaRepository $areaRepository, RockRepository $rockRepository): Response
+    public function edit(ManagerRegistry $doctrine, Request $request, Area $area, AreaRepository $areaRepository, RockRepository $rockRepository): Response
     {
         
         $form = $this->createForm(AreaType::class, $area);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $doctrine->getManager()->flush();
 
             $this->addFlash('success', 'Gebiet wurde erfolgreich aktualisiert');
 
@@ -86,7 +84,7 @@ class AreaController extends AbstractController
     public function delete(Request $request, Area $area): Response
     {
         if ($this->isCsrfTokenValid('delete'.$area->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->remove($area);
             $entityManager->flush();
         }

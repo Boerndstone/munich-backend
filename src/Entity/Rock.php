@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
+use Symfony\Component\Serializer\Annotation\Groups;
+
 /**
  * @ORM\Entity(repositoryClass=RockRepository::class)
  */
@@ -24,6 +26,7 @@ class Rock
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("rocks")
      * @Assert\NotNull(message="Felsname darf nicht leer sein!")
      * @Assert\Length(
      *      min = 2,
@@ -34,7 +37,7 @@ class Rock
 
     /**
      * @ORM\OneToMany(targetEntity=Routes::class, mappedBy="rock", fetch="EXTRA_LAZY")
-     * * @ORM\OrderBy({"nr" = "ASC"})
+     * @ORM\OrderBy({"nr" = "ASC"})
      */
     private $routes;
 
@@ -56,6 +59,7 @@ class Rock
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("rocks")
      */
     private $nr;
 

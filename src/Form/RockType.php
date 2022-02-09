@@ -207,6 +207,10 @@ class RockType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Rock::class,
+            'attr' => [
+                'class' => 'js-user-autocomplete',
+                'data-autocomplete-url' => $this->router->generate('admin_utility_users')
+            ]
         ]);
     }
 }

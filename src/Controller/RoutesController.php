@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @Route("/Route")
@@ -34,14 +35,14 @@ class RoutesController extends AbstractController
     /**
      * @Route("/new", name="routes_new", methods={"GET","POST"})
      */
-    public function new(Request $request, AreaRepository $areaRepository): Response
+    public function new(ManagerRegistry $doctrine, Request $request, AreaRepository $areaRepository): Response
     {
         $routes = new Routes();
         $form = $this->createForm(RoutesType::class, $routes);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->persist($routes);
             $entityManager->flush();
 
@@ -58,13 +59,13 @@ class RoutesController extends AbstractController
     /**
      * @Route("/{id}/edit", name="routes_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Routes $routes, AreaRepository $areaRepository): Response
+    public function edit(ManagerRegistry $doctrine, Request $request, Routes $routes, AreaRepository $areaRepository): Response
     {
         $form = $this->createForm(RoutesType::class, $routes);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $doctrine->getManager()->flush();
 
             return $this->redirect($request->request->get('referer'));
         }
@@ -79,10 +80,10 @@ class RoutesController extends AbstractController
     /**
      * @Route("/{id}", name="routes_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Routes $routes): Response
+    public function delete(ManagerRegistry $doctrine, Request $request, Routes $routes): Response
     {
         if ($this->isCsrfTokenValid('delete'.$routes->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->remove($routes);
             $entityManager->flush();
         }

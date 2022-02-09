@@ -7,9 +7,11 @@ use App\Entity\Area;
 use App\Entity\Routes;
 use App\Form\RockType;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use App\Repository\AreaRepository;
 use App\Repository\RockRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,6 +21,22 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class RockController extends AbstractController
 {
+
+    /**
+     * @Route("/search/rocks", name="search_rocks", methods={"GET"})
+     */
+    public function getRocks(RockRepository $rockRepository, Request $request, AreaRepository $areaRepository): Response
+    {
+
+        $rocks = $rockRepository->findSearchTerm(
+            //$request->get('q')
+        );
+
+        return $this->json([
+            'rocks' => $rocks
+        ], 200, [], ['groups' => ['rocks']]);
+    }
+
     /**
      * @Route("/", name="rock_index", methods={"GET"})
      */
@@ -38,14 +56,14 @@ class RockController extends AbstractController
     /**
      * @Route("/new", name="rock_new", methods={"GET","POST"})
      */
-    public function new(Request $request, AreaRepository $areaRepository): Response
+    public function new(ManagerRegistry $doctrine, Request $request, AreaRepository $areaRepository): Response
     {
         $rock = new Rock();
         $form = $this->createForm(RockType::class, $rock);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->persist($rock);
             $entityManager->flush();
 
@@ -76,7 +94,7 @@ class RockController extends AbstractController
     /**
      * @Route("/{id}/edit", name="rock_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Rock $rock, AreaRepository $areaRepository): Response
+    public function edit(ManagerRegistry $doctrine, Request $request, Rock $rock, AreaRepository $areaRepository): Response
     {
         $area = $rock->getArea();
         $routes = $rock->getRoutes();
@@ -86,7 +104,7 @@ class RockController extends AbstractController
 
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $doctrine->getManager()->flush();
 
             $this->addFlash('success', 'Fels wurde erfolgreich aktualisiert');
 
@@ -104,10 +122,10 @@ class RockController extends AbstractController
     /**
      * @Route("/{id}", name="rock_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Rock $rock): Response
+    public function delete(ManagerRegistry $doctrine, Request $request, Rock $rock): Response
     {
         if ($this->isCsrfTokenValid('delete'.$rock->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->remove($rock);
             $entityManager->flush();
         }
