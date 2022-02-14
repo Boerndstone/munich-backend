@@ -26,6 +26,7 @@ Encore
     .addEntry('global', './assets/js/global.js')
     .addEntry('frontend', './assets/js/frontend.js')
     .addStyleEntry('tailwind', './assets/css/tailwind.css')
+    .addStyleEntry('admin', './assets/css/admin.css')
     // enable post css loader
     .enablePostCssLoader((options) => {
         options.postcssOptions = {
