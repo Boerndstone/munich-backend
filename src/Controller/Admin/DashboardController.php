@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 use App\Entity\Area;
 use App\Entity\Rock;
 use App\Entity\Routes;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
@@ -55,6 +56,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Gebiete', 'fa fa-home', Area::class);
         yield MenuItem::linkToCrud('Felsen', 'fa fa-home', Rock::class);
         yield MenuItem::linkToCrud('Touren', 'fa fa-home', Routes::class);
+        yield MenuItem::linkToCrud('User', 'fa fa-home', User::class);
         yield MenuItem::linkToUrl('Home', 'fa fa-home', $this->generateUrl('frontend'));
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }

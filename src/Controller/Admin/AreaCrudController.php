@@ -4,6 +4,11 @@ namespace App\Controller\Admin;
 
 use App\Entity\Area;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class AreaCrudController extends AbstractCrudController
 {
@@ -12,14 +17,19 @@ class AreaCrudController extends AbstractCrudController
         return Area::class;
     }
 
-    /*
+    
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-        ];
+        yield Field::new('name')
+            //->hideOnIndex()
+        ;
+        yield Field::new('slug')
+            ->hideOnIndex()
+            ->setFormTypeOption(
+                'disabled',
+                $pageName !== Crud::PAGE_NEW
+            )
+        ;
     }
-    */
+    
 }
