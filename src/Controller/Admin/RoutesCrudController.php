@@ -8,6 +8,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 
 class RoutesCrudController extends AbstractCrudController
 {
@@ -21,10 +24,12 @@ class RoutesCrudController extends AbstractCrudController
     {
         yield Field::new('id')
             ->hideonForm();
-        yield Field::new('name');
+        yield Field::new('name')
+            ->setLabel('Tourenname');
         yield AssociationField::new('area')
-            ->autocomplete();
-        yield AssociationField::new('rock');
+            ->setLabel('Gebiet');
+        yield AssociationField::new('rock')
+            ->setLabel('Fels');
         yield Field::new('grade')
             ->setLabel('Schwierigkeitsgrad');
         yield Field::new('climbed')
@@ -33,7 +38,18 @@ class RoutesCrudController extends AbstractCrudController
             ->setLabel('Erstbegeher')
             ->hideOnIndex();
         yield Field::new('year_first_ascent')
+            ->setLabel('Jahr der Erstbegehung')
             ->hideOnIndex();
+        yield ChoiceField::new('protection')
+            ->setLabel('Absicherung')
+            ->hideOnIndex()
+            ->setHelp('Wie die Absicherung ist, von gut bis sehr gefährlich!')
+            ->setChoices([
+                'gut abgesichert' => '1',
+                'vorsichtig' => '2',
+                'gefährlich' => '3',
+            ]);
+
     }
     
 }
