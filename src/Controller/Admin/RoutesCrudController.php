@@ -33,7 +33,8 @@ class RoutesCrudController extends AbstractCrudController
         yield Field::new('grade')
             ->setLabel('Schwierigkeitsgrad');
         yield Field::new('climbed')
-            ->setLabel('Bereits geklettert');
+            ->setLabel('Bereits geklettert')
+            ->setTemplatePath('admin/field/votes.html.twig');
         yield Field::new('first_ascent')
             ->setLabel('Erstbegeher')
             ->hideOnIndex();
