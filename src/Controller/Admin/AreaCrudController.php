@@ -59,7 +59,7 @@ class AreaCrudController extends AbstractCrudController
                 'Online' => '1',
                 'Offline' => '0',
             ])
-            ->setTemplatePath('Admin/field/status.html.twig')
+            ->setTemplatePath('admin/field/status.html.twig')
         ;
 
         yield Field::new('image')
