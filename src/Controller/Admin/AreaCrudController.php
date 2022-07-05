@@ -19,6 +19,12 @@ class AreaCrudController extends AbstractCrudController
         return Area::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return parent::configureCrud($crud)
+            ->setPageTitle(Crud::PAGE_INDEX, 'Gebiete');
+    }
+
     
     public function configureFields(string $pageName): iterable
     {
@@ -47,12 +53,13 @@ class AreaCrudController extends AbstractCrudController
         ;
 
         yield ChoiceField::new('online')
-            ->setLabel('Online:')
+            ->setLabel('Status:')
             ->renderAsNativeWidget()
             ->setChoices([
                 'Online' => '1',
                 'Offline' => '0',
             ])
+            ->setTemplatePath('Admin/field/status.html.twig')
         ;
 
         yield Field::new('image')
