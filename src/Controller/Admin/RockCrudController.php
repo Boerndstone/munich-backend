@@ -31,7 +31,7 @@ class RockCrudController extends AbstractCrudController
                 'online' => '1',
                 'offline' => '0',
             ])
-            ->setTemplatePath('Admin/field/status.html.twig')
+            ->setTemplatePath('admin/field/status.html.twig')
         ;
         yield Field::new('height');
         }
