@@ -45,11 +45,34 @@ class RoutesCrudController extends AbstractCrudController
             ->setLabel('Absicherung')
             ->hideOnIndex()
             ->setHelp('Wie die Absicherung ist, von gut bis sehr gefährlich!')
-            ->setChoices([
-                'gut abgesichert' => '1',
-                'vorsichtig' => '2',
-                'gefährlich' => '3',
-            ]);
+            ->setChoices(
+                [
+                    'gut abgesichert' => '1',
+                    'vorsichtig' => '2',
+                    'gefährlich' => '3',
+                ]
+            )
+        ;
+        yield Field::new('description')
+            ->setLabel('Beschreibung')
+            ->hideOnIndex()
+        ;
+        yield Field::new('grade_no')
+            ->setLabel('Grade')
+            ->hideOnIndex()
+        ;
+        yield Field::new('rating')
+            ->setLabel('Schönheit')
+            ->hideOnIndex()
+        ;
+        yield Field::new('topo_id')
+            ->setLabel('Topo ID')
+            ->hideOnIndex()
+        ;
+        yield Field::new('nr')
+            ->setLabel('Reihenfolge')
+            ->hideOnIndex()
+        ;
 
     }
     
