@@ -49,7 +49,6 @@ class AreaCrudController extends AbstractCrudController
 
         yield Field::new('sequence')
             ->setLabel('Reihenfolge')
-            ->hideOnIndex()
         ;
 
         yield ChoiceField::new('online')

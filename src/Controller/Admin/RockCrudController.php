@@ -41,8 +41,6 @@ class RockCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
 
-
-
         yield Field::new('name')
             ->setLabel('Name')
             ->hideOnDetail()
