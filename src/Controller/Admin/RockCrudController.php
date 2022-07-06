@@ -13,6 +13,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+
 
 
 class RockCrudController extends AbstractCrudController
@@ -41,54 +43,71 @@ class RockCrudController extends AbstractCrudController
 
         yield IdField::new('id')
             ->setLabel('ID')
+            ->hideOnDetail()
         ;
 
         yield Field::new('name')
             ->setLabel('Name')
+            ->hideOnDetail()
         ;
 
         yield AssociationField::new('area')
             ->setLabel('Gebiet')
+            ->hideOnDetail()
+        ;
+
+        yield CollectionField::new('routes')
+            ->setLabel('Routen')
+            ->onlyOnDetail()
+            ->setTemplatePath('admin/field/routes.html.twig')
         ;
 
         yield Field::new('slug')
             ->setLabel('URL')
             ->hideOnIndex()
+            ->hideOnDetail()
         ;
 
         yield Field::new('nr')
             ->setLabel('Numer')
             ->hideOnIndex()
+            ->hideOnDetail()
         ;
 
         yield TextareaField::new('description')
             ->setLabel('Beschreibung')
             ->hideOnIndex()
+            ->hideOnDetail()
         ;
 
         yield TextareaField::new('nature')
             ->setLabel('Naturschutz')
             ->hideOnIndex()
+            ->hideOnDetail()
         ;
 
         yield TextareaField::new('access')
             ->setLabel('Zustieg')
             ->hideOnIndex()
+            ->hideOnDetail()
         ;
 
         yield NumberField::new('zone')
             ->setLabel('Zone')
             ->hideOnIndex()
+            ->hideOnDetail()
         ;
 
         yield NumberField::new('banned')
             ->setLabel('Jahreszeitliche Sperrung')
             ->hideOnIndex()
+            ->hideOnDetail()
         ;
 
         yield NumberField::new('height')
             ->setLabel('Height')
             ->setTemplatePath('admin/field/height.html.twig')
+            ->hideOnDetail()
         ;
 
         yield ChoiceField::new('online')
@@ -99,56 +118,67 @@ class RockCrudController extends AbstractCrudController
                 'offline' => '0',
             ])
             ->setTemplatePath('admin/field/status.html.twig')
+            ->hideOnDetail()
         ;
 
         yield Field::new('orientation')
             ->setLabel('Ausrichtung')
             ->hideOnIndex()
+            ->hideOnDetail()
         ;
 
         yield Field::new('season')
             ->setLabel('Beste Jahreszeit')
             ->hideOnIndex()
+            ->hideOnDetail()
         ;
 
         yield Field::new('child_friendly')
             ->setLabel('Kinderfreundlich')
             ->hideOnIndex()
+            ->hideOnDetail()
         ;
 
         yield Field::new('sunny')
             ->setLabel('Sonnig')
             ->hideOnIndex()
+            ->hideOnDetail()
         ;
 
         yield Field::new('rain')
             ->setLabel('Regensicher')
             ->hideOnIndex()
+            ->hideOnDetail()
         ;
 
         yield Field::new('image')
             ->setLabel('Bilder')
             ->hideOnIndex()
+            ->hideOnDetail()
         ;
 
         yield Field::new('header_image')
             ->setLabel('Header Bild')
             ->hideOnIndex()
+            ->hideOnDetail()
         ;
 
         yield Field::new('topo')
             ->setLabel('Topo')
             ->hideOnIndex()
+            ->hideOnDetail()
         ;
 
         yield Field::new('lat')
             ->setLabel('Breitengrad')
             ->hideOnIndex()
+            ->hideOnDetail()
         ;
 
         yield Field::new('lng')
             ->setLabel('Längengrad')
             ->hideOnIndex()
+            ->hideOnDetail()
         ;
 
     }

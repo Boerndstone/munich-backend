@@ -1,0 +1,29 @@
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
+{# @var field \EasyCorp\Bundle\EasyAdminBundle\Dto\FieldDto #}
+{# @var entity \EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto #}
+{% if ea.crud.currentAction == 'detail' %}
+    <table class="table table-striped">
+        <tr>
+            <th>Name</th>
+            <th>Schwierigkeitsgrad</th>
+            <th>Geklettert</th>
+            <th>Erstbegeher</th>
+        </tr>
+        {% for value in field.value %}
+        <tr>
+            <td>{{ value.name }}</td>
+            <td>{{ value.grade }}</td>
+            <td>
+                {% if value.climbed == 0 %}
+                    <div class="badge bg-danger text-white"><i class="fa-fw fa fa-close"></i></div> 
+                {% elseif value.climbed == 1 %}
+                    <div class="badge bg-success text-white"><i class="fa-fw fa fa-check"></i></div> 
+                {% endif %}
+            </td>
+            <td>{{ value.firstAscent }} {% if value.yearFirstAscent %} ({{ value.yearFirstAscent }}){% endif %}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <span class="badge badge-secondary">{{ field.formattedValue }}</span>
+{% endif %}
