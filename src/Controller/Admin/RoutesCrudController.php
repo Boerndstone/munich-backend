@@ -61,9 +61,18 @@ class RoutesCrudController extends AbstractCrudController
             ->setLabel('Grade')
             ->hideOnIndex()
         ;
-        yield Field::new('rating')
+        yield ChoiceField::new('rating')
             ->setLabel('Schönheit')
             ->hideOnIndex()
+            ->setHelp('Schönheit der Route.')
+            ->setChoices(
+                [
+                    'schlecht => Mülltonne' => '-1',
+                    'gut => ein Stern' => '1',
+                    'super  => zwei Sterne' => '2',
+                    'fantastisch   => drei Sterne' => '3',
+                ]
+            )
         ;
         yield Field::new('topo_id')
             ->setLabel('Topo ID')
