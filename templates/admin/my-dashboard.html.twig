@@ -1,21 +1,17 @@
 {# templates/admin/my-custom-page.html.twig #}
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
-{% block content_title %}The Title of the Page{% endblock %}
-{% block page_actions %}
-    <a class="btn btn-primary" href="...">Some Action sadv</a>
-{% endblock %}
+{% block content_title %}To Do's{% endblock %}
 
 {% block main %}
-    <table class="datagrid">
-        <thead>
-            <tr>
-                <td>Some Column</td>
-                <td>Another Column</td>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-    <p>Dokumentation was weiter entwickelt werden soll.</p>
+    <h2>Backend</h2>
+    <ul>
+        <li>Kindereignung stimmt bei Übersicht nicht mit der auf Detailseite überein.</li>
+        <li>Koordinaten auf wie viele Stellen kürzen?</li>
+    </ul>
+    <h2>Frontend</h2>
+    <ul>
+        <li>Startseite Card's eventuell horizontal.</li>
+        <li>Karte Überischtsseite Icons fehlen.</li>
+    </ul>
 {% endblock %}
