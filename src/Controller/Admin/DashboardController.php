@@ -58,6 +58,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Touren', 'fa fa-home', Routes::class);
         yield MenuItem::linkToCrud('User', 'fa fa-home', User::class);
         yield MenuItem::linkToUrl('Home', 'fa fa-home', $this->generateUrl('frontend'));
+        yield MenuItem::section('Tools');
         yield MenuItem::linkToUrl('Generiere UIAA Grade', 'fa fa-link', 'https://munichclimbs.de/calculateGradesUIAA.php')
             ->setLinkTarget('_blank');
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);

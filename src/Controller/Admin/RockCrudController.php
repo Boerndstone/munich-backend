@@ -52,9 +52,12 @@ class RockCrudController extends AbstractCrudController
         ;
 
         yield CollectionField::new('routes')
-            ->setLabel('Routen')
+            //->setLabel('Routen')
+            ->setLabel(false)
             ->onlyOnDetail()
             ->setTemplatePath('admin/field/routes.html.twig')
+            ->setFormType(AddressType::class)
+            ->addCssClass('field-address')
         ;
 
         yield Field::new('slug')
@@ -64,7 +67,7 @@ class RockCrudController extends AbstractCrudController
         ;
 
         yield Field::new('nr')
-            ->setLabel('Numer')
+            ->setLabel('Nummer')
             ->hideOnIndex()
             ->hideOnDetail()
         ;
