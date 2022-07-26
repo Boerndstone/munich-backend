@@ -54,7 +54,7 @@ class DashboardController extends AbstractDashboardController
         // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
         //
         return $this->render('admin/index.html.twig', [
-            'chart' => $this->createChart(),
+            //'chart' => $this->createChart(),
         ]);
     }
 
