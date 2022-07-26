@@ -26,7 +26,7 @@ Encore
     .addEntry('global', './assets/js/global.js')
     .addEntry('frontend', './assets/js/frontend.js')
     .addStyleEntry('tailwind', './assets/css/tailwind.css')
-    .addStyleEntry('admin', './assets/css/admin.css')
+    .addEntry('admin', './assets/admin.js')
     // enable post css loader
     .enablePostCssLoader((options) => {
         options.postcssOptions = {
@@ -40,7 +40,7 @@ Encore
     })
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
-    //.enableStimulusBridge('./assets/controllers.json')
+    .enableStimulusBridge('./assets/controllers.json')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     //.splitEntryChunks()

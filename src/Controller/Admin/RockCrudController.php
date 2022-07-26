@@ -43,39 +43,55 @@ class RockCrudController extends AbstractCrudController
 
         yield Field::new('name')
             ->setLabel('Name')
-            ->hideOnDetail()
+            ->hideOnDetail() 
+            ->setColumns('col-12 col-md-4')
         ;
 
         yield AssociationField::new('area')
             ->setLabel('Gebiet')
             ->hideOnDetail()
+            ->setColumns('col-12 col-md-4')
         ;
 
         yield CollectionField::new('routes')
-            //->setLabel('Routen')
             ->setLabel(false)
             ->onlyOnDetail()
             ->setTemplatePath('admin/field/routes.html.twig')
             ->setFormType(AddressType::class)
             ->addCssClass('field-address')
+            ->setColumns('col-12 col-md-4')
         ;
 
         yield Field::new('slug')
             ->setLabel('URL')
             ->hideOnIndex()
             ->hideOnDetail()
+            ->setColumns('col-12 col-md-4')
         ;
 
         yield Field::new('nr')
-            ->setLabel('Nummer')
+            ->setLabel('Reihenfolge')
             ->hideOnIndex()
             ->hideOnDetail()
+            ->setHelp('Reihenfolge auf der Live Seite in der Überischtstabelle')
+            ->setColumns('col-12 col-md-4')
         ;
 
         yield TextareaField::new('description')
             ->setLabel('Beschreibung')
             ->hideOnIndex()
             ->hideOnDetail()
+            ->setFormTypeOptions([
+                'row_attr' => [
+                    'data-controller' => 'snarkdown',
+                ],
+                'attr' => [
+                    'data-snarkdown-target' => 'input',
+                    'data-action' => 'snarkdown#render',
+                ],
+            ])
+            ->setHelp('Vorschau:')
+            ->setColumns('col-12')
         ;
 
         yield TextareaField::new('nature')

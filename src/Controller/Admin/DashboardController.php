@@ -5,6 +5,7 @@ use App\Entity\Area;
 use App\Entity\Rock;
 use App\Entity\Routes;
 use App\Entity\User;
+use App\Repository\RoutesRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
@@ -17,9 +18,19 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
+use Symfony\UX\Chartjs\Model\Chart;
 
 class DashboardController extends AbstractDashboardController
 {
+
+    private RoutesRepository $routesRepository;
+    public function __construct(RoutesRepository $routesRepository, ChartBuilderInterface $chartBuilder)
+    {
+        $this->routesRepository = $routesRepository;
+        $this->chartBuilder = $chartBuilder;
+    }
+
     // Have to to make user in db + user form!!!
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/admin', name: 'admin')]
@@ -41,7 +52,9 @@ class DashboardController extends AbstractDashboardController
         // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
         // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
         //
-        return $this->render('admin/my-dashboard.html.twig');
+        return $this->render('admin/index.html.twig', [
+            'chart' => $this->createChart(),
+        ]);
     }
 
     public function configureDashboard(): Dashboard
@@ -89,5 +102,29 @@ class DashboardController extends AbstractDashboardController
     {
         return parent::configureAssets()
             ->addWebpackEncoreEntry('admin');
+    }
+    private function createChart(): Chart
+    {
+        $chart = $this->chartBuilder->createChart(Chart::TYPE_LINE);
+        $chart->setData([
+            'labels' => ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            'datasets' => [
+                [
+                    'label' => 'My First dataset',
+                    'backgroundColor' => 'rgb(255, 99, 132)',
+                    'borderColor' => 'rgb(255, 99, 132)',
+                    'data' => [0, 10, 5, 2, 20, 30, 45],
+                ],
+            ],
+        ]);
+        $chart->setOptions([
+            'scales' => [
+                'y' => [
+                   'suggestedMin' => 0,
+                   'suggestedMax' => 100,
+                ],
+            ],
+        ]);
+        return $chart;
     }
 }
