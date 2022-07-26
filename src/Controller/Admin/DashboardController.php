@@ -25,10 +25,11 @@ class DashboardController extends AbstractDashboardController
 {
 
     private RoutesRepository $routesRepository;
-    public function __construct(RoutesRepository $routesRepository, ChartBuilderInterface $chartBuilder)
+    #public function __construct(RoutesRepository $routesRepository, ChartBuilderInterface $chartBuilder)
+    public function __construct(RoutesRepository $routesRepository)
     {
         $this->routesRepository = $routesRepository;
-        $this->chartBuilder = $chartBuilder;
+        #$this->chartBuilder = $chartBuilder;
     }
 
     // Have to to make user in db + user form!!!
@@ -103,7 +104,7 @@ class DashboardController extends AbstractDashboardController
         return parent::configureAssets()
             ->addWebpackEncoreEntry('admin');
     }
-    private function createChart(): Chart
+    /*private function createChart(): Chart
     {
         $chart = $this->chartBuilder->createChart(Chart::TYPE_LINE);
         $chart->setData([
@@ -126,5 +127,5 @@ class DashboardController extends AbstractDashboardController
             ],
         ]);
         return $chart;
-    }
+    }*/
 }
