@@ -52,6 +52,7 @@ class AreaCrudController extends AbstractCrudController
 
         yield Field::new('sequence')
             ->setLabel('Reihenfolge')
+            ->setColumns('col-12 col-md-4')
         ;
 
         yield ChoiceField::new('online')
@@ -62,31 +63,37 @@ class AreaCrudController extends AbstractCrudController
                 'Offline' => '0',
             ])
             ->setTemplatePath('admin/field/status.html.twig')
+            ->setColumns('col-12 col-md-4')
         ;
 
         yield Field::new('image')
             ->setLabel('Bild')
             ->hideOnIndex()
+            ->setColumns('col-12 col-md-4')
         ;
 
         yield Field::new('header_image')
             ->setLabel('Header Bild')
             ->hideOnIndex()
+            ->setColumns('col-12 col-md-3')
         ;
 
         yield Field::new('lat')
             ->setLabel('Breitengrad')
             ->hideOnIndex()
+            ->setColumns('col-12 col-md-3')
         ;
 
         yield Field::new('lng')
             ->setLabel('Längengrad')
             ->hideOnIndex()
+            ->setColumns('col-12 col-md-3')
         ;
 
         yield Field::new('zoom')
             ->setLabel('Zoomstufe')
             ->hideOnIndex()
+            ->setColumns('col-12 col-md-3')
         ;
         
     }
