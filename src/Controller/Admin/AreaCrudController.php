@@ -26,6 +26,7 @@ class AreaCrudController extends AbstractCrudController
             ->setPageTitle(Crud::PAGE_EDIT, static function (Area $area) {
                 return sprintf($area->getName() );
             })
+        ;
     }
 
     
