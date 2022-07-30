@@ -22,7 +22,10 @@ class AreaCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return parent::configureCrud($crud)
-            ->setPageTitle(Crud::PAGE_INDEX, 'Gebiete');
+            ->setPageTitle(Crud::PAGE_INDEX, 'Gebiete')
+            ->setPageTitle(Crud::PAGE_EDIT, static function (Area $area) {
+                return sprintf($area->getName() );
+            })
     }
 
     
