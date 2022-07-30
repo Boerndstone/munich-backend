@@ -31,6 +31,7 @@ class AreaCrudController extends AbstractCrudController
 
         yield Field::new('name')
             //->hideOnIndex()
+            ->setColumns('col-12 col-md-4')
         ;
 
         yield Field::new('slug')
@@ -40,11 +41,13 @@ class AreaCrudController extends AbstractCrudController
                 'disabled',
                 $pageName !== Crud::PAGE_NEW
             )
+            ->setColumns('col-12 col-md-4')
         ;
 
         yield Field::new('orientation')
             ->setLabel('Ausrichtung')
             ->hideOnIndex()
+            ->setColumns('col-12 col-md-4')
         ;
 
         yield Field::new('sequence')
