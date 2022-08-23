@@ -25,6 +25,7 @@
 {% if ea.crud.currentAction == 'detail' %}
     <table class="table table-striped">
         <tr>
+            <th>Nr.</th>
             <th>Name</th>
             <th>Schwierigkeitsgrad</th>
             <th>Geklettert</th>
@@ -32,6 +33,7 @@
         </tr>
         {% for value in field.value %}
         <tr>
+            <td>{{ loop.index }}</td>
             <td>{{ value.name }}</td>
             <td>{{ value.grade }}</td>
             <td>
