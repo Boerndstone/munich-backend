@@ -183,14 +183,16 @@ class RockCrudController extends AbstractCrudController
             ->hideOnDetail()
         ;
 
-        yield Field::new('lat')
+        yield NumberField::new('lat')
             ->setLabel('Breitengrad')
+            ->setNumDecimals(6)
             ->hideOnIndex()
             ->hideOnDetail()
         ;
 
-        yield Field::new('lng')
+        yield NumberField::new('lng')
             ->setLabel('Längengrad')
+            ->setNumDecimals(6)
             ->hideOnIndex()
             ->hideOnDetail()
         ;
