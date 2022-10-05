@@ -134,12 +134,12 @@ class Rock
     private $topo;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="decimal", precision=10, scale=6, nullable=true)
      */
     private $lat;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="decimal", precision=10, scale=6, nullable=true)
      */
     private $lng;
 
