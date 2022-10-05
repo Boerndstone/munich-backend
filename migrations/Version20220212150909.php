@@ -20,7 +20,7 @@ final class Version20220212150909 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE user DROP password, DROP agreed_terms_at, CHANGE first_name firt_name VARCHAR(255) DEFAULT NULL');
+        $this->addSql('ALTER TABLE user DROP password, DROP agreed_terms_at, CHANGE firstname firt_name VARCHAR(255) DEFAULT NULL');
     }
 
     public function down(Schema $schema): void
@@ -32,7 +32,7 @@ final class Version20220212150909 extends AbstractMigration
         $this->addSql('ALTER TABLE routes CHANGE name name VARCHAR(255) DEFAULT NULL COLLATE `utf8mb4_unicode_ci`, CHANGE grade grade VARCHAR(20) DEFAULT NULL COLLATE `utf8mb4_unicode_ci`, CHANGE first_ascent first_ascent VARCHAR(100) DEFAULT NULL COLLATE `utf8mb4_unicode_ci`, CHANGE description description LONGTEXT DEFAULT NULL COLLATE `utf8mb4_unicode_ci`, CHANGE scale scale VARCHAR(100) DEFAULT NULL COLLATE `utf8mb4_unicode_ci`');
         $this->addSql('ALTER TABLE test CHANGE name name VARCHAR(255) NOT NULL COLLATE `utf8mb4_unicode_ci`, CHANGE super super VARCHAR(255) NOT NULL COLLATE `utf8mb4_unicode_ci`');
         $this->addSql('ALTER TABLE topo CHANGE name name VARCHAR(255) NOT NULL COLLATE `utf8mb4_unicode_ci`, CHANGE image image VARCHAR(255) DEFAULT NULL COLLATE `utf8mb4_unicode_ci`, CHANGE svg svg LONGTEXT DEFAULT NULL COLLATE `utf8mb4_unicode_ci`');
-        $this->addSql('ALTER TABLE user ADD first_name VARCHAR(255) DEFAULT NULL COLLATE `utf8mb4_unicode_ci`, ADD password VARCHAR(255) NOT NULL COLLATE `utf8mb4_unicode_ci`, ADD agreed_terms_at DATETIME NOT NULL, DROP firt_name, CHANGE email email VARCHAR(180) NOT NULL COLLATE `utf8mb4_unicode_ci`');
+        $this->addSql('ALTER TABLE user ADD firstname VARCHAR(255) DEFAULT NULL COLLATE `utf8mb4_unicode_ci`, ADD password VARCHAR(255) NOT NULL COLLATE `utf8mb4_unicode_ci`, ADD agreed_terms_at DATETIME NOT NULL, DROP firt_name, CHANGE email email VARCHAR(180) NOT NULL COLLATE `utf8mb4_unicode_ci`');
         $this->addSql('ALTER TABLE videos CHANGE video_link video_link VARCHAR(255) NOT NULL COLLATE `utf8mb4_unicode_ci`');
     }
 }
