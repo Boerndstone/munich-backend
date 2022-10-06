@@ -67,14 +67,15 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Gebiete', 'fa fa-home', Area::class);
+        yield MenuItem::linkToCrud('Gebiete', 'fa fa-tags', Area::class);
         yield MenuItem::linkToCrud('Felsen', 'fa fa-home', Rock::class);
         yield MenuItem::linkToCrud('Touren', 'fa fa-home', Routes::class);
-        yield MenuItem::linkToCrud('User', 'fa fa-home', User::class);
-        yield MenuItem::linkToUrl('Home', 'fa fa-home', $this->generateUrl('frontend'));
+        yield MenuItem::linkToCrud('User', 'fa fa-user', User::class);
+        yield MenuItem::section('Live Seite');
+        yield MenuItem::linkToUrl('munichclimbs', 'fa fa-link', 'https://munichclimbs.de')->setLinkTarget('_blank');
         yield MenuItem::section('Tools');
-        yield MenuItem::linkToUrl('Generiere UIAA Grade', 'fa fa-link', 'https://munichclimbs.de/calculateGradesUIAA.php')
-            ->setLinkTarget('_blank');
+        yield MenuItem::linkToUrl('Generiere UIAA Grade', 'fa fa-arrow-right-arrow-left', 'https://munichclimbs.de/calculateGradesUIAA.php')->setLinkTarget('_blank');
+        yield MenuItem::linkToUrl('Generiere FRENCH Grade', 'fa fa-arrow-right-arrow-left', 'https://munichclimbs.de/calculateGradesFRENCH.php')->setLinkTarget('_blank');
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 
