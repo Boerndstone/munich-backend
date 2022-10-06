@@ -81,18 +81,11 @@ class DashboardController extends AbstractDashboardController
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 
-    /**
-     * @param UserInterface|User $user
-     */
-    /*public function configureUserMenu(UserInterface $user): UserMenu
+    public function configureUserMenu(UserInterface $user): UserMenu
     {
-        // Does not work yet!!!
         return parent::configureUserMenu($user)
-            ->setAvatarUrl($user->getAvatarUrl())
-            ->addMenuItems([
-                MenuItem::linkToUrl('My Profile', 'fas fa-user', $this->generateUrl('app_profile_show'))
-        ]);
-    }*/
+            ->setAvatarUrl($user->getAvatarUrl());
+    }
 
     // This is the setup for a global Show Action
     // It is possible to diable it for specific pages or disable it globally
