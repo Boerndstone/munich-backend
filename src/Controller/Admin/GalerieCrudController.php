@@ -23,6 +23,7 @@ class GalerieCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield Field::new('id')
+            ->hideOnIndex()    
             ->hideonForm();
         yield AssociationField::new('belongsToArea')
             ->setLabel('Gebiet')
