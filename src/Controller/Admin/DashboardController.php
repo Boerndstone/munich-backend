@@ -61,7 +61,9 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Munichclimbs');
+            ->setTitle('Munichclimbs')
+            //->setFaviconPath("{{ asset('favicon.png') }}")
+        ;
     }
 
     public function configureMenuItems(): iterable
