@@ -5,6 +5,7 @@ use App\Entity\Area;
 use App\Entity\Rock;
 use App\Entity\Routes;
 use App\Entity\User;
+use App\Entity\Videos;
 use App\Repository\RoutesRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -72,6 +73,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Gebiete', 'fa fa-tags', Area::class);
         yield MenuItem::linkToCrud('Felsen', 'fa fa-home', Rock::class);
         yield MenuItem::linkToCrud('Touren', 'fa fa-home', Routes::class);
+        yield MenuItem::linkToCrud('Videos', 'fa fa-video', Videos::class);
         yield MenuItem::linkToCrud('User', 'fa fa-user', User::class);
         yield MenuItem::section('Live Seite');
         yield MenuItem::linkToUrl('munichclimbs', 'fa fa-link', 'https://munichclimbs.de')->setLinkTarget('_blank');
