@@ -25,11 +25,17 @@ class RoutesCrudController extends AbstractCrudController
         yield Field::new('id')
             ->hideonForm();
         yield Field::new('name')
-            ->setLabel('Tourenname');
+            ->setLabel('Tourenname')
+            ->setColumns('col-12 col-md-4')
+        ;
         yield AssociationField::new('area')
-            ->setLabel('Gebiet');
+            ->setLabel('Gebiet')
+            ->setColumns('col-12 col-md-4')
+        ;
         yield AssociationField::new('rock')
-            ->setLabel('Fels');
+            ->setLabel('Fels')
+            ->setColumns('col-12 col-md-4')
+        ;
         yield Field::new('grade')
             ->setLabel('Schwierigkeitsgrad');
         yield Field::new('climbed')
