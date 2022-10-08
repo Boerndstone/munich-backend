@@ -70,7 +70,7 @@ class RoutesCrudController extends AbstractCrudController
         ;
         yield Field::new('description')
             ->setLabel('Beschreibung')
-            ->setColumns('col-12 col-md-4')
+            ->setColumns('col-12')
             ->hideOnIndex()
         ;
         yield Field::new('grade_no')
