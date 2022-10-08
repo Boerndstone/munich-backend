@@ -38,6 +38,19 @@ class RoutesCrudController extends AbstractCrudController
         ;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return parent::configureCrud($crud)
+            ->setPageTitle(Crud::PAGE_INDEX, 'Routen')
+            ->setPageTitle(Crud::PAGE_EDIT, static function (Routes $routes) {
+                return sprintf($routes->getName() );
+            })
+            ->setPageTitle(Crud::PAGE_DETAIL, static function (Routes $routes) {
+                return sprintf($routes->getName() );
+            })
+        ;
+    }
+
     
     public function configureFields(string $pageName): iterable
     {
