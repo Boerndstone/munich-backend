@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 use App\Entity\Area;
 use App\Entity\Rock;
 use App\Entity\Routes;
+use App\Entity\Topo;
 use App\Entity\User;
 use App\Entity\Galerie;
 use App\Entity\Videos;
@@ -74,6 +75,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Gebiete', 'fa fa-tags', Area::class);
         yield MenuItem::linkToCrud('Felsen', 'fa fa-home', Rock::class);
         yield MenuItem::linkToCrud('Touren', 'fa fa-home', Routes::class);
+        yield MenuItem::linkToCrud('Topos', 'fa fa-home', Topo::class);
         yield MenuItem::linkToCrud('Photos', 'fa fa-camera-retro', Galerie::class);
         yield MenuItem::linkToCrud('Videos', 'fa fa-video', Videos::class);
         yield MenuItem::linkToCrud('User', 'fa fa-user', User::class);
