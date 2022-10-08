@@ -37,13 +37,19 @@ class RoutesCrudController extends AbstractCrudController
             ->setColumns('col-12 col-md-4')
         ;
         yield Field::new('grade')
-            ->setLabel('Schwierigkeitsgrad');
+            ->setLabel('Schwierigkeitsgrad')
+            ->setColumns('col-12 col-md-4')
+        ;
         yield Field::new('climbed')
             ->setLabel('Bereits geklettert')
-            ->setTemplatePath('admin/field/votes.html.twig');
+            ->setColumns('col-12 col-md-4')
+            ->setTemplatePath('admin/field/votes.html.twig')
+        ;
         yield Field::new('first_ascent')
             ->setLabel('Erstbegeher')
-            ->hideOnIndex();
+            ->setColumns('col-12 col-md-4')
+            ->hideOnIndex()
+        ;
         yield Field::new('year_first_ascent')
             ->setLabel('Jahr der Erstbegehung')
             ->hideOnIndex();
