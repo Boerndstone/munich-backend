@@ -38,11 +38,11 @@ class RoutesCrudController extends AbstractCrudController
         ;
         yield Field::new('grade')
             ->setLabel('Schwierigkeitsgrad')
-            ->setColumns('col-12 col-md-4')
+            ->setColumns('col-12')
         ;
         yield Field::new('climbed')
             ->setLabel('Bereits geklettert')
-            ->setColumns('col-12 col-md-4')
+            ->setColumns('col-12')
             ->setTemplatePath('admin/field/votes.html.twig')
         ;
         yield Field::new('first_ascent')
@@ -52,9 +52,12 @@ class RoutesCrudController extends AbstractCrudController
         ;
         yield Field::new('year_first_ascent')
             ->setLabel('Jahr der Erstbegehung')
-            ->hideOnIndex();
+            ->setColumns('col-12 col-md-4')
+            ->hideOnIndex()
+        ;
         yield ChoiceField::new('protection')
             ->setLabel('Absicherung')
+            ->setColumns('col-12 col-md-4')
             ->hideOnIndex()
             ->setHelp('Wie die Absicherung ist, von gut bis sehr gefährlich!')
             ->setChoices(
@@ -67,14 +70,17 @@ class RoutesCrudController extends AbstractCrudController
         ;
         yield Field::new('description')
             ->setLabel('Beschreibung')
+            ->setColumns('col-12 col-md-4')
             ->hideOnIndex()
         ;
         yield Field::new('grade_no')
             ->setLabel('Grade')
+            ->setColumns('col-12')
             ->hideOnIndex()
         ;
         yield ChoiceField::new('rating')
             ->setLabel('Schönheit')
+            ->setColumns('col-12 col-md-4')
             ->hideOnIndex()
             ->setHelp('Schönheit der Route.')
             ->setChoices(
@@ -88,10 +94,12 @@ class RoutesCrudController extends AbstractCrudController
         ;
         yield Field::new('topo_id')
             ->setLabel('Topo ID')
+            ->setColumns('col-12 col-md-4')
             ->hideOnIndex()
         ;
         yield Field::new('nr')
             ->setLabel('Reihenfolge')
+            ->setColumns('col-12 col-md-4')
             ->hideOnIndex()
         ;
 
