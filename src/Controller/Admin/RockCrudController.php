@@ -187,8 +187,14 @@ class RockCrudController extends AbstractCrudController
             ->setColumns('col-12 col-md-4')
         ;
 
-        yield Field::new('sunny')
+        yield ChoiceField::new('sunny')
             ->setLabel('Sonnig')
+            ->renderAsNativeWidget()
+            ->setChoices([
+                'keine Sonne' => '1',
+                'teils Sonne' => '2',
+                'sonnig' => '3',
+            ])
             ->hideOnIndex()
             ->hideOnDetail()
             ->setColumns('col-12 col-md-4')
