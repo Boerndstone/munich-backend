@@ -19,6 +19,21 @@ class RoutesCrudController extends AbstractCrudController
         return Routes::class;
     }
 
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+
+            ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
+                return $action
+                    ->setIcon('fa fa-plus')
+                    ->setLabel('Tour hinzufügen')
+                    ->setCssClass('btn btn-success')
+                ;
+            })
+
+        ;
+    }
+
     
     public function configureFields(string $pageName): iterable
     {
