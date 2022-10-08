@@ -15,6 +15,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+
 
 
 class RockCrudController extends AbstractCrudController
@@ -22,6 +25,21 @@ class RockCrudController extends AbstractCrudController
     public static function getEntityFqcn(): string
     {
         return Rock::class;
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+
+            ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
+                return $action
+                    ->setIcon('fa fa-plus')
+                    ->setLabel('Fels hinzufügen')
+                    ->setCssClass('btn btn-success')
+                ;
+            })
+
+        ;
     }
     
     public function configureCrud(Crud $crud): Crud
@@ -98,30 +116,35 @@ class RockCrudController extends AbstractCrudController
             ->setLabel('Naturschutz')
             ->hideOnIndex()
             ->hideOnDetail()
+            ->setColumns('col-12')
         ;
 
         yield TextareaField::new('access')
             ->setLabel('Zustieg')
             ->hideOnIndex()
             ->hideOnDetail()
+            ->setColumns('col-12')
         ;
 
         yield NumberField::new('zone')
             ->setLabel('Zone')
             ->hideOnIndex()
             ->hideOnDetail()
+            ->setColumns('col-12 col-md-4')
         ;
 
         yield NumberField::new('banned')
             ->setLabel('Jahreszeitliche Sperrung')
             ->hideOnIndex()
             ->hideOnDetail()
+            ->setColumns('col-12 col-md-4')
         ;
 
         yield NumberField::new('height')
             ->setLabel('Height')
             ->setTemplatePath('admin/field/height.html.twig')
             ->hideOnDetail()
+            ->setColumns('col-12 col-md-4')
         ;
 
         yield ChoiceField::new('online')
@@ -133,54 +156,70 @@ class RockCrudController extends AbstractCrudController
             ])
             ->setTemplatePath('admin/field/status.html.twig')
             ->hideOnDetail()
+            ->setColumns('col-12 col-md-4')
         ;
 
         yield Field::new('orientation')
             ->setLabel('Ausrichtung')
             ->hideOnIndex()
             ->hideOnDetail()
+            ->setColumns('col-12 col-md-4')
         ;
 
         yield Field::new('season')
             ->setLabel('Beste Jahreszeit')
             ->hideOnIndex()
             ->hideOnDetail()
+            ->setColumns('col-12 col-md-4')
         ;
 
-        yield Field::new('child_friendly')
+        yield ChoiceField::new('child_friendly')
             ->setLabel('Kinderfreundlich')
+            ->renderAsNativeWidget()
+            ->setChoices([
+                'keine Angaben' => '',
+                'gut geeignet' => '1',
+                'teils geeignet' => '2',
+                'ungeeignet' => '3',
+            ])
             ->hideOnIndex()
             ->hideOnDetail()
+            ->setColumns('col-12 col-md-4')
         ;
 
         yield Field::new('sunny')
             ->setLabel('Sonnig')
             ->hideOnIndex()
             ->hideOnDetail()
+            ->setColumns('col-12 col-md-4')
         ;
 
         yield Field::new('rain')
             ->setLabel('Regensicher')
             ->hideOnIndex()
             ->hideOnDetail()
+            ->setColumns('col-12 col-md-4')
         ;
 
         yield Field::new('image')
             ->setLabel('Bilder')
             ->hideOnIndex()
             ->hideOnDetail()
+            ->setColumns('col-12 col-md-4')
         ;
 
         yield Field::new('header_image')
             ->setLabel('Header Bild')
             ->hideOnIndex()
             ->hideOnDetail()
+            ->setColumns('col-12 col-md-4')
         ;
 
         yield Field::new('topo')
             ->setLabel('Topo')
             ->hideOnIndex()
             ->hideOnDetail()
+            ->setColumns('col-12 col-md-4')
         ;
 
         yield NumberField::new('lat')
@@ -188,6 +227,7 @@ class RockCrudController extends AbstractCrudController
             ->setNumDecimals(6)
             ->hideOnIndex()
             ->hideOnDetail()
+            ->setColumns('col-12 col-md-4')
         ;
 
         yield NumberField::new('lng')
@@ -195,6 +235,7 @@ class RockCrudController extends AbstractCrudController
             ->setNumDecimals(6)
             ->hideOnIndex()
             ->hideOnDetail()
+            ->setColumns('col-12 col-md-4')
         ;
 
     }
