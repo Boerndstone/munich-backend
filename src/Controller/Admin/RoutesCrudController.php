@@ -33,7 +33,14 @@ class RoutesCrudController extends AbstractCrudController
                     ->setLabel('Tour hinzufügen')
                     ->setCssClass('btn btn-success')
                 ;
-            })
+            });
+            return parent::configureActions($actions)
+                ->setPermission(Action::INDEX, 'ROLE_MODERATOR')
+                ->setPermission(Action::DETAIL, 'ROLE_MODERATOR')
+                ->setPermission(Action::EDIT, 'ROLE_MODERATOR')
+                ->setPermission(Action::NEW, 'ROLE_SUPER_ADMIN')
+                ->setPermission(Action::DELETE, 'ROLE_SUPER_ADMIN')
+            ;
 
         ;
     }

@@ -6,20 +6,9 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-import './css/app.scss';
-import './styles/app.css';
-
-//import './js/global.js';
-//import './js/backend.js';
-
-require('bootstrap');
+import "./styles/app.css";
 
 // start the Stimulus application
-//import './bootstrap';
+import "./bootstrap";
 
-
-
-// start the Stimulus application
-//
-
-import { Collapse, Modal, Dropdown } from 'bootstrap';
+import * as mdb from "mdb-ui-kit"; // lib
