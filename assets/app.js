@@ -12,3 +12,4 @@ import "./styles/app.css";
 import "./bootstrap";
 
 import * as mdb from "mdb-ui-kit"; // lib
+window.mdb = mdb;

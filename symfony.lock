@@ -407,6 +407,9 @@
     "symfony/ux-chartjs": {
         "version": "v2.3.0"
     },
+    "symfony/ux-turbo": {
+        "version": "v2.5.0"
+    },
     "symfony/validator": {
         "version": "5.3",
         "recipe": {
