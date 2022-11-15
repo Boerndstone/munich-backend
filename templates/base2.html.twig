@@ -1,122 +1,247 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spartan&display=swap">
-            <link href='https://fonts.googleapis.com/css?family=Chelsea+Market' rel='stylesheet' type='text/css'>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		{% block stylesheets %}
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spartan&display=swap">
+			<link href='https://fonts.googleapis.com/css?family=Chelsea+Market' rel='stylesheet' type='text/css'>
 
-            <link
-                href="https://fonts.googleapis.com/icon?family=Material+Icons"
-                rel="stylesheet"
-            />
-            
-            <link
-                rel="stylesheet"
-                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
-                integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
-                crossOrigin="anonymous"
-            />           
-            {{ encore_entry_link_tags('app') }} 
-            {{ encore_entry_link_tags('tailwind') }}
+			<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
 
-            
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous"/>
+			{{ encore_entry_link_tags('app') }}
+			{#{ encore_entry_link_tags('tailwind') }#}
 
-        {% endblock %}
 
-        
-  
+		{% endblock %}
 
-        
 
-        
+		<style>
 
-         <style>
+			/*Banner open/load animation*/
+			.alert-banner {
+				-webkit-animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+				animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+			}
 
-            /*Banner open/load animation*/
-            .alert-banner {
-                -webkit-animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-                        animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-            }
+			/*Banner close animation*/
+			.alert-banner input:checked ~ * {
+				-webkit-animation: slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+				animation: slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+			}
 
-            /*Banner close animation*/
-            .alert-banner input:checked ~ * {
-                -webkit-animation: slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-                        animation: slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;		
-            }
+			/*Footer open/load animation*/
+			.alert-footer {
+				-webkit-animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+				animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+			}
 
-            /*Footer open/load animation*/
-            .alert-footer {
-                -webkit-animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-                        animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;	
-            }
+			/*Footer close animation*/
+			.alert-footer input:checked ~ * {
+				-webkit-animation: slide-out-bottom 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+				animation: slide-out-bottom 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+			}
 
-            /*Footer close animation*/
-            .alert-footer input:checked ~ * {
-                -webkit-animation: slide-out-bottom 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-                        animation: slide-out-bottom 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-            }
+			/*Toast open/load animation*/
+			.alert-toast {
+				-webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+				animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+			}
 
-            /*Toast open/load animation*/
-            .alert-toast {
-                -webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-                        animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-            }
+			/*Toast close animation*/
+			.alert-toast input:checked ~ * {
+				-webkit-animation: fade-out-right 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+				animation: fade-out-right 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+			}
 
-            /*Toast close animation*/
-            .alert-toast input:checked ~ * {
-                -webkit-animation: fade-out-right 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-                        animation: fade-out-right 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-            }
-
-            /* -------------------------------------------------------------
+			/* -------------------------------------------------------------
             * Animations generated using Animista * w: http://animista.net, 
             * ---------------------------------------------------------- */
 
-            @-webkit-keyframes slide-in-top{0%{-webkit-transform:translateY(-1000px);transform:translateY(-1000px);opacity:0}100%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}}@keyframes slide-in-top{0%{-webkit-transform:translateY(-1000px);transform:translateY(-1000px);opacity:0}100%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}}@-webkit-keyframes slide-out-top{0%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}100%{-webkit-transform:translateY(-1000px);transform:translateY(-1000px);opacity:0}}@keyframes slide-out-top{0%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}100%{-webkit-transform:translateY(-1000px);transform:translateY(-1000px);opacity:0}}@-webkit-keyframes slide-in-bottom{0%{-webkit-transform:translateY(1000px);transform:translateY(1000px);opacity:0}100%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}}@keyframes slide-in-bottom{0%{-webkit-transform:translateY(1000px);transform:translateY(1000px);opacity:0}100%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}}@-webkit-keyframes slide-out-bottom{0%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}100%{-webkit-transform:translateY(1000px);transform:translateY(1000px);opacity:0}}@keyframes slide-out-bottom{0%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}100%{-webkit-transform:translateY(1000px);transform:translateY(1000px);opacity:0}}@-webkit-keyframes slide-in-right{0%{-webkit-transform:translateX(1000px);transform:translateX(1000px);opacity:0}100%{-webkit-transform:translateX(0);transform:translateX(0);opacity:1}}@keyframes slide-in-right{0%{-webkit-transform:translateX(1000px);transform:translateX(1000px);opacity:0}100%{-webkit-transform:translateX(0);transform:translateX(0);opacity:1}}@-webkit-keyframes fade-out-right{0%{-webkit-transform:translateX(0);transform:translateX(0);opacity:1}100%{-webkit-transform:translateX(50px);transform:translateX(50px);opacity:0}}@keyframes fade-out-right{0%{-webkit-transform:translateX(0);transform:translateX(0);opacity:1}100%{-webkit-transform:translateX(50px);transform:translateX(50px);opacity:0}}
+			@-webkit-keyframes slide-in-top {
+				0% {
+					-webkit-transform: translateY(-1000px);
+					transform: translateY(-1000px);
+					opacity: 0
+				}
+				100% {
+					-webkit-transform: translateY(0);
+					transform: translateY(0);
+					opacity: 1
+				}
+			}
+			@keyframes slide-in-top {
+				0% {
+					-webkit-transform: translateY(-1000px);
+					transform: translateY(-1000px);
+					opacity: 0
+				}
+				100% {
+					-webkit-transform: translateY(0);
+					transform: translateY(0);
+					opacity: 1
+				}
+			}
+			@-webkit-keyframes slide-out-top {
+				0% {
+					-webkit-transform: translateY(0);
+					transform: translateY(0);
+					opacity: 1
+				}
+				100% {
+					-webkit-transform: translateY(-1000px);
+					transform: translateY(-1000px);
+					opacity: 0
+				}
+			}
+			@keyframes slide-out-top {
+				0% {
+					-webkit-transform: translateY(0);
+					transform: translateY(0);
+					opacity: 1
+				}
+				100% {
+					-webkit-transform: translateY(-1000px);
+					transform: translateY(-1000px);
+					opacity: 0
+				}
+			}
+			@-webkit-keyframes slide-in-bottom {
+				0% {
+					-webkit-transform: translateY(1000px);
+					transform: translateY(1000px);
+					opacity: 0
+				}
+				100% {
+					-webkit-transform: translateY(0);
+					transform: translateY(0);
+					opacity: 1
+				}
+			}
+			@keyframes slide-in-bottom {
+				0% {
+					-webkit-transform: translateY(1000px);
+					transform: translateY(1000px);
+					opacity: 0
+				}
+				100% {
+					-webkit-transform: translateY(0);
+					transform: translateY(0);
+					opacity: 1
+				}
+			}
+			@-webkit-keyframes slide-out-bottom {
+				0% {
+					-webkit-transform: translateY(0);
+					transform: translateY(0);
+					opacity: 1
+				}
+				100% {
+					-webkit-transform: translateY(1000px);
+					transform: translateY(1000px);
+					opacity: 0
+				}
+			}
+			@keyframes slide-out-bottom {
+				0% {
+					-webkit-transform: translateY(0);
+					transform: translateY(0);
+					opacity: 1
+				}
+				100% {
+					-webkit-transform: translateY(1000px);
+					transform: translateY(1000px);
+					opacity: 0
+				}
+			}
+			@-webkit-keyframes slide-in-right {
+				0% {
+					-webkit-transform: translateX(1000px);
+					transform: translateX(1000px);
+					opacity: 0
+				}
+				100% {
+					-webkit-transform: translateX(0);
+					transform: translateX(0);
+					opacity: 1
+				}
+			}
+			@keyframes slide-in-right {
+				0% {
+					-webkit-transform: translateX(1000px);
+					transform: translateX(1000px);
+					opacity: 0
+				}
+				100% {
+					-webkit-transform: translateX(0);
+					transform: translateX(0);
+					opacity: 1
+				}
+			}
+			@-webkit-keyframes fade-out-right {
+				0% {
+					-webkit-transform: translateX(0);
+					transform: translateX(0);
+					opacity: 1
+				}
+				100% {
+					-webkit-transform: translateX(50px);
+					transform: translateX(50px);
+					opacity: 0
+				}
+			}
+			@keyframes fade-out-right {
+				0% {
+					-webkit-transform: translateX(0);
+					transform: translateX(0);
+					opacity: 1
+				}
+				100% {
+					-webkit-transform: translateX(50px);
+					transform: translateX(50px);
+					opacity: 0
+				}
+			}
+		</style>
 
-            
+		<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+	</head>
+	<body class="skin-blue sidebar-mini" style="height: auto; min-height: 100%;">
 
-        </style>
+		{% for message in app.flashes('success') %}
+			<div class="alert-banner w-full fixed top-0">
+				<input type="checkbox" class="hidden" id="banneralert">
 
-        <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
-    </head>
-    <body 
-        class="skin-blue sidebar-mini" 
-        style="height: auto; min-height: 100%;"
-    >
+				<label class="close cursor-pointer flex items-center justify-between w-full p-2 bg-green-500 shadow text-white" title="close" for="banneralert">
+					{{ message }}
 
-        {% for message in app.flashes('success') %}
-            <div class="alert-banner w-full fixed top-0">
-                <input type="checkbox" class="hidden" id="banneralert">
-                
-                <label class="close cursor-pointer flex items-center justify-between w-full p-2 bg-green-500 shadow text-white" title="close" for="banneralert">
-                    {{ message }}
-                    
-                    <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                        <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
-                    </svg>
-                </label>
-            </div>
-        {% endfor %}
+					<svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 18 18">
+						<path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+					</svg>
+				</label>
+			</div>
+		{% endfor %}
 
-        {% block body %}{% endblock %}
-        
-        <div 
-            id="back_to_top_button" 
-            class="fixed border-solid border-white border outline-none bg-sky-800 shadow-xl cursor-pointer p-2 rounded-lg" 
-            style="display: none; bottom: 20px; right: 30px; z-index: 99;"
-        ><svg class="stroke-current text-white h-8 w-8" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" fill="none" viewBox="0 0 24 24"><path d="M5 15l7-7 7 7"></path></svg></div>
+		{% block body %}{% endblock %}
 
-        <div id="active-background" class=""></div>
+		<div id="back_to_top_button" class="fixed border-solid border-white border outline-none bg-sky-800 shadow-xl cursor-pointer p-2 rounded-lg" style="display: none; bottom: 20px; right: 30px; z-index: 99;">
+			<svg class="stroke-current text-white h-8 w-8" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" fill="none" viewbox="0 0 24 24">
+				<path d="M5 15l7-7 7 7"></path>
+			</svg>
+		</div>
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-            {{ encore_entry_script_tags('global') }}
-        {% endblock %}
-        
+		<div id="active-background" class=""></div>
 
-    </body>
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+			{{ encore_entry_script_tags('global') }}
+		{% endblock %}
+
+
+	</body>
 </html>

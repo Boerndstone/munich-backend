@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class FrontendController extends AbstractController
 {
     /**
-     * @Route("/", name="frontend")
+     * @Route("/frontend", name="frontend")
      */
     public function index(ManagerRegistry $doctrine): Response
     {
