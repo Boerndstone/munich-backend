@@ -21,18 +21,19 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
-#use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
-#use Symfony\UX\Chartjs\Model\Chart;
+use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
+use Symfony\UX\Chartjs\Model\Chart;
 
 class DashboardController extends AbstractDashboardController
 {
 
     private RoutesRepository $routesRepository;
-    #public function __construct(RoutesRepository $routesRepository, ChartBuilderInterface $chartBuilder)
-    public function __construct(RoutesRepository $routesRepository)
+    private ChartBuilderInterface $chartBuilder;
+
+    public function __construct(RoutesRepository $routesRepository, ChartBuilderInterface $chartBuilder)
     {
         $this->routesRepository = $routesRepository;
-        #$this->chartBuilder = $chartBuilder;
+        $this->chartBuilder = $chartBuilder;
     }
 
     // Have to to make user in db + user form!!!
@@ -57,7 +58,7 @@ class DashboardController extends AbstractDashboardController
         // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
         //
         return $this->render('admin/index.html.twig', [
-            //'chart' => $this->createChart(),
+            'chart' => $this->createChart(),
         ]);
     }
 
@@ -106,7 +107,7 @@ class DashboardController extends AbstractDashboardController
         return parent::configureAssets()
             ->addWebpackEncoreEntry('admin');
     }
-    /*private function createChart(): Chart
+    private function createChart(): Chart
     {
         $chart = $this->chartBuilder->createChart(Chart::TYPE_LINE);
         $chart->setData([
@@ -129,5 +130,5 @@ class DashboardController extends AbstractDashboardController
             ],
         ]);
         return $chart;
-    }*/
+    }
 }

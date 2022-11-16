@@ -34,7 +34,7 @@
         "symfony/stopwatch": "6.0.*",
         "symfony/translation": "6.0.*",
         "symfony/twig-bundle": "6.0.*",
-        "symfony/ux-chartjs": "^2.3",
+        "symfony/ux-chartjs": "^2.5",
         "symfony/ux-turbo": "^2.5",
         "symfony/validator": "6.0.*",
         "symfony/var-dumper": "6.0.*",

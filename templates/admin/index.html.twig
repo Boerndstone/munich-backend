@@ -1,19 +1,19 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
 {% block page_title %}
-    Munichclimbs Dashboard
+	Munichclimbs Dashboard
 {% endblock %}
 
 {% block main %}
-    <div class="row">
-        <div class="col-12">
-            <h3>To Do's</h3>
-            <ul>
-                <li>Userverwaltung einrichten</li>
-            </ul>
-        </div>
-        <div class="col-12">
-            {#{ render_chart(chart) }#}
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-12">
+			<h3>To Do's</h3>
+			<ul>
+				<li>Userverwaltung einrichten</li>
+			</ul>
+		</div>
+		<div class="col-12">
+			{{ render_chart(chart) }}
+		</div>
+	</div>
 {% endblock %}
