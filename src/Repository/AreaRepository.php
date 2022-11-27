@@ -21,6 +21,15 @@ class AreaRepository extends ServiceEntityRepository
         parent::__construct($registry, Area::class);
     }
 
+    public function getAllAreas()
+    {
+        return $this->createQueryBuilder('areas')
+            ->select('count(areas.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+        ;
+    }
+
     /**
      * @return Area[] Returns an array of Area objects
      */

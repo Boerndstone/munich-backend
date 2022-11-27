@@ -21,6 +21,15 @@ class RockRepository extends ServiceEntityRepository
         parent::__construct($registry, Rock::class);
     }
 
+    public function getAllRocks()
+    {
+        return $this->createQueryBuilder('rocks')
+            ->select('count(rocks.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+        ;
+    }
+
     /**
      * @return Rock[] Returns an array of Rock objects
      */

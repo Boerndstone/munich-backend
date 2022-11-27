@@ -21,14 +21,67 @@ class RoutesRepository extends ServiceEntityRepository
     }
 
 
-    public function countRoutes()
+    public function getAllRoutes()
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.routes = :routes')
-            //->setParameter('rock', $rock)
-            //->select('SUM(fc.numberPrinted) as fortunesPrinted, AVG(fc.numberPrinted) as fortunesAverage, cat.name')
+        return $this->createQueryBuilder('routes')
+            ->select('count(routes.id)')
             ->getQuery()
-            ->getResult()
+            ->getSingleScalarResult();
+        ;
+    }
+
+    public function findAllRoutesBelowSix()
+    {
+        return $this->createQueryBuilder('routes')
+            ->orderBy('routes.id', 'ASC')
+            ->where('routes.gradeNo < 15')
+            ->select('count(routes.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+        ;
+    }
+
+    public function findAllRoutesBelowEight()
+    {
+        return $this->createQueryBuilder('routes')
+            ->orderBy('routes.id', 'ASC')
+            ->where('routes.gradeNo >= 15 and routes.gradeNo <= 29')
+            ->select('count(routes.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+        ;
+    }
+
+    public function findAllRoutesGreaterEight()
+    {
+        return $this->createQueryBuilder('routes')
+            ->orderBy('routes.id', 'ASC')
+            ->where('routes.gradeNo > 29')
+            ->select('count(routes.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+        ;
+    }
+
+    public function findAllProjectds()
+    {
+        return $this->createQueryBuilder('routes')
+            ->orderBy('routes.id', 'ASC')
+            ->where('routes.gradeNo is NULL')
+            ->select('count(routes.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+        ;
+    }
+
+    public function findAllAlreadyClimbed()
+    {
+        return $this->createQueryBuilder('routes')
+            ->orderBy('routes.id', 'ASC')
+            ->where('routes.climbed = 1')
+            ->select('count(routes.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
         ;
     }
 

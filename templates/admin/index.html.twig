@@ -1,4 +1,4 @@
-{% extends '@EasyAdmin/page/content.html.twig' %}
+{% extends '@!EasyAdmin/layout.html.twig' %}
 
 {% block page_title %}
 	Munichclimbs Dashboard
@@ -7,14 +7,40 @@
 {% block main %}
 	<div class="row">
 		<div class="col-12">
-			<h3>To Do's</h3>
-			<ul>
-				<li>Userverwaltung einrichten</li>
-			</ul>
+			<h3 class="mb-3">Munichclimbs</h3>
+			<table class="mb-5 table">
+
+
+				<thead>
+
+					<tr>
+						<th>Gebiete</th>
+						<th>Felsen</th>
+
+						<th>Touren</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{getAreas}}</td>
+
+						<td>{{getRocks}}</td>
+
+						<td>{{getRoutes}}</td>
+
+
+					</tr>
+				</tbody>
+			</table>
 		</div>
-		<div class="col-12">
+		<div class="col-4">
 			{{ render_chart(chart) }}
-			sadfadfads
 		</div>
+		<div class="col-4">
+			{{ render_chart(chartBernd) }}
+
+		</div>
+
 	</div>
 {% endblock %}

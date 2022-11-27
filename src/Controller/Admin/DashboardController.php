@@ -8,6 +8,8 @@ use App\Entity\Topo;
 use App\Entity\User;
 use App\Entity\Galerie;
 use App\Entity\Videos;
+use App\Repository\AreaRepository;
+use App\Repository\RockRepository;
 use App\Repository\RoutesRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -30,11 +32,15 @@ class DashboardController extends AbstractDashboardController
     private RoutesRepository $routesRepository;
     private ChartBuilderInterface $chartBuilder;
 
-    public function __construct(RoutesRepository $routesRepository, ChartBuilderInterface $chartBuilder)
+    public function __construct(RoutesRepository $routesRepository, AreaRepository $areaRepository, RockRepository $rockRepository, ChartBuilderInterface $chartBuilder)
     {
+        $this->areaRepository = $areaRepository;
+        $this->rockRepository = $rockRepository;
         $this->routesRepository = $routesRepository;
         $this->chartBuilder = $chartBuilder;
     }
+
+    
 
     // Have to to make user in db + user form!!!
     #[IsGranted('ROLE_ADMIN')]
@@ -57,16 +63,28 @@ class DashboardController extends AbstractDashboardController
         // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
         // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
         //
+        $areas = $this->areaRepository->findAllAreasAlphabetical();
+        $getRoutes = $this->routesRepository->getAllRoutes();
+        $getAreas = $this->areaRepository->getAllAreas();
+        $getRocks = $this->rockRepository->getAllRocks();
+        
         return $this->render('admin/index.html.twig', [
             'chart' => $this->createChart(),
+            'chartBernd' => $this->createChartBernd(),
+            'areas' => $areas,
+            'getAreas' => $getAreas,
+            'getRocks' => $getRocks,
+            'getRoutes' => $getRoutes,
         ]);
     }
+
+    
 
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
             ->setTitle('Munichclimbs')
-            //->setFaviconPath("{{ asset('favicon.png') }}")
+            ->setFaviconPath('build/images/favicon/favicon.png')
         ;
     }
 
@@ -104,20 +122,29 @@ class DashboardController extends AbstractDashboardController
 
     public function configureAssets(): Assets
     {
-        return parent::configureAssets()
-            ->addWebpackEncoreEntry('admin');
+        $assets = parent::configureAssets();
+        $assets->addWebpackEncoreEntry('admin');
+        
+        return $assets;
     }
+
     private function createChart(): Chart
-    {
-        $chart = $this->chartBuilder->createChart(Chart::TYPE_LINE);
+    {        
+
+        $belowSix = $this->routesRepository->findAllRoutesBelowSix();
+        $belowEight = $this->routesRepository->findAllRoutesBelowEight();
+        $greaterEight = $this->routesRepository->findAllRoutesGreaterEight();
+        $projects = $this->routesRepository->findAllProjectds();
+
+        $chart = $this->chartBuilder->createChart(Chart::TYPE_DOUGHNUT);
         $chart->setData([
-            'labels' => ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            'labels' => ['1 - 5', '6 - 7', '8 - 11', 'Projekte'],
             'datasets' => [
                 [
-                    'label' => 'My First dataset',
-                    'backgroundColor' => 'rgb(255, 99, 132)',
+                    'label' => 'Schwierigkeiten',
+                    'backgroundColor' => ['#15803d', '#075985', '#b91c1c', 'black'],
                     'borderColor' => 'rgb(255, 99, 132)',
-                    'data' => [0, 10, 5, 2, 20, 30, 45],
+                    'data' => [$belowSix, $belowEight, $greaterEight, $projects, ],
                 ],
             ],
         ]);
@@ -125,10 +152,38 @@ class DashboardController extends AbstractDashboardController
             'scales' => [
                 'y' => [
                    'suggestedMin' => 0,
-                   'suggestedMax' => 100,
+                   'suggestedMax' => 2500,
                 ],
             ],
         ]);
         return $chart;
+    }
+    private function createChartBernd(): Chart
+    {        
+
+        $alreadyClimbed = $this->routesRepository->findAllAlreadyClimbed();
+        $allRoutes = $this->routesRepository->getAllRoutes();
+
+        $chartBernd = $this->chartBuilder->createChart(Chart::TYPE_DOUGHNUT);
+        $chartBernd->setData([
+            'labels' => ['Routen gesamt', 'Bisher geklettert'],
+            'datasets' => [
+                [
+                    'label' => 'Schwierigkeiten',
+                    'backgroundColor' => ['#b91c1c', '#15803d'],
+                    'borderColor' => 'rgb(255, 99, 132)',
+                    'data' => [$allRoutes, $alreadyClimbed],
+                ],
+            ],
+        ]);
+        $chartBernd->setOptions([
+            'scales' => [
+                'y' => [
+                   'suggestedMin' => 0,
+                   'suggestedMax' => 2500,
+                ],
+            ],
+        ]);
+        return $chartBernd;
     }
 }

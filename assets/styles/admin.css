@@ -3,3 +3,10 @@
     border: 2px dashed #da3735;
     padding: 5px;
 }
+:root {
+    --link-color: rgb(7 89 133);
+}
+.logo-custom {
+    color: black;
+    font-family: 'Chelsea Market', cursive;
+}
