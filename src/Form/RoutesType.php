@@ -9,8 +9,8 @@ use App\Repository\AreaRepository;
 use App\Repository\RockRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,16 +27,16 @@ class RoutesType extends AbstractType
         $builder
             ->add('name',
                 TextType::class,
-                    [
-                        'label_format' => 'Name der Tour',
-                    ]
+                [
+                    'label_format' => 'Name der Tour',
+                ]
             )
             ->add('area',
                 ChoiceType::class,
                 [
                     'label_format' => 'Gebiet',
-                    'choice_label' => function(Area $area) {
-                        return sprintf('(%d) %s', $area->getOnline(), $area->getName() );
+                    'choice_label' => function (Area $area) {
+                        return sprintf('(%d) %s', $area->getOnline(), $area->getName());
                     },
                     'choices' => $this->areaRepository->findAllAreasAlphabetical(),
                 ]
@@ -45,22 +45,22 @@ class RoutesType extends AbstractType
                 ChoiceType::class,
                 [
                     'label_format' => 'Fels',
-                    'choice_label' => function(Rock $rock) {
-                        return sprintf('(%d) %s', $rock->getOnline(), $rock->getName() );
+                    'choice_label' => function (Rock $rock) {
+                        return sprintf('(%d) %s', $rock->getOnline(), $rock->getName());
                     },
                     'choices' => $this->rockRepository->findAllRocksAlphabetical(),
                 ]
             )
             ->add('grade',
                 TextType::class,
-                    [
-                        'label_format' => 'Schwierigkeitsgrad',
-                    ]
+                [
+                    'label_format' => 'Schwierigkeitsgrad',
+                ]
             )
-            ->add('climbed', 
+            ->add('climbed',
                 ChoiceType::class, [
                     'label_format' => 'Bereits geklettert',
-                    'choices'  => [
+                    'choices' => [
                         'Nein' => 0,
                         'Ja' => 1,
                     ],
@@ -85,7 +85,7 @@ class RoutesType extends AbstractType
             ->add('description',
                 TextareaType::class, [
                     'attr' => [
-                        'rows' => 5
+                        'rows' => 5,
                     ],
                     'label_format' => 'Beschreibung',
                 ]

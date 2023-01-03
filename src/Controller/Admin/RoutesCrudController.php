@@ -3,19 +3,15 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Routes;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
-use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
+use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 
 class RoutesCrudController extends AbstractCrudController
 {
@@ -43,14 +39,13 @@ class RoutesCrudController extends AbstractCrudController
                     ->setCssClass('btn btn-success')
                 ;
             });
-            return parent::configureActions($actions)
-                ->setPermission(Action::INDEX, 'ROLE_MODERATOR')
-                ->setPermission(Action::DETAIL, 'ROLE_MODERATOR')
-                ->setPermission(Action::EDIT, 'ROLE_MODERATOR')
-                ->setPermission(Action::NEW, 'ROLE_SUPER_ADMIN')
-                ->setPermission(Action::DELETE, 'ROLE_SUPER_ADMIN')
-            ;
 
+        return parent::configureActions($actions)
+            ->setPermission(Action::INDEX, 'ROLE_MODERATOR')
+            ->setPermission(Action::DETAIL, 'ROLE_MODERATOR')
+            ->setPermission(Action::EDIT, 'ROLE_MODERATOR')
+            ->setPermission(Action::NEW, 'ROLE_SUPER_ADMIN')
+            ->setPermission(Action::DELETE, 'ROLE_SUPER_ADMIN')
         ;
     }
 
@@ -59,15 +54,14 @@ class RoutesCrudController extends AbstractCrudController
         return parent::configureCrud($crud)
             ->setPageTitle(Crud::PAGE_INDEX, 'Routen')
             ->setPageTitle(Crud::PAGE_EDIT, static function (Routes $routes) {
-                return sprintf($routes->getName() );
+                return sprintf($routes->getName());
             })
             ->setPageTitle(Crud::PAGE_DETAIL, static function (Routes $routes) {
-                return sprintf($routes->getName() );
+                return sprintf($routes->getName());
             })
         ;
     }
 
-    
     public function configureFields(string $pageName): iterable
     {
         yield Field::new('id')
@@ -150,7 +144,5 @@ class RoutesCrudController extends AbstractCrudController
             ->setColumns('col-12 col-md-4')
             ->hideOnIndex()
         ;
-
     }
-    
 }

@@ -2,9 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Area;
 use App\Entity\Rock;
-use App\Entity\Routes;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -27,14 +25,12 @@ class RockRepository extends ServiceEntityRepository
             ->select('count(rocks.id)')
             ->getQuery()
             ->getSingleScalarResult();
-        ;
     }
 
     /**
      * @return Rock[] Returns an array of Rock objects
      */
-    
-    public function findByAreaId($amount_rocks) : array
+    public function findByAreaId($amount_rocks): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
@@ -46,12 +42,14 @@ class RockRepository extends ServiceEntityRepository
         return $stmt->fetchAllAssociative();
     }
 
-    public function amountRocks($amount_rocks) {
+    public function amountRocks($amount_rocks)
+    {
         $sql = 'SELECT * FROM area INNER JOIN rock ON area.id = rock.area_relation_id WHERE area_relation_id = :amountRocks';
         $query = $this->pdo->prepare($sql);
         $query->bindParam(':amountRocks', $amount_rocks);
         $query->execute();
         $rocks = $query->rowCount();
+
         return $rocks;
     }
 
@@ -61,7 +59,7 @@ class RockRepository extends ServiceEntityRepository
     public function findSearchTerm(string $search = null): array
     {
         $queryBuilder = $this->createQueryBuilder('rock')
-            //->addCriteria(self::createApprovedCriteria())
+            // ->addCriteria(self::createApprovedCriteria())
             ->orderBy('rock.id', 'ASC')
             ->innerJoin('rock.area', 'area')
             ->addSelect('rock');
@@ -69,8 +67,9 @@ class RockRepository extends ServiceEntityRepository
             $queryBuilder->andWhere('rock.name LIKE :searchTerm OR area.name LIKE :searchTerm')
                 ->setParameter('searchTerm', '%'.$search.'%');
         }
+
         return $queryBuilder
-            //->setMaxResults(10)
+            // ->setMaxResults(10)
             ->getQuery()
             ->getResult();
     }
@@ -89,7 +88,7 @@ class RockRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
 
-            return $queryBuilder;
+        return $queryBuilder;
     }
 
     /**
@@ -98,7 +97,7 @@ class RockRepository extends ServiceEntityRepository
     public function findRocksAreaName($areaSlug): array
     {
         $queryBuilder = $this->createQueryBuilder('rock')
-            //->orderBy('rock.id', 'ASC')
+            // ->orderBy('rock.id', 'ASC')
             ->leftJoin('rock.area', 'area')
             ->addSelect('rock')
             ->where('area.slug LIKE :areaSlug')
@@ -106,19 +105,19 @@ class RockRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
 
-            return $queryBuilder;
+        return $queryBuilder;
     }
 
     /**
      * @return Rocks[] Returns an array of Rocks objects
      */
-    public function findAllRocksAlphabetical ()
+    public function findAllRocksAlphabetical()
     {
         return $this->createQueryBuilder('rock')
             ->orderBy('rock.id', 'ASC')
             ->getQuery()
             ->getResult()
-            
+
         ;
     }
 
@@ -134,11 +133,6 @@ class RockRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
 
-            return $queryBuilder;
+        return $queryBuilder;
     }
-
-
-
-
-    
 }

@@ -1,19 +1,18 @@
 <?php
 
 // src/Entity/User.php
+
 namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Doctrine\DBAL\Types\Types;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -55,7 +54,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * The public representation of the user (e.g. a username, an email address, etc.)
+     * The public representation of the user (e.g. a username, an email address, etc.).
      *
      * @see UserInterface
      */
@@ -155,6 +154,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if (strpos($this->avatar, '/') !== false) {
             return $this->avatar;
         }
+
         return sprintf('/uploads/avatars/%s', $this->avatar);
     }
 

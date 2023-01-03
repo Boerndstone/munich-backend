@@ -2,24 +2,19 @@
 
 namespace App\Form;
 
-use App\Entity\Rock;
 use App\Entity\Area;
+use App\Entity\Rock;
 use App\Repository\AreaRepository;
-use App\Repository\RockRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RockType extends AbstractType
 {
-
     public function __construct(AreaRepository $areaRepository)
     {
         $this->areaRepository = $areaRepository;
@@ -30,83 +25,81 @@ class RockType extends AbstractType
         $builder
             ->add('id',
                 TextType::class,
-                    [
-                        'attr' => [
-                            'readonly' => true,
-                        ],
-                        'label_format' => 'ID',
-                        'mapped' => false,
-                        
-                    ]
+                [
+                    'attr' => [
+                        'readonly' => true,
+                    ],
+                    'label_format' => 'ID',
+                    'mapped' => false,
+                ]
             )
             ->add('area', EntityType::class, [
                 'class' => Area::class,
                 'label_format' => 'Gebiet',
-                'choice_label' => function(Area $area) {
-                    return sprintf('(%d) %s', $area->getOnline(), $area->getName() );
+                'choice_label' => function (Area $area) {
+                    return sprintf('(%d) %s', $area->getOnline(), $area->getName());
                 },
                 'choices' => $this->areaRepository->findAllAreasAlphabetical(),
-                
             ])
             ->add('name',
                 TextType::class,
-                    [
-                        'label_format' => 'Name des Felsen',
-                    ]
+                [
+                    'label_format' => 'Name des Felsen',
+                ]
             )
             ->add('slug',
                 TextType::class,
-                    [
-                        'label_format' => 'URL',
-                    ]
+                [
+                    'label_format' => 'URL',
+                ]
             )
             ->add('nr',
                 TextType::class,
-                    [
-                        'label_format' => 'Reihenfolge',
-                    ]
+                [
+                    'label_format' => 'Reihenfolge',
+                ]
             )
             ->add('description',
                 TextareaType::class,
-                    [
-                        'attr' => [
-                            'rows' => 5
-                        ],
-                        'label_format' => 'Beschreibung',
-                    ]
+                [
+                    'attr' => [
+                        'rows' => 5,
+                    ],
+                    'label_format' => 'Beschreibung',
+                ]
             )
             ->add('access',
                 TextareaType::class,
-                    [
-                        'attr' => [
-                            'rows' => 5
-                        ],
-                        'label_format' => 'Zugang',
-                    ]
+                [
+                    'attr' => [
+                        'rows' => 5,
+                    ],
+                    'label_format' => 'Zugang',
+                ]
             )
             ->add('nature',
                 TextareaType::class,
-                    [
-                        'attr' => [
-                            'rows' => 5
-                        ],
-                        'label_format' => 'Naturschutz',
-                    ]
+                [
+                    'attr' => [
+                        'rows' => 5,
+                    ],
+                    'label_format' => 'Naturschutz',
+                ]
             )
-            ->add('zone', 
+            ->add('zone',
                 ChoiceType::class, [
                     'label_format' => 'Zone',
-                    'choices'  => [
+                    'choices' => [
                         'Zone 1' => 1,
                         'Zone 2' => 2,
                         'Zone 3' => 3,
                     ],
                 ]
             )
-            ->add('banned', 
+            ->add('banned',
                 ChoiceType::class, [
                     'label_format' => 'Befristete Sperrung',
-                    'choices'  => [
+                    'choices' => [
                         'Nein' => 0,
                         'Ja' => 1,
                     ],
@@ -114,36 +107,36 @@ class RockType extends AbstractType
             )
             ->add('height',
                 TextType::class,
-                    [
-                        'label_format' => 'Höhe',
-                    ]
+                [
+                    'label_format' => 'Höhe',
+                ]
             )
             ->add('orientation',
                 TextType::class,
-                    [
-                        'label_format' => 'Ausrichtung',
-                    ]
+                [
+                    'label_format' => 'Ausrichtung',
+                ]
             )
             ->add('season',
                 TextType::class,
-                    [
-                        'label_format' => 'Beste Jahreszeit',
-                    ]
+                [
+                    'label_format' => 'Beste Jahreszeit',
+                ]
             )
-            ->add('child_friendly', 
+            ->add('child_friendly',
                 ChoiceType::class, [
                     'label_format' => 'Kinderfreundlich',
-                    'choices'  => [
+                    'choices' => [
                         'perfekt' => 1,
                         'gut' => 2,
                         'kaum' => 3,
                     ],
                 ]
             )
-            ->add('sunny', 
+            ->add('sunny',
                 ChoiceType::class, [
                     'label_format' => 'Sonne',
-                    'choices'  => [
+                    'choices' => [
                         'gar nicht' => 0,
                         'teils' => 1,
                         'mittel' => 2,
@@ -151,10 +144,10 @@ class RockType extends AbstractType
                     ],
                 ]
             )
-            ->add('rain', 
+            ->add('rain',
                 ChoiceType::class, [
                     'label_format' => 'Regengeschützt',
-                    'choices'  => [
+                    'choices' => [
                         'gar nicht' => 0,
                         'teils' => 1,
                         'mittel' => 2,
@@ -162,39 +155,39 @@ class RockType extends AbstractType
                     ],
                 ]
             )
-            ->add('image', 
-            TextType::class,
+            ->add('image',
+                TextType::class,
                 [
                     'label_format' => 'Foto',
                 ]
             )
-            ->add('header_image', 
-            TextType::class,
+            ->add('header_image',
+                TextType::class,
                 [
                     'label_format' => 'Header Foto',
                 ]
             )
-            ->add('topo', 
-            TextType::class,
+            ->add('topo',
+                TextType::class,
                 [
                     'label_format' => 'Topo',
                 ]
             )
-            ->add('lat', 
-            TextType::class,
+            ->add('lat',
+                TextType::class,
                 [
                     'label_format' => 'Längengrad',
                 ]
             )
-            ->add('lng', 
+            ->add('lng',
                 TextType::class, [
                     'label_format' => 'Breitengrad',
                 ]
             )
-            ->add('online', 
+            ->add('online',
                 ChoiceType::class, [
                     'label_format' => 'Online',
-                    'choices'  => [
+                    'choices' => [
                         'nein' => 0,
                         'ja' => 1,
                     ],
@@ -206,7 +199,7 @@ class RockType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Rock::class
+            'data_class' => Rock::class,
         ]);
     }
 }

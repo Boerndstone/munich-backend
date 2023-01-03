@@ -1,18 +1,14 @@
 <?php
 
 namespace App\Controller;
+
 use App\Entity\Area;
 use App\Entity\Rock;
-use App\Entity\Routes;
-use App\Repository\AreaRepository;
-use App\Repository\RockRepository;
-use App\Repository\RoutesRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Cache\CacheInterface;
 
 class FrontendController extends AbstractController
 {
@@ -21,7 +17,6 @@ class FrontendController extends AbstractController
      */
     public function index(ManagerRegistry $doctrine): Response
     {
-
         $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
 
         return $this->render('frontend/index.html.twig', [
@@ -29,11 +24,10 @@ class FrontendController extends AbstractController
         ]);
     }
 
-
     /**
      * @Route("/frontend/create-topo", name="create_topo")
      */
-    public function create() : Response
+    public function create(): Response
     {
         return $this->render('frontend/create.topo.html.twig', []);
     }
@@ -41,7 +35,7 @@ class FrontendController extends AbstractController
     /**
      * @Route("/Klettergebiet/{slug}", name="show_rocks")
      */
-    public function showRocksArea(ManagerRegistry $doctrine, $slug, CacheInterface $cache, Request $request)
+    public function showRocksArea(ManagerRegistry $doctrine, $slug, CacheInterface $cache): Response
     {
         $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
         $rocks = $doctrine->getRepository(Rock::class)->findRocksArea($slug);
@@ -55,7 +49,7 @@ class FrontendController extends AbstractController
     /**
      * @Route("/Kletterfels/{slug}", name="show_rock")
      */
-    public function showRock(ManagerRegistry $doctrine, $slug,  CacheInterface $cache, Request $request)
+    public function showRock(ManagerRegistry $doctrine, $slug, CacheInterface $cache): Response
     {
         $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
         $rock = $doctrine->getRepository(Rock::class)->findRockName($slug);

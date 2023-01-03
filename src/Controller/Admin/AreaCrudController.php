@@ -3,17 +3,12 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Area;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 
 class AreaCrudController extends AbstractCrudController
 {
@@ -68,17 +63,15 @@ class AreaCrudController extends AbstractCrudController
         return parent::configureCrud($crud)
             ->setPageTitle(Crud::PAGE_INDEX, 'Gebiete')
             ->setPageTitle(Crud::PAGE_EDIT, static function (Area $area) {
-                return sprintf($area->getName() );
+                return sprintf($area->getName());
             })
         ;
     }
 
-    
     public function configureFields(string $pageName): iterable
     {
-
         yield Field::new('name')
-            //->hideOnIndex()
+            // ->hideOnIndex()
             ->setColumns('col-12 col-md-4')
             ->setHelp('Der Name des Gebiet\'s ist ein Pflichtfeld!')
         ;
@@ -144,7 +137,5 @@ class AreaCrudController extends AbstractCrudController
             ->hideOnIndex()
             ->setColumns('col-12 col-md-3')
         ;
-        
     }
-    
 }

@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 #[Route('/photos')]
 class PhotosController extends AbstractController
@@ -36,7 +35,7 @@ class PhotosController extends AbstractController
             return $this->redirectToRoute('app_photos_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('photos/new.html.twig', [
+        return $this->render('photos/new.html.twig', [
             'photo' => $photo,
             'form' => $form,
         ]);
@@ -62,7 +61,7 @@ class PhotosController extends AbstractController
             return $this->redirectToRoute('app_photos_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('photos/edit.html.twig', [
+        return $this->render('photos/edit.html.twig', [
             'photo' => $photo,
             'form' => $form,
         ]);

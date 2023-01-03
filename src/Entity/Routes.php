@@ -3,12 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\RoutesRepository;
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RoutesRepository::class)]
 class Routes
@@ -23,10 +20,10 @@ class Routes
     #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(inversedBy: 'routes', fetch: "EXTRA_LAZY")]
+    #[ORM\ManyToOne(inversedBy: 'routes', fetch: 'EXTRA_LAZY')]
     private ?Area $area = null;
 
-    #[ORM\ManyToOne(inversedBy: 'routes', fetch: "EXTRA_LAZY")]
+    #[ORM\ManyToOne(inversedBy: 'routes', fetch: 'EXTRA_LAZY')]
     private ?Rock $rock = null;
 
     #[ORM\Column(type: Types::STRING, length: 20)]

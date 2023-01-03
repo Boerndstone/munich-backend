@@ -5,12 +5,11 @@ namespace App\Controller;
 use App\Entity\Area;
 use App\Form\Area1Type;
 use App\Repository\AreaRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface;
-
 
 #[Route('/area')]
 class AreaController extends AbstractController
@@ -37,7 +36,7 @@ class AreaController extends AbstractController
             return $this->redirectToRoute('app_area_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('area/new.html.twig', [
+        return $this->render('area/new.html.twig', [
             'area' => $area,
             'form' => $form,
         ]);
@@ -63,7 +62,7 @@ class AreaController extends AbstractController
             return $this->redirectToRoute('app_area_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('area/edit.html.twig', [
+        return $this->render('area/edit.html.twig', [
             'area' => $area,
             'form' => $form,
         ]);

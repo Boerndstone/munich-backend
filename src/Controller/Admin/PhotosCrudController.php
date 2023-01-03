@@ -4,13 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Photos;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 
 class PhotosCrudController extends AbstractCrudController
@@ -23,7 +18,7 @@ class PhotosCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield Field::new('id')
-            ->hideOnIndex()    
+            ->hideOnIndex()
             ->hideonForm();
         yield AssociationField::new('belongsToArea')
             ->setLabel('Gebiet')

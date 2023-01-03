@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\Area;
-use App\Entity\Rock;
 use App\Entity\Routes;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -27,17 +26,16 @@ class AreaRepository extends ServiceEntityRepository
             ->select('count(areas.id)')
             ->getQuery()
             ->getSingleScalarResult();
-        ;
     }
 
     /**
      * @return Area[] Returns an array of Area objects
      */
-    public function findAllAreasAlphabetical ()
+    public function findAllAreasAlphabetical()
     {
         return $this->createQueryBuilder('area')
             ->orderBy('area.id', 'ASC')
-            //->where('area.online = 1')
+            // ->where('area.online = 1')
             /*->innerJoin('area.rocks', 'rocks')
             ->innerJoin('area.routes', 'routes')
             ->addSelect('area.name as areaName')
@@ -45,21 +43,19 @@ class AreaRepository extends ServiceEntityRepository
             ->addSelect('area.image as areaImage')
             ->addSelect('rocks.name as rocksName')
             ->addSelect('rocks.id as rocksID')*/
-            //->addSelect('routes.name as routesName')
-            
-            //->addSelect("COUNT(rocks.areaRelation) as amountRocks")
-           
-            //->addSelect("COUNT(routes.id) as amountRoutes")
-            
+            // ->addSelect('routes.name as routesName')
 
-            //->groupBy('rocks.areaRelation')
-            //->addGroupBy('routes.id')
-            //->addSelect('rocks.name as areaRocks')
-            
+            // ->addSelect("COUNT(rocks.areaRelation) as amountRocks")
+
+            // ->addSelect("COUNT(routes.id) as amountRoutes")
+
+            // ->groupBy('rocks.areaRelation')
+            // ->addGroupBy('routes.id')
+            // ->addSelect('rocks.name as areaRocks')
 
             ->getQuery()
             ->getResult()
-            
+
         ;
 
         // Das wäre dann der inner join!!!!!
@@ -73,18 +69,18 @@ class AreaRepository extends ServiceEntityRepository
 
         ;*/
 
-        //$query = $qb->getQuery();
-        //var_dump($query->getDQL());
-        //die();
+        // $query = $qb->getQuery();
+        // var_dump($query->getDQL());
+        // die();
 
-        //return $query->getArrayResult();
-        //getOneORNullResult
+        // return $query->getArrayResult();
+        // getOneORNullResult
     }
 
     /**
      * @return Area[] Returns an array of Area objects
      */
-    public function getAreasFrontend ()
+    public function getAreasFrontend()
     {
         return $this->createQueryBuilder('a')
             ->orderBy('a.sequence', 'ASC')
@@ -97,7 +93,7 @@ class AreaRepository extends ServiceEntityRepository
     /**
      * @return Rocks[] Returns an array of Rocks objects
      */
-    public function getRocksAreasFrontend ()
+    public function getRocksAreasFrontend()
     {
         $entityManager = $this->getEntityManager();
 
@@ -105,15 +101,13 @@ class AreaRepository extends ServiceEntityRepository
             ->innerJoin('area.rocks', 'area_rocks')
             ->select('area.name as areaName')
             ->addSelect('area.online as areaOnline')
-            //->addSelect('area.rockName as name')
-            //->andWhere('area.online = 1')
-            
+            // ->addSelect('area.rockName as name')
+            // ->andWhere('area.online = 1')
+
             ->getQuery()
             ->execute()
         ;
-
     }
-
 
     /* $qb = $em
             ->createQueryBuilder()
@@ -143,7 +137,7 @@ class AreaRepository extends ServiceEntityRepository
     /**
      * @return Routes[] Returns an array of Routes objects
      */
-    public function getRocksRoutesFrontend ()
+    public function getRocksRoutesFrontend()
     {
         $entityManager = $this->getEntityManager();
 
@@ -153,20 +147,18 @@ class AreaRepository extends ServiceEntityRepository
             ->getQuery()
             ->execute()
         ;
-
     }
 
     /**
      * @return RoutesLowerFiveteen[]
      */
-
-    public function getRocksLowerFiveteen ($value) : array
+    public function getRocksLowerFiveteen($value): array
     {
         $entityManager = $this->getEntityManager();
 
         return $this->createQueryBuilder('area')
-            //->where('routes.gradeNo < 15')
-            //->setParameter('routes.areaId', $grade)
+            // ->where('routes.gradeNo < 15')
+            // ->setParameter('routes.areaId', $grade)
             ->andWhere('area.id = :val')
             ->setParameter('val', $value)
             ->innerJoin('area.routes', 'routes')
@@ -175,10 +167,7 @@ class AreaRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
-
     }
-
-
 
     // /**
     //  * @return Area[] Returns an array of Area objects

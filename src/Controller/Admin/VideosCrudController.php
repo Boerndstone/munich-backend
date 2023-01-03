@@ -3,17 +3,12 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Videos;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 
 class VideosCrudController extends AbstractCrudController
 {
@@ -33,18 +28,16 @@ class VideosCrudController extends AbstractCrudController
                     ->setCssClass('btn btn-success')
                 ;
             });
-            return parent::configureActions($actions)
-                ->setPermission(Action::INDEX, 'ROLE_MODERATOR')
-                ->setPermission(Action::DETAIL, 'ROLE_MODERATOR')
-                ->setPermission(Action::EDIT, 'ROLE_MODERATOR')
-                ->setPermission(Action::NEW, 'ROLE_SUPER_ADMIN')
-                ->setPermission(Action::DELETE, 'ROLE_SUPER_ADMIN')
-            ;
 
+        return parent::configureActions($actions)
+            ->setPermission(Action::INDEX, 'ROLE_MODERATOR')
+            ->setPermission(Action::DETAIL, 'ROLE_MODERATOR')
+            ->setPermission(Action::EDIT, 'ROLE_MODERATOR')
+            ->setPermission(Action::NEW, 'ROLE_SUPER_ADMIN')
+            ->setPermission(Action::DELETE, 'ROLE_SUPER_ADMIN')
         ;
     }
 
-    
     public function configureFields(string $pageName): iterable
     {
         yield Field::new('id')
@@ -59,5 +52,4 @@ class VideosCrudController extends AbstractCrudController
         yield Field::new('videoLink')
             ->setLabel('Link');
     }
-    
 }

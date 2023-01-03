@@ -5,15 +5,14 @@ namespace App\Entity;
 use App\Repository\AreaRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Doctrine\DBAL\Types\Types;
 
 #[ORM\Entity(repositoryClass: AreaRepository::class)]
 class Area
 {
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -32,10 +31,10 @@ class Area
     #[ORM\Column(type: Types::STRING, length: 25)]
     private ?string $orientation = null;
 
-    #[ORM\OneToMany(mappedBy: 'area', targetEntity: Rock::class, fetch: "EXTRA_LAZY")]
+    #[ORM\OneToMany(mappedBy: 'area', targetEntity: Rock::class, fetch: 'EXTRA_LAZY')]
     private Collection $rocks;
 
-    #[ORM\OneToMany(mappedBy: 'area', targetEntity: Routes::class, fetch: "EXTRA_LAZY")]
+    #[ORM\OneToMany(mappedBy: 'area', targetEntity: Routes::class, fetch: 'EXTRA_LAZY')]
     private Collection $routes;
 
     #[ORM\Column(type: Types::SMALLINT)]
@@ -50,10 +49,10 @@ class Area
     #[ORM\Column(type: Types::STRING, length: 25)]
     private ?string $headerImage = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2, nullable: true )]
+    #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2, nullable: true)]
     private ?float $lat = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2, nullable: true )]
+    #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2, nullable: true)]
     private ?float $lng = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
@@ -145,7 +144,8 @@ class Area
         return $this;
     }
 
-    public function __toString(){
+    public function __toString()
+    {
         return $this->getName();
     }
 
@@ -244,6 +244,4 @@ class Area
                 ->addViolation();
         }
     }
-
-    
 }

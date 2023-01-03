@@ -3,13 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\RockRepository;
-use App\Repository\RoutesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Doctrine\DBAL\Types\Types;
 
 #[ORM\Entity(repositoryClass: RockRepository::class)]
 class Rock
@@ -24,7 +22,7 @@ class Rock
     #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'rock', targetEntity: Routes::class, fetch: "EXTRA_LAZY")]
+    #[ORM\OneToMany(mappedBy: 'rock', targetEntity: Routes::class, fetch: 'EXTRA_LAZY')]
     private Collection $routes;
 
     #[ORM\ManyToOne(inversedBy: 'rocks')]
@@ -80,10 +78,10 @@ class Rock
     #[ORM\Column(type: Types::INTEGER)]
     protected ?int $topo = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 6, nullable: true )]
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 6, nullable: true)]
     private ?float $lat = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 6, nullable: true )]
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 6, nullable: true)]
     private ?float $lng = null;
 
     #[ORM\Column(type: Types::BOOLEAN)]
@@ -118,7 +116,8 @@ class Rock
         return $this;
     }
 
-    public function __toString(){
+    public function __toString()
+    {
         return $this->getName();
     }
 
@@ -362,5 +361,4 @@ class Rock
     {
         return $this->routes;
     }
-
 }

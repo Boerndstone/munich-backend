@@ -57,7 +57,6 @@ class SecurityController extends AbstractController
 
             // the 'name' HTML attribute of the <input> used for the password field (default: '_password')
             'password_parameter' => 'password',
-            
         ]);
     }
 

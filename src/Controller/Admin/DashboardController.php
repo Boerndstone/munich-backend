@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Controller\Admin;
+
 use App\Entity\Area;
+use App\Entity\Photos;
 use App\Entity\Rock;
 use App\Entity\Routes;
 use App\Entity\Topo;
 use App\Entity\User;
-use App\Entity\Photos;
 use App\Entity\Videos;
 use App\Repository\AreaRepository;
 use App\Repository\RockRepository;
@@ -28,7 +29,6 @@ use Symfony\UX\Chartjs\Model\Chart;
 
 class DashboardController extends AbstractDashboardController
 {
-
     private RoutesRepository $routesRepository;
     private ChartBuilderInterface $chartBuilder;
 
@@ -40,14 +40,12 @@ class DashboardController extends AbstractDashboardController
         $this->chartBuilder = $chartBuilder;
     }
 
-    
-
     // Have to to make user in db + user form!!!
-    #[IsGranted('ROLE_ADMIN')]
+    #[\Symfony\Component\Security\Http\Attribute\IsGranted('ROLE_ADMIN')]
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-        //return parent::index();
+        // return parent::index();
 
         // Option 1. You can make your dashboard redirect to some common page of your backend
         //
@@ -67,7 +65,7 @@ class DashboardController extends AbstractDashboardController
         $getRoutes = $this->routesRepository->getAllRoutes();
         $getAreas = $this->areaRepository->getAllAreas();
         $getRocks = $this->rockRepository->getAllRocks();
-        
+
         return $this->render('admin/index.html.twig', [
             'chart' => $this->createChart(),
             'chartBernd' => $this->createChartBernd(),
@@ -77,8 +75,6 @@ class DashboardController extends AbstractDashboardController
             'getRoutes' => $getRoutes,
         ]);
     }
-
-    
 
     public function configureDashboard(): Dashboard
     {
@@ -124,13 +120,12 @@ class DashboardController extends AbstractDashboardController
     {
         $assets = parent::configureAssets();
         $assets->addWebpackEncoreEntry('admin');
-        
+
         return $assets;
     }
 
     private function createChart(): Chart
-    {        
-
+    {
         $belowSix = $this->routesRepository->findAllRoutesBelowSix();
         $belowEight = $this->routesRepository->findAllRoutesBelowEight();
         $greaterEight = $this->routesRepository->findAllRoutesGreaterEight();
@@ -144,7 +139,7 @@ class DashboardController extends AbstractDashboardController
                     'label' => 'Schwierigkeiten',
                     'backgroundColor' => ['#15803d', '#075985', '#b91c1c', 'black'],
                     'borderColor' => 'rgb(255, 99, 132)',
-                    'data' => [$belowSix, $belowEight, $greaterEight, $projects, ],
+                    'data' => [$belowSix, $belowEight, $greaterEight, $projects],
                 ],
             ],
         ]);
@@ -156,11 +151,12 @@ class DashboardController extends AbstractDashboardController
                 ],
             ],
         ]);
+
         return $chart;
     }
-    private function createChartBernd(): Chart
-    {        
 
+    private function createChartBernd(): Chart
+    {
         $alreadyClimbed = $this->routesRepository->findAllAlreadyClimbed();
         $allRoutes = $this->routesRepository->getAllRoutes();
 
@@ -184,6 +180,7 @@ class DashboardController extends AbstractDashboardController
                 ],
             ],
         ]);
+
         return $chartBernd;
     }
 }

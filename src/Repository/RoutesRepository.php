@@ -2,7 +2,6 @@
 
 namespace App\Repository;
 
-use App\Entity\Rock;
 use App\Entity\Routes;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -20,14 +19,12 @@ class RoutesRepository extends ServiceEntityRepository
         parent::__construct($registry, Routes::class);
     }
 
-
     public function getAllRoutes()
     {
         return $this->createQueryBuilder('routes')
             ->select('count(routes.id)')
             ->getQuery()
             ->getSingleScalarResult();
-        ;
     }
 
     public function findAllRoutesBelowSix()
@@ -38,7 +35,6 @@ class RoutesRepository extends ServiceEntityRepository
             ->select('count(routes.id)')
             ->getQuery()
             ->getSingleScalarResult();
-        ;
     }
 
     public function findAllRoutesBelowEight()
@@ -49,7 +45,6 @@ class RoutesRepository extends ServiceEntityRepository
             ->select('count(routes.id)')
             ->getQuery()
             ->getSingleScalarResult();
-        ;
     }
 
     public function findAllRoutesGreaterEight()
@@ -60,7 +55,6 @@ class RoutesRepository extends ServiceEntityRepository
             ->select('count(routes.id)')
             ->getQuery()
             ->getSingleScalarResult();
-        ;
     }
 
     public function findAllProjectds()
@@ -71,7 +65,6 @@ class RoutesRepository extends ServiceEntityRepository
             ->select('count(routes.id)')
             ->getQuery()
             ->getSingleScalarResult();
-        ;
     }
 
     public function findAllAlreadyClimbed()
@@ -82,14 +75,7 @@ class RoutesRepository extends ServiceEntityRepository
             ->select('count(routes.id)')
             ->getQuery()
             ->getSingleScalarResult();
-        ;
     }
-
-    
-
-    
-
-    
 
     // /**
     //  * @return Routes[] Returns an array of Routes objects
