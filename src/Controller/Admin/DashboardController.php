@@ -30,6 +30,7 @@ use Symfony\UX\Chartjs\Model\Chart;
 class DashboardController extends AbstractDashboardController
 {
     private RoutesRepository $routesRepository;
+
     private ChartBuilderInterface $chartBuilder;
 
     public function __construct(RoutesRepository $routesRepository, AreaRepository $areaRepository, RockRepository $rockRepository, ChartBuilderInterface $chartBuilder)
