@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Galerie;
+use App\Entity\Photos;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -13,11 +13,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 
-class GalerieCrudController extends AbstractCrudController
+class PhotosCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Galerie::class;
+        return Photos::class;
     }
 
     public function configureFields(string $pageName): iterable
@@ -45,7 +45,7 @@ class GalerieCrudController extends AbstractCrudController
         yield Field::new('description')
             ->setLabel('Beschreibung')
             ->hideOnIndex();
-        yield Field::new('photographer')
+        yield Field::new('photgrapher')
             ->setLabel('Fotograph');
     }
 }

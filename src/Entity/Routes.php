@@ -4,90 +4,63 @@ namespace App\Entity;
 
 use App\Repository\RoutesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Doctrine\DBAL\Types\Types;
 
-/**
- * @ORM\Entity(repositoryClass=RoutesRepository::class)
- */
+#[ORM\Entity(repositoryClass: RoutesRepository::class)]
 class Routes
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $name;
+    #[Assert\NotNull(message: 'Routenname darf nicht leer sein!')]
+    #[Assert\Length(minMessage: 'Routenname sollte mehr als zwei Zeichen enthalten!', min: 2)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $name = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Area::class, inversedBy="routes" , fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $area;
+    #[ORM\ManyToOne(inversedBy: 'routes', fetch: "EXTRA_LAZY")]
+    private ?Area $area = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Rock::class, inversedBy="routes", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $rock;
+    #[ORM\ManyToOne(inversedBy: 'routes', fetch: "EXTRA_LAZY")]
+    private ?Rock $rock = null;
 
-    /**
-     * @ORM\Column(type="string", length=20, nullable=true)
-     */
-    private $grade;
+    #[ORM\Column(type: Types::STRING, length: 20)]
+    private ?string $grade = null;
 
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $climbed;
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private bool $climbed = false;
 
-    /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     */
-    private $firstAscent;
+    #[ORM\Column(type: Types::STRING, length: 100)]
+    private ?string $firstAscent = null;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $yearFirstAscent;
+    #[ORM\Column(type: Types::INTEGER)]
+    protected ?int $yearFirstAscent = null;
 
-    /**
-     * @ORM\Column(type="smallint", nullable=true)
-     */
-    private $protection;
+    #[ORM\Column(type: Types::SMALLINT)]
+    private int $protection;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $description;
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $description = null;
 
-    /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     */
-    private $scale;
+    #[ORM\Column(type: Types::STRING, length: 100)]
+    private ?string $scale = null;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $gradeNo;
+    #[ORM\Column(type: Types::INTEGER)]
+    protected ?int $gradeNo = null;
 
-    /**
-     * @ORM\Column(type="smallint", nullable=true)
-     */
-    private $rating;
+    #[ORM\Column(type: Types::SMALLINT)]
+    private int $rating;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $topoId;
+    #[ORM\Column(type: Types::INTEGER)]
+    protected ?int $topoId = null;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $nr;
+    #[ORM\Column(type: Types::INTEGER)]
+    protected ?int $nr = null;
 
     public function __toString(): string
     {

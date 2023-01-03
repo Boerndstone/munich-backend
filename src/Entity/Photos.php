@@ -2,53 +2,36 @@
 
 namespace App\Entity;
 
-use App\Repository\GalerieRepository;
+use App\Repository\PhotosRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=GalerieRepository::class)
- */
-class Galerie
+#[ORM\Entity(repositoryClass: PhotosRepository::class)]
+class Photos
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Area::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $belongsToArea;
+    #[ORM\ManyToOne]
+    private ?Area $belongsToArea = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Rock::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $belongsToRock;
+    #[ORM\ManyToOne]
+    private ?Rock $belongsToRock = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Routes::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $belongsToRoute;
+    #[ORM\ManyToOne]
+    private ?Routes $belongsToRoute = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    private ?string $name = null;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $description;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $photographer;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $photgrapher = null;
 
     public function getId(): ?int
     {
@@ -108,21 +91,21 @@ class Galerie
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    public function getPhotographer(): ?string
+    public function getPhotgrapher(): ?string
     {
-        return $this->photographer;
+        return $this->photgrapher;
     }
 
-    public function setPhotographer(?string $photographer): self
+    public function setPhotgrapher(string $photgrapher): self
     {
-        $this->photographer = $photographer;
+        $this->photgrapher = $photgrapher;
 
         return $this;
     }

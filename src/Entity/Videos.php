@@ -3,42 +3,28 @@
 namespace App\Entity;
 
 use App\Repository\VideosRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=VideosRepository::class)
- */
+#[ORM\Entity(repositoryClass: VideosRepository::class)]
 class Videos
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Area::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $videoArea;
+    #[ORM\ManyToOne]
+    private ?Area $videoArea = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Rock::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $videoRocks;
+    #[ORM\ManyToOne]
+    private ?Rock $videoRocks = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Routes::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $videoRoutes;
+    #[ORM\ManyToOne]
+    private ?Routes $videoRoutes = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $videoLink;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $videoLink = null;
 
     public function getId(): ?int
     {

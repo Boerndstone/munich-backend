@@ -8,94 +8,62 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Doctrine\DBAL\Types\Types;
 
-/**
- * @ORM\Entity(repositoryClass=AreaRepository::class)
- */
+#[ORM\Entity(repositoryClass: AreaRepository::class)]
 class Area
 {
 
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotNull(message="Gebietsname darf nicht leer sein!")
-     * @Assert\Length(
-     *      min = 2,
-     *      minMessage = "Gebietsname sollte mehr als zwei Zeichen enthalten!",
-     * )
-     */
-    private $name;
+    #[Assert\NotNull(message: 'Gebietsname darf nicht leer sein!')]
+    #[Assert\Length(minMessage: 'Gebietsname sollte mehr als zwei Zeichen enthalten!', min: 2)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $name = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotNull(message="URL darf nicht leer sein und darf keine Umlaute enthalten!")
-     * @Assert\Length(
-     *      min = 2,
-     *      minMessage = "URL sollte mehr als zwei Zeichen enthalten!",
-     * )
-     */
-    private $slug;
+    #[Assert\NotNull(message: 'URL darf nicht leer sein und darf keine Umlaute enthalten!')]
+    #[Assert\Length(minMessage: 'URL sollte mehr als zwei Zeichen enthalten!', min: 2)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $slug = null;
 
-    /**
-     * @ORM\Column(type="string", length=25)
-     */
-    private $orientation;
+    #[ORM\Column(type: Types::STRING, length: 25)]
+    private ?string $orientation = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Rock::class, mappedBy="area", fetch="EXTRA_LAZY")
-     */
-    private $rocks;
+    #[ORM\OneToMany(mappedBy: 'area', targetEntity: Rock::class, fetch: "EXTRA_LAZY")]
+    private Collection $rocks;
 
-     /**
-     * @ORM\OneToMany(targetEntity=Routes::class, mappedBy="area", fetch="EXTRA_LAZY")
-     */
-    private $routes;
+    #[ORM\OneToMany(mappedBy: 'area', targetEntity: Routes::class, fetch: "EXTRA_LAZY")]
+    private Collection $routes;
 
-    /**
-     * @ORM\Column(type="smallint", nullable=true)
-     */
-    private $sequence;
+    #[ORM\Column(type: Types::SMALLINT)]
+    private int $sequence;
 
-    /**
-     * @ORM\Column(type="smallint")
-     */
-    private $online;
+    #[ORM\Column(type: Types::SMALLINT)]
+    private int $online;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $image;
+    #[ORM\Column(type: Types::STRING, length: 25)]
+    private ?string $image = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $headerImage;
+    #[ORM\Column(type: Types::STRING, length: 25)]
+    private ?string $headerImage = null;
 
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     */
-    private $lat;
+    #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2, nullable: true )]
+    private ?float $lat = null;
 
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     */
-    private $lng;
+    #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2, nullable: true )]
+    private ?float $lng = null;
 
-    /**
-     * @ORM\Column(type="smallint", nullable=true)
-     */
-    private $zoom;
+    #[ORM\Column(type: Types::SMALLINT)]
+    private int $zoom;
 
     public function __construct()
     {
         $this->rocks = new ArrayCollection();
         $this->routes = new ArrayCollection();
+        $this->belongsToRock = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -276,5 +244,6 @@ class Area
                 ->addViolation();
         }
     }
+
     
 }

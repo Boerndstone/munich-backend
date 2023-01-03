@@ -4,49 +4,33 @@ namespace App\Entity;
 
 use App\Repository\TopoRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\Types;
 
-/**
- * @ORM\Entity(repositoryClass=TopoRepository::class)
- */
+#[ORM\Entity(repositoryClass: TopoRepository::class)]
 class Topo
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Rock::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $rocks;
+    #[ORM\ManyToOne(inversedBy: 'topo')]
+    private ?Rock $rocks = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $name = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $image;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $image = null;
 
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $withSector;
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private bool $withSector = false;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $svg;
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $svg = null;
 
-    /**
-     * @ORM\Column(type="smallint")
-     */
-    private $number;
+    #[ORM\Column(type: Types::SMALLINT)]
+    private int $number;
 
     public function getId(): ?int
     {

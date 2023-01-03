@@ -80,6 +80,7 @@ class AreaCrudController extends AbstractCrudController
         yield Field::new('name')
             //->hideOnIndex()
             ->setColumns('col-12 col-md-4')
+            ->setHelp('Der Name des Gebiet\'s ist ein Pflichtfeld!')
         ;
 
         yield Field::new('slug')

@@ -9,144 +9,85 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Doctrine\DBAL\Types\Types;
 
-use Symfony\Component\Serializer\Annotation\Groups;
-
-/**
- * @ORM\Entity(repositoryClass=RockRepository::class)
- */
+#[ORM\Entity(repositoryClass: RockRepository::class)]
 class Rock
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups("rocks")
-     * @Assert\NotNull(message="Felsname darf nicht leer sein!")
-     * @Assert\Length(
-     *      min = 2,
-     *      minMessage = "Felsname sollte mehr als zwei Zeichen enthalten!",
-     * )
-     */
-    private $name;
+    #[Assert\NotBlank(message: 'Felsname darf nicht leer sein!')]
+    #[Assert\Length(minMessage: 'Felsname sollte mehr als zwei Zeichen enthalten!', min: 2)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $name = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Routes::class, mappedBy="rock", fetch="EXTRA_LAZY")
-     * @ORM\OrderBy({"nr" = "ASC"})
-     */
-    private $routes;
+    #[ORM\OneToMany(mappedBy: 'rock', targetEntity: Routes::class, fetch: "EXTRA_LAZY")]
+    private Collection $routes;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Area::class, inversedBy="rocks", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $area;
+    #[ORM\ManyToOne(inversedBy: 'rocks')]
+    private ?Area $area = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotNull(message="URL darf nicht leer sein und darf keine Umlaute enthalten!")
-     * @Assert\Length(
-     *      min = 2,
-     *      minMessage = "URL sollte mehr als zwei Zeichen enthalten!",
-     * )
-     */
-    private $slug;
+    #[Assert\NotNull(message: 'URL darf nicht leer sein und darf keine Umlaute enthalten!')]
+    #[Assert\Length(minMessage: 'URL sollte mehr als zwei Zeichen enthalten!', min: 2)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $slug = null;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Groups("rocks")
-     */
-    private $nr;
+    #[ORM\Column(type: Types::INTEGER)]
+    protected ?int $nr = null;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $description;
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $description = null;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $access;
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $access = null;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $nature;
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $nature = null;
 
-    /**
-     * @ORM\Column(type="smallint", nullable=true)
-     */
-    private $zone;
+    #[ORM\Column(type: Types::SMALLINT)]
+    private int $zone;
 
-    /**
-     * @ORM\Column(type="smallint", nullable=true)
-     */
-    private $banned;
+    #[ORM\Column(type: Types::SMALLINT)]
+    private int $banned;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $height;
+    #[ORM\Column(type: Types::INTEGER)]
+    protected ?int $height = null;
 
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $orientation;
+    #[ORM\Column(type: Types::STRING, length: 50)]
+    private ?string $orientation = null;
 
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $season;
+    #[ORM\Column(type: Types::STRING, length: 50)]
+    private ?string $season = null;
 
-    /**
-     * @ORM\Column(type="smallint", nullable=true)
-     */
-    private $childFriendly;
+    #[ORM\Column(type: Types::SMALLINT)]
+    private int $childFriendly;
 
-    /**
-     * @ORM\Column(type="smallint", nullable=true)
-     */
-    private $sunny;
+    #[ORM\Column(type: Types::SMALLINT)]
+    private int $sunny;
 
-    /**
-     * @ORM\Column(type="smallint", nullable=true)
-     */
-    private $rain;
+    #[ORM\Column(type: Types::SMALLINT)]
+    private int $rain;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $image;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $image = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $headerImage;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $headerImage = null;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $topo;
+    #[ORM\Column(type: Types::INTEGER)]
+    protected ?int $topo = null;
 
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=6, nullable=true)
-     */
-    private $lat;
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 6, nullable: true )]
+    private ?float $lat = null;
 
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=6, nullable=true)
-     */
-    private $lng;
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 6, nullable: true )]
+    private ?float $lng = null;
 
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $online;
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private bool $online = false;
 
     public function getId(): ?int
     {
