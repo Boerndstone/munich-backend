@@ -59,6 +59,12 @@ class RoutesCrudController extends AbstractCrudController
             ->setPageTitle(Crud::PAGE_DETAIL, static function (Routes $routes) {
                 return sprintf($routes->getName());
             })
+            // this sets the options of the entire form (later, you can set the options
+            // of each form type via the methods of their associated fields)
+            // pass a single array argument to apply the same options for the new and edit forms
+            ->setFormOptions([
+                'attr' => ['novalidate' => null]
+            ])
         ;
     }
 

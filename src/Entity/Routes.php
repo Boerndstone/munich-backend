@@ -16,6 +16,7 @@ class Routes
     private ?int $id = null;
 
     #[Assert\NotNull(message: 'Routenname darf nicht leer sein!')]
+    #[Assert\NotBlank(message: 'Bitte Bauträger auswählen',)]
     #[Assert\Length(minMessage: 'Routenname sollte mehr als zwei Zeichen enthalten!', min: 2)]
     #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $name = null;
@@ -41,6 +42,8 @@ class Routes
     #[ORM\Column(type: Types::SMALLINT)]
     private int $protection;
 
+    #[Assert\NotBlank(message: 'Beschreibung darf nicht leer sein!')]
+    #[Assert\Length(minMessage: 'Routenname sollte mehr als zwei Zeichen enthalten!', min: 2)]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
