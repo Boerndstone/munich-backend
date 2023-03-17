@@ -3,144 +3,122 @@
 {% block title %}Munichclimbs | {% endblock %}
 
 {% block body %}
-  <div 
-    class="container pb-2" 
-    style="padding-top: 60px;"
-  >
-    <div id="main" class="mt-3">
-        <div class="bg-white p-3 mb-4 flex items-center justify-between shadow">
-          {% set headline = '' %}
-          {% for headlineArea in rocks %}
-            {% set name = headlineArea.area %}
-            {% if name != headline %}
-              <h1 class="tracking-wide w-full">{{ name }}</h2>
-            {% endif %}
-            {% set headline = name %}
-          {% endfor %}            
-        </div>
+    <main class="pt-3">
+        <div class="container my-5">
+            <section>
+                <div class="bg-image pb-3 rounded">
+                    <div class="p-3 rounded shadow-3 alert-light d-flex align-items-center justify-content-between" style="background-color: rgba(255, 255, 255, 0.6);">
+                        <h1 class="h3 mb-0 fw-bold text-black">
+                            {{ headline }}							
+                        </h1>
+                        <div>
+                            <button type="button" class="btn btn-primary btn-floating" data-mdb-toggle="collapse" data-mdb-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                <i class="fas fa-map-marked"></i>
+                            </button>
+                        </div>
+                    </div>
+				</div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="datatable" data-mdb-striped="true" data-mdb-pagination="false">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="th-sm"><i class="fas fa-align-justify"></i></th>
+                                            <th class="th-sm">Fels</th>
+                                            <th class="th-sm">Routen</th>
+                                            <th class="th-sm">Höhe</th>
+                                            <th class="th-sm">Kinder</th>
+                                            <th class="th-sm">Regensicher</th>
+                                            <th class="th-sm">Ausrichtung</th>
+                                            <th class="th-sm">Sonnig</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-        <div class="hidden lg:block px-3">
-          <div class="my-2 text-sm font-bold w-full text-gray-900 grid grid-cols-12 gap-4">
-            
-            <span class="col-span-3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="fill-current inline-block text-gray-900 mb-1 w-10 md:w-6 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-                </svg>
-                <span class="inline-block mx-2">Fels</span>
-            </span>
-            <span class="col-span-2">Routen</span>
-            <span class="col-span-1">Höhe</span>
-            <span class="col-span-1">Kinder</span>
-            <span class="col-span-2">Regensicher</span>
-            <span class="col-span-2">Ausrichtung</span>
-            <span class="col-span-1">Sonnig</span>
-          </div>
-        </div>
-
-        {% for rock in rocks %}
-          <a 
-            href="{{ path('show_rock', { slug: rock.slug }) }}"
-            class="flex text-sm p-3 {% if loop.index is not divisible by(2) %} bg-gray-200 {% endif %} hover:bg-gray-400"
-          >
-            <div class="w-full grid grid-cols-12 gap-4 items-center">
-								
-              <span class="col-span-9 sm:col-span-5 md:col-span-3 truncate flex items-center">
-                <span class="inline-block w-10 md:w-6 ">{{ loop.index }}</span> 
-                <span class="text-blue-800 font-medium mx-2 block truncate ">{{ rock.name }}</span>
-              </span>
-              
-              <span class="hidden sm:flex items-center sm:col-span-3 md:col-span-2">
-                <span class="w-8">{{rock.routes|length}}</span>
-                <div class="hidden sm:flex h-4 w-24 mr-3">
-
-                  {% set amount = 100/rock.routes|length %}
-
-                  {% for test in rock.routes %}
-
-                  
-                  {#% set easy     = amount * test.gradeNo < 15 %}
-                  {% set middle   = amount * test.gradeNo > 15 and test.gradeNo < 29 %}
-                  {% set hard     = amount * test.gradeNo > 29 and test.gradeNo < 60 %}
-                  {% set project  = amount * test.gradeNo is null %#}
-
-                    {% if test.gradeNo < 15 %}
-
-                      {% set easy = test.gradeNo|length %}
-                      {#<div class="bg-green-500" style="width: {{easy}}">
-                        {{easy}}
-                      </div>#}
-{#
-                    {% elseif test.gradeNo > 15 and test.gradeNo < 29 %}
-
-                      {% set easy = middle * test.gradeNo|length %}
-                      <div class="bg-blue-500" style="width: {{middle}}">{{ middle }}</div>
-
-                    {% elseif test.gradeNo > 29 and test.gradeNo < 60 %}
-                      <div class="bg-blue-500" style="width: {{hard}}">hard{{test.gradeNo|length}}</div>
-                    {% elseif test.gradeNo is null %}
-                      <div class="bg-black" style="width: {{project}}">project{{test.gradeNo|length}}</div>
-                      #}
-                    {% endif %}
-
-                    
-                  {% endfor %} 
-
-                  
+                                        {% for rock in rocks %}
+                                            <tr>
+                                                <td>{{loop.index}}</td>
+                                                <td>
+                                                    <a 
+                                                        href="{{ path('show_rock', { slug: rock.slug }) }}"
+                                                        class="flex text-sm p-3 {% if loop.index is not divisible by(2) %} bg-gray-200 {% endif %} hover:bg-gray-400"
+                                                    >{{rock.name}}</a>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="text-end me-3" style="width: 1rem;">{{rock.routes|length}}</span>
+                                                        <div class="progress" style="height: 1rem; width: 6rem;">
+                                                            {% set amount = 100/rock.routes|length %}
+                                                            {% for amountGrade in rock.routes %}
+                                                                {% if amountGrade.gradeNo < 15 %}
+                                                                    {% set easy = amountGrade.gradeNo|length %}
+                                                                    <div class="progress-bar" role="progressbar" style="width: {{easy}}%; background-color: #15803d" aria-valuenow="{{easy}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                {% elseif amountGrade.gradeNo > 15 and  amountGrade.gradeNo < 29 %}
+                                                                    {% set middle = amountGrade.gradeNo|length %}
+                                                                    <div class="progress-bar" role="progressbar" style="width: {{middle}}%; background-color: #075985" aria-valuenow="{{middle}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                {% elseif amountGrade.gradeNo > 29 and  amountGrade.gradeNo < 60 %}
+                                                                    {% set hard = amountGrade.gradeNo|length %}
+                                                                    <div class="progress-bar" role="progressbar" style="width: {{hard}}%; background-color: #b91c1c" aria-valuenow="{{hard}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                {% else %}
+                                                                    {% set project = amountGrade.gradeNo|length %}
+                                                                    <div class="progress-bar" role="progressbar" style="width: {{project}}%; background-color: black" aria-valuenow="{{project}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                {% endif %}
+                                                            {% endfor %} 
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    {{ rock.height }} m
+                                                </td>
+                                                <td>
+                                                    <i 
+                                                        class="fas fa-baby-carriage fa-lg" 
+                                                        {% if rock.childFriendly == 2 %} 
+                                                            style="transform: rotate(45deg) scaleX(-1);" 
+                                                        {% elseif rock.childFriendly == 3 %} 
+                                                            style="transform: rotate(90deg) scaleX(-1);" 
+                                                        {% else %} 
+                                                            style="transform: rotate(0deg) scaleX(-1);" 
+                                                        {% endif %}
+                                                        
+                                                    ></i>
+                                                </td>
+                                                <td>
+                                                    <i 
+                                                        
+                                                        {% if rock.rain < 2 %} 
+                                                            class="fas fa-umbrella fa-lg" 
+                                                            style="color: rgb(20 83 45);" 
+                                                        {% else %} 
+                                                            class="far fa-thumbs-down fa-lg" 
+                                                            style="color: rgb(185 28 28);" 
+                                                        {% endif %}
+                                                        
+                                                    ></i>
+                                                </td>
+                                                <td>{{ rock.orientation }}</td>
+                                                <td>
+                                                    <i 
+                                                        {% if rock.sunny >= 1 %} 
+                                                            class="fas fa-sun fa-lg" 
+                                                            style="color: rgb(161 98 7);" 
+                                                        {% else %} 
+                                                            class="fas fa-umbrella-beach fa-lg" 
+                                                        {% endif %}
+                                                    ></i>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </span>
-
-
-
-              {#
-                
-                <?php
-										$prozentRock 	= 100/$routes->amountRoutesRock($rocksData['rockId']);
-										$easy 			= $prozentRock * $routes->getGradeForRock($rocksData['rockId'], 0, 15);
-										$middle 		= $prozentRock * $routes->getGradeForRock($rocksData['rockId'], 15, 29);
-										$hard 			= $prozentRock * $routes->getGradeForRock($rocksData['rockId'], 29, 60);
-										$project 		= $prozentRock * $routes->projectsRock($rocksData['rockId']);
-									?>
-									<div class="hidden sm:flex h-4 w-24 mr-3">
-										<div class="bg-green" style="width: <?php echo $easy; ?>%" title="<?php echo $routes->getGradeForRock($rocksData['rockId'], 0, 15); ?> <?php if($routes->getGradeForRock($rocksData['rockId'], 0, 15) == 1) { ?>Tour <?php } else { ?> Touren <?php } ?> von 1 bis 5"></div>
-										<div class="bg-blue" style="width: <?php echo $middle; ?>%" title="<?php echo $routes->getGradeForRock($rocksData['rockId'], 15, 29); ?> <?php if($routes->getGradeForRock($rocksData['rockId'], 15, 29) == 1) { ?>Tour <?php } else { ?> Touren <?php } ?> von 6 bis 7"></div>
-										<div class="bg-red" style="width: <?php echo $hard; ?>%" title="<?php echo $routes->getGradeForRock($rocksData['rockId'], 29, 60); ?> <?php if($routes->getGradeForRock($rocksData['rockId'], 29, 60) == 1) { ?>Tour <?php } else { ?> Touren <?php } ?> von 8 bis 11"></div>
-										<div class="bg-black" style="width: <?php echo $project; ?>%" title="<?php echo $routes->projectsRock($rocksData['rockId']) ?> <?php if($routes->projectsRock($rocksData['rockId']) == 1) { ?>Projekt <?php } else { ?> Projekte <?php } ?> "></div>
-									</div>
-                
-                #}
-              <span class="col-span-2 md:col-span-1">{{ rock.height }} m</span>
-              <span class="hidden sm:inline-block sm:col-span-1 md:col-span-1">
-                {% if rock.childFriendly == 1 %}
-                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current inline-block text-green-500 mb-1 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                {% else %}
-                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current inline-block text-red-500 mb-1 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                {% endif %}
-                </span>
-              <span class="hidden md:inline-block col-span-2">
-                {% if rock.rain > 1 %}
-                  <svg class="stroke-current inline-block text-red-500 mb-1 h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018a2 2 0 01.485.06l3.76.94m-7 10v5a2 2 0 002 2h.096c.5 0 .905-.405.905-.904 0-.715.211-1.413.608-2.008L17 13V4m-7 10h2m5-10h2a2 2 0 012 2v6a2 2 0 01-2 2h-2.5"></path></svg>
-                {% else %}
-                <svg class="stroke-current inline-block text-green-500 mb-1 h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path></svg>
-                {% endif %}
-              </span>
-              <span class="hidden md:inline-block col-span-2">{{ rock.orientation }}</span>
-              <span class="hidden md:inline-block col-span-1">
-                {% if rock.sunny > 1 %}
-                  <svg class="stroke-current inline-block text-yellow-500 h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                {% else %}
-                  <svg class="stroke-current inline-block text-red-500 h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg>
-                {% endif %}
-              </span>
-            </div>
-          </a>
-          {% endfor %}
-    </div>
-		</div>
-	
-    {{ include('pageParts/footer.html.twig') }}
-        
+            </section>
+        </div>
+        {{ include('pageParts/footer.html.twig') }}
+    </main>
 {% endblock %}

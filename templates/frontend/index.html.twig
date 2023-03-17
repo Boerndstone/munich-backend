@@ -1,184 +1,146 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Klettergebiete um München
-{% endblock %}
+{% block title %}Munichclimbs{% endblock %}
 
 {% block body %}
 	<main class="pt-3">
 		<div class="container my-5">
 			<section>
-				<span class="dpl-newmdb-docs-alert-advanced">
-					<div class="alert shadow-3 alert-light d-flex justify-content-between" role="alert" data-mdb-color="light">
+				<div class="dpl-newmdb-docs-alert-advanced pb-3">
+					<div 
+						class="p-3 rounded shadow-3 alert-light d-flex align-items-center justify-content-between" 
+						style="background-color: rgba(255, 255, 255, 0.6);"
+						role="alert" 
+						data-mdb-color="light"
+					>
 						<h1 class="h2 mb-0 fw-bold text-black">Klettergebiete um München</h1>
+						<div>
+							<button type="button" class="btn btn-primary btn-floating" data-mdb-toggle="collapse" data-mdb-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+								<i class="fas fa-map-marked text-white"></i>
+							</button>
+						</div>
 					</div>
-				</span>
+					{# Hier kommt dann die Karte hin!!! #}
+				</div>
 				<div class="row">
 					<div class="col-md-8">
 						<div class="row">
-
 							{% for area in areas %}
 								<div class="col-12">
 									<div class="card mb-4 p-0">
 										<div class="row g-0">
 											<div class="col-md-6">
-
 												{% if area.image %}
-													<img class="class=" img-fluid rounded-start"" src="{{ asset('build/images/areas/' ~ area.image ~ '.jpg') }}" data-src="" alt="Übersicht Klettergebiete {{ area.name }}"/>
-
+													<img 
+														class="img-fluid rounded-start" 
+														src="{{ asset('build/images/areas/' ~ area.image ~ '.webp') }}" 
+														data-src="" 
+														alt="Übersicht Klettergebiete {{ area.name }}"
+													/>
 												{% else %}
 													<div class="d-flex justify-content-center align-items-center" style="min-height: 220px;">
 														<i class="fas fa-images fa-10x"></i>
 													</div>
-
 												{% endif %}
 												<a href="{{ path('show_rocks', { slug: area.slug }) }}">
-
 													<div class="mask"></div>
 													<div class="hover-overlay">
 														<div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
 													</div>
 												</a>
-
-
 											</div>
 											<div class="col-md-6">
 												<div class="card-body p-3">
-
-
 													<h5 class="card-title mb-0">
 														<a href="{{ path('show_rocks', { slug: area.slug } ) }}" title="Klettergebiet {{ area.name }} " data-area=" {{ area.name }} " class=" text-black stretched-link">{{ area.name }}</a>
-
-
 													</h5>
 													<hr class="my-2"/>
 													<ul class="list-unstyled text-black mb-0">
 														<li class="mb-2">Felsen
 															<span class="ms-3 badge badge-dark">{{ area.rocks|length }}</span>
 														</li>
-													</li>
-													<li>Touren
-														<span class="badge bg-black ms-2">{{ area.rocks|length }}</span>
-													</li>
-												</ul>
-												<hr class="my-2"/>
+														<li>Touren
+															<span class="badge bg-black ms-2">{{ area.routes|length }}</span>
+														</li>
+													</ul>
+													<hr class="my-2"/>
+													<div class="d-flex justify-content-between">
 
-												<hr class="my-2"/>
+														<div class="d-flex flex-column">
+															<div 
+																class="text-center px-2 py-1 small text-white"
+																style="background-color:#15803d; font-size: .75rem;"
+															>1 - 5</div>
+															
+														</div>
 
-												<div class="flex flex-row justify-between">
+														<div class="d-flex flex-column">
+															<div 
+																class="text-center px-2 py-1 small text-white"
+																style="background-color:#075985; font-size: .75rem;" 
+															>6 - 7</div>
 
-													<div class="d-flex flex-col">
-														<div class="text-center bg-green-700 px-2 py-1 md:text-xs text-sm text-white">1 - 5</div>
+														</div>
+
+														<div class="d-flex flex-column">
+															<div 
+																class="text-center px-2 py-1 small text-white"
+																style="background-color:#b91c1c; font-size: .75rem;" 
+															>8 - 11</div>
+
+														</div>
+
+														<div class="d-flex flex-column">
+															<div 
+																class="text-center px-2 py-1 small text-white"
+																style="background-color:black; font-size: .75rem;" 
+															>Proj.</div>
+														</div>
 													</div>
-
-													<div class="d-flex flex-col">
-														<div class="text-center bg-sky-700 px-2 py-1 md:text-xs text-sm text-white">6 - 7</div>
-
-													</div>
-
-													<div class="d-flex flex-col">
-														<div class="text-center bg-red-700 px-2 py-1 md:text-xs text-sm text-white">8 - 11</div>
-
-													</div>
-
-													<div class="d-flex flex-col">
-														<div class="text-center bg-black px-2 py-1 md:text-xs text-sm text-white">Proj.</div>
-
-													</div>
-													{#}
-																																																																																																																																																																																																																																																																																																																																																												foreach ($online as $key) {
-																																																																																																																																																																																																																																																																																																																																																																				$prozent 	= 100/$routes->amountRoutesArea($key['areaId']);
-																																																																																																																																																																																																																																																																																																																																																																				$easy 		= $prozent * $routes->getRoutesGrade($key['areaId'], 0, 15);
-																																																																																																																																																																																																																																																																																																																																																																				$middle 	= $prozent * $routes->getRoutesGrade($key['areaId'], 15, 29);
-																																																																																																																																																																																																																																																																																																																																																																				$hard 		= $prozent * $routes->getRoutesGrade($key['areaId'], 29, 60);
-																																																																																																																																																																																																																																																																																																																																																																				$project 	= $prozent * $routes->projects($key['areaId']);
-																																																																																																																																																																																																																																																																																																																																																												
-																																																																																																																																																																																																																																																																																																																																																																				$grading = array(
-																																																																																																																																																																																																																																																																																																																																																																									'easy' 		=> array("green", "1 - 5", $easy, 0, 15),
-																																																																																																																																																																																																																																																																																																																																																																									'middle' 	=> array("blue", "6 - 7", $middle, 15, 29),
-																																																																																																																																																																																																																																																																																																																																																																									'hard' 		=> array("red", "8 - 11", $hard, 29, 60),
-																																																																																																																																																																																																																																																																																																																																																																									'project' 	=> array("black", "Proj.", $project),
-																																																																																																																																																																																																																																																																																																																																																																								);
-																																																																																																																																																																																																																																																																																																																																																																								foreach($grading as $i => $value) {
-																																																																																																																																																																																																																																																																																																																																																												
-																																																																																																																																																																																																																																																																																																																																																												#}
-												{#% set prozent = 100/area.routes|length %#}
-
-
-													{#{ prozent }#}
-
-													{#% for route in area.routes %}
-																																																																																																																																																																																																																																																																																																																																																												
-																																																																																																																																																																																																																																																																																																																																																												
-																																																																																																																																																																																																																																																																																																																																																												
-																																																																																																																																																																																																																																																																																																																																																																									<div class="d-flex flex-col">
-																																																																																																																																																																																																																																																																																																																																																																										<div class="text-center bg- px-2 py-1 md:text-xs text-sm text-white"></div>
-																																																																																																																																																																																																																																																																																																																																																																										<div class="text-center md:text-xs text-sm text-white bg-gray-400 mt-1">
-																																																																																																																																																																																																																																																																																																																																																																											<div class="bg- px-2 py-1" style="width: %">
-																																																																																																																																																																																																																																																																																																																																																																											</div>
-																																																																																																																																																																																																																																																																																																																																																																										</div>	
-																																																																																																																																																																																																																																																																																																																																																																									</div>
-																																																																																																																																																																																																																																																																																																																																																																								{% endfor %#}
 												</div>
-											</div>
-										</div>
-									</a>
-
-
-								{% endfor %}
-							</div>
-							<div class="col-span-3 md:col-span-1">
-								<div class="accordion" id="accordionExample">
-									<div class="accordion-item">
-										<h2 class="accordion-header" id="headingOne">
-											<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-												Accordion Item #1
-											</button>
-										</h2>
-										<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-											<div class="accordion-body">
-												<strong>This is the first item's accordion body.</strong>
-												It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the
-												<code>.accordion-body</code>, though the transition does limit overflow.
-											</div>
-										</div>
-									</div>
-									<div class="accordion-item">
-										<h2 class="accordion-header" id="headingTwo">
-											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-												Accordion Item #2
-											</button>
-										</h2>
-										<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-											<div class="accordion-body">
-												<strong>This is the second item's accordion body.</strong>
-												It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the
-												<code>.accordion-body</code>, though the transition does limit overflow.
-											</div>
-										</div>
-									</div>
-									<div class="accordion-item">
-										<h2 class="accordion-header" id="headingThree">
-											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-												Accordion Item #3
-											</button>
-										</h2>
-										<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-											<div class="accordion-body">
-												<strong>This is the third item's accordion body.</strong>
-												It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the
-												<code>.accordion-body</code>, though the transition does limit overflow.
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
+							{% endfor %}
 						</div>
 					</div>
+					<div class="col-md-4">
+						<section class="card">
+							<div class="pb-2">
+								<h2 class="text-white fs-5 fw-light px-3 py-2 mb-2 rounded-top bg-primary">Neuste Routen</h2>
+								<ul class="list-unstyled">
+									<li class="px-3 mb-2 hover:bg-gray-300" style="line-height: 1.3rem;">
+										<a class="fs-6 text-truncate text-black block" href="/Kletterfels/Quaderwand">
+											<span class="d-inline-block me-2" style="width: 8px; height: 8px; border-radius: 50%; border: 4px solid #2c5282;"></span>
+											<span class="fw-normal pr-2">Larissa</span>
+											<span class="fw-normal">10+</span>
+											<span class="fw-light d-block ms-2 text-truncate" style="padding-left: 12px; color: rgba(0,0,0,.6);">Quaderwand</span>
+										</a>
+									</li>
+								</ul>
+								<hr class="my-2 border-dotted">
+								<a class="flex items-center text-black text-sm font-semibold px-3 py-1 block hover:bg-gray-300" href="/neuesteRouten"><i class="fas fa-chevron-circle-right text-primary me-2"></i>Mehr aktuelle Touren</a>
+							</div>
+						</section>		
+						<section class="card mt-5">
+							<div class="pb-4">
+								<h2 class="text-white fs-5 fw-light px-3 py-2 mb-2 rounded-top bg-danger">Aktuelle Sperrungen bis 30.06.</h2>
+								<ul class="list-unstyled">
+									<li class="px-3 mb-2 hover:bg-gray-300" style="line-height: 1.3rem;">
+										<a class="fs-6 text-truncate text-black block" href="/Kletterfels/Dohlenfels_Rueckseite">
+											<span class="d-inline-block me-2" style="width: 8px; height: 8px; border-radius: 50%; border: 4px solid #c53030;"></span>
+											<span class="fw-normal pr-2">Dohlenfels Rückseite</span>
+											<span class="fw-light d-block ms-2 text-truncate" style="padding-left: 12px; color: rgba(0,0,0,.6);">Konstein</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</section>
+					</div>
 				</div>
-
-			</div>
-
-			{{ include('pageParts/footer.html.twig') }}
-
-
-		{% endblock %}
+			</section>
+		</div>
+		{{ include('pageParts/footer.html.twig') }}
+	</main>
+{% endblock %}

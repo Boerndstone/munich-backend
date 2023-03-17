@@ -18,9 +18,31 @@ class FrontendController extends AbstractController
     public function index(ManagerRegistry $doctrine): Response
     {
         $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
+        $routes = $doctrine->getRepository(Area::class)->getRocksRoutesFrontend();
+        //$rock = $doctrine->getRepository(Rock::class)->find($id);
+        //$test = $area->getId();
+
+        //dd($test);
+
+        //$getRoutes = [];
+        /*foreach($areas as $value) {
+            //dd($value->getId());
+            array_push($getRoutes, $value->getId());
+        }Ü*/
+
+        //$area = $doctrine->getRepository(Area::class)->findBy($areas[0]->getId());
+
+        //$area = $areas[0]->getId();
+
+        //dd($getRoutes);
+        //$getRoute = $doctrine->getRepository(Area::class)->getRocksLowerFiveteen($getRoutes);
+        //$getRoute = $doctrine->getRepository(Area::class)->getRocksLowerFiveteen();
+
+        //dd($getRoutes);
 
         return $this->render('frontend/index.html.twig', [
             'areas' => $areas,
+            'routes' => $routes,
         ]);
     }
 
@@ -39,10 +61,13 @@ class FrontendController extends AbstractController
     {
         $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
         $rocks = $doctrine->getRepository(Rock::class)->findRocksArea($slug);
+        $headline = $slug;
+
 
         return $this->render('frontend/rocks.html.twig', [
             'areas' => $areas,
             'rocks' => $rocks,
+            'headline' => $headline,
         ]);
     }
 
@@ -57,6 +82,30 @@ class FrontendController extends AbstractController
         return $this->render('frontend/rock.html.twig', [
             'areas' => $areas,
             'rock' => $rock,
+        ]);
+    }
+
+    /**
+     * @Route("/Datenschutz", name="datenschutz")
+     */
+    public function datenschutz(ManagerRegistry $doctrine): Response
+    {
+        $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
+
+        return $this->render('frontend/datenschutz.html.twig', [
+            'areas' => $areas,
+        ]);
+    }
+
+    /**
+     * @Route("/Impressum", name="impressum")
+     */
+    public function impressum(ManagerRegistry $doctrine): Response
+    {
+        $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
+
+        return $this->render('frontend/impressum.html.twig', [
+            'areas' => $areas,
         ]);
     }
 }

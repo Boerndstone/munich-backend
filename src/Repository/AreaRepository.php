@@ -152,21 +152,21 @@ class AreaRepository extends ServiceEntityRepository
     /**
      * @return RoutesLowerFiveteen[]
      */
-    public function getRocksLowerFiveteen($value): array
+    public function getRocksLowerFiveteen(int $grade): array
     {
         $entityManager = $this->getEntityManager();
 
-        return $this->createQueryBuilder('area')
-            // ->where('routes.gradeNo < 15')
-            // ->setParameter('routes.areaId', $grade)
-            ->andWhere('area.id = :val')
-            ->setParameter('val', $value)
+        $qb = $this->createQueryBuilder('area')
+            ->andWhere('area.id = :grade')
+            ->setParameter('grade', $grade)
             ->innerJoin('area.routes', 'routes')
             ->addSelect('routes.gradeNo')
-            ->where('routes.gradeNo < 15')
-            ->getQuery()
-            ->getResult()
+            ->andWhere('routes.gradeNo < 15')
         ;
+
+        $query = $qb->getQuery();
+
+        return $query->execute();
     }
 
     // /**
