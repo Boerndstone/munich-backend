@@ -267,7 +267,7 @@
 																			</div>
 																		</div>
 																	</div>
-																	<?php 
+																	{#<?php 
 																		$prozentRock 	= 100/$routes->amountRoutesRock($rockId);
 																		$easy 			= $prozentRock * $routes->getGradeForRock($rockId, 0, 15);
 																		$middle 		= $prozentRock * $routes->getGradeForRock($rockId, 15, 29);
@@ -280,24 +280,56 @@
 																		'project' 	=> array("black", "Proj.", $project),
 																		);
 																		foreach($grading as $i => $value) {
-																	?>
-																		<div class="d-flex flex-column me-2">
-																			<div style="background-color:<?php echo $value[0]; ?>; font-size: 14px;" class="text-center px-2 py-1 text-white" ><?php echo $value[1]; ?></div>
-																			<div class="text-center text-white bg-gray-400 mt-1">
-																				<div style="background-color:<?php echo $value[0]; ?>; font-size: 14px;" class=" px-2 py-1">
-																					<?php 
-																						if($i != 'project') {
-																							echo $routes->getGradeForRock($rockId, $value[3], $value[4]);
-																						} else {
-																							echo $routes->projectsRock($rockId);
-																						}
-																					?>
-																				</div>
-																			</div>	
-																		</div>
-																	<?php
-																		}
-																	?>
+																	?>#}
+																	<div class="d-flex flex-column me-2">
+																		<div style="background-color:#15803d; font-size: 14px;" class="text-center px-2 py-1 text-white" >1 - 5</div>
+																		<div class="text-center text-white bg-gray-400 mt-1">
+																			<div style="background-color:#15803d; font-size: 14px;" class=" px-2 py-1">
+																			{% set easy = '' %}
+																			 {% for amountGrade in rockAttribute.routes %}
+																			 {% set now = amountGrade.gradeNo|length %}
+																				{% if amountGrade.gradeNo < 15 %}
+																					
+																					{% set easy = now %}
+																				{% else %}
+																					0
+																				{% endif %}
+																			{% endfor %} 
+																			</div>
+																		</div>	
+																	</div>	
+																	<div class="d-flex flex-column me-2">
+																		<div style="background-color:#075985; font-size: 14px;" class="text-center px-2 py-1 text-white" >6 - 7</div>
+																		<div class="text-center text-white bg-gray-400 mt-1">
+																			<div style="background-color:#075985; font-size: 14px;" class=" px-2 py-1">
+																			{% set middle = '' %}
+																				{% for amountGrade in rockAttribute.routes %}
+																					{% set test = amountGrade.gradeNo|length %}
+																					{% if amountGrade.gradeNo > 15 and  amountGrade.gradeNo < 29 %}
+																						{{test}}
+																						
+																					{% endif %}
+																					{% set middle = test %}
+																				{% endfor %} 
+																			</div>
+																		</div>	
+																	</div>	
+																	<div class="d-flex flex-column me-2">
+																		<div style="background-color:#b91c1c; font-size: 14px;" class="text-center px-2 py-1 text-white" >8 - 11</div>
+																		<div class="text-center text-white bg-gray-400 mt-1">
+																			<div style="background-color:#b91c1c; font-size: 14px;" class=" px-2 py-1">
+																				zahl
+																			</div>
+																		</div>	
+																	</div>	
+																	<div class="d-flex flex-column me-2">
+																		<div style="background-color:black; font-size: 14px;" class="text-center px-2 py-1 text-white" >Proj.</div>
+																		<div class="text-center text-white bg-gray-400 mt-1">
+																			<div style="background-color:black; font-size: 14px;" class=" px-2 py-1">
+																				zahl
+																			</div>
+																		</div>	
+																	</div>
 																</div>
 															</div>
 														</td>

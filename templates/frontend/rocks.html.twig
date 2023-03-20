@@ -50,7 +50,7 @@
                                                     <div class="d-flex align-items-center">
                                                         <span class="text-end me-3" style="width: 1rem;">{{rock.routes|length}}</span>
                                                         <div class="progress" style="height: 1rem; width: 6rem;">
-                                                            {% set amount = 100/rock.routes|length %}
+                                                            {% set amount = 100 / rock.routes|length %}
                                                             {% for amountGrade in rock.routes %}
                                                                 {% if amountGrade.gradeNo < 15 %}
                                                                     {% set easy = amountGrade.gradeNo|length %}

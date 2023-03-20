@@ -106,37 +106,8 @@
 						</div>
 					</div>
 					<div class="col-md-4">
-						<section class="card">
-							<div class="pb-2">
-								<h2 class="text-white fs-5 fw-light px-3 py-2 mb-2 rounded-top bg-primary">Neuste Routen</h2>
-								<ul class="list-unstyled">
-									<li class="px-3 mb-2 hover:bg-gray-300" style="line-height: 1.3rem;">
-										<a class="fs-6 text-truncate text-black block" href="/Kletterfels/Quaderwand">
-											<span class="d-inline-block me-2" style="width: 8px; height: 8px; border-radius: 50%; border: 4px solid #2c5282;"></span>
-											<span class="fw-normal pr-2">Larissa</span>
-											<span class="fw-normal">10+</span>
-											<span class="fw-light d-block ms-2 text-truncate" style="padding-left: 12px; color: rgba(0,0,0,.6);">Quaderwand</span>
-										</a>
-									</li>
-								</ul>
-								<hr class="my-2 border-dotted">
-								<a class="flex items-center text-black text-sm font-semibold px-3 py-1 block hover:bg-gray-300" href="/neuesteRouten"><i class="fas fa-chevron-circle-right text-primary me-2"></i>Mehr aktuelle Touren</a>
-							</div>
-						</section>		
-						<section class="card mt-5">
-							<div class="pb-4">
-								<h2 class="text-white fs-5 fw-light px-3 py-2 mb-2 rounded-top bg-danger">Aktuelle Sperrungen bis 30.06.</h2>
-								<ul class="list-unstyled">
-									<li class="px-3 mb-2 hover:bg-gray-300" style="line-height: 1.3rem;">
-										<a class="fs-6 text-truncate text-black block" href="/Kletterfels/Dohlenfels_Rueckseite">
-											<span class="d-inline-block me-2" style="width: 8px; height: 8px; border-radius: 50%; border: 4px solid #c53030;"></span>
-											<span class="fw-normal pr-2">Dohlenfels Rückseite</span>
-											<span class="fw-light d-block ms-2 text-truncate" style="padding-left: 12px; color: rgba(0,0,0,.6);">Konstein</span>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</section>
+						{{ include('pageParts/latestRoutes.html.twig') }}
+						{{ include('pageParts/bannedRocks.html.twig') }}
 					</div>
 				</div>
 			</section>

@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use App\Entity\Area;
+use App\Entity\Rock;
 use App\Entity\Routes;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -94,15 +96,14 @@ class RoutesRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Routes
+    public function latestRoutes()
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
+        return $this->createQueryBuilder('routes')
+            ->orderBy('routes.yearFirstAscent', 'DESC')
+            ->innerJoin('routes.rock', 'routes_rock')
+            ->setMaxResults( 5)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
-    */
 }

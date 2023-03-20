@@ -135,4 +135,14 @@ class RockRepository extends ServiceEntityRepository
 
         return $queryBuilder;
     }
+
+    public function saisonalGesperrt()
+    {
+        return $this->createQueryBuilder('rock')
+            ->orderBy('rock.name', 'ASC')
+            ->where('rock.banned = 1')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

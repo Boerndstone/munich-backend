@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Area;
 use App\Entity\Rock;
+use App\Entity\Routes;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,6 +20,9 @@ class FrontendController extends AbstractController
     {
         $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
         $routes = $doctrine->getRepository(Area::class)->getRocksRoutesFrontend();
+
+        $latestRoutes = $doctrine->getRepository(Routes::class)->latestRoutes();
+        $banned = $doctrine->getRepository(Rock::class)->saisonalGesperrt();
         //$rock = $doctrine->getRepository(Rock::class)->find($id);
         //$test = $area->getId();
 
@@ -43,6 +47,8 @@ class FrontendController extends AbstractController
         return $this->render('frontend/index.html.twig', [
             'areas' => $areas,
             'routes' => $routes,
+            'latestRoutes' => $latestRoutes,
+            'banned' => $banned
         ]);
     }
 
