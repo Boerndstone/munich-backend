@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Munichclimbs | {% endblock %}
+{% block title %}Munichclimbs | {{ areaName }}{% endblock %}
 
 {% block body %}
     <main class="pt-3">
@@ -9,7 +9,7 @@
                 <div class="bg-image pb-3 rounded">
                     <div class="p-3 rounded shadow-3 alert-light d-flex align-items-center justify-content-between" style="background-color: rgba(255, 255, 255, 0.6);">
                         <h1 class="h3 mb-0 fw-bold text-black">
-                            {{ headline }}							
+                            {{ areaName }}							
                         </h1>
                         <div>
                             <button type="button" class="btn btn-primary btn-floating" data-mdb-toggle="collapse" data-mdb-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -18,10 +18,12 @@
                         </div>
                     </div>
 				</div>
+                {#{dump(rocks)}#}
                 <div class="row">
                     <div class="col-md-12">
                         <div class="datatable" data-mdb-striped="true" data-mdb-pagination="false">
                             <div class="table-responsive">
+                            
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -37,9 +39,12 @@
                                     </thead>
                                     <tbody>
 
-                                        {% for rock in rocks %}
+                                        {% for x, rock in rocks %}
+
+                                            
+                                    
                                             <tr>
-                                                <td>{{loop.index}}</td>
+                                                <td>{{loop.index}} {#{ dump(sum[rock.id]['5']) }#}</td>
                                                 <td>
                                                     <a 
                                                         href="{{ path('show_rock', { slug: rock.slug }) }}"
@@ -48,24 +53,47 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-flex align-items-center">
-                                                        <span class="text-end me-3" style="width: 1rem;">{{rock.routes|length}}</span>
+                                                        <span class="text-end me-3" style="width: 1rem;">
+                                                            {{rock.routes|length}} 
+                                                            {% set percent = 100 / rock.routes|length %}
+                                                            {% set easy = percent * belowSix[x] %}
+                                                            {% set middle = percent * belowEight[x] %}
+                                                            {% set hard = percent * greaterEight[x] %}
+                                                            {% set project = percent * projects[x] %}
+                                                        </span>
                                                         <div class="progress" style="height: 1rem; width: 6rem;">
-                                                            {% set amount = 100 / rock.routes|length %}
-                                                            {% for amountGrade in rock.routes %}
-                                                                {% if amountGrade.gradeNo < 15 %}
-                                                                    {% set easy = amountGrade.gradeNo|length %}
-                                                                    <div class="progress-bar" role="progressbar" style="width: {{easy}}%; background-color: #15803d" aria-valuenow="{{easy}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                {% elseif amountGrade.gradeNo > 15 and  amountGrade.gradeNo < 29 %}
-                                                                    {% set middle = amountGrade.gradeNo|length %}
-                                                                    <div class="progress-bar" role="progressbar" style="width: {{middle}}%; background-color: #075985" aria-valuenow="{{middle}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                {% elseif amountGrade.gradeNo > 29 and  amountGrade.gradeNo < 60 %}
-                                                                    {% set hard = amountGrade.gradeNo|length %}
-                                                                    <div class="progress-bar" role="progressbar" style="width: {{hard}}%; background-color: #b91c1c" aria-valuenow="{{hard}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                {% else %}
-                                                                    {% set project = amountGrade.gradeNo|length %}
-                                                                    <div class="progress-bar" role="progressbar" style="width: {{project}}%; background-color: black" aria-valuenow="{{project}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                {% endif %}
-                                                            {% endfor %} 
+                                                            <div 
+                                                                class="progress-bar" 
+                                                                role="progressbar" 
+                                                                style="width: {{ easy }}%; background-color: #15803d" 
+                                                                aria-valuenow="{{ easy }}" 
+                                                                aria-valuemin="0" 
+                                                                aria-valuemax="100"
+                                                            ></div>
+                                                            <div 
+                                                                class="progress-bar" 
+                                                                role="progressbar" 
+                                                                style="width: {{ middle }}%; background-color: #075985" 
+                                                                aria-valuenow="{{ middle }}" 
+                                                                aria-valuemin="0" 
+                                                                aria-valuemax="100"
+                                                            ></div>
+                                                            <div 
+                                                                class="progress-bar" 
+                                                                role="progressbar" 
+                                                                style="width: {{ hard }}%; background-color: #b91c1c" 
+                                                                aria-valuenow="{{ hard }}" 
+                                                                aria-valuemin="0" 
+                                                                aria-valuemax="100"
+                                                            ></div>
+                                                            <div 
+                                                                class="progress-bar" 
+                                                                role="progressbar" 
+                                                                style="width: {{ project }}%; background-color: black" 
+                                                                aria-valuenow="{{ project }}" 
+                                                                aria-valuemin="0" 
+                                                                aria-valuemax="100"
+                                                            ></div>
                                                         </div>
                                                     </div>
                                                 </td>

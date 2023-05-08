@@ -4,6 +4,9 @@ namespace App\Repository;
 
 use App\Entity\Area;
 use App\Entity\Routes;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -18,6 +21,34 @@ class AreaRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Area::class);
+    }
+
+    // Doctrine's normal mode is to always return objects, not an array of data.
+    public function findAllOrderedBy() {
+        //die('Servus');
+        
+        //$dql = 'SELECT area From App\Entity\Area area';
+        //$query = $this->getEntityManager()->createQuery($dql);
+        //var_dump($query->getSQL()); die;
+        
+        $qb = $this->createQueryBuilder('area')
+            ->addOrderBy('area.name', 'DESC');
+            $query = $qb->getQuery();
+        //var_dump($query->getSQL()); die;
+        
+        return $query->execute();
+    }
+
+    public function search($term) {
+        return $this->createQueryBuilder('area')
+            // always use andWhere!!!!
+            ->andWhere('area.name LIKE :searchTerm OR area.orientation LIKE :searchTerm OR route.name LIKE :searchTerm')
+            ->leftJoin('area.routes', 'route')
+            ->addSelect('route')
+            ->setParameter('searchTerm', '%' . $term . '%')
+            ->getQuery()
+            ->execute()
+        ;
     }
 
     public function getAllAreas()
@@ -87,6 +118,53 @@ class AreaRepository extends ServiceEntityRepository
             ->where('a.online = 1')
             ->getQuery()
             ->getResult()
+        ;
+    }
+
+    /**
+     * @return AreaRocksRoutes[] Returns an array of Area objects
+     */
+    public function getTheStuff()
+    {
+        return $this->createQueryBuilder('area')
+            //->orderBy('area.sequence', 'ASC')
+            ->join('area.rocks', 'rocks')
+            ->addSelect('rocks')
+            ->join('area.routes', 'routes')
+            ->addSelect('routes')
+            ->where('area.online = 1')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function priceHistoryImportQuery(): Query {
+        return $this
+            ->createQueryBuilder('u')
+            ->select('u, o, city')
+            ->leftJoin('u.object', 'o')
+            ->leftJoin('o.city', 'city')
+            ->where('u.entry_type is null')
+            ->orderBy('u.id', Criteria::DESC)
+            ->getQuery()
+        ;
+    }
+
+    /**
+     * @return Grades[] Returns an array of Grades objects
+     */
+    public function getGradesArea($id, $gradeLow, $gradeHigh) {
+        return $this->createQueryBuilder('area')
+            ->innerJoin('area.routes', 'routes')
+            ->andWhere('routes.area = :id')
+            ->setParameter('id', $id)
+            ->andWhere('routes.gradeNo > :gradeLow')
+            ->setParameter('gradeLow', $gradeLow)
+            ->andWhere('routes.gradeNo <= :gradeHigh')
+            ->setParameter('gradeHigh', $gradeHigh)
+            ->select('count(routes.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
         ;
     }
 

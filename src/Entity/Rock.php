@@ -25,7 +25,7 @@ class Rock
     #[ORM\OneToMany(mappedBy: 'rock', targetEntity: Routes::class, fetch: 'EXTRA_LAZY')]
     private Collection $routes;
 
-    #[ORM\ManyToOne(inversedBy: 'rocks')]
+    #[ORM\ManyToOne(targetEntity: Area::class, inversedBy: 'rocks')]
     private ?Area $area = null;
 
     #[Assert\NotNull(message: 'URL darf nicht leer sein und darf keine Umlaute enthalten!')]
@@ -360,5 +360,13 @@ class Rock
     public function getRoutes(): Collection
     {
         return $this->routes;
+    }
+
+    /**
+     * @return ArrayCollection|Routes[]
+     */
+    public function getRoutesDavid(): ArrayCollection|array
+    {
+        return $this->routes->toArray();
     }
 }

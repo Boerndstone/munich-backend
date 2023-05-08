@@ -1106,15 +1106,20 @@
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-6.2.0.tgz#ba3510825b332816fe7190f28827f8cb33a298b5"
   integrity sha512-CNR7qRIfCwWHNN7FnKUniva94edPdyQzil/zCwk3v6k4R6rR2Fr8i4s3PM7n/lyfPA6Zfko9z5WDzFxG9SW1uQ==
 
-"@hotwired/stimulus-webpack-helpers@^1.0.1":
+"@hotwired/stimulus-webpack-helpers@^1.0.0", "@hotwired/stimulus-webpack-helpers@^1.0.1":
   version "1.0.1"
-  resolved "https://registry.npmjs.org/@hotwired/stimulus-webpack-helpers/-/stimulus-webpack-helpers-1.0.1.tgz"
+  resolved "https://registry.yarnpkg.com/@hotwired/stimulus-webpack-helpers/-/stimulus-webpack-helpers-1.0.1.tgz#4cd74487adeca576c9865ac2b9fe5cb20cef16dd"
   integrity sha512-wa/zupVG0eWxRYJjC1IiPBdt3Lruv0RqGN+/DTMmUWUyMAEB27KXmVY6a8YpUVTM7QwVuaLNGW4EqDgrS2upXQ==
 
 "@hotwired/stimulus@^3.0.0":
   version "3.0.1"
   resolved "https://registry.npmjs.org/@hotwired/stimulus/-/stimulus-3.0.1.tgz"
   integrity sha512-oHsJhgY2cip+K2ED7vKUNd2P+BEswVhrCYcJ802DSsblJFv7mPFVk3cQKvm2vHgHeDVdnj7oOKrBbzp1u8D+KA==
+
+"@hotwired/stimulus@^3.2.1":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@hotwired/stimulus/-/stimulus-3.2.1.tgz#e3de23623b0c52c247aba4cd5d530d257008676b"
+  integrity sha512-HGlzDcf9vv/EQrMJ5ZG6VWNs8Z/xMN+1o2OhV1gKiSG6CqZt5MCBB1gRg5ILiN3U0jEAxuDTNPRfBcnZBDmupQ==
 
 "@hotwired/turbo@^7.0.1":
   version "7.2.4"
@@ -1246,6 +1251,18 @@
     error-stack-parser "^2.0.0"
     string-width "^4.2.3"
 
+"@orchidjs/sifter@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@orchidjs/sifter/-/sifter-1.0.3.tgz#43f42519472282eb632d0a1589184f044d64129b"
+  integrity sha512-zCZbwKegHytfsPm8Amcfh7v/4vHqTAaOu6xFswBYcn8nznBOuseu6COB2ON7ez0tFV0mKL0nRNnCiZZA+lU9/g==
+  dependencies:
+    "@orchidjs/unicode-variants" "^1.0.4"
+
+"@orchidjs/unicode-variants@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@orchidjs/unicode-variants/-/unicode-variants-1.0.4.tgz#6d2f812e3b19545bba2d81caffff1204de9a6a58"
+  integrity sha512-NvVBRnZNE+dugiXERFsET1JlKZfM5lJDEpSMilKW4bToYJ7pxf0Zne78xyXB2ny2c2aHfJ6WLnz1AaTNHAmQeQ==
+
 "@popperjs/core@^2.11.2":
   version "2.11.2"
   resolved "https://registry.npmjs.org/@popperjs/core/-/core-2.11.2.tgz"
@@ -1256,16 +1273,19 @@
   resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.24.51.tgz#645f33fe4e02defe26f2f5c0410e1c094eac7f5f"
   integrity sha512-1P1OROm/rdubP5aFDSZQILU0vrLCJ4fvHt6EoqHEM+2D/G5MK3bIaymUKLit8Js9gbns5UyJnkP/TZROLw4tUA==
 
-"@symfony/stimulus-bridge@^3.2.0":
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/@symfony/stimulus-bridge/-/stimulus-bridge-3.2.1.tgz#b9c261ad72830fd17898cf27c97862d1cc15b46a"
-  integrity sha512-eawmVu+tLVkiTz7ewkcsxFvaSZKxFWXmdWxIsxr2jIfQ64PSJg7PIcd7GsPMDxX8sLwg3LGxXfJv5bASL1es+A==
+"@symfony/stimulus-bridge@^3.2.2":
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/@symfony/stimulus-bridge/-/stimulus-bridge-3.2.2.tgz#afc1918f82d78cb2b6e299285c54094aa7f53696"
+  integrity sha512-kIaUEGPXW7g14zsHkIvQWw8cmfCdXSqsEQx18fuHPBb+R0h8nYPyY+e9uVtTuHlE2wHwAjrJoc6YBBK4a7CpKA==
   dependencies:
     "@hotwired/stimulus-webpack-helpers" "^1.0.1"
     "@types/webpack-env" "^1.16.4"
     acorn "^8.0.5"
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
+
+"@symfony/ux-autocomplete@file:vendor/symfony/ux-autocomplete/assets":
+  version "1.0.0"
 
 "@symfony/ux-chartjs@file:vendor/symfony/ux-chartjs/assets":
   version "1.1.0"
@@ -7205,6 +7225,31 @@ stdout-stream@^1.4.0:
   dependencies:
     readable-stream "^2.0.1"
 
+stimulus-autocomplete@2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/stimulus-autocomplete/-/stimulus-autocomplete-2.0.2.tgz#ded9f8481515222e707e8ad2ec094259f94d1895"
+  integrity sha512-nX9LHOqbZdRmnQm6ZMSdU9g0Fij2kdWM8mSwdatKdQl+gP82TQ0EwuB70qG7wdVLA2YkIXhGoAH9RbIR/KyY6Q==
+  dependencies:
+    lodash.debounce "^4.0.8"
+
+stimulus-scroll-to@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/stimulus-scroll-to/-/stimulus-scroll-to-4.1.0.tgz#22b24d768d673f029ab0f68100556e113075fa95"
+  integrity sha512-bKltfECyU8y/ck8yXy77hlK/vv85igW7LPtZpgkUBFuAGz+Ou7EnMPpKrSJiYoK+TXS2COFilb/PGND/xISxJA==
+
+stimulus-use@^0.52.0:
+  version "0.52.0"
+  resolved "https://registry.yarnpkg.com/stimulus-use/-/stimulus-use-0.52.0.tgz#a52df4e2b59f3273fc6941f98fa173f0892d4e9d"
+  integrity sha512-b2Z2krSSIqKvG9ncrjMlxbX3SYg9mgL0g/1Zc25jTZjTr0//wgg7szUi9G67amBs/yLqO12GAEnudybZgYNnjA==
+
+stimulus@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/stimulus/-/stimulus-3.2.1.tgz#bf049a4379ed4ff7475515acce1f0b6fa15a0187"
+  integrity sha512-EhpuHnTwtkWrE5m7tQxLBLsi1aE6xJ/9MbB88aKXZSquIC4pCueKJ2AGaF5gq+/BzP7+xvYaVYA0j1dIUuBsgA==
+  dependencies:
+    "@hotwired/stimulus" "^3.2.1"
+    "@hotwired/stimulus-webpack-helpers" "^1.0.0"
+
 string-width@^1.0.1, string-width@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npmjs.org/string-width/-/string-width-1.0.2.tgz"
@@ -7491,6 +7536,14 @@ toidentifier@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/toidentifier/-/toidentifier-1.0.1.tgz#3be34321a88a820ed1bd80dfaa33e479fbb8dd35"
   integrity sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==
+
+tom-select@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/tom-select/-/tom-select-2.2.2.tgz#8e5f9296e6d80254feccb57f0986bd6c44d126e2"
+  integrity sha512-igGah1yY6yhrnN2h/Ky8I5muw/nE/YQxIsEZoYu5qaA4bsRibvKto3s8QZZosKpOd0uO8fNYhRfAwgHB4IAYew==
+  dependencies:
+    "@orchidjs/sifter" "^1.0.3"
+    "@orchidjs/unicode-variants" "^1.0.4"
 
 tough-cookie@~2.5.0:
   version "2.5.0"

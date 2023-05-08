@@ -316,17 +316,48 @@
 					</div>
 				</div>
 				<div class="col-9 d-flex justify-content-end">
-					<form autocomplete="off" action="<?php echo BASE_URL; ?>searchResult" method="post" class="w-100">
-						<div class="input-group d-flex flex-nowrap">
-							<div id="navbar-search-autocomplete" class="form-outline" style="width: 90%;">
-								<input type="search" id="form1" class="form-control" name="route"/>
-								<label class="form-label" for="form1">Finde Route....</label>
-							</div>
-							<button type="submit" class="btn btn-primary" style="width: 10%;">
-								<i class="fas fa-search"></i>
-							</button>
+					{#<form class="w-100">
+						<div 
+                            class="input-group d-flex flex-nowrap"
+                            {{ stimulus_controller('autocomplete', {
+                                url: path('frontend', { preview: 1 })
+                            })}}
+                        >
+							<input 
+                                name="q" 
+                                class="form-control" 
+                                palceholder="Finde Route...."
+                                type="search"
+                                data-autocomplete-target="input"
+                            />
+							<div 
+                                class="search-preview"
+                                data-autocomplete-target="results"
+                            ></div>
 						</div>
-					</from>
+					</from>#}
+
+                    <form class="w-100">
+                        <div
+                            class="input-group"
+                            {{ stimulus_controller('search-preview', {
+                                url: path('frontend')
+                            }) }}
+                        >
+                            <input
+                                name="q"
+                                value="{{ searchTerm }}"
+                                placeholder="Search products..."
+                                type="search"
+                                class="form-control"
+                                data-action="search-preview#onSearchInput"
+                            >
+                            <div
+                                class="search-preview"
+                                data-search-preview-target="result"
+                            ></div>
+                        </div>
+                    </form>
 				</div>
 				<div class="col-md"></div>
 			</div>

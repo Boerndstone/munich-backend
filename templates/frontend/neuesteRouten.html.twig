@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Klettergebiete um München
+{% endblock %}
+
+{% block body %}
+	<main class="pt-3">
+        <div class="container my-5">
+            <section>
+                <span class="dpl-newmdb-docs-alert-advanced">
+                    <div class="alert shadow-3 d-flex justify-content-between alert-light" style="background-color: rgba(255, 255, 255, 0.6);" role="alert" data-mdb-color="light">
+                        <h1 class="h2 mb-0 fw-bold text-black">Neuste Routen</h1>
+                    </div>
+                </span>
+            </section>
+            <section>
+                <div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-body">
+							    <div class="row">
+						            <div class="col-md-12">
+							            <div class="datatable" data-mdb-striped="true" data-mdb-pagination="false">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="th-sm"><i class="fas fa-align-justify"></i></th>
+                                                            <th class="th-sm">Tour</th>
+                                                            <th class="th-sm">Schwierigkeit</th>
+                                                            <th class="th-sm">Erstbegeher</th>
+                                                            <th class="th-sm">Fels</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for latestRoute in latestRoutes %}
+                                                            <tr>
+                                                                <td>{{loop.index}}</td>
+                                                                <td>
+                                                                    <a 
+                                                                        href="{{ path('show_rock', { slug: latestRoute.rock.slug }) }}"
+                                                                        title="Tourenname: {{ latestRoute.name }}, Fels: {{ latestRoute.rock }}" 
+                                                                        class="text-primary"
+                                                                    >{{ latestRoute.name }}
+                                                                    </a>
+                                                                    {#{ latestRoute.protection }#}
+                                                                    {#{ latestRoute.rating }#}
+                                                                </td>
+                                                                <td>{{ latestRoute.grade }}</td>
+                                                                <td>{{ latestRoute.firstAscent }} {{ latestRoute.yearFirstAscent }}</td>
+                                                                <td>{{ latestRoute.rock }}</td>
+                                                            </tr>	
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+						                </div>
+					                </div>
+				                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>            
+            </section>
+        </div>		
+    </main>
+    {{ include('pageParts/footer.html.twig') }}
+{% endblock %}

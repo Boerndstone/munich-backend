@@ -80,7 +80,7 @@ class AreaType extends AbstractType
                 ]
             )
             ->add('lat',
-                TextType::class,
+                FloatType::class,
                 [
                     'label_format' => 'Breitengrad',
                 ]
@@ -97,6 +97,7 @@ class AreaType extends AbstractType
                     'label_format' => 'Zoom',
                 ]
             )
+            ->add('food', AreaAutocompleteField::class)
         ;
     }
 
