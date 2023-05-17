@@ -18,16 +18,17 @@ class Area
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\NotBlank(message: 'Gebietsname darf nicht leer sein!')]
-    #[Assert\Length(minMessage: 'Gebietsname sollte mehr als zwei Zeichen enthalten!', min: 2)]
+    #[Assert\NotBlank(message: 'Der Name des Gebiets darf nicht leer sein!')]
+    #[Assert\Length(minMessage: 'Der Gebietsname sollte mehr als zwei Zeichen enthalten!', min: 2)]
     #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $name = null;
 
-    #[Assert\NotNull(message: 'URL darf nicht leer sein und darf keine Umlaute enthalten!')]
-    #[Assert\Length(minMessage: 'URL sollte mehr als zwei Zeichen enthalten!', min: 2)]
+    #[Assert\NotNull(message: 'Die URL darf nicht leer sein und darf keine Umlaute enthalten!')]
+    #[Assert\Length(minMessage: 'Die URL sollte mehr als zwei Zeichen enthalten!', min: 2)]
     #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $slug = null;
 
+    #[Assert\NotNull(message: 'Die Angabe zur Lage darf nicht ler sein.')]
     #[ORM\Column(type: Types::STRING, length: 25)]
     private ?string $orientation = null;
 

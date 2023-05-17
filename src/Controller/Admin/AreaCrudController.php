@@ -61,58 +61,51 @@ class AreaCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return parent::configureCrud($crud)
-            ->setPageTitle(Crud::PAGE_INDEX, 'Gebiete')
+            ->setPageTitle(Crud::PAGE_INDEX, 'Übersicht der Gebiete')
             ->setPageTitle(Crud::PAGE_NEW, 'Gebiete anlegen')
             ->setPageTitle(Crud::PAGE_EDIT, static function (Area $area) {
                 return sprintf($area->getName());
             })
-            ->showEntityActionsInlined()
             ->setFormOptions(['attr' => ['novalidate' => null]])
         ;
     }
 
-    /*public function configureCrud(Crud $crud): Crud
-    {
-        return parent::configureCrud($crud)
-            ->setEntityLabelInSingular('Partner-Portal Benutzer')
-            ->setEntityLabelInPlural('Partner-Portal Benutzer')
-            ->showEntityActionsInlined()
-            ->setFormOptions(['attr' => ['novalidate' => null]])
-            ->addFormTheme('FormThemes/logs.html.twig')
-            ->setPageTitle('index', 'Partner-Portal Benutzer')
-            ->setPageTitle('edit', 'Partner-Portal Benutzer bearbeiten')
-            ->setPageTitle('new', 'Partner-Portal Benutzer anlegen');
-    }*/
-
     public function configureFields(string $pageName): iterable
     {
         yield Field::new('name')
-            ->hideOnIndex()
-            ->setColumns('col-12 col-md-4')
+            ->setLabel('Name des Gebiet\'s')
             ->setHelp('Der Name des Gebiet\'s ist ein Pflichtfeld!')
+            ->setColumns('col-12')
         ;
 
-        //yield EmailField::new('email');
-
         yield Field::new('slug')
-            ->setLabel('URL')
+            ->setLabel('URL des Gebiet\'s')
             ->hideOnIndex()
             ->setFormTypeOption(
                 'disabled',
                 $pageName !== Crud::PAGE_NEW
             )
-            ->setColumns('col-12 col-md-4')
+            ->setHelp('Die URL darf keine Leerzeichen oder Umlaute beinhalten!')
+            ->setColumns('col-12')
         ;
 
-        yield Field::new('orientation')
-            ->setLabel('Ausrichtung')
+        yield ChoiceField::new('orientation')
+            ->setLabel('Lage')
+            ->renderAsNativeWidget()
+            ->setChoices([
+                'Im Norden Münchens' => 'north',
+                'Im Süden Münchens' => 'south',
+                'Im Westen Münchens' => 'west',
+                'Im Osten Münchens' => 'east',
+            ])
             ->hideOnIndex()
-            ->setColumns('col-12 col-md-4')
+            ->setHelp('Die Lage beschreibt wo sich das Gebiet befindet.')
+            ->setColumns('col-12')
         ;
 
         yield Field::new('sequence')
             ->setLabel('Reihenfolge')
-            ->setColumns('col-12 col-md-4')
+            ->setColumns('col-12')
         ;
 
         yield ChoiceField::new('online')
@@ -123,37 +116,39 @@ class AreaCrudController extends AbstractCrudController
                 'Offline' => '0',
             ])
             ->setTemplatePath('admin/field/status.html.twig')
-            ->setColumns('col-12 col-md-4')
+            ->setHelp('Ob das Gebiet Online/Offline ist.')
+            ->setColumns('col-12')
         ;
 
         yield Field::new('image')
             ->setLabel('Bild')
             ->hideOnIndex()
-            ->setColumns('col-12 col-md-4')
+            ->setColumns('col-12')
         ;
 
         yield Field::new('header_image')
             ->setLabel('Header Bild')
             ->hideOnIndex()
-            ->setColumns('col-12 col-md-3')
+            ->setColumns('col-12')
         ;
 
         yield Field::new('lat')
             ->setLabel('Breitengrad')
             ->hideOnIndex()
-            ->setColumns('col-12 col-md-3')
+            ->setColumns('col-12')
         ;
 
         yield Field::new('lng')
             ->setLabel('Längengrad')
             ->hideOnIndex()
-            ->setColumns('col-12 col-md-3')
+            ->setColumns('col-12')
         ;
 
         yield Field::new('zoom')
             ->setLabel('Zoomstufe')
             ->hideOnIndex()
-            ->setColumns('col-12 col-md-3')
+            ->setColumns('col-12')
+            ->setHelp('Zoom Stufe relevant für Kartenansicht auf der Gebietsseite.')
         ;
     }
 }
