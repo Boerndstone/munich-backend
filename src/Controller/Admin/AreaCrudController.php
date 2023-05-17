@@ -55,6 +55,24 @@ class AreaCrudController extends AbstractCrudController
                 ;
             })
 
+            ->update(Crud::PAGE_DETAIL, Action::EDIT, function (Action $action) {
+                return $action
+                    ->setLabel('Bearbeiten')
+                    ->setCssClass('btn btn-success')
+                ;
+            })
+
+            ->update(Crud::PAGE_DETAIL, Action::INDEX, function (Action $action) {
+                return $action
+                    ->setLabel('Zurück zur Liste')
+                ;
+            })
+            ->update(Crud::PAGE_DETAIL, Action::DELETE, function (Action $action) {
+                return $action
+                    ->setLabel('Löschen')
+                ;
+            })
+
         ;
     }
 

@@ -15,8 +15,7 @@ class Routes
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\NotNull(message: 'Routenname darf nicht leer sein!')]
-    #[Assert\NotBlank(message: 'Bitte Bauträger auswählen',)]
+    #[Assert\NotBlank(message: 'Routenname darf nicht leer sein!')]
     #[Assert\Length(minMessage: 'Routenname sollte mehr als zwei Zeichen enthalten!', min: 2)]
     #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $name = null;
@@ -27,39 +26,37 @@ class Routes
     #[ORM\ManyToOne(inversedBy: 'routes', fetch: 'EXTRA_LAZY')]
     private ?Rock $rock = null;
 
-    #[ORM\Column(type: Types::STRING, length: 20)]
+    #[ORM\Column(type: Types::STRING, length: 20, nullable: true)]
     private ?string $grade = null;
 
-    #[ORM\Column(type: Types::BOOLEAN)]
+    #[ORM\Column(type: Types::BOOLEAN, nullable: true)]
     private bool $climbed = false;
 
-    #[ORM\Column(type: Types::STRING, length: 100)]
+    #[ORM\Column(type: Types::STRING, length: 100, nullable: true)]
     private ?string $firstAscent = null;
 
-    #[ORM\Column(type: Types::INTEGER)]
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
     protected ?int $yearFirstAscent = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
+    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
     private int $protection;
 
-    #[Assert\NotBlank(message: 'Beschreibung darf nicht leer sein!')]
-    #[Assert\Length(minMessage: 'Routenname sollte mehr als zwei Zeichen enthalten!', min: 2)]
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::STRING, length: 100)]
+    #[ORM\Column(type: Types::STRING, length: 100, nullable: true)]
     private ?string $scale = null;
 
-    #[ORM\Column(type: Types::INTEGER)]
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
     protected ?int $gradeNo = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
+    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
     private int $rating;
 
-    #[ORM\Column(type: Types::INTEGER)]
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
     protected ?int $topoId = null;
 
-    #[ORM\Column(type: Types::INTEGER)]
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
     protected ?int $nr = null;
 
     public function __toString(): string

@@ -38,7 +38,52 @@ class RoutesCrudController extends AbstractCrudController
                     ->setLabel('Tour hinzufügen')
                     ->setCssClass('btn btn-success')
                 ;
-            });
+            })
+
+            ->update(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN, function (Action $action) {
+                return $action
+                    ->setLabel('Änderungen speichern')
+                    ->setCssClass('btn btn-success')
+                ;
+            })
+
+            ->update(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE, function (Action $action) {
+                return $action
+                    ->setLabel('Speichern und bearbeiten fortsetzen')
+                ;
+            })
+
+            ->update(Crud::PAGE_NEW, Action::SAVE_AND_RETURN, function (Action $action) {
+                return $action
+                    ->setLabel('Speichern')
+                    ->setCssClass('btn btn-success')
+                ;
+            })
+
+            ->update(Crud::PAGE_NEW, Action::SAVE_AND_ADD_ANOTHER, function (Action $action) {
+                return $action
+                    ->setLabel('Speichern und ein weiteres Gebiet hinzufügen')
+                ;
+            })
+
+            ->update(Crud::PAGE_DETAIL, Action::EDIT, function (Action $action) {
+                return $action
+                    ->setLabel('Bearbeiten')
+                    ->setCssClass('btn btn-success')
+                ;
+            })
+
+            ->update(Crud::PAGE_DETAIL, Action::INDEX, function (Action $action) {
+                return $action
+                    ->setLabel('Zurück zur Liste')
+                ;
+            })
+            ->update(Crud::PAGE_DETAIL, Action::DELETE, function (Action $action) {
+                return $action
+                    ->setLabel('Löschen')
+                ;
+            })
+        ;
 
         return parent::configureActions($actions)
             ->setPermission(Action::INDEX, 'ROLE_MODERATOR')
@@ -52,19 +97,15 @@ class RoutesCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return parent::configureCrud($crud)
-            ->setPageTitle(Crud::PAGE_INDEX, 'Routen')
+            ->setPageTitle(Crud::PAGE_INDEX, 'Übersicht der Routen')
+            ->setPageTitle(Crud::PAGE_NEW, 'Neue Route hinzufügen')
             ->setPageTitle(Crud::PAGE_EDIT, static function (Routes $routes) {
                 return sprintf($routes->getName());
             })
             ->setPageTitle(Crud::PAGE_DETAIL, static function (Routes $routes) {
                 return sprintf($routes->getName());
             })
-            // this sets the options of the entire form (later, you can set the options
-            // of each form type via the methods of their associated fields)
-            // pass a single array argument to apply the same options for the new and edit forms
-            ->setFormOptions([
-                'attr' => ['novalidate' => null]
-            ])
+            ->setFormOptions(['attr' => ['novalidate' => null]])
         ;
     }
 
@@ -73,16 +114,16 @@ class RoutesCrudController extends AbstractCrudController
         yield Field::new('id')
             ->hideonForm();
         yield Field::new('name')
-            ->setLabel('Tourenname')
-            ->setColumns('col-12 col-md-4')
+            ->setLabel('Name der Route')
+            ->setColumns('col-12')
         ;
         yield AssociationField::new('area')
             ->setLabel('Gebiet')
-            ->setColumns('col-12 col-md-4')
+            ->setColumns('col-12')
         ;
         yield AssociationField::new('rock')
             ->setLabel('Fels')
-            ->setColumns('col-12 col-md-4')
+            ->setColumns('col-12')
         ;
         yield Field::new('grade')
             ->setLabel('Schwierigkeitsgrad')
@@ -95,17 +136,17 @@ class RoutesCrudController extends AbstractCrudController
         ;
         yield Field::new('first_ascent')
             ->setLabel('Erstbegeher')
-            ->setColumns('col-12 col-md-4')
+            ->setColumns('col-12')
             ->hideOnIndex()
         ;
         yield Field::new('year_first_ascent')
             ->setLabel('Jahr der Erstbegehung')
-            ->setColumns('col-12 col-md-4')
+            ->setColumns('col-12')
             ->hideOnIndex()
         ;
         yield ChoiceField::new('protection')
             ->setLabel('Absicherung')
-            ->setColumns('col-12 col-md-4')
+            ->setColumns('col-12')
             ->hideOnIndex()
             ->setHelp('Wie die Absicherung ist, von gut bis sehr gefährlich!')
             ->setChoices(
@@ -128,7 +169,7 @@ class RoutesCrudController extends AbstractCrudController
         ;
         yield ChoiceField::new('rating')
             ->setLabel('Schönheit')
-            ->setColumns('col-12 col-md-4')
+            ->setColumns('col-12')
             ->hideOnIndex()
             ->setHelp('Schönheit der Route.')
             ->setChoices(
@@ -142,12 +183,12 @@ class RoutesCrudController extends AbstractCrudController
         ;
         yield Field::new('topo_id')
             ->setLabel('Topo ID')
-            ->setColumns('col-12 col-md-4')
+            ->setColumns('col-12')
             ->hideOnIndex()
         ;
         yield Field::new('nr')
             ->setLabel('Reihenfolge')
-            ->setColumns('col-12 col-md-4')
+            ->setColumns('col-12')
             ->hideOnIndex()
         ;
     }
