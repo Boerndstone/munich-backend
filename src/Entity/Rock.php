@@ -42,6 +42,7 @@ class Rock
     #[ORM\Column(type: Types::TEXT)]
     private ?string $access = null;
 
+    #[Assert\Blank]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $nature = null;
 

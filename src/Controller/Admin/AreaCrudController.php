@@ -62,19 +62,37 @@ class AreaCrudController extends AbstractCrudController
     {
         return parent::configureCrud($crud)
             ->setPageTitle(Crud::PAGE_INDEX, 'Gebiete')
+            ->setPageTitle(Crud::PAGE_NEW, 'Gebiete anlegen')
             ->setPageTitle(Crud::PAGE_EDIT, static function (Area $area) {
                 return sprintf($area->getName());
             })
+            ->showEntityActionsInlined()
+            ->setFormOptions(['attr' => ['novalidate' => null]])
         ;
     }
+
+    /*public function configureCrud(Crud $crud): Crud
+    {
+        return parent::configureCrud($crud)
+            ->setEntityLabelInSingular('Partner-Portal Benutzer')
+            ->setEntityLabelInPlural('Partner-Portal Benutzer')
+            ->showEntityActionsInlined()
+            ->setFormOptions(['attr' => ['novalidate' => null]])
+            ->addFormTheme('FormThemes/logs.html.twig')
+            ->setPageTitle('index', 'Partner-Portal Benutzer')
+            ->setPageTitle('edit', 'Partner-Portal Benutzer bearbeiten')
+            ->setPageTitle('new', 'Partner-Portal Benutzer anlegen');
+    }*/
 
     public function configureFields(string $pageName): iterable
     {
         yield Field::new('name')
-            // ->hideOnIndex()
+            ->hideOnIndex()
             ->setColumns('col-12 col-md-4')
             ->setHelp('Der Name des Gebiet\'s ist ein Pflichtfeld!')
         ;
+
+        //yield EmailField::new('email');
 
         yield Field::new('slug')
             ->setLabel('URL')

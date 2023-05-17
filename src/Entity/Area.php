@@ -18,7 +18,7 @@ class Area
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\NotNull(message: 'Gebietsname darf nicht leer sein!')]
+    #[Assert\NotBlank(message: 'Gebietsname darf nicht leer sein!')]
     #[Assert\Length(minMessage: 'Gebietsname sollte mehr als zwei Zeichen enthalten!', min: 2)]
     #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $name = null;
@@ -37,16 +37,16 @@ class Area
     #[ORM\OneToMany(mappedBy: 'area', targetEntity: Routes::class, fetch: 'EXTRA_LAZY')]
     private Collection $routes;
 
-    #[ORM\Column(type: Types::SMALLINT)]
+    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
     private int $sequence;
 
     #[ORM\Column(type: Types::SMALLINT)]
     private int $online;
 
-    #[ORM\Column(type: Types::STRING, length: 25)]
+    #[ORM\Column(type: Types::STRING, length: 25, nullable: true)]
     private ?string $image = null;
 
-    #[ORM\Column(type: Types::STRING, length: 25)]
+    #[ORM\Column(type: Types::STRING, length: 25, nullable: true)]
     private ?string $headerImage = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2, nullable: true)]
@@ -55,7 +55,7 @@ class Area
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2, nullable: true)]
     private ?float $lng = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
+    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
     private int $zoom;
 
     public function __construct()
