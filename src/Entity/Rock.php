@@ -79,10 +79,10 @@ class Rock
     protected ?int $topo = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 6, nullable: true)]
-    private ?float $lat = null;
+    private ?string $lat = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 6, nullable: true)]
-    private ?float $lng = null;
+    private ?string $lng = null;
 
     #[ORM\Column(type: Types::BOOLEAN)]
     private bool $online = false;
