@@ -28,7 +28,7 @@ class Area
     #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $slug = null;
 
-    #[Assert\NotNull(message: 'Die Angabe zur Lage darf nicht ler sein.')]
+    #[Assert\NotNull(message: 'Die Angabe zur Lage darf nicht leer sein.')]
     #[ORM\Column(type: Types::STRING, length: 25)]
     private ?string $orientation = null;
 
@@ -39,6 +39,7 @@ class Area
     private Collection $routes;
 
     #[ORM\Column(type: Types::SMALLINT, nullable: true)]
+    #[Assert\Type(type: 'integer', message: 'Bitte nur Zahlenwerte eintragen.')]
     private int $sequence;
 
     #[ORM\Column(type: Types::SMALLINT)]
@@ -50,11 +51,11 @@ class Area
     #[ORM\Column(type: Types::STRING, length: 25, nullable: true)]
     private ?string $headerImage = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2, nullable: true)]
-    private ?float $lat = null;
+    #[ORM\Column(type: Types::DECIMAL, precision: 4, scale: 2, nullable: true)]
+    private ?string $lat = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2, nullable: true)]
-    private ?float $lng = null;
+    #[ORM\Column(type: Types::DECIMAL, precision: 4, scale: 2, nullable: true)]
+    private ?string $lng = null;
 
     #[ORM\Column(type: Types::SMALLINT, nullable: true)]
     private int $zoom;
