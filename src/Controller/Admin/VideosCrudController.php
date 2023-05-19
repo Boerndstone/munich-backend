@@ -24,10 +24,56 @@ class VideosCrudController extends AbstractCrudController
             ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
                 return $action
                     ->setIcon('fa fa-plus')
-                    ->setLabel('Video hinzufügen')
+                    ->setLabel('Foto hinzufügen')
                     ->setCssClass('btn btn-success')
                 ;
-            });
+            })
+
+            ->update(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN, function (Action $action) {
+                return $action
+                    ->setLabel('Änderungen speichern')
+                    ->setCssClass('btn btn-success')
+                ;
+            })
+
+            ->update(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE, function (Action $action) {
+                return $action
+                    ->setLabel('Speichern und bearbeiten fortsetzen')
+                ;
+            })
+
+            ->update(Crud::PAGE_NEW, Action::SAVE_AND_RETURN, function (Action $action) {
+                return $action
+                    ->setLabel('Speichern')
+                    ->setCssClass('btn btn-success')
+                ;
+            })
+
+            ->update(Crud::PAGE_NEW, Action::SAVE_AND_ADD_ANOTHER, function (Action $action) {
+                return $action
+                    ->setLabel('Speichern und ein weiteres Foto hinzufügen')
+                ;
+            })
+
+            ->update(Crud::PAGE_DETAIL, Action::EDIT, function (Action $action) {
+                return $action
+                    ->setLabel('Bearbeiten')
+                    ->setCssClass('btn btn-success')
+                ;
+            })
+
+            ->update(Crud::PAGE_DETAIL, Action::INDEX, function (Action $action) {
+                return $action
+                    ->setLabel('Zurück zur Liste')
+                ;
+            })
+            ->update(Crud::PAGE_DETAIL, Action::DELETE, function (Action $action) {
+                return $action
+                    ->setLabel('Löschen')
+                ;
+            })
+
+        ;
 
         return parent::configureActions($actions)
             ->setPermission(Action::INDEX, 'ROLE_MODERATOR')
@@ -38,18 +84,37 @@ class VideosCrudController extends AbstractCrudController
         ;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return parent::configureCrud($crud)
+            ->setPageTitle(Crud::PAGE_INDEX, 'Übersicht der Fotos')
+            ->setPageTitle(Crud::PAGE_NEW, 'Video hinzufügen')
+            ->setPageTitle(Crud::PAGE_EDIT, static function (Videos $videos) {
+                return sprintf($videos->getVideoRoutes());
+            })
+            ->setPageTitle(Crud::PAGE_DETAIL, static function (Videos $videos) {
+                return sprintf($videos->getVideoRoutes());
+            })
+            ->setFormOptions(['attr' => ['novalidate' => null]])
+        ;
+    }
+
     public function configureFields(string $pageName): iterable
     {
         yield Field::new('id')
             ->hideOnIndex()
             ->hideonForm();
         yield AssociationField::new('videoArea')
-            ->setLabel('Gebiet');
+            ->setLabel('Gebiet')
+            ->setColumns('col-12');
         yield AssociationField::new('videoRocks')
-            ->setLabel('Fels');
+            ->setLabel('Fels')
+            ->setColumns('col-12');
         yield AssociationField::new('videoRoutes')
-            ->setLabel('Tour');
+            ->setLabel('Tour')
+            ->setColumns('col-12');
         yield Field::new('videoLink')
-            ->setLabel('Link');
+            ->setLabel('Link')
+            ->setColumns('col-12');
     }
 }
