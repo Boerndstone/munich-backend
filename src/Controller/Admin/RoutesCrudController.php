@@ -112,7 +112,8 @@ class RoutesCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield Field::new('id')
-            ->hideonForm();
+            ->hideonForm()
+            ->hideonIndex();
         yield Field::new('name')
             ->setLabel('Name der Route')
             ->setColumns('col-12')

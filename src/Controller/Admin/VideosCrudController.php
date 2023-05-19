@@ -24,7 +24,7 @@ class VideosCrudController extends AbstractCrudController
             ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
                 return $action
                     ->setIcon('fa fa-plus')
-                    ->setLabel('Foto hinzufügen')
+                    ->setLabel('Video hinzufügen')
                     ->setCssClass('btn btn-success')
                 ;
             })
@@ -51,7 +51,7 @@ class VideosCrudController extends AbstractCrudController
 
             ->update(Crud::PAGE_NEW, Action::SAVE_AND_ADD_ANOTHER, function (Action $action) {
                 return $action
-                    ->setLabel('Speichern und ein weiteres Foto hinzufügen')
+                    ->setLabel('Speichern und ein weiteres Video hinzufügen')
                 ;
             })
 
@@ -87,7 +87,7 @@ class VideosCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return parent::configureCrud($crud)
-            ->setPageTitle(Crud::PAGE_INDEX, 'Übersicht der Fotos')
+            ->setPageTitle(Crud::PAGE_INDEX, 'Übersicht der Videos')
             ->setPageTitle(Crud::PAGE_NEW, 'Video hinzufügen')
             ->setPageTitle(Crud::PAGE_EDIT, static function (Videos $videos) {
                 return sprintf($videos->getVideoRoutes());
