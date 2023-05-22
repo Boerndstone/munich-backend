@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RoutesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -58,6 +60,14 @@ class Routes
 
     #[ORM\Column(type: Types::INTEGER, nullable: true)]
     protected ?int $nr = null;
+
+    #[ORM\ManyToMany(targetEntity: ClimbedRoutes::class, mappedBy: 'ManyToMany')]
+    private Collection $climbedRoutes;
+
+    public function __construct()
+    {
+        $this->climbedRoutes = new ArrayCollection();
+    }
 
     public function __toString(): string
     {
@@ -233,6 +243,33 @@ class Routes
     public function setNr(?int $nr): self
     {
         $this->nr = $nr;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ClimbedRoutes>
+     */
+    public function getClimbedRoutes(): Collection
+    {
+        return $this->climbedRoutes;
+    }
+
+    public function addClimbedRoute(ClimbedRoutes $climbedRoute): self
+    {
+        if (!$this->climbedRoutes->contains($climbedRoute)) {
+            $this->climbedRoutes->add($climbedRoute);
+            $climbedRoute->addManyToMany($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClimbedRoute(ClimbedRoutes $climbedRoute): self
+    {
+        if ($this->climbedRoutes->removeElement($climbedRoute)) {
+            $climbedRoute->removeManyToMany($this);
+        }
 
         return $this;
     }
