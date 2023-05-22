@@ -112,6 +112,7 @@ class FrontendController extends AbstractController
      * @Route("/Klettergebiet/{slug}", name="show_rocks")
      */
     public function showRocksArea(
+        Request $request,
         ManagerRegistry $doctrine, 
         RoutesRepository $routesRepository,
         RockRepository $rockRepository,
@@ -120,8 +121,22 @@ class FrontendController extends AbstractController
         CacheInterface $cache
     ): Response
     {
+
+        $search = $request->query->get('q');
+        if($search) {
+            $areaSearch = $doctrine->getRepository(Area::class)->search($search);
+        } else {
+            $areaSearch = $doctrine->getRepository(Area::class)->findAllOrderedBy();
+        } 
+
+
+        $searchTerm = $request->query->get('q');
+
         $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
         $areaName = $area->getName();
+        $areaLat = $area->getLat();
+        $areaLng = $area->getLng();
+        $areaZoom = $area->getZoom();
         $rocks = $doctrine->getRepository(Rock::class)->findRocksArea($slug);
         $rock = $doctrine->getRepository(Rock::class)->findRocksArea($slug);
 
@@ -182,22 +197,39 @@ class FrontendController extends AbstractController
         return $this->render('frontend/rocks.html.twig', [
             'areas' => $areas,
             'areaName' => $areaName,
+            'areaLat' => $areaLat,
+            'areaLng' => $areaLng,
+            'areaZoom' => $areaZoom,
             'rocks' => $rocks,
             'belowSix' => $belowSix,
             'belowEight' => $belowEight,
             'greaterEight' => $greaterEight,
             'projects' => $projects,
-            'sum' => $sum
+            'sum' => $sum,
+            'searchTerm' => $searchTerm,
         ]);
     }
 
     /**
      * @Route("/Kletterfels/{slug}", name="show_rock")
      */
-    public function showRock(ManagerRegistry $doctrine, $slug, CacheInterface $cache): Response
+    public function showRock(Request $request, ManagerRegistry $doctrine, $slug, CacheInterface $cache): Response
     {
+
+        $search = $request->query->get('q');
+        if($search) {
+            $areaSearch = $doctrine->getRepository(Area::class)->search($search);
+        } else {
+            $areaSearch = $doctrine->getRepository(Area::class)->findAllOrderedBy();
+        } 
+
+
+        $searchTerm = $request->query->get('q');
+
         $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
         $rock = $doctrine->getRepository(Rock::class)->findRockName($slug);
+
+        
 
         $belowSix = $doctrine->getRepository(Routes::class)->findRoutesBelowSixForRock($slug);
         $belowEight = $doctrine->getRepository(Routes::class)->findRoutesBelowEightForRock($slug);
@@ -214,7 +246,8 @@ class FrontendController extends AbstractController
             'belowEight' => $belowEight,
             'greaterEight' => $greaterEight,
             'projects' => $projects,
-            'routes' => $routes
+            'routes' => $routes,
+            'searchTerm' => $searchTerm,
             
         ]);
     }
@@ -260,14 +293,4 @@ class FrontendController extends AbstractController
         ]);
     }
 
-     #[Route('frontend/pageParts/mainMap/')]
-    public function mainMap(ManagerRegistry $doctrine): Response
-    {
-
-        $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
-
-        return $this->render('frontend/impressum.html.twig', [
-            'areas' => $areas,
-        ]);
-    }
 }

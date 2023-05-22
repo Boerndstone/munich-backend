@@ -4,6 +4,7 @@
 
 {% block bodyclass %}scrollspy-example{% endblock %}
 {% block body %}
+	{{ include('pageParts/navigation.html.twig') }}
     <main class="pt-3">
 		<div class="container my-5">
 		{% for rockAttribute in rock %}
@@ -12,7 +13,7 @@
 			<section>
 				<div
 					class="bg-image py-3 rounded d-flex align-items-start background-image-height"
-					style="background-image: "
+					style="background-image: url('https://www.munichclimbs.de/images/headerImages/{{ rockAttribute.headerImage }}.webp')"
 				>
 					<div 
 						class="p-3 shadow-3 alert-light d-flex justify-content-between w-100"
@@ -28,7 +29,7 @@
 								data-mdb-toggle="modal" 
 								data-mdb-target="#infoModal" 
 							>
-								<i class="fas fa-info"></i>
+								<i class="fas fa-info text-white"></i>
 							</button>
 							<button 
 								type="button" 
@@ -36,7 +37,7 @@
 								data-mdb-toggle="modal" 
 								data-mdb-target="#exampleModal" 
 							>
-								<i class="far fa-images"></i>
+								<i class="far fa-images text-white"></i>
 							</button>
 						</div>
 					</div>

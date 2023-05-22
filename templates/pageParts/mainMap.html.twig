@@ -7,28 +7,26 @@
 
 <script>
 
-    var mymap = L.map('mapid').setView([ 48.74, 12.44], 7);
+	var markers = {{ marker|json_encode|raw }}
+
+    var mainMap = L.map('mainMap').setView([ 48.74, 12.44], 7);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
 		maxZoom: 18,
 		accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
-	}).addTo(mymap);
-
-    var markers = {{ marker|json_encode|raw }}
-
-    console.log(markers);
+	}).addTo(mainMap);
     
 	for (var i = 0; i < markers.length; i++) {
 		marker = new L.marker([markers[i][0],markers[i][1]])
 			.bindPopup(markers[i][2])
-			.addTo(mymap);
+			.addTo(mainMap);
 	}
 
 	const myModalEl = document.getElementById('collapseExample');
         myModalEl.addEventListener('shown.bs.collapse', (e) => {
             setTimeout(function(){ 
-            mymap.invalidateSize();
+            mainMap.invalidateSize();
         }, 40);
 	});
 

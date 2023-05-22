@@ -2,7 +2,8 @@
 
 {% block title %}Munichclimbs{% endblock %}
 
-{% block body %}{{ include('pageParts/navigation.html.twig') }}
+{% block body %}
+	{{ include('pageParts/navigation.html.twig') }}
 	<main class="pt-3">
 		<div class="container my-5">
 			<section>
@@ -14,28 +15,19 @@
 						data-mdb-color="light"
 					>
 						<h1 class="h2 mb-0 fw-bold text-black">Klettergebiete um München</h1>
-						{#<div data-controller="counter">
-							<button
-								data-action="counter#increment"
-								class="btn btn-primary btn-sm"
-							>Click me!</button>
-							I have been clicked 
-							<span data-counter-target="count">0</span> times.
-						</div>#}
 						<div>
 							<button type="button" class="btn btn-primary btn-floating" data-mdb-toggle="collapse" data-mdb-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
 								<i class="fas fa-map-marked text-white"></i>
 							</button>
 						</div>
 					</div>
-					{# Hier kommt dann die Karte hin!!! #}
 				</div>
 
 				<div class="collapse mt-3" id="collapseExample">
-						<div id="mapid" class="z-10 mb-3" style="width: 100%; height: 500px;">
-							{{ include('pageParts/mainMap.html.twig') }}
-						</div>
+					<div id="mainMap" class="z-10 mb-3" style="width: 100%; height: 500px;">
+						{{ include('pageParts/mainMap.html.twig') }}
 					</div>
+				</div>
 
 				{# Geplant für Suche siehe Stimulus Tutorial #}
 				{#{dump(area.getRocks())}#}
@@ -92,8 +84,11 @@
 																class="text-center px-2 py-1 small text-white"
 																style="background-color:#15803d; font-size: .75rem;"
 															>1 - 5</div>
-
-{{getLowGrades}}				 					
+															<div class="text-center text-white bg-gray-400 mt-1" style="font-size: .75rem;">
+																<div style="background-color:#15803d;" class=" px-2 py-1">
+																	{{getLowGrades}}																
+																</div>
+															</div>
 														</div>
 
 														<div class="d-flex flex-column">
@@ -101,7 +96,11 @@
 																class="text-center px-2 py-1 small text-white"
 																style="background-color:#075985; font-size: .75rem;" 
 															>6 - 7</div>
-{{getMiddleGrades}}			
+															<div class="text-center text-white bg-gray-400 mt-1" style="font-size: .75rem;">
+																<div style="background-color:#075985;" class=" px-2 py-1">
+																	{{getMiddleGrades}}																	
+																</div>
+															</div>
 														</div>
 
 														<div class="d-flex flex-column">
@@ -109,7 +108,11 @@
 																class="text-center px-2 py-1 small text-white"
 																style="background-color:#b91c1c; font-size: .75rem;" 
 															>8 - 11</div>
-{{getHighGrades}}
+															<div class="text-center text-white bg-gray-400 mt-1" style="font-size: .75rem;">
+																<div style="background-color:#b91c1c;" class=" px-2 py-1">
+																	{{getHighGrades}}																
+																</div>
+															</div>
 														</div>
 
 														<div class="d-flex flex-column">
@@ -117,8 +120,13 @@
 																class="text-center px-2 py-1 small text-white"
 																style="background-color:black; font-size: .75rem;" 
 															>Proj.</div>
-															{{getHighGrades}}
+															<div class="text-center text-white bg-gray-400 mt-1" style="font-size: .75rem;">
+																<div style="background-color:black;" class=" px-2 py-1">
+																	{{getHighGrades}}																
+																</div>
+															</div>
 														</div>
+
 													</div>
 												</div>
 											</div>
