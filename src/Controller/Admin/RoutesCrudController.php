@@ -176,6 +176,7 @@ class RoutesCrudController extends AbstractCrudController
             ->setChoices(
                 [
                     'schlecht => Mülltonne' => '-1',
+                    'keine Angabe' => '0',
                     'gut => ein Stern' => '1',
                     'super  => zwei Sterne' => '2',
                     'fantastisch   => drei Sterne' => '3',
