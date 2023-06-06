@@ -213,7 +213,16 @@ class FrontendController extends AbstractController
     /**
      * @Route("/Kletterfels/{slug}", name="show_rock")
      */
-    public function showRock(Request $request, ManagerRegistry $doctrine, $slug, CacheInterface $cache): Response
+    public function showRock(
+        Request $request,
+        ManagerRegistry $doctrine, 
+        RoutesRepository $routesRepository,
+        RockRepository $rockRepository,
+        //Area $area, 
+        $slug, 
+        CacheInterface $cache
+        
+    ): Response
     {
 
         $search = $request->query->get('q');
@@ -227,6 +236,8 @@ class FrontendController extends AbstractController
         $searchTerm = $request->query->get('q');
 
         $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
+        $areaName = $doctrine->getRepository(Area::class)->getAreaName($slug);
+        dd($areaName);
         $rock = $doctrine->getRepository(Rock::class)->findRockName($slug);
 
         
@@ -241,6 +252,7 @@ class FrontendController extends AbstractController
 
         return $this->render('frontend/rock.html.twig', [
             'areas' => $areas,
+            'slug' => $slug,
             'rock' => $rock,
             'belowSix' => $belowSix,
             'belowEight' => $belowEight,

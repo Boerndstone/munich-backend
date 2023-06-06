@@ -25,7 +25,7 @@
 		<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
 
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
-<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+		<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 	</head>
 	<body 
 		id="body" 
@@ -61,6 +61,13 @@
 			<i class="fas fa-angle-up"></i>
 		</a>
 
-		
+		<script>
+			var collapseModal = document.getElementById('collapseMap');
+				collapseModal.addEventListener('shown.bs.collapse', (e) => {
+					setTimeout(function(){ 
+					map.invalidateSize();
+				}, 40);
+			});
+		</script>
 	</body>
 </html>

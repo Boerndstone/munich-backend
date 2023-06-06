@@ -196,6 +196,7 @@ class RockCrudController extends AbstractCrudController
             ->hideOnDetail()
             ->setColumns('col-12')
             ->setChoices([
+                'keine Angabe' => '0',
                 'Sperrungen bis 30.06.' => '1',
             ])
             ->setHelp('Gibt es eine jahreszeitliche Sperrung.')

@@ -39,6 +39,28 @@ class AreaRepository extends ServiceEntityRepository
         return $query->execute();
     }
 
+     public function getAreaName($slug)
+    {
+        return $this->createQueryBuilder('area')
+            ->innerJoin('area.rock', 'rock')
+            ->where('rock.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->getQuery()
+            ->getResult()
+        ;
+
+/*
+        $queryBuilder = $this->createQueryBuilder('rock')
+            ->orderBy('rock.id', 'ASC')
+            ->innerJoin('rock.area', 'area')
+            ->addSelect('rock')
+            ->where('area.slug LIKE :areaSlug')
+            ->setParameter('areaSlug', $areaSlug)
+            ->getQuery()
+            ->getResult();
+*/
+    }
+
     public function search($term) {
         return $this->createQueryBuilder('area')
             // always use andWhere!!!!
