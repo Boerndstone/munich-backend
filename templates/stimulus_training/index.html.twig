@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base2.html.twig' %}
 
 {% block title %}Hello StimulusTrainingController!{% endblock %}
 
@@ -9,7 +9,6 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>{{ controller_name }}!</h1>
     <div data-controller="counter">
         <button
             data-action="counter#increment"
@@ -19,4 +18,26 @@
         <span data-counter-target="count">0</span> times.
     </div>
 </div>
+
+<form>
+    <div
+        class="input-group"
+        {{ stimulus_controller('search-preview', {
+            url: path('app_stimulus_training')
+        }) }}
+    >
+        <input
+            name="q"
+            value="{{ searchTerm }}"
+            placeholder="Search products..."
+            type="search"
+            class="form-control"
+            data-action="search-preview#onSearchInput"
+        >
+        <div
+            class="search-preview"
+            data-search-preview-target="result"
+        ></div>
+    </div>
+</form>
 {% endblock %}
