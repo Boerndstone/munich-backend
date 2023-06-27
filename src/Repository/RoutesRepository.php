@@ -45,7 +45,7 @@ class RoutesRepository extends ServiceEntityRepository
 
         if ($term) {
             $qb->andWhere('routes.name LIKE :term')
-                ->setParameter('term', '%'.$term.'%');
+                ->setParameter('term', '%' . $term . '%');
         }
 
         return $qb
@@ -156,10 +156,9 @@ class RoutesRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('routes')
             ->orderBy('routes.yearFirstAscent', 'DESC')
             ->innerJoin('routes.rock', 'routes_rock')
-            ->setMaxResults( 5)
+            ->setMaxResults(5)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
     public function latestRoutesPage($calculateDate)
@@ -170,8 +169,7 @@ class RoutesRepository extends ServiceEntityRepository
             ->where('routes.yearFirstAscent >= :calculateDate')
             ->setParameter('calculateDate', $calculateDate)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
     public function findRoutesRock($rockSlug)
@@ -182,11 +180,11 @@ class RoutesRepository extends ServiceEntityRepository
             ->andWhere('routes_rock.slug = :rockSlug')
             ->setParameter('rockSlug', $rockSlug)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
-    public function getGrades($area, $gradeLow, $gradeHigh) {
+    public function getGrades($area, $gradeLow, $gradeHigh)
+    {
         return $this->createQueryBuilder('routes')
             ->innerJoin('routes.area', 'area')
             ->andWhere('routes.area = :area')
@@ -197,11 +195,11 @@ class RoutesRepository extends ServiceEntityRepository
             ->setParameter('gradeHigh', $gradeHigh)
             ->select('count(routes.id)')
             ->getQuery()
-            ->getSingleScalarResult()
-        ;
+            ->getSingleScalarResult();
     }
 
-    public function getProjects($area, $gradeLow, $gradeHigh) {
+    public function getProjects($area, $gradeLow, $gradeHigh)
+    {
         return $this->createQueryBuilder('routes')
             ->innerJoin('routes.area', 'area')
             ->andWhere('routes.area = :area')
@@ -212,7 +210,6 @@ class RoutesRepository extends ServiceEntityRepository
             ->setParameter('gradeHigh', $gradeHigh)
             ->select('count(routes.id)')
             ->getQuery()
-            ->getSingleScalarResult()
-        ;
+            ->getSingleScalarResult();
     }
 }

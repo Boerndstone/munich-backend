@@ -13,9 +13,12 @@ export default class extends Controller {
       preview: 1,
     });
     const response = await fetch(`${this.urlValue}?${params.toString()}`);
-    //this.resultTarget.innerHTML = await response.text();
-    console.log(await response.text());
+    this.resultTarget.innerHTML = await response.text();
+    //console.log(await response.text());
   }
+  /*onSearchInput(event) {
+    console.log(this.urlValue);
+  }*/
   /*
   async search(query) {
     const params = new URLSearchParams({
@@ -28,8 +31,4 @@ export default class extends Controller {
   clickOutside(event) {
     this.resultTarget.innerHTML = "";
   }*/
-
-  onSearchInput(event) {
-    console.log(this.urlValue);
-  }
 }

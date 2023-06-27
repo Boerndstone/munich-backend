@@ -29,20 +29,19 @@ class FrontendController extends AbstractController
         RockRepository $rockRepository,
         Rock $rock = null,
         ManagerRegistry $doctrine,
-    ): Response
-    {
+    ): Response {
 
         $doctrineTutorial = $doctrine->getRepository(Area::class)->findAllOrderedBy();
         $search = $request->query->get('q');
-        if($search) {
+        if ($search) {
             $areaSearch = $doctrine->getRepository(Area::class)->search($search);
         } else {
             $areaSearch = $doctrine->getRepository(Area::class)->findAllOrderedBy();
-        } 
+        }
 
 
         $searchTerm = $request->query->get('q');
-        
+
         // Important for Stimulus!!!!!!
         /*$routesSearch = $routesRepository->search(
             $rock,
@@ -57,7 +56,7 @@ class FrontendController extends AbstractController
 
         //dd($routesSearch);
 
-        
+
 
         $area = $doctrine->getRepository(Area::class)->getTheStuff();
         $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
@@ -113,21 +112,20 @@ class FrontendController extends AbstractController
      */
     public function showRocksArea(
         Request $request,
-        ManagerRegistry $doctrine, 
+        ManagerRegistry $doctrine,
         RoutesRepository $routesRepository,
         RockRepository $rockRepository,
-        Area $area, 
-        $slug, 
+        Area $area,
+        $slug,
         CacheInterface $cache
-    ): Response
-    {
+    ): Response {
 
         $search = $request->query->get('q');
-        if($search) {
+        if ($search) {
             $areaSearch = $doctrine->getRepository(Area::class)->search($search);
         } else {
             $areaSearch = $doctrine->getRepository(Area::class)->findAllOrderedBy();
-        } 
+        }
 
 
         $searchTerm = $request->query->get('q');
@@ -141,27 +139,27 @@ class FrontendController extends AbstractController
         $rock = $doctrine->getRepository(Rock::class)->findRocksArea($slug);
 
         $belowSix = array();
-        
+
         $sum = [];
-        foreach($rock as $test) {
+        foreach ($rock as $test) {
             $rs = $test->getRoutes();
             $id = $test->getId();
 
-            if(!isset($sum[$id])){
+            if (!isset($sum[$id])) {
                 $sum[$id] = [
                     '5' => 0,
                     '7-8' => 0,
                 ];
             }
 
-            foreach($rs as $r) {
+            foreach ($rs as $r) {
                 $g = $r->getGrade();
 
-                if(5 == $g or '5' == $g) {
+                if (5 == $g or '5' == $g) {
                     $sum[$id]['5'] += 1;
                 }
 
-                if(7 == $g or '7' == $g or '7+' == $g) {
+                if (7 == $g or '7' == $g or '7+' == $g) {
                     $sum[$id]['7-8'] += 1;
                 }
             }
@@ -174,23 +172,23 @@ class FrontendController extends AbstractController
         // dd($sum);
 
         $belowSix = array();
-        foreach($rock as $rockGrades) {
-             array_push($belowSix, $doctrine->getRepository(Routes::class)->findRoutesBelowSixForRock($rockGrades->getSlug()));
+        foreach ($rock as $rockGrades) {
+            array_push($belowSix, $doctrine->getRepository(Routes::class)->findRoutesBelowSixForRock($rockGrades->getSlug()));
         }
 
         $belowEight = array();
-        foreach($rock as $rockGrades) {
-             array_push($belowEight, $doctrine->getRepository(Routes::class)->findRoutesBelowEightForRock($rockGrades->getSlug()));
+        foreach ($rock as $rockGrades) {
+            array_push($belowEight, $doctrine->getRepository(Routes::class)->findRoutesBelowEightForRock($rockGrades->getSlug()));
         }
 
         $greaterEight = array();
-        foreach($rock as $rockGrades) {
-             array_push($greaterEight, $doctrine->getRepository(Routes::class)->findRoutesGreaterEightForRock($rockGrades->getSlug()));
+        foreach ($rock as $rockGrades) {
+            array_push($greaterEight, $doctrine->getRepository(Routes::class)->findRoutesGreaterEightForRock($rockGrades->getSlug()));
         }
 
         $projects = array();
-        foreach($rock as $rockGrades) {
-             array_push($projects, $doctrine->getRepository(Routes::class)->findProjectForRock($rockGrades->getSlug()));
+        foreach ($rock as $rockGrades) {
+            array_push($projects, $doctrine->getRepository(Routes::class)->findProjectForRock($rockGrades->getSlug()));
         }
 
 
@@ -215,32 +213,31 @@ class FrontendController extends AbstractController
      */
     public function showRock(
         Request $request,
-        ManagerRegistry $doctrine, 
+        ManagerRegistry $doctrine,
         RoutesRepository $routesRepository,
         RockRepository $rockRepository,
         //Area $area, 
-        $slug, 
+        $slug,
         CacheInterface $cache
-        
-    ): Response
-    {
+
+    ): Response {
 
         $search = $request->query->get('q');
-        if($search) {
+        if ($search) {
             $areaSearch = $doctrine->getRepository(Area::class)->search($search);
         } else {
             $areaSearch = $doctrine->getRepository(Area::class)->findAllOrderedBy();
-        } 
+        }
 
 
         $searchTerm = $request->query->get('q');
 
         $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
-        $areaName = $doctrine->getRepository(Area::class)->getAreaName($slug);
-        dd($areaName);
+        //$areaName = $doctrine->getRepository(Area::class)->getAreaName($slug);
+        //dd($areaName);
         $rock = $doctrine->getRepository(Rock::class)->findRockName($slug);
 
-        
+
 
         $belowSix = $doctrine->getRepository(Routes::class)->findRoutesBelowSixForRock($slug);
         $belowEight = $doctrine->getRepository(Routes::class)->findRoutesBelowEightForRock($slug);
@@ -260,7 +257,7 @@ class FrontendController extends AbstractController
             'projects' => $projects,
             'routes' => $routes,
             'searchTerm' => $searchTerm,
-            
+
         ]);
     }
 
@@ -304,5 +301,4 @@ class FrontendController extends AbstractController
             'areas' => $areas,
         ]);
     }
-
 }
