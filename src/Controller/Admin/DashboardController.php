@@ -83,8 +83,7 @@ class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()
             ->setTitle('Munichclimbs')
-            ->setFaviconPath('build/images/favicon/favicon.png')
-        ;
+            ->setFaviconPath('build/images/favicon/favicon.png');
     }
 
     public function configureMenuItems(): iterable
@@ -101,6 +100,10 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('User', 'fa fa-user', User::class)->setPermission('ROLE_SUPER_ADMIN');
         yield MenuItem::section('Live Seite')->setPermission('ROLE_SUPER_ADMIN');
         yield MenuItem::linkToUrl('munichclimbs', 'fa fa-link', 'https://munichclimbs.de')->setLinkTarget('_blank')->setPermission('ROLE_SUPER_ADMIN');
+        yield MenuItem::section('Topo')->setPermission('ROLE_SUPER_ADMIN');
+        yield MenuItem::linkToUrl('Topo erstellen', 'fa fa-link', 'https://www.munichclimbs.de/draw-topo/src/')
+            ->setLinkTarget('_blank')
+            ->setPermission('ROLE_SUPER_ADMIN');
         yield MenuItem::section('Tools')->setPermission('ROLE_SUPER_ADMIN');
         yield MenuItem::linkToUrl('Generiere UIAA Grade', 'fa fa-arrow-right-arrow-left', 'https://munichclimbs.de/calculateGradesUIAA.php')->setLinkTarget('_blank')->setPermission('ROLE_SUPER_ADMIN');
         yield MenuItem::linkToUrl('Generiere FRENCH Grade', 'fa fa-arrow-right-arrow-left', 'https://munichclimbs.de/calculateGradesFRENCH.php')->setLinkTarget('_blank')->setPermission('ROLE_SUPER_ADMIN');
@@ -150,8 +153,8 @@ class DashboardController extends AbstractDashboardController
         $chart->setOptions([
             'scales' => [
                 'y' => [
-                   'suggestedMin' => 0,
-                   'suggestedMax' => 2500,
+                    'suggestedMin' => 0,
+                    'suggestedMax' => 2500,
                 ],
             ],
         ]);
@@ -179,8 +182,8 @@ class DashboardController extends AbstractDashboardController
         $chartBernd->setOptions([
             'scales' => [
                 'y' => [
-                   'suggestedMin' => 0,
-                   'suggestedMax' => 2500,
+                    'suggestedMin' => 0,
+                    'suggestedMax' => 2500,
                 ],
             ],
         ]);

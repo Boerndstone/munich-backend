@@ -100,14 +100,6 @@ class FrontendController extends AbstractController
     }
 
     /**
-     * @Route("/frontend/create-topo", name="create_topo")
-     */
-    public function create(): Response
-    {
-        return $this->render('frontend/create.topo.html.twig', []);
-    }
-
-    /**
      * @Route("/Klettergebiet/{slug}", name="show_rocks")
      */
     public function showRocksArea(
