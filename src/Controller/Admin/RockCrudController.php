@@ -26,8 +26,7 @@ class RockCrudController extends AbstractCrudController
     public function configureFilters(Filters $filters): Filters
     {
         return parent::configureFilters($filters)
-            ->add(EntityFilter::new('area'))
-        ;
+            ->add(EntityFilter::new('area'));
     }
 
     public function configureActions(Actions $actions): Actions
@@ -38,55 +37,45 @@ class RockCrudController extends AbstractCrudController
                 return $action
                     ->setIcon('fa fa-plus')
                     ->setLabel('Fels hinzufügen')
-                    ->setCssClass('btn btn-success')
-                ;
+                    ->setCssClass('btn btn-success');
             })
 
             ->update(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN, function (Action $action) {
                 return $action
                     ->setLabel('Änderungen speichern')
-                    ->setCssClass('btn btn-success')
-                ;
+                    ->setCssClass('btn btn-success');
             })
 
             ->update(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE, function (Action $action) {
                 return $action
-                    ->setLabel('Speichern und bearbeiten fortsetzen')
-                ;
+                    ->setLabel('Speichern und bearbeiten fortsetzen');
             })
 
             ->update(Crud::PAGE_NEW, Action::SAVE_AND_RETURN, function (Action $action) {
                 return $action
                     ->setLabel('Speichern')
-                    ->setCssClass('btn btn-success')
-                ;
+                    ->setCssClass('btn btn-success');
             })
 
             ->update(Crud::PAGE_NEW, Action::SAVE_AND_ADD_ANOTHER, function (Action $action) {
                 return $action
-                    ->setLabel('Speichern und ein weiteres Gebiet hinzufügen')
-                ;
+                    ->setLabel('Speichern und ein weiteres Gebiet hinzufügen');
             })
 
             ->update(Crud::PAGE_DETAIL, Action::EDIT, function (Action $action) {
                 return $action
                     ->setLabel('Bearbeiten')
-                    ->setCssClass('btn btn-success')
-                ;
+                    ->setCssClass('btn btn-success');
             })
 
             ->update(Crud::PAGE_DETAIL, Action::INDEX, function (Action $action) {
                 return $action
-                    ->setLabel('Zurück zur Liste')
-                ;
+                    ->setLabel('Zurück zur Liste');
             })
             ->update(Crud::PAGE_DETAIL, Action::DELETE, function (Action $action) {
                 return $action
-                    ->setLabel('Löschen')
-                ;
-            })
-
-        ;
+                    ->setLabel('Löschen');
+            });
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -99,8 +88,7 @@ class RockCrudController extends AbstractCrudController
             })
             ->setPageTitle(Crud::PAGE_DETAIL, static function (Rock $rock) {
                 return sprintf($rock->getName());
-            })
-        ;
+            });
     }
 
     public function configureFields(string $pageName): iterable
@@ -108,23 +96,20 @@ class RockCrudController extends AbstractCrudController
         yield Field::new('name')
             ->setLabel('Name Fels')
             ->hideOnDetail()
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
 
         yield Field::new('slug')
             ->setLabel('URL des Fels')
             ->hideOnIndex()
             ->hideOnDetail()
             ->setColumns('col-12')
-            ->setHelp('Die URL darf keine Leerzeichen oder Umlaute beinhalten!')
-        ;
+            ->setHelp('Die URL darf keine Leerzeichen oder Umlaute beinhalten!');
 
         yield AssociationField::new('area')
             ->setLabel('Gebiet')
             ->hideOnDetail()
             ->setColumns('col-12')
-            ->setHelp('Zu welchem Gebiet der Fels gehört.')
-        ;
+            ->setHelp('Zu welchem Gebiet der Fels gehört.');
 
         yield CollectionField::new('routes')
             ->setLabel(false)
@@ -132,17 +117,15 @@ class RockCrudController extends AbstractCrudController
             ->setTemplatePath('admin/field/routes.html.twig')
             ->setFormType(AddressType::class)
             ->addCssClass('field-address')
-            ->setColumns('col-12 col-md-4')
-        ;
+            ->setColumns('col-12 col-md-4');
 
-        
+
         yield Field::new('nr')
             ->setLabel('Reihenfolge')
             ->hideOnIndex()
             ->hideOnDetail()
             ->setHelp('Reihenfolge auf der Live Seite in der Überischtstabelle')
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
 
         yield TextareaField::new('description')
             ->setLabel('Beschreibung')
@@ -158,24 +141,21 @@ class RockCrudController extends AbstractCrudController
                 ],
             ])*/
             ->setHelp('Beschreibung zum Fels.')
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
 
         yield TextareaField::new('nature')
             ->setLabel('Naturschutz')
             ->hideOnIndex()
             ->hideOnDetail()
             ->setColumns('col-12')
-            ->setHelp('Angaben die für den Naturschutz wichtig sind.')
-        ;
+            ->setHelp('Angaben die für den Naturschutz wichtig sind.');
 
         yield TextareaField::new('access')
             ->setLabel('Zustieg')
             ->hideOnIndex()
             ->hideOnDetail()
             ->setColumns('col-12')
-            ->setHelp('Beschreibung des Zustiegs zum Fels.')
-        ;
+            ->setHelp('Beschreibung des Zustiegs zum Fels.');
 
         yield ChoiceField::new('zone')
             ->setLabel('Zone')
@@ -187,8 +167,7 @@ class RockCrudController extends AbstractCrudController
                 'Zone 2' => '2',
                 'Zone 3' => '3',
             ])
-            ->setHelp('Befindet sich der Fels in einem zonierten Gebiet? Zone 1 - 3.')
-        ;
+            ->setHelp('Befindet sich der Fels in einem zonierten Gebiet? Zone 1 - 3.');
 
         yield ChoiceField::new('banned')
             ->setLabel('Jahreszeitliche Sperrung')
@@ -198,16 +177,15 @@ class RockCrudController extends AbstractCrudController
             ->setChoices([
                 'keine Angabe' => '0',
                 'Sperrungen bis 30.06.' => '1',
+                'Sperrungen bis 31.07.' => '2',
             ])
-            ->setHelp('Gibt es eine jahreszeitliche Sperrung.')
-        ;
+            ->setHelp('Gibt es eine jahreszeitliche Sperrung.');
 
         yield NumberField::new('height')
             ->setLabel('Höhe')
             ->setTemplatePath('admin/field/height.html.twig')
             ->hideOnDetail()
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
 
         yield ChoiceField::new('online')
             ->setLabel('Status')
@@ -218,15 +196,13 @@ class RockCrudController extends AbstractCrudController
             ])
             ->setTemplatePath('admin/field/status.html.twig')
             ->hideOnDetail()
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
 
         yield Field::new('orientation')
             ->setLabel('Ausrichtung')
             ->hideOnIndex()
             ->hideOnDetail()
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
 
         yield ChoiceField::new('season')
             ->setLabel('Beste Jahreszeit')
@@ -237,8 +213,7 @@ class RockCrudController extends AbstractCrudController
                 'Sommer Herbst' => 'Sommer Herbst',
                 'Frühling Sommer Herbst' => 'Frühling Sommer Herbst',
             ])
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
 
         yield ChoiceField::new('child_friendly')
             ->setLabel('Kinderfreundlich')
@@ -252,8 +227,7 @@ class RockCrudController extends AbstractCrudController
             ->hideOnIndex()
             ->hideOnDetail()
             ->setColumns('col-12')
-            ->setHelp('Wie gut ist der Fels mit Kindern geeignet.')
-        ;
+            ->setHelp('Wie gut ist der Fels mit Kindern geeignet.');
 
         yield ChoiceField::new('sunny')
             ->setLabel('Sonnig')
@@ -265,8 +239,7 @@ class RockCrudController extends AbstractCrudController
             ])
             ->hideOnIndex()
             ->hideOnDetail()
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
 
         yield ChoiceField::new('rain')
             ->setLabel('Regensicher')
@@ -278,44 +251,38 @@ class RockCrudController extends AbstractCrudController
             ])
             ->hideOnIndex()
             ->hideOnDetail()
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
 
         yield Field::new('image')
             ->setLabel('Bilder')
             ->hideOnIndex()
             ->hideOnDetail()
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
 
         yield Field::new('header_image')
             ->setLabel('Header Bild')
             ->hideOnIndex()
             ->hideOnDetail()
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
 
         yield Field::new('topo')
             ->setLabel('Topo')
             ->hideOnIndex()
             ->hideOnDetail()
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
 
         yield NumberField::new('lat')
             ->setLabel('Breitengrad')
             ->setNumDecimals(6)
             ->hideOnIndex()
             ->hideOnDetail()
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
 
         yield NumberField::new('lng')
             ->setLabel('Längengrad')
             ->setNumDecimals(6)
             ->hideOnIndex()
             ->hideOnDetail()
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
     }
 }
