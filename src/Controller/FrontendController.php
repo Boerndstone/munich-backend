@@ -73,10 +73,19 @@ class FrontendController extends AbstractController
         }*/
 
         $getLowGrades = $doctrine->getRepository(Routes::class)->getGrades(1, 0, 15);
+        //dd($getLowGrades);
         $getMiddleGrades = $doctrine->getRepository(Routes::class)->getGrades(1, 15, 29);
         $getHighGrades = $doctrine->getRepository(Routes::class)->getGrades(1, 29, 60);
         $getLowGradesArea = $doctrine->getRepository(Area::class)->getGradesArea(1, 0, 15);
 
+        /*->getGradeMapForAread($areas);
+
+        [
+            'areaId' => [
+                'low' => 5,
+                'middle' => 
+            ]
+        ]*/
 
         $latestRoutes = $doctrine->getRepository(Routes::class)->latestRoutes();
         $banned = $doctrine->getRepository(Rock::class)->saisonalGesperrt();

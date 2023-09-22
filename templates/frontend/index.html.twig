@@ -38,6 +38,7 @@
 					<div class="col-md-8">
 						<div class="row">
 							{% for x, area in areas %}
+								
 								<div class="col-12">
 									<div class="card mb-4 p-0">
 										<div class="row g-0">
@@ -86,7 +87,8 @@
 															>1 - 5</div>
 															<div class="text-center text-white bg-gray-400 mt-1" style="font-size: .75rem;">
 																<div style="background-color:#15803d;" class=" px-2 py-1">
-																	{{getLowGrades}}																
+																	{#{getLowGrades[x]^}#}
+																	{#{ gradesForAreas[x]['low'] }#}																
 																</div>
 															</div>
 														</div>
