@@ -49,7 +49,7 @@ class Rock
     private ?int $zone = null;
 
     #[ORM\Column(type: Types::SMALLINT, nullable: true)]
-    private int $banned;
+    private ?int $banned = null;
 
     #[ORM\Column(type: Types::INTEGER, nullable: true)]
     protected ?int $height = null;
