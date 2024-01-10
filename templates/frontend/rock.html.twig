@@ -130,36 +130,44 @@
 															<td>{{ route.grade }}</td>
 															<td class="d-none d-lg-table-cell" style="white-space: nowrap;">
 																{{ route.firstAscent }} {% if route.yearFirstAscent %}{{ route.yearFirstAscent }}{% endif %}
-																{#<?php 
-																	if (isset($values['routesFirstAscent'])) {
-																		echo $values['routesFirstAscent'];
-																	} else {
-																		echo '&nbsp;';
-																	}
-																	if (isset($values['routesYearFirstAscent']) && $values['routesYearFirstAscent'] != 0) {
-																		echo " " . $values['routesYearFirstAscent'];
-																	} else {
-																		echo '&nbsp;';
-																	}
-																?>#}
 															</td>
 															<td style="padding-top: 0.2rem;">
-																{#<?php 
-																	if (isset($values['routesDescription'])) {
-																?>
-																		<button 
-																			type="button" 
-																			class="btn btn-sm btn-primary btn-floating"
-																			data-mdb-toggle="modal" 
-																			data-mdb-target="#infoModal<?php echo preg_replace('/(\s|&(amp;)?|\.)+/', '', $values['routesName']); ?>"
-																			style="width: 1.125rem;height: 1.125rem; background: transparent;"
-																		>
-																			<i class="fas fa-info fa-xs " style="width: 1.125rem;line-height: 1.12rem;"></i>
-																		</button>
-																<?php
-																	}
-																?>#}
-																
+																{% if route.description %}
+																	<button 
+																		type="button" 
+																		class="btn btn-sm btn-primary btn-floating"
+																		data-mdb-toggle="modal" 
+																		data-mdb-target="#infoModal{{ route.name|replace({' ': '', '!': ''}) }}"
+																		style="width: 1.125rem;height: 1.125rem; background: transparent;"
+																	>
+																		<i class="fas fa-info fa-xs " style="width: 1.125rem;line-height: 1.12rem;"></i>
+																	</button>
+
+
+																	<div class="modal fade" id="infoModal{{ route.name|replace({' ': '', '!': ''}) }}" tabindex="-1" aria-labelledby="infoModal{ route.name|replace({' ': '', '!': ''}) }}Label" aria-hidden="true">
+																		<div class="modal-dialog modal-dialog-centered">
+																			<div class="modal-content">
+																				<div class="modal-header">
+																					<h5 class="modal-title" id="infoModal{{ route.name|replace({' ': '', '!': ''}) }}Label">
+																						{{ route.name }} 
+																						{% if route.rating == 1 %}
+																							{{ star|raw }}
+																						{% elseif route.rating == 2 %}
+																							{{ star|raw }}{{ star|raw }}
+																						{% elseif route.rating == 3 %}
+																							{{ star|raw }}{{ star|raw }}{{ star|raw }}
+																						{% endif %}
+																					</h5>
+																					<button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+																				</div>
+																				<div class="modal-body">
+																					<p class="d-lg-none" style="font-size: .85rem;">Erstbegeher: {{ route.firstAscent }} {% if route.yearFirstAscent %}{{ route.yearFirstAscent }}{% endif %}</p>
+																					<p style="font-size: .85rem;">{{ route.description }}</p>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																{% endif %}
 															</td>
 														</tr>
 													
