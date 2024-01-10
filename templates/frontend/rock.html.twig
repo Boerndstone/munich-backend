@@ -137,18 +137,16 @@
 																		type="button" 
 																		class="btn btn-sm btn-primary btn-floating"
 																		data-mdb-toggle="modal" 
-																		data-mdb-target="#infoModal{{ route.name|replace({' ': '', '!': ''}) }}"
+																		data-mdb-target="#infoModal{{ route.name|replace({' ': '', '!': '','&':''}) }}"
 																		style="width: 1.125rem;height: 1.125rem; background: transparent;"
 																	>
 																		<i class="fas fa-info fa-xs " style="width: 1.125rem;line-height: 1.12rem;"></i>
 																	</button>
-
-
-																	<div class="modal fade" id="infoModal{{ route.name|replace({' ': '', '!': ''}) }}" tabindex="-1" aria-labelledby="infoModal{ route.name|replace({' ': '', '!': ''}) }}Label" aria-hidden="true">
+																	<div class="modal fade" id="infoModal{{ route.name|replace({' ': '', '!': '','&':''}) }}" tabindex="-1" aria-labelledby="infoModal{ route.name|replace({' ': '', '!': '','&':''}) }}Label" aria-hidden="true">
 																		<div class="modal-dialog modal-dialog-centered">
 																			<div class="modal-content">
 																				<div class="modal-header">
-																					<h5 class="modal-title" id="infoModal{{ route.name|replace({' ': '', '!': ''}) }}Label">
+																					<h5 class="modal-title" id="infoModal{{ route.name|replace({' ': '', '!': '','&':''}) }}Label">
 																						{{ route.name }} 
 																						{% if route.rating == 1 %}
 																							{{ star|raw }}
@@ -170,48 +168,12 @@
 																{% endif %}
 															</td>
 														</tr>
-													
 												{% endfor %} 
 												</table>
 											</div>
 										</section>
 									</div>
 								</div>
-								{#<?php 
-									$getValuesRoutes	= getParamsWithTopo($rockName, $valueTopo);
-									while($values = $getValuesRoutes->fetch()) { 
-								?>
-								<div class="modal fade" id="infoModal<?php echo preg_replace('/(\s|&(amp;)?|\.)+/', '', $values['routesName']); ?>" tabindex="-1" aria-labelledby="infoModal<?php echo preg_replace('/(\s|&(amp;)?|\.)+/', '', $values['routesName']); ?>Label" aria-hidden="true">
-									<div class="modal-dialog modal-dialog-centered">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="infoModal<?php echo preg_replace('/(\s|&(amp;)?|\.)+/', '', $values['routesName']); ?>Label"><?php echo $values['routesName']; ?> <?php echo $values['routesGrade']; ?> <?php echo $routes->routeBeauty($values['routesRating']); ?></h5>
-												<button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-											</div>
-											<div class="modal-body">
-												<p class="d-lg-none" style="font-size: .85rem;">Erstbegeher: 
-													<?php 
-														if (isset($values['routesFirstAscent'])) {
-															echo $values['routesFirstAscent'];
-														} else {
-															echo '&nbsp;';
-														}
-														if (isset($values['routesYearFirstAscent']) && $values['routesYearFirstAscent'] != 0) {
-															echo " " . $values['routesYearFirstAscent'];
-														} else {
-															echo '&nbsp;';
-														}
-													?>
-												</p>
-												<p style="font-size: .85rem;"><?php echo $values['routesDescription']; ?></p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<?php 
-									}
-								?>#}
-							{#<?php } ?>#}
 						</section>
 					</div>
 					{#<?php if($nameTopo['topoWithSector'] == 1) { ?>
