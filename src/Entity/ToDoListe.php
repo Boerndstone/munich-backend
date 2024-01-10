@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+
 use App\Repository\ToDoListeRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,6 +11,7 @@ use Symfony\UX\Turbo\Attribute\Broadcast;
 
 #[ORM\Entity(repositoryClass: ToDoListeRepository::class)]
 #[Broadcast]
+#[ApiResource]
 class ToDoListe
 {
     #[ORM\Id]

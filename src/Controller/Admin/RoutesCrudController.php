@@ -24,8 +24,7 @@ class RoutesCrudController extends AbstractCrudController
     {
         return parent::configureFilters($filters)
             ->add(EntityFilter::new('area'))
-            ->add(EntityFilter::new('rock'))
-        ;
+            ->add(EntityFilter::new('rock'));
     }
 
     public function configureActions(Actions $actions): Actions
@@ -36,62 +35,52 @@ class RoutesCrudController extends AbstractCrudController
                 return $action
                     ->setIcon('fa fa-plus')
                     ->setLabel('Tour hinzufügen')
-                    ->setCssClass('btn btn-success')
-                ;
+                    ->setCssClass('btn btn-success');
             })
 
             ->update(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN, function (Action $action) {
                 return $action
                     ->setLabel('Änderungen speichern')
-                    ->setCssClass('btn btn-success')
-                ;
+                    ->setCssClass('btn btn-success');
             })
 
             ->update(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE, function (Action $action) {
                 return $action
-                    ->setLabel('Speichern und bearbeiten fortsetzen')
-                ;
+                    ->setLabel('Speichern und bearbeiten fortsetzen');
             })
 
             ->update(Crud::PAGE_NEW, Action::SAVE_AND_RETURN, function (Action $action) {
                 return $action
                     ->setLabel('Speichern')
-                    ->setCssClass('btn btn-success')
-                ;
+                    ->setCssClass('btn btn-success');
             })
 
             ->update(Crud::PAGE_NEW, Action::SAVE_AND_ADD_ANOTHER, function (Action $action) {
                 return $action
-                    ->setLabel('Speichern und ein weiteres Gebiet hinzufügen')
-                ;
+                    ->setLabel('Speichern und ein weiteres Gebiet hinzufügen');
             })
 
             ->update(Crud::PAGE_DETAIL, Action::EDIT, function (Action $action) {
                 return $action
                     ->setLabel('Bearbeiten')
-                    ->setCssClass('btn btn-success')
-                ;
+                    ->setCssClass('btn btn-success');
             })
 
             ->update(Crud::PAGE_DETAIL, Action::INDEX, function (Action $action) {
                 return $action
-                    ->setLabel('Zurück zur Liste')
-                ;
+                    ->setLabel('Zurück zur Liste');
             })
             ->update(Crud::PAGE_DETAIL, Action::DELETE, function (Action $action) {
                 return $action
-                    ->setLabel('Löschen')
-                ;
-            })
-        ;
+                    ->setLabel('Löschen');
+            });
 
         return parent::configureActions($actions)
             ->setPermission(Action::INDEX, 'ROLE_MODERATOR')
             ->setPermission(Action::DETAIL, 'ROLE_MODERATOR')
             ->setPermission(Action::EDIT, 'ROLE_MODERATOR')
             ->setPermission(Action::NEW, 'ROLE_SUPER_ADMIN')
-            ->setPermission(Action::DELETE, 'ROLE_SUPER_ADMIN')
-        ;
+            ->setPermission(Action::DELETE, 'ROLE_SUPER_ADMIN');
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -105,8 +94,7 @@ class RoutesCrudController extends AbstractCrudController
             ->setPageTitle(Crud::PAGE_DETAIL, static function (Routes $routes) {
                 return sprintf($routes->getName());
             })
-            ->setFormOptions(['attr' => ['novalidate' => null]])
-        ;
+            ->setFormOptions(['attr' => ['novalidate' => null]]);
     }
 
     public function configureFields(string $pageName): iterable
@@ -116,35 +104,31 @@ class RoutesCrudController extends AbstractCrudController
             ->hideonIndex();
         yield Field::new('name')
             ->setLabel('Name der Route')
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
         yield AssociationField::new('area')
             ->setLabel('Gebiet')
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
         yield AssociationField::new('rock')
             ->setLabel('Fels')
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
         yield Field::new('grade')
             ->setLabel('Schwierigkeitsgrad')
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
         yield Field::new('climbed')
             ->setLabel('Bereits geklettert')
             ->setColumns('col-12')
-            ->setTemplatePath('admin/field/votes.html.twig')
-        ;
+            ->setTemplatePath('admin/field/votes.html.twig');
         yield Field::new('first_ascent')
             ->setLabel('Erstbegeher')
             ->setColumns('col-12')
-            ->hideOnIndex()
-        ;
+            ->hideOnIndex();
+        yield AssociationField::new('relatesToRoute')
+            ->setLabel('Erstbegeher Neu')
+            ->setColumns('col-12');
         yield Field::new('year_first_ascent')
             ->setLabel('Jahr der Erstbegehung')
             ->setColumns('col-12')
-            ->hideOnIndex()
-        ;
+            ->hideOnIndex();
         yield ChoiceField::new('protection')
             ->setLabel('Absicherung')
             ->setColumns('col-12')
@@ -156,18 +140,15 @@ class RoutesCrudController extends AbstractCrudController
                     'vorsichtig' => '2',
                     'gefährlich' => '3',
                 ]
-            )
-        ;
+            );
         yield Field::new('description')
             ->setLabel('Beschreibung')
             ->setColumns('col-12')
-            ->hideOnIndex()
-        ;
+            ->hideOnIndex();
         yield Field::new('grade_no')
             ->setLabel('Grade')
             ->setColumns('col-12')
-            ->hideOnIndex()
-        ;
+            ->hideOnIndex();
         yield ChoiceField::new('rating')
             ->setLabel('Schönheit')
             ->setColumns('col-12')
@@ -181,17 +162,14 @@ class RoutesCrudController extends AbstractCrudController
                     'super  => zwei Sterne' => '2',
                     'fantastisch   => drei Sterne' => '3',
                 ]
-            )
-        ;
+            );
         yield Field::new('topo_id')
             ->setLabel('Topo ID')
             ->setColumns('col-12')
-            ->hideOnIndex()
-        ;
+            ->hideOnIndex();
         yield Field::new('nr')
             ->setLabel('Reihenfolge')
             ->setColumns('col-12')
-            ->hideOnIndex()
-        ;
+            ->hideOnIndex();
     }
 }

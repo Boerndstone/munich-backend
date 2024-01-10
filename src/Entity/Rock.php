@@ -46,7 +46,7 @@ class Rock
     private ?string $nature = null;
 
     #[ORM\Column(type: Types::SMALLINT, nullable: true)]
-    private int $zone;
+    private ?int $zone = null;
 
     #[ORM\Column(type: Types::SMALLINT, nullable: true)]
     private int $banned;

@@ -247,7 +247,6 @@ class FrontendController extends AbstractController
 
         $routes = $doctrine->getRepository(Routes::class)->findRoutesRock($slug);
 
-
         return $this->render('frontend/rock.html.twig', [
             'areas' => $areas,
             'slug' => $slug,

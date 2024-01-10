@@ -41,7 +41,7 @@ class Routes
     protected ?int $yearFirstAscent = null;
 
     #[ORM\Column(type: Types::SMALLINT, nullable: true)]
-    private int $protection;
+    private ?int $protection = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
@@ -53,7 +53,7 @@ class Routes
     protected ?int $gradeNo = null;
 
     #[ORM\Column(type: Types::SMALLINT, nullable: true)]
-    private int $rating;
+    private ?int $rating = null;
 
     #[ORM\Column(type: Types::INTEGER, nullable: true)]
     protected ?int $topoId = null;
@@ -63,6 +63,9 @@ class Routes
 
     #[ORM\ManyToMany(targetEntity: ClimbedRoutes::class, mappedBy: 'ManyToMany')]
     private Collection $climbedRoutes;
+
+    #[ORM\ManyToOne(inversedBy: 'realtion')]
+    private ?FirstAscencionist $relatesToRoute = null;
 
     public function __construct()
     {
@@ -270,6 +273,18 @@ class Routes
         if ($this->climbedRoutes->removeElement($climbedRoute)) {
             $climbedRoute->removeManyToMany($this);
         }
+
+        return $this;
+    }
+
+    public function getRelatesToRoute(): ?FirstAscencionist
+    {
+        return $this->relatesToRoute;
+    }
+
+    public function setRelatesToRoute(?FirstAscencionist $relatesToRoute): static
+    {
+        $this->relatesToRoute = $relatesToRoute;
 
         return $this;
     }
