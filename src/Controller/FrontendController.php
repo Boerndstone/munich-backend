@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\Area;
 use App\Entity\Rock;
 use App\Entity\Routes;
+use App\Entity\Topo;
 use App\Repository\AreaRepository;
 use App\Repository\RockRepository;
 use App\Repository\RoutesRepository;
 use App\Repository\VideosRepository;
+use App\Repository\TopoRepository;
 //use App\Form\RoutesAutocompleteField;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
@@ -252,12 +254,10 @@ class FrontendController extends AbstractController
 
         $routes = $doctrine->getRepository(Routes::class)->findRoutesRock($slug);
 
-        $areaId = $doctrine->getRepository(Area::class)->getAreaId($slug);
         $rockId = $rockRepository->getRockId($slug);
         //dd($rockId);
 
-        $routesId = $doctrine->getRepository(Rock::class)->getRockId($slug);
-        //$videos = $videoRepository->findVideosByParams($areaId, $rockId, $routesId);
+        $topos = $doctrine->getRepository(Topo::class)->getTopos($rockId);
 
 
         return $this->render('frontend/rock.html.twig', [
@@ -271,7 +271,7 @@ class FrontendController extends AbstractController
             'routes' => $routes,
             'searchTerm' => $searchTerm,
             'videoRepository' => $videoRepository,
-            //'videos' => $videos,
+            'topos' => $topos
         ]);
     }
 

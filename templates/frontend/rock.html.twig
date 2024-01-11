@@ -129,16 +129,16 @@
 																	type="button" 
 																	class="btn btn-sm btn-primary btn-floating"
 																	data-mdb-toggle="modal" 
-																	data-mdb-target="#infoModal{{ route.name|replace({' ': '', '!': '','&':''}) }}"
+																	data-mdb-target="#infoModal{{ route.name|replace({' ': '', '!': '','&':'','.':''}) }}"
 																	style="width: 1.125rem;height: 1.125rem; background: transparent;"
 																>
 																	<i class="fas fa-info fa-xs " style="width: 1.125rem;line-height: 1.12rem;"></i>
 																</button>
-																<div class="modal fade" id="infoModal{{ route.name|replace({' ': '', '!': '','&':''}) }}" tabindex="-1" aria-labelledby="infoModal{ route.name|replace({' ': '', '!': '','&':''}) }}Label" aria-hidden="true">
+																<div class="modal fade" id="infoModal{{ route.name|replace({' ': '', '!': '','&':'','.':''}) }}" tabindex="-1" aria-labelledby="infoModal{ route.name|replace({' ': '', '!': '','&':'','.':''}) }}Label" aria-hidden="true">
 																	<div class="modal-dialog modal-dialog-centered">
 																		<div class="modal-content">
 																			<div class="modal-header">
-																				<h5 class="modal-title" id="infoModal{{ route.name|replace({' ': '', '!': '','&':''}) }}Label">
+																				<h5 class="modal-title" id="infoModal{{ route.name|replace({' ': '', '!': '','&':'','.':''}) }}Label">
 																					{{ route.name }} 
 																					{% if route.rating == 1 %}
 																						{{ star|raw }}
@@ -168,33 +168,33 @@
 								</div>
 						</section>
 					</div>
-						<div class="col-md-3 d-none d-lg-block position-relative">
-							<div id="scrollspy-collapsible" class="sticky-top" style="top: 80px;">
-								<div class="card mt-3">
-									<div class="card-body">
-										<ul 
-											class="nav flex-column nav-pills menu-sidebar" 
-											data-mdb-allow-hashes="true"
-										>
-											{# <?php
-												$i = 0;
-												for ($valueTopo = 1; $valueTopo <= $num_rows; $valueTopo++) {
-													$getValuesTopo	= getParamsWithTopo($rockName, $valueTopo);
-													$nameTopo		= $getValuesTopo->fetch();
-											?> #}
-											<li class="nav-item">
-												<a 
-													class="nav-link" 
-													{# href="#<?php echo strtr(strtolower($nameTopo['topoName']), $valuesToReplace); ?>" #}
-													data-mdb-smooth-scroll="smooth-scroll"
-													data-mdb-easing="easeInOutQuart"
-												{# ><?php echo $nameTopo['topoName']; ?></a> #}
-											</li>
-										</ul>
+						{% if topos is not empty %}
+							<div class="col-md-3 d-none d-lg-block position-relative">
+								<div id="scrollspy-collapsible" class="sticky-top" style="top: 80px;">
+									<div class="card mt-3">
+										<div class="card-body">
+											<ul 
+												class="nav flex-column nav-pills menu-sidebar" 
+												data-mdb-allow-hashes="true"
+											>
+												{% for topo in topos %}
+													<li class="nav-item">
+														<a 
+															class="nav-link" 
+															href="#{{ topo.name|replace({' ': '', '!': '','&':'','.':''}) }}"
+															data-mdb-smooth-scroll="smooth-scroll"
+															data-mdb-easing="easeInOutQuart"
+														>
+															{{ topo.name }}
+														</a>
+													</li>
+												{% endfor %}
+											</ul>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
+						{% endif %}
 					</div>
 				</div>
 			</section>

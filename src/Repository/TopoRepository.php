@@ -19,32 +19,19 @@ class TopoRepository extends ServiceEntityRepository
         parent::__construct($registry, Topo::class);
     }
 
-    // /**
-    //  * @return Topo[] Returns an array of Topo objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Topos[] Returns an array of Rocks objects
+     */
+    public function getTopos($rockId): array
     {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
+        $queryBuilder = $this->createQueryBuilder('topo')
+            ->select('topo.name')
+            ->innerJoin('topo.rocks', 'rocks')
+            ->where('rocks.id LIKE :rockId')
+            ->andWhere('topo.withSector = 1')
+            ->setParameter('rockId', $rockId)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
+        return $queryBuilder;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Topo
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
