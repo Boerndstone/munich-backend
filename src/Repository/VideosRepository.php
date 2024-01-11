@@ -19,32 +19,17 @@ class VideosRepository extends ServiceEntityRepository
         parent::__construct($registry, Videos::class);
     }
 
-    // /**
-    //  * @return Videos[] Returns an array of Videos objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findVideosByParams($areaId, $rockId, $routeId)
     {
         return $this->createQueryBuilder('v')
-            ->andWhere('v.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('v.id', 'ASC')
-            ->setMaxResults(10)
+            ->select('v.videoLink')
+            ->where('v.videoArea = :areaId')
+            ->andWhere('v.videoRocks = :rockId')
+            ->andWhere('v.videoRoutes = :routeId')
+            ->setParameter('areaId', $areaId)
+            ->setParameter('rockId', $rockId)
+            ->setParameter('routeId', $routeId)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Videos
-    {
-        return $this->createQueryBuilder('v')
-            ->andWhere('v.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

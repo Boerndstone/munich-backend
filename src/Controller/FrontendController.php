@@ -8,6 +8,7 @@ use App\Entity\Routes;
 use App\Repository\AreaRepository;
 use App\Repository\RockRepository;
 use App\Repository\RoutesRepository;
+use App\Repository\VideosRepository;
 //use App\Form\RoutesAutocompleteField;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
@@ -215,9 +216,9 @@ class FrontendController extends AbstractController
     public function showRock(
         Request $request,
         ManagerRegistry $doctrine,
+        VideosRepository $videoRepository,
         RoutesRepository $routesRepository,
         RockRepository $rockRepository,
-        //Area $area, 
         $slug,
         CacheInterface $cache
 
@@ -231,11 +232,15 @@ class FrontendController extends AbstractController
         }
 
 
+
+
+
         $searchTerm = $request->query->get('q');
 
         $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
         //$areaName = $doctrine->getRepository(Area::class)->getAreaName($slug);
-        //dd($areaName);
+
+
         $rock = $doctrine->getRepository(Rock::class)->findRockName($slug);
 
 
@@ -247,6 +252,14 @@ class FrontendController extends AbstractController
 
         $routes = $doctrine->getRepository(Routes::class)->findRoutesRock($slug);
 
+        $areaId = $doctrine->getRepository(Area::class)->getAreaId($slug);
+        $rockId = $rockRepository->getRockId($slug);
+        //dd($rockId);
+
+        $routesId = $doctrine->getRepository(Rock::class)->getRockId($slug);
+        //$videos = $videoRepository->findVideosByParams($areaId, $rockId, $routesId);
+
+
         return $this->render('frontend/rock.html.twig', [
             'areas' => $areas,
             'slug' => $slug,
@@ -257,7 +270,8 @@ class FrontendController extends AbstractController
             'projects' => $projects,
             'routes' => $routes,
             'searchTerm' => $searchTerm,
-
+            'videoRepository' => $videoRepository,
+            //'videos' => $videos,
         ]);
     }
 

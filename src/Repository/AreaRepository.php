@@ -24,44 +24,45 @@ class AreaRepository extends ServiceEntityRepository
     }
 
     // Doctrine's normal mode is to always return objects, not an array of data.
-    public function findAllOrderedBy() {
+    public function findAllOrderedBy()
+    {
         //die('Servus');
-        
+
         //$dql = 'SELECT area From App\Entity\Area area';
         //$query = $this->getEntityManager()->createQuery($dql);
         //var_dump($query->getSQL()); die;
-        
+
         $qb = $this->createQueryBuilder('area')
             ->addOrderBy('area.name', 'DESC');
-            $query = $qb->getQuery();
+        $query = $qb->getQuery();
         //var_dump($query->getSQL()); die;
-        
+
         return $query->execute();
     }
 
-     public function getAreaName($slug)
+    public function getAreaName($slug)
     {
         return $this->createQueryBuilder('area')
             ->innerJoin('area.rock', 'rock')
             ->where('rock.slug = :slug')
             ->setParameter('slug', $slug)
             ->getQuery()
-            ->getResult()
-        ;
-
-/*
-        $queryBuilder = $this->createQueryBuilder('rock')
-            ->orderBy('rock.id', 'ASC')
-            ->innerJoin('rock.area', 'area')
-            ->addSelect('rock')
-            ->where('area.slug LIKE :areaSlug')
-            ->setParameter('areaSlug', $areaSlug)
-            ->getQuery()
             ->getResult();
-*/
     }
 
-    public function search($term) {
+    public function getAreaId($slug)
+    {
+        return $this->createQueryBuilder('area')
+
+            ->where('rocks.slug = :slug')
+            ->innerJoin('area.rocks', 'rocks')
+            ->setParameter('slug', $slug)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function search($term)
+    {
         return $this->createQueryBuilder('area')
             // always use andWhere!!!!
             ->andWhere('area.name LIKE :searchTerm OR area.orientation LIKE :searchTerm OR route.name LIKE :searchTerm')
@@ -69,8 +70,7 @@ class AreaRepository extends ServiceEntityRepository
             ->addSelect('route')
             ->setParameter('searchTerm', '%' . $term . '%')
             ->getQuery()
-            ->execute()
-        ;
+            ->execute();
     }
 
     public function getAllAreas()
@@ -107,9 +107,7 @@ class AreaRepository extends ServiceEntityRepository
             // ->addSelect('rocks.name as areaRocks')
 
             ->getQuery()
-            ->getResult()
-
-        ;
+            ->getResult();
 
         // Das wäre dann der inner join!!!!!
         /*$qb = $this->createQueryBuilder('area')
@@ -139,8 +137,7 @@ class AreaRepository extends ServiceEntityRepository
             ->orderBy('a.sequence', 'ASC')
             ->where('a.online = 1')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
     /**
@@ -156,11 +153,11 @@ class AreaRepository extends ServiceEntityRepository
             ->addSelect('routes')
             ->where('area.online = 1')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
-    public function priceHistoryImportQuery(): Query {
+    public function priceHistoryImportQuery(): Query
+    {
         return $this
             ->createQueryBuilder('u')
             ->select('u, o, city')
@@ -168,14 +165,14 @@ class AreaRepository extends ServiceEntityRepository
             ->leftJoin('o.city', 'city')
             ->where('u.entry_type is null')
             ->orderBy('u.id', Criteria::DESC)
-            ->getQuery()
-        ;
+            ->getQuery();
     }
 
     /**
      * @return Grades[] Returns an array of Grades objects
      */
-    public function getGradesArea($id, $gradeLow, $gradeHigh) {
+    public function getGradesArea($id, $gradeLow, $gradeHigh)
+    {
         return $this->createQueryBuilder('area')
             ->innerJoin('area.routes', 'routes')
             ->andWhere('routes.area = :id')
@@ -186,8 +183,7 @@ class AreaRepository extends ServiceEntityRepository
             ->setParameter('gradeHigh', $gradeHigh)
             ->select('count(routes.id)')
             ->getQuery()
-            ->getSingleScalarResult()
-        ;
+            ->getSingleScalarResult();
     }
 
     /**
@@ -205,8 +201,7 @@ class AreaRepository extends ServiceEntityRepository
             // ->andWhere('area.online = 1')
 
             ->getQuery()
-            ->execute()
-        ;
+            ->execute();
     }
 
     /* $qb = $em
@@ -245,8 +240,7 @@ class AreaRepository extends ServiceEntityRepository
             ->andWhere('area.online = 1')
             ->leftJoin('area.routes', 'area_routes')
             ->getQuery()
-            ->execute()
-        ;
+            ->execute();
     }
 
     /**
@@ -261,8 +255,7 @@ class AreaRepository extends ServiceEntityRepository
             ->setParameter('grade', $grade)
             ->innerJoin('area.routes', 'routes')
             ->addSelect('routes.gradeNo')
-            ->andWhere('routes.gradeNo < 15')
-        ;
+            ->andWhere('routes.gradeNo < 15');
 
         $query = $qb->getQuery();
 

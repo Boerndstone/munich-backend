@@ -67,7 +67,6 @@ class Area
     {
         $this->rocks = new ArrayCollection();
         $this->routes = new ArrayCollection();
-        $this->belongsToRock = new ArrayCollection();
     }
 
     public function getId(): ?int

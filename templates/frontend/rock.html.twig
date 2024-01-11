@@ -91,83 +91,75 @@
 											?>#}
 											<div class="table-responsive">
 												<table class="table table-striped table-sm ">
+												
 												{% for route in routes %}
-														<tr>
-															<td>{{loop.index}}</td>
-															<td>
-																{{ route.name }} 
-																{% set star = '<i class="fas fa-star" style="color: rgb(202 138 4)"></i>' %}
-																{% if route.rating == 1 %}
-																	{{ star|raw }}
-																{% elseif route.rating == 2 %}
-																	{{ star|raw }}{{ star|raw }}
-																{% elseif route.rating == 3 %}
-																	{{ star|raw }}{{ star|raw }}{{ star|raw }}
-																{% endif %}
-																{% if route.protection == 2 %}
-																	<i class="fa fa-exclamation-triangle text-danger"></i>
-																{% elseif route.protection == 3 %}
-																	<i class="fa fa-ambulance text-danger"></i>
-																{% endif %}
-																
-
-															{#{rockAttribute.routes.getName()}#}
-																{#<!--<div class="d-flex align-items-center">-->
-																	<?php echo $values['routesName']; ?>
-																	<?php echo $routes->routeProtection($values['routesProtection']); ?>
-																	<?php echo $routes->routeBeauty($values['routesRating']); ?>
-																	<?php 
-																		$video = $videos->right_video($areaNeu, $rockId, $routesid); include(ROOT_PATH . 'includes_videos.php'); 
-																	?>
-																	<!--<div class="lightbox inline-block" data-mdb-zoom-level="0.5"> -->
-																		<?php 
-																			//$test = $images->right_image($areaNeu, $rockId, $routesid); 
-																			//include(ROOT_PATH . 'includes_photos.php'); 
-																		?>
-																	<!--</div>
-																</div>-->#}
-															</td>
-															<td>{{ route.grade }}</td>
-															<td class="d-none d-lg-table-cell" style="white-space: nowrap;">
-																{{ route.firstAscent }} {% if route.yearFirstAscent %}{{ route.yearFirstAscent }}{% endif %}
-															</td>
-															<td style="padding-top: 0.2rem;">
-																{% if route.description %}
-																	<button 
-																		type="button" 
-																		class="btn btn-sm btn-primary btn-floating"
-																		data-mdb-toggle="modal" 
-																		data-mdb-target="#infoModal{{ route.name|replace({' ': '', '!': '','&':''}) }}"
-																		style="width: 1.125rem;height: 1.125rem; background: transparent;"
-																	>
-																		<i class="fas fa-info fa-xs " style="width: 1.125rem;line-height: 1.12rem;"></i>
-																	</button>
-																	<div class="modal fade" id="infoModal{{ route.name|replace({' ': '', '!': '','&':''}) }}" tabindex="-1" aria-labelledby="infoModal{ route.name|replace({' ': '', '!': '','&':''}) }}Label" aria-hidden="true">
-																		<div class="modal-dialog modal-dialog-centered">
-																			<div class="modal-content">
-																				<div class="modal-header">
-																					<h5 class="modal-title" id="infoModal{{ route.name|replace({' ': '', '!': '','&':''}) }}Label">
-																						{{ route.name }} 
-																						{% if route.rating == 1 %}
-																							{{ star|raw }}
-																						{% elseif route.rating == 2 %}
-																							{{ star|raw }}{{ star|raw }}
-																						{% elseif route.rating == 3 %}
-																							{{ star|raw }}{{ star|raw }}{{ star|raw }}
-																						{% endif %}
-																					</h5>
-																					<button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-																				</div>
-																				<div class="modal-body">
-																					<p class="d-lg-none" style="font-size: .85rem;">Erstbegeher: {{ route.firstAscent }} {% if route.yearFirstAscent %}{{ route.yearFirstAscent }}{% endif %}</p>
-																					<p style="font-size: .85rem;">{{ route.description }}</p>
-																				</div>
+													<tr>
+														<td>{{loop.index}}</td>
+														<td>
+															{{ route.name }} 
+															{% set star = '<i class="fas fa-star" style="color: rgb(202 138 4)"></i>' %}
+															{% if route.rating == 1 %}
+																{{ star|raw }}
+															{% elseif route.rating == 2 %}
+																{{ star|raw }}{{ star|raw }}
+															{% elseif route.rating == 3 %}
+																{{ star|raw }}{{ star|raw }}{{ star|raw }}
+															{% endif %}
+															{% if route.protection == 2 %}
+																<i class="fa fa-exclamation-triangle text-danger"></i>
+															{% elseif route.protection == 3 %}
+																<i class="fa fa-ambulance text-danger"></i>
+															{% endif %}
+															{% set videos = videoRepository.findVideosByParams(route.area.id, route.rock.id, route.id) %}
+															{% if videos is not empty %}
+																{% for video in videos %}
+																	<a href="{{ video.videoLink }}" alt="Video von Route {{ route.name }} " target="_blank">
+																		<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="text-black"><path fill="currentColor" d="M15 8v8H5V8h10m1-2H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4V7c0-.55-.45-1-1-1z"/></svg>
+																	</a>
+																{% endfor %}
+															{% endif %}
+														</td>
+														<td>{{ route.grade }}</td>
+														<td class="d-none d-lg-table-cell" style="white-space: nowrap;">
+															{{ route.firstAscent }} {% if route.yearFirstAscent %}{{ route.yearFirstAscent }}{% endif %}
+														</td>
+														<td style="padding-top: 0.2rem;">
+															{% if route.description %}
+																<button 
+																	type="button" 
+																	class="btn btn-sm btn-primary btn-floating"
+																	data-mdb-toggle="modal" 
+																	data-mdb-target="#infoModal{{ route.name|replace({' ': '', '!': '','&':''}) }}"
+																	style="width: 1.125rem;height: 1.125rem; background: transparent;"
+																>
+																	<i class="fas fa-info fa-xs " style="width: 1.125rem;line-height: 1.12rem;"></i>
+																</button>
+																<div class="modal fade" id="infoModal{{ route.name|replace({' ': '', '!': '','&':''}) }}" tabindex="-1" aria-labelledby="infoModal{ route.name|replace({' ': '', '!': '','&':''}) }}Label" aria-hidden="true">
+																	<div class="modal-dialog modal-dialog-centered">
+																		<div class="modal-content">
+																			<div class="modal-header">
+																				<h5 class="modal-title" id="infoModal{{ route.name|replace({' ': '', '!': '','&':''}) }}Label">
+																					{{ route.name }} 
+																					{% if route.rating == 1 %}
+																						{{ star|raw }}
+																					{% elseif route.rating == 2 %}
+																						{{ star|raw }}{{ star|raw }}
+																					{% elseif route.rating == 3 %}
+																						{{ star|raw }}{{ star|raw }}{{ star|raw }}
+																					{% endif %}
+																				</h5>
+																				<button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+																			</div>
+																			<div class="modal-body">
+																				<p class="d-lg-none" style="font-size: .85rem;">Erstbegeher: {{ route.firstAscent }} {% if route.yearFirstAscent %}{{ route.yearFirstAscent }}{% endif %}</p>
+																				<p style="font-size: .85rem;">{{ route.description }}</p>
 																			</div>
 																		</div>
 																	</div>
-																{% endif %}
-															</td>
-														</tr>
+																</div>
+															{% endif %}
+														</td>
+													</tr>
 												{% endfor %} 
 												</table>
 											</div>
@@ -176,7 +168,6 @@
 								</div>
 						</section>
 					</div>
-					{#<?php if($nameTopo['topoWithSector'] == 1) { ?>
 						<div class="col-md-3 d-none d-lg-block position-relative">
 							<div id="scrollspy-collapsible" class="sticky-top" style="top: 80px;">
 								<div class="card mt-3">
@@ -185,27 +176,25 @@
 											class="nav flex-column nav-pills menu-sidebar" 
 											data-mdb-allow-hashes="true"
 										>
-											<?php
+											{# <?php
 												$i = 0;
 												for ($valueTopo = 1; $valueTopo <= $num_rows; $valueTopo++) {
 													$getValuesTopo	= getParamsWithTopo($rockName, $valueTopo);
 													$nameTopo		= $getValuesTopo->fetch();
-											?>
+											?> #}
 											<li class="nav-item">
 												<a 
 													class="nav-link" 
-													href="#<?php echo strtr(strtolower($nameTopo['topoName']), $valuesToReplace); ?>"
+													{# href="#<?php echo strtr(strtolower($nameTopo['topoName']), $valuesToReplace); ?>" #}
 													data-mdb-smooth-scroll="smooth-scroll"
 													data-mdb-easing="easeInOutQuart"
-												><?php echo $nameTopo['topoName']; ?></a>
+												{# ><?php echo $nameTopo['topoName']; ?></a> #}
 											</li>
-											<?php } ?>
 										</ul>
 									</div>
 								</div>
 							</div>
 						</div>
-					<?php } ?>#}
 					</div>
 				</div>
 			</section>

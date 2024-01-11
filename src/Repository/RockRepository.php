@@ -65,7 +65,7 @@ class RockRepository extends ServiceEntityRepository
             ->addSelect('rock');
         if ($search) {
             $queryBuilder->andWhere('rock.name LIKE :searchTerm OR area.name LIKE :searchTerm')
-                ->setParameter('searchTerm', '%'.$search.'%');
+                ->setParameter('searchTerm', '%' . $search . '%');
         }
 
         return $queryBuilder
@@ -116,9 +116,7 @@ class RockRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('rock')
             ->orderBy('rock.id', 'ASC')
             ->getQuery()
-            ->getResult()
-
-        ;
+            ->getResult();
     }
 
     /**
@@ -136,16 +134,24 @@ class RockRepository extends ServiceEntityRepository
         return $queryBuilder;
     }
 
+    public function getRockId($rockSlug)
+    {
+        $queryBuilder = $this->createQueryBuilder('rock')
+            ->select('rock.id')
+            ->where('rock.slug LIKE :rockSlug')
+            ->setParameter('rockSlug', $rockSlug)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return $queryBuilder;
+    }
+
     public function saisonalGesperrt()
     {
         return $this->createQueryBuilder('rock')
             ->orderBy('rock.name', 'ASC')
             ->where('rock.banned = 1')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-
-    
-
 }
