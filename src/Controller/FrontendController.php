@@ -21,12 +21,18 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+
 class FrontendController extends AbstractController
 {
     /**
      * @Route("/frontend", name="frontend")
      */
     public function index(
+        AreaRepository $areaRepository,
+
+
+
+
         Request $request,
         RoutesRepository $routesRepository,
         RockRepository $rockRepository,
@@ -34,80 +40,84 @@ class FrontendController extends AbstractController
         ManagerRegistry $doctrine,
     ): Response {
 
-        $doctrineTutorial = $doctrine->getRepository(Area::class)->findAllOrderedBy();
-        $search = $request->query->get('q');
-        if ($search) {
-            $areaSearch = $doctrine->getRepository(Area::class)->search($search);
-        } else {
-            $areaSearch = $doctrine->getRepository(Area::class)->findAllOrderedBy();
-        }
+        // $doctrineTutorial = $doctrine->getRepository(Area::class)->findAllOrderedBy();
+        // $search = $request->query->get('q');
+        // if ($search) {
+        //     $areaSearch = $doctrine->getRepository(Area::class)->search($search);
+        // } else {
+        //     $areaSearch = $doctrine->getRepository(Area::class)->findAllOrderedBy();
+        // }
 
 
         $searchTerm = $request->query->get('q');
 
-        // Important for Stimulus!!!!!!
-        /*$routesSearch = $routesRepository->search(
-            $rock,
-            $searchTerm
-        );
-        if($request->query->get('preview')) {
-            return $this->render('pageParts/_searchPreview.html.twig', [
-                'routesSearch' => $routesSearch,
-            ]);
-        }*/
-        // End Important for Stimulus!!!!!!
+        // // Important for Stimulus!!!!!!
+        // /*$routesSearch = $routesRepository->search(
+        //     $rock,
+        //     $searchTerm
+        // );
+        // if($request->query->get('preview')) {
+        //     return $this->render('pageParts/_searchPreview.html.twig', [
+        //         'routesSearch' => $routesSearch,
+        //     ]);
+        // }*/
+        // // End Important for Stimulus!!!!!!
 
-        //dd($routesSearch);
+        // //dd($routesSearch);
 
 
 
-        $area = $doctrine->getRepository(Area::class)->getTheStuff();
-        $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
-        //dd($area);
-        //$areaName = $area->getRocks()->getName();
-        //dd($areaName);
-        $routes = $doctrine->getRepository(Area::class)->getRocksRoutesFrontend();
+        // $area = $doctrine->getRepository(Area::class)->getTheStuff();
+        // //$areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
+        // //dd($area);
+        // //$areaName = $area->getRocks()->getName();
+        // //dd($areaName);
+        // $routes = $doctrine->getRepository(Area::class)->getRocksRoutesFrontend();
 
-        // Wie bekomme ich hier die Id der Area als Parameter in die funktion getGrades($area->getId())
+        // // Wie bekomme ich hier die Id der Area als Parameter in die funktion getGrades($area->getId())
 
-        /*$sum = [];
-        foreach($lowGrade as $low) {
-            $getLowGrades = $doctrine->getRepository(Routes::class)->getGrades($area->getId(), 0, 15);
-        }*/
+        // /*$sum = [];
+        // foreach($lowGrade as $low) {
+        //     $getLowGrades = $doctrine->getRepository(Routes::class)->getGrades($area->getId(), 0, 15);
+        // }*/
 
-        $getLowGrades = $doctrine->getRepository(Routes::class)->getGrades(1, 0, 15);
-        //dd($getLowGrades);
-        $getMiddleGrades = $doctrine->getRepository(Routes::class)->getGrades(1, 15, 29);
-        $getHighGrades = $doctrine->getRepository(Routes::class)->getGrades(1, 29, 60);
-        $getLowGradesArea = $doctrine->getRepository(Area::class)->getGradesArea(1, 0, 15);
+        // $getLowGrades = $doctrine->getRepository(Routes::class)->getGrades(1, 0, 15);
+        // //dd($getLowGrades);
+        // $getMiddleGrades = $doctrine->getRepository(Routes::class)->getGrades(1, 15, 29);
+        // $getHighGrades = $doctrine->getRepository(Routes::class)->getGrades(1, 29, 60);
+        // $getLowGradesArea = $doctrine->getRepository(Area::class)->getGradesArea(1, 0, 15);
 
-        /*->getGradeMapForAread($areas);
+        // /*->getGradeMapForAread($areas);
 
-        [
-            'areaId' => [
-                'low' => 5,
-                'middle' => 
-            ]
-        ]*/
+        // [
+        //     'areaId' => [
+        //         'low' => 5,
+        //         'middle' => 
+        //     ]
+        // ]*/
 
         $latestRoutes = $doctrine->getRepository(Routes::class)->latestRoutes();
         $banned = $doctrine->getRepository(Rock::class)->saisonalGesperrt();
 
+
+
+        $areas = $areaRepository->getAreasInformation();
+
         return $this->render('frontend/index.html.twig', [
             'areas' => $areas,
-            'area' => $area,
-            //'areaName' => $areaName,
-            'routes' => $routes,
+            // 'area' => $area,
+            // //'areaName' => $areaName,
+            // 'routes' => $routes,
             'latestRoutes' => $latestRoutes,
             'banned' => $banned,
-            'getLowGrades' => $getLowGrades,
-            'getMiddleGrades' => $getMiddleGrades,
-            'getHighGrades' => $getHighGrades,
-            'routes' => $routes,
+            // 'getLowGrades' => $getLowGrades,
+            // 'getMiddleGrades' => $getMiddleGrades,
+            // 'getHighGrades' => $getHighGrades,
+            // 'routes' => $routes,
             'searchTerm' => $searchTerm,
-            'doctrineTutorial' => $doctrineTutorial,
-            'search' => $search,
-            'areaSearch' => $areaSearch
+            // 'doctrineTutorial' => $doctrineTutorial,
+            // 'search' => $search,
+            // 'areaSearch' => $areaSearch
         ]);
     }
 
@@ -260,6 +270,7 @@ class FrontendController extends AbstractController
         $topos = $doctrine->getRepository(Topo::class)->getTopos($rockId);
 
 
+
         return $this->render('frontend/rock.html.twig', [
             'areas' => $areas,
             'slug' => $slug,
@@ -271,6 +282,7 @@ class FrontendController extends AbstractController
             'routes' => $routes,
             'searchTerm' => $searchTerm,
             'videoRepository' => $videoRepository,
+            'routesRepository' => $routesRepository,
             'topos' => $topos
         ]);
     }
@@ -312,6 +324,21 @@ class FrontendController extends AbstractController
         $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
 
         return $this->render('frontend/impressum.html.twig', [
+            'areas' => $areas,
+        ]);
+    }
+
+    /**
+     * @Route("/Database", name="databasequeries")
+     */
+    public function databasequeries(
+        ManagerRegistry $doctrine,
+        AreaRepository $areaRepository,
+    ): Response {
+
+        $areas = $areaRepository->getAreasInformation();
+
+        return $this->render('frontend/database-queries.html.twig', [
             'areas' => $areas,
         ]);
     }

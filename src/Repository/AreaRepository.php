@@ -9,6 +9,7 @@ use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Common\Collections\Criteria;
 
 /**
  * @method Area|null find($id, $lockMode = null, $lockVersion = null)
@@ -243,51 +244,29 @@ class AreaRepository extends ServiceEntityRepository
             ->execute();
     }
 
-    /**
-     * @return RoutesLowerFiveteen[]
-     */
-    public function getRocksLowerFiveteen(int $grade): array
+    public function getAreasInformation()
     {
-        $entityManager = $this->getEntityManager();
-
         $qb = $this->createQueryBuilder('area')
-            ->andWhere('area.id = :grade')
-            ->setParameter('grade', $grade)
-            ->innerJoin('area.routes', 'routes')
-            ->addSelect('routes.gradeNo')
-            ->andWhere('routes.gradeNo < 15');
+            ->select(
+                'area.id as areaId',
+                'area.name as name',
+                'area.slug as slug',
+                'area.image as image',
+                'area.lat as lat',
+                'area.lng as lng',
+                'COUNT(DISTINCT route.id) AS routes',
+                'COUNT(DISTINCT rock.id) AS rocks',
+                'COUNT(DISTINCT CASE WHEN route.gradeNo > 0 AND route.gradeNo <= 15 THEN route.id ELSE 0 END) AS amountEasy',
+                'COUNT(DISTINCT CASE WHEN route.gradeNo > 15 AND route.gradeNo <= 29 THEN route.id ELSE 0 END) AS amountMiddle',
+                'COUNT(DISTINCT CASE WHEN route.gradeNo > 29 AND route.gradeNo <= 60 THEN route.id ELSE 0 END) AS amountHard',
+                'COUNT(DISTINCT CASE WHEN route.gradeNo = 0 OR route.gradeNo IS NULL THEN route.id ELSE 0 END) AS amountProjects'
+            )
+            ->leftJoin('area.routes', 'route')
+            ->leftJoin('area.rocks', 'rock')
+            ->where('area.online = 1')
+            ->groupBy('area.id, area.name')
+            ->orderBy('area.sequence');
 
-        $query = $qb->getQuery();
-
-        return $query->execute();
+        return $qb->getQuery()->getResult();
     }
-
-    // /**
-    //  * @return Area[] Returns an array of Area objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Area
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

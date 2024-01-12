@@ -22,28 +22,19 @@
 						</div>
 					</div>
 				</div>
-
 				<div class="collapse mt-3" id="collapseMap">
 					<div id="map" class="z-10 mb-3" style="width: 100%; height: 500px;">
 						{{ include('pageParts/mainMap.html.twig') }}
 					</div>
 				</div>
-
-				{# Geplant für Suche siehe Stimulus Tutorial #}
-				{#{dump(area.getRocks())}#}
-				{#% for a in areaSearch %#}
-					{#{a.name}} {{a.routes|length}} {#{a.routes.getName()}#}
-				{#% endfor %#}
 				<div class="row">
 					<div class="col-md-8">
 						<div class="row">
-							{% for x, area in areas %}
-								
+							{% for area in areas %}
 								<div class="col-12">
 									<div class="card mb-4 p-0">
 										<div class="row g-0">
 											<div class="col-md-6">
-											
 												{% if area.image %}
 													<img 
 														class="img-fluid rounded-start" 
@@ -71,64 +62,58 @@
 													<hr class="my-2"/>
 													<ul class="list-unstyled text-black mb-0">
 														<li class="mb-2">Felsen
-															<span class="ms-3 badge badge-dark">{{ area.rocks|length }}</span>
+															<span class="ms-3 badge badge-dark">{{ area.rocks }}</span>
 														</li>
 														<li>Touren
-															<span class="badge bg-black ms-2">{{ area.routes|length }}</span>
+															<span class="badge bg-black ms-2">{{ area.routes }}</span>
 														</li>
 													</ul>
 													<hr class="my-2"/>
 													<div class="d-flex justify-content-between">
-
 														<div class="d-flex flex-column">
 															<div 
 																class="text-center px-2 py-1 small text-white"
 																style="background-color:#15803d; font-size: .75rem;"
 															>1 - 5</div>
 															<div class="text-center text-white bg-gray-400 mt-1" style="font-size: .75rem;">
-																<div style="background-color:#15803d;" class=" px-2 py-1">
-																	{#{getLowGrades[x]^}#}
-																	{#{ gradesForAreas[x]['low'] }#}																
+																<div style="background-color:#15803d;" class="px-2 py-1">
+																	{{ area.amountEasy }}													
 																</div>
 															</div>
 														</div>
-
 														<div class="d-flex flex-column">
 															<div 
 																class="text-center px-2 py-1 small text-white"
 																style="background-color:#075985; font-size: .75rem;" 
 															>6 - 7</div>
 															<div class="text-center text-white bg-gray-400 mt-1" style="font-size: .75rem;">
-																<div style="background-color:#075985;" class=" px-2 py-1">
-																	{{getMiddleGrades}}																	
+																<div style="background-color:#075985;" class="px-2 py-1">
+																	{{ area.amountMiddle }}
 																</div>
 															</div>
 														</div>
-
 														<div class="d-flex flex-column">
 															<div 
 																class="text-center px-2 py-1 small text-white"
 																style="background-color:#b91c1c; font-size: .75rem;" 
 															>8 - 11</div>
 															<div class="text-center text-white bg-gray-400 mt-1" style="font-size: .75rem;">
-																<div style="background-color:#b91c1c;" class=" px-2 py-1">
-																	{{getHighGrades}}																
+																<div style="background-color:#b91c1c;" class="px-2 py-1">
+																	{{ area.amountHard }}
 																</div>
 															</div>
 														</div>
-
 														<div class="d-flex flex-column">
 															<div 
 																class="text-center px-2 py-1 small text-white"
 																style="background-color:black; font-size: .75rem;" 
 															>Proj.</div>
 															<div class="text-center text-white bg-gray-400 mt-1" style="font-size: .75rem;">
-																<div style="background-color:black;" class=" px-2 py-1">
-																	{{getHighGrades}}																
+																<div style="background-color:black;" class="px-2 py-1">
+																	{{ area.amountProjects }}
 																</div>
 															</div>
 														</div>
-
 													</div>
 												</div>
 											</div>
