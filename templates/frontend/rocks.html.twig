@@ -45,24 +45,24 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for x, rock in rocks %}
+                                        {% for rock in rocks %}
                                             <tr>
                                                 <td>{{loop.index}}</td>
                                                 <td>
                                                     <a 
-                                                        href="{{ path('show_rock', { slug: rock.slug }) }}"
+                                                        href="{{ path('show_rock', { slug: rock.rockSlug }) }}"
                                                         class="flex text-sm p-3 {% if loop.index is not divisible by(2) %} bg-gray-200 {% endif %} hover:bg-gray-400"
-                                                    >{{rock.name}}</a>
+                                                    >{{rock.rockName}}</a>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex align-items-center">
                                                         <span class="text-end me-3" style="width: 1rem;">
-                                                            {{rock.routes|length}} 
-                                                            {% set percent = 100 / rock.routes|length %}
-                                                            {% set easy = percent * belowSix[x] %}
-                                                            {% set middle = percent * belowEight[x] %}
-                                                            {% set hard = percent * greaterEight[x] %}
-                                                            {% set project = percent * projects[x] %}
+                                                            {{ rock.amountRoutes }} 
+                                                            {% set percent = 100 / rock.amountRoutes %}
+                                                            {% set easy = percent * rock.amountEasy %}
+                                                            {% set middle = percent * rock.amountMiddle %}
+                                                            {% set hard = percent * rock.amountHard %}
+                                                            {% set project = percent * rock.amountProjects %}
                                                         </span>
                                                         <div class="progress" style="height: 1rem; width: 6rem;">
                                                             <div 
@@ -101,14 +101,14 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    {{ rock.height }} m
+                                                    {{ rock.rockHeight }} m
                                                 </td>
                                                 <td>
                                                     <i 
                                                         class="fas fa-baby-carriage fa-lg" 
-                                                        {% if rock.childFriendly == 2 %} 
+                                                        {% if rock.rockChild == 2 %} 
                                                             style="transform: rotate(45deg) scaleX(-1);" 
-                                                        {% elseif rock.childFriendly == 3 %} 
+                                                        {% elseif rock.rockChild == 3 %} 
                                                             style="transform: rotate(90deg) scaleX(-1);" 
                                                         {% else %} 
                                                             style="transform: rotate(0deg) scaleX(-1);" 
@@ -118,7 +118,7 @@
                                                 </td>
                                                 <td>
                                                     <i 
-                                                        {% if rock.rain < 2 %} 
+                                                        {% if rock.rockRain < 2 %} 
                                                             class="fas fa-umbrella fa-lg" 
                                                             style="color: rgb(20 83 45);" 
                                                         {% else %} 
@@ -127,10 +127,10 @@
                                                         {% endif %}
                                                     ></i>
                                                 </td>
-                                                <td>{{ rock.orientation }}</td>
+                                                <td>{{ rock.rockOrientation }}</td>
                                                 <td>
                                                     <i 
-                                                        {% if rock.sunny >= 1 %} 
+                                                        {% if rock.rockSunny >= 1 %} 
                                                             class="fas fa-sun fa-lg" 
                                                             style="color: rgb(161 98 7);" 
                                                         {% else %} 

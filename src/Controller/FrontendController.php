@@ -78,63 +78,9 @@ class FrontendController extends AbstractController
         $areaLat = $area->getLat();
         $areaLng = $area->getLng();
         $areaZoom = $area->getZoom();
-        $rocks = $doctrine->getRepository(Rock::class)->findRocksArea($slug);
-        $rock = $doctrine->getRepository(Rock::class)->findRocksArea($slug);
-
-        $belowSix = array();
-
-        $sum = [];
-        foreach ($rock as $test) {
-            $rs = $test->getRoutes();
-            $id = $test->getId();
-
-            if (!isset($sum[$id])) {
-                $sum[$id] = [
-                    '5' => 0,
-                    '7-8' => 0,
-                ];
-            }
-
-            foreach ($rs as $r) {
-                $g = $r->getGrade();
-
-                if (5 == $g or '5' == $g) {
-                    $sum[$id]['5'] += 1;
-                }
-
-                if (7 == $g or '7' == $g or '7+' == $g) {
-                    $sum[$id]['7-8'] += 1;
-                }
-            }
-
-            // dd();
-            // //$array = $test->getName();
-            //  array_push($belowSix, $doctrine->getRepository(Routes::class)->findRoutesBelowSixForRock($test->getSlug()));
-        }
-
-        // dd($sum);
-
-        $belowSix = array();
-        foreach ($rock as $rockGrades) {
-            array_push($belowSix, $doctrine->getRepository(Routes::class)->findRoutesBelowSixForRock($rockGrades->getSlug()));
-        }
-
-        $belowEight = array();
-        foreach ($rock as $rockGrades) {
-            array_push($belowEight, $doctrine->getRepository(Routes::class)->findRoutesBelowEightForRock($rockGrades->getSlug()));
-        }
-
-        $greaterEight = array();
-        foreach ($rock as $rockGrades) {
-            array_push($greaterEight, $doctrine->getRepository(Routes::class)->findRoutesGreaterEightForRock($rockGrades->getSlug()));
-        }
-
-        $projects = array();
-        foreach ($rock as $rockGrades) {
-            array_push($projects, $doctrine->getRepository(Routes::class)->findProjectForRock($rockGrades->getSlug()));
-        }
 
         $sideBar = $areaRepository->sidebarNavigation();
+        $rocks = $rockRepository->getRocksInformation($slug);
 
 
         return $this->render('frontend/rocks.html.twig', [
@@ -144,11 +90,6 @@ class FrontendController extends AbstractController
             'areaLng' => $areaLng,
             'areaZoom' => $areaZoom,
             'rocks' => $rocks,
-            'belowSix' => $belowSix,
-            'belowEight' => $belowEight,
-            'greaterEight' => $greaterEight,
-            'projects' => $projects,
-            'sum' => $sum,
             'searchTerm' => $searchTerm,
             'sideBar' => $sideBar,
         ]);
@@ -187,10 +128,10 @@ class FrontendController extends AbstractController
 
 
 
-        $belowSix = $doctrine->getRepository(Routes::class)->findRoutesBelowSixForRock($slug);
-        $belowEight = $doctrine->getRepository(Routes::class)->findRoutesBelowEightForRock($slug);
-        $greaterEight = $doctrine->getRepository(Routes::class)->findRoutesGreaterEightForRock($slug);
-        $projects = $doctrine->getRepository(Routes::class)->findProjectForRock($slug);
+        // $belowSix = $doctrine->getRepository(Routes::class)->findRoutesBelowSixForRock($slug);
+        // $belowEight = $doctrine->getRepository(Routes::class)->findRoutesBelowEightForRock($slug);
+        // $greaterEight = $doctrine->getRepository(Routes::class)->findRoutesGreaterEightForRock($slug);
+        // $projects = $doctrine->getRepository(Routes::class)->findProjectForRock($slug);
 
         $routes = $doctrine->getRepository(Routes::class)->findRoutesRock($slug);
 
@@ -280,12 +221,13 @@ class FrontendController extends AbstractController
     public function databasequeries(
         ManagerRegistry $doctrine,
         AreaRepository $areaRepository,
+        RockRepository $rockRepository,
     ): Response {
 
-        $areas = $areaRepository->sidebarNavigation();
+        $dummyData = $rockRepository->getRocksInformation('Konstein');
 
         return $this->render('frontend/database-queries.html.twig', [
-            'areas' => $areas,
+            'dummyData' => $dummyData,
         ]);
     }
 }

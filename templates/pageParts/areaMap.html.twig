@@ -1,14 +1,15 @@
 {% set marker = [] %}
-{% for rock in rocks %}
-    {% set rockName     = '<h6 class="font-semibold mb-2">' ~ rock.name ~ '</h6><div style="background-image: url(https://www.munichclimbs.de/images/rocksmap/' ~ rock.image ~ '.webp);overflow: hidden; background-size: cover; background-position: center; width: 150px; height: 150px;"></div><p class="fw-normal text-black mt-1 my-0">GPS:</p><p class="fw-normal text-black my-0">' ~ rock.lat ~ ', ' ~ rock.lng ~ '</p>' %}
+{{dump(rocks)}}
+{# {% for rock in rocks %}
+    {% set rockName     = '<h6 class="font-semibold mb-2">' ~ rock.name ~ '</h6><div style="background-image: url(https://www.munichclimbs.de/images/rocksmap/' ~ rock.image ~ '.webp);overflow: hidden; background-size: cover; background-position: center; width: 150px; height: 150px;"></div><p class="fw-normal text-black mt-1 my-0">GPS:</p><p class="fw-normal text-black my-0">' ~ rockLat ~ ', ' ~ rockLng ~ '</p>' %}
     {% set rockImage = '' %}
-    {% set marker = marker|merge([[ rock.lat, rock.lng, rockName, rockImage ]]) %}
+    {% set marker = marker|merge([[ rockLat, rockLng, rockName, rockImage ]]) %}
 {% endfor %}
 
 {% set intialZoom = [] %}
-{% set intialZoom = intialZoom|merge([areaLat, areaLng, areaZoom]) %}
+{% set intialZoom = intialZoom|merge([areaLat, areaLng, areaZoom]) %} #}
 
-<script>
+{# <script>
 
     var markersArea = {{ marker|json_encode|raw }}
     var zoom = {{ intialZoom|json_encode|raw }}
@@ -30,4 +31,4 @@
 
 	
 
-</script>
+</script> #}

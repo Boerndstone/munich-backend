@@ -63,35 +63,11 @@ class RoutesRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
-    public function findRoutesBelowSixForRock($rockSlug)
-    {
-        return $this->createQueryBuilder('routes')
-            ->innerJoin('routes.rock', 'routes_rock')
-            ->where('routes.gradeNo > 0 and routes.gradeNo < 15')
-            ->andWhere('routes_rock.slug = :rockSlug')
-            ->setParameter('rockSlug', $rockSlug)
-            ->select('count(routes.id)')
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
-
     public function findAllRoutesBelowEight()
     {
         return $this->createQueryBuilder('routes')
             ->orderBy('routes.id', 'ASC')
             ->where('routes.gradeNo >= 15 and routes.gradeNo <= 29')
-            ->select('count(routes.id)')
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
-
-    public function findRoutesBelowEightForRock($rockSlug)
-    {
-        return $this->createQueryBuilder('routes')
-            ->innerJoin('routes.rock', 'routes_rock')
-            ->where('routes.gradeNo >= 15 and routes.gradeNo <= 29')
-            ->andWhere('routes_rock.slug = :rockSlug')
-            ->setParameter('rockSlug', $rockSlug)
             ->select('count(routes.id)')
             ->getQuery()
             ->getSingleScalarResult();
@@ -107,35 +83,11 @@ class RoutesRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
-    public function findRoutesGreaterEightForRock($rockSlug)
-    {
-        return $this->createQueryBuilder('routes')
-            ->innerJoin('routes.rock', 'routes_rock')
-            ->where('routes.gradeNo > 29')
-            ->andWhere('routes_rock.slug = :rockSlug')
-            ->setParameter('rockSlug', $rockSlug)
-            ->select('count(routes.id)')
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
-
     public function findAllProjectds()
     {
         return $this->createQueryBuilder('routes')
             ->orderBy('routes.id', 'ASC')
             ->where('routes.gradeNo is NULL')
-            ->select('count(routes.id)')
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
-
-    public function findProjectForRock($rockSlug)
-    {
-        return $this->createQueryBuilder('routes')
-            ->innerJoin('routes.rock', 'routes_rock')
-            ->where('routes.gradeNo = 0')
-            ->andWhere('routes_rock.slug = :rockSlug')
-            ->setParameter('rockSlug', $rockSlug)
             ->select('count(routes.id)')
             ->getQuery()
             ->getSingleScalarResult();

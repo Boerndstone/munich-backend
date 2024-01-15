@@ -75,23 +75,6 @@ class RockRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Rocks[] Returns an array of Rocks objects
-     */
-    public function findRocksArea($areaSlug): array
-    {
-        $queryBuilder = $this->createQueryBuilder('rock')
-            ->orderBy('rock.id', 'ASC')
-            ->innerJoin('rock.area', 'area')
-            ->addSelect('rock')
-            ->where('area.slug LIKE :areaSlug')
-            ->setParameter('areaSlug', $areaSlug)
-            ->getQuery()
-            ->getResult();
-
-        return $queryBuilder;
-    }
-
-    /**
      * @return AreaName[] Returns an array of Rocks objects
      */
     public function findRocksAreaName($areaSlug): array
@@ -153,5 +136,38 @@ class RockRepository extends ServiceEntityRepository
             ->where('rock.banned = 1')
             ->getQuery()
             ->getResult();
+    }
+
+
+    public function getRocksInformation($areaSlug)
+    {
+        $queryBuilder = $this->createQueryBuilder('rock')
+            ->select(
+                'rock.name as rockName',
+                'rock.slug as rockSlug',
+                'rock.height as rockHeight',
+                'rock.childFriendly as rockChild',
+                'rock.rain as rockRain',
+                'rock.lat as rockLat',
+                'rock.lng as rockLng',
+                'rock.orientation as rockOrientation',
+                'rock.sunny as rockSunny',
+                'COUNT(DISTINCT route.id) AS amountRoutes',
+                'SUM(CASE WHEN route.gradeNo > 0 AND route.gradeNo <= 15 THEN 1 ELSE 0 END) AS amountEasy',
+                'SUM(CASE WHEN route.gradeNo > 15 AND route.gradeNo <= 29 THEN 1 ELSE 0 END) AS amountMiddle',
+                'SUM(CASE WHEN route.gradeNo > 29 AND route.gradeNo <= 60 THEN 1 ELSE 0 END) AS amountHard',
+                'SUM(CASE WHEN route.gradeNo = 0 OR route.gradeNo IS NULL THEN 1 ELSE 0 END) AS amountProjects'
+            )
+            ->orderBy('rock.id', 'ASC')
+            ->leftJoin('rock.area', 'area')
+            ->leftJoin('rock.routes', 'route')
+            ->where('area.slug LIKE :areaSlug')
+            ->andWhere('rock.online = 1')
+            ->setParameter('areaSlug', $areaSlug)
+            ->groupBy('rock.id')
+            ->getQuery()
+            ->getResult();
+
+        return $queryBuilder;
     }
 }
