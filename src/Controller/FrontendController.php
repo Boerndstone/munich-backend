@@ -53,6 +53,7 @@ class FrontendController extends AbstractController
      * @Route("/Klettergebiet/{slug}", name="show_rocks")
      */
     public function showRocksArea(
+        AreaRepository $areaRepository,
         Request $request,
         ManagerRegistry $doctrine,
         RoutesRepository $routesRepository,
@@ -133,6 +134,8 @@ class FrontendController extends AbstractController
             array_push($projects, $doctrine->getRepository(Routes::class)->findProjectForRock($rockGrades->getSlug()));
         }
 
+        $sideBar = $areaRepository->sidebarNavigation();
+
 
         return $this->render('frontend/rocks.html.twig', [
             'areas' => $areas,
@@ -147,6 +150,7 @@ class FrontendController extends AbstractController
             'projects' => $projects,
             'sum' => $sum,
             'searchTerm' => $searchTerm,
+            'sideBar' => $sideBar,
         ]);
     }
 
@@ -154,6 +158,7 @@ class FrontendController extends AbstractController
      * @Route("/Kletterfels/{slug}", name="show_rock")
      */
     public function showRock(
+        AreaRepository $areaRepository,
         Request $request,
         ManagerRegistry $doctrine,
         VideosRepository $videoRepository,
@@ -196,6 +201,8 @@ class FrontendController extends AbstractController
 
 
 
+        $sideBar = $areaRepository->sidebarNavigation();
+
         return $this->render('frontend/rock.html.twig', [
             'areas' => $areas,
             'slug' => $slug,
@@ -208,48 +215,62 @@ class FrontendController extends AbstractController
             'searchTerm' => $searchTerm,
             'videoRepository' => $videoRepository,
             'routesRepository' => $routesRepository,
-            'topos' => $topos
+            'topos' => $topos,
+            'sideBar' => $sideBar,
         ]);
     }
 
     /**
      * @Route("/neuesteRouten", name="neuesteRouten")
      */
-    public function neuesteRouten(ManagerRegistry $doctrine): Response
-    {
+    public function neuesteRouten(
+        AreaRepository $areaRepository,
+        ManagerRegistry $doctrine
+    ): Response {
         $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
 
         $getDate = date("Y");
         $calculateDate = $getDate - 2;
         $latestRoutes = $doctrine->getRepository(Routes::class)->latestRoutesPage($calculateDate);
 
+        $sideBar = $areaRepository->sidebarNavigation();
+
         return $this->render('frontend/neuesteRouten.html.twig', [
             'areas' => $areas,
             'latestRoutes' => $latestRoutes,
+            'sideBar' => $sideBar,
         ]);
     }
 
     /**
      * @Route("/Datenschutz", name="datenschutz")
      */
-    public function datenschutz(ManagerRegistry $doctrine): Response
-    {
+    public function datenschutz(
+        AreaRepository $areaRepository,
+        ManagerRegistry $doctrine
+    ): Response {
         $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
+        $sideBar = $areaRepository->sidebarNavigation();
 
         return $this->render('frontend/datenschutz.html.twig', [
             'areas' => $areas,
+            'sideBar' => $sideBar,
         ]);
     }
 
     /**
      * @Route("/Impressum", name="impressum")
      */
-    public function impressum(ManagerRegistry $doctrine): Response
-    {
+    public function impressum(
+        AreaRepository $areaRepository,
+        ManagerRegistry $doctrine
+    ): Response {
         $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
+        $sideBar = $areaRepository->sidebarNavigation();
 
         return $this->render('frontend/impressum.html.twig', [
             'areas' => $areas,
+            'sideBar' => $sideBar,
         ]);
     }
 

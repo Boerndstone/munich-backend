@@ -16,7 +16,7 @@
                 {% if area.rocks is not empty %}
                     <ul class="sidenav-collapse collapse" id="sidenav-collapse-1-0-0">
                         {% for rock in area.rocks %}
-                            <li class="sidenav-item"><a href="/Kletterfels/{{ rock.name }}" title="Link zum Klettergebiet: {{ rock.name }}" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="{{ rock.name }}" data-banned="0">{{ rock.name }}</a></li>
+                            <li class="sidenav-item"><a href="{{ path('show_rock', { slug: rock.slug } ) }}" title="Link zum Klettergebiet: {{ rock.name }}" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="{{ rock.name }}" data-banned="0">{{ rock.name }}</a></li>
                         {% endfor %}
                     </ul>
                 {% endif %}
