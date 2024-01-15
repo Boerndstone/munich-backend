@@ -1,20 +1,19 @@
 {% set marker = [] %}
-{{dump(rocks)}}
-{# {% for rock in rocks %}
-    {% set rockName     = '<h6 class="font-semibold mb-2">' ~ rock.name ~ '</h6><div style="background-image: url(https://www.munichclimbs.de/images/rocksmap/' ~ rock.image ~ '.webp);overflow: hidden; background-size: cover; background-position: center; width: 150px; height: 150px;"></div><p class="fw-normal text-black mt-1 my-0">GPS:</p><p class="fw-normal text-black my-0">' ~ rockLat ~ ', ' ~ rockLng ~ '</p>' %}
+{% for rock in rocks %}
+    {% set rockName     = '<h6 class="font-semibold mb-2">' ~ rock.rockName ~ '</h6><div style="background-image: url(https://www.munichclimbs.de/images/rocksmap/' ~ rock.rockImage ~ '.webp);overflow: hidden; background-size: cover; background-position: center; width: 150px; height: 150px;"></div><p class="fw-normal text-black mt-1 my-0">GPS:</p><p class="fw-normal text-black my-0">' ~ rock.rockLat ~ ', ' ~ rock.rockLng ~ '</p>' %}
     {% set rockImage = '' %}
-    {% set marker = marker|merge([[ rockLat, rockLng, rockName, rockImage ]]) %}
+    {% set marker = marker|merge([[ rock.rockLat, rock.rockLng, rock.rockName, rock.rockImage ]]) %}
 {% endfor %}
 
 {% set intialZoom = [] %}
-{% set intialZoom = intialZoom|merge([areaLat, areaLng, areaZoom]) %} #}
+{% set intialZoom = intialZoom|merge([areaLat, areaLng, areaZoom]) %} 
 
-{# <script>
+<script>
 
-    var markersArea = {{ marker|json_encode|raw }}
-    var zoom = {{ intialZoom|json_encode|raw }}
+    let markersArea = {{ marker|json_encode|raw }}
+    let zoom = {{ intialZoom|json_encode|raw }}
 
-    var map = L.map('map').setView([ zoom[0], zoom[1]], zoom[2]);
+    let map = L.map('map').setView([ zoom[0], zoom[1]], zoom[2]);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
@@ -23,7 +22,7 @@
 	}).addTo(map);
 
         
-	for (var i = 0; i < markersArea.length; i++) {
+	for (let i = 0; i < markersArea.length; i++) {
 		marker = new L.marker([markersArea[i][0],markersArea[i][1]])
 			.bindPopup(markersArea[i][2])
 			.addTo(map);
@@ -31,4 +30,4 @@
 
 	
 
-</script> #}
+</script>
