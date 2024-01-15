@@ -3,5 +3,15 @@
 {% block title %}Munichclimbs{% endblock %}
 
 {% block body %}
-    {{dump(areas)}}
+    {# {{dump(areas)}} #}
+    {% for area in areas %}
+        <h2>{{ area.name }}</h2>
+        {% if area.rocks is not empty %}
+            <ul>
+                {% for rock in area.rocks %}
+                    <li>{{ rock.name }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endfor %}
 {% endblock %}

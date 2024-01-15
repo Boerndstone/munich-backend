@@ -38,12 +38,14 @@ class FrontendController extends AbstractController
         $latestRoutes = $routesRepository->latestRoutes();
         $banned = $rockRepository->saisonalGesperrt();
         $areas = $areaRepository->getAreasInformation();
+        $sideBar = $areaRepository->sidebarNavigation();
 
         return $this->render('frontend/index.html.twig', [
             'areas' => $areas,
             'latestRoutes' => $latestRoutes,
             'banned' => $banned,
             'searchTerm' => $searchTerm,
+            'sideBar' => $sideBar,
         ]);
     }
 
@@ -259,7 +261,7 @@ class FrontendController extends AbstractController
         AreaRepository $areaRepository,
     ): Response {
 
-        $areas = $areaRepository->getAreasInformation();
+        $areas = $areaRepository->sidebarNavigation();
 
         return $this->render('frontend/database-queries.html.twig', [
             'areas' => $areas,

@@ -2,306 +2,38 @@
 	<nav id="sidenav" class="sidenav sidenav-primary ps" data-mdb-hidden="true" data-mdb-accordion="true" style="width: 240px; height: 100vh; position: fixed; transition: all 0.3s linear 0s;">
     <a class="ripple d-flex justify-content-left p-4 text-dark" style="font-family: 'Chelsea Market', cursive;" href="{{path('frontend')}}">munichclimbs</a>
     <ul class="sidenav-menu">
-                  <li class="sidenav-item">
-              <a class="sidenav-link collapsed ripple-surface" href="#sidenav-collapse-1-0-0" title="Klettergebiet Konstein" data-mdb-toggle="collapse" role="button" aria-expanded="false">
-                                    <picture>
-                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/konstein.webp" type="image/webp">
-                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/konstein.jpg" type="image/jpeg"> 
-                        <img src="https://www.munichclimbs.de/images/navigationThumbs/konstein.jpg" alt="Übersicht Klettergebiete Konstein." class="rounded me-3" style="width: 18px; height: 18px;">
+        {% for area in sideBar %}
+            <li class="sidenav-item">
+                <a class="sidenav-link collapsed ripple-surface" href="#sidenav-collapse-1-0-0" title="Klettergebiet {{ area.name }}" data-mdb-toggle="collapse" role="button" aria-expanded="false">
+                    <picture>
+                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/{{ area.image }}.webp" type="image/webp">
+                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/{{ area.image }}.jpg" type="image/jpeg"> 
+                        <img src="https://www.munichclimbs.de/images/navigationThumbs/{{ area.image }}.jpg" alt="Übersicht Klettergebiete {{ area.name }}." class="rounded me-3" style="width: 18px; height: 18px;">
                     </picture>
-                                    <span class="text-truncate">Konstein</span>
-              <i class="fas fa-angle-down rotate-icon"></i></a>
-              <ul class="sidenav-collapse collapse" id="sidenav-collapse-1-0-0">
-                <li class="sidenav-item">
-                                      <a href="/Kletterfels/Burgstein" title="Link zum Klettergebiet: Burgstein" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Burgstein" data-banned="0">Burgstein</a>
-                                      <a href="/Kletterfels/Dollnsteiner_Turm" title="Link zum Klettergebiet: Dollnsteiner Turm" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Dollnsteiner Turm" data-banned="">Dollnsteiner Turm</a>
-                                      <a href="/Kletterfels/Dollnsteiner_Wand" title="Link zum Klettergebiet: Dollnsteiner Wand" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Dollnsteiner Wand" data-banned="">Dollnsteiner Wand</a>
-                                      <a href="/Kletterfels/Hintere_Konsteiner_Wand" title="Link zum Klettergebiet: Hintere Konsteiner Wand" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Hintere Konsteiner Wand" data-banned="">Hintere Konsteiner Wand</a>
-                                      <a href="/Kletterfels/Konsteiner_Wand" title="Link zum Klettergebiet: Konsteiner Wand" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Konsteiner Wand" data-banned="">Konsteiner Wand</a>
-                                      <a href="/Kletterfels/Madonna" title="Link zum Klettergebiet: Madonna" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Madonna" data-banned="">Madonna</a>
-                                      <a href="/Kletterfels/Dohlenwandl" title="Link zum Klettergebiet: Dohlenwandl" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Dohlenwandl" data-banned="">Dohlenwandl</a>
-                                      <a href="/Kletterfels/Dohlenfels" title="Link zum Klettergebiet: Dohlenfels" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Dohlenfels" data-banned="">Dohlenfels</a>
-                                      <a href="/Kletterfels/Dohlenfels_Rueckseite" title="Link zum Klettergebiet: Dohlenfels Rückseite" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Dohlenfels Rückseite" data-banned="1">Dohlenfels Rückseite</a>
-                                      <a href="/Kletterfels/Foersterfels" title="Link zum Klettergebiet: Försterfels" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Försterfels" data-banned="">Försterfels</a>
-                                      <a href="/Kletterfels/Dohlenturm" title="Link zum Klettergebiet: Dohlenturm" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Dohlenturm" data-banned="">Dohlenturm</a>
-                                      <a href="/Kletterfels/Bergspinnenturm" title="Link zum Klettergebiet: Bergspinnenturm" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Bergspinnenturm" data-banned="">Bergspinnenturm</a>
-                                      <a href="/Kletterfels/Lucky_Luke" title="Link zum Klettergebiet: Lucky Luke" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Lucky Luke" data-banned="">Lucky Luke</a>
-                                      <a href="/Kletterfels/Braut_und_Braeutigam" title="Link zum Klettergebiet: Braut und Bräutigam" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Braut und Bräutigam" data-banned="">Braut und Bräutigam</a>
-                                      <a href="/Kletterfels/Asterix_und_Obelix" title="Link zum Klettergebiet: Asterix und Obelix" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Asterix und Obelix" data-banned="">Asterix und Obelix</a>
-                                      <a href="/Kletterfels/Vergessene_Wand" title="Link zum Klettergebiet: Vergessene Wand" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Vergessene Wand" data-banned="">Vergessene Wand</a>
-                                      <a href="/Kletterfels/Merltuerme" title="Link zum Klettergebiet: Merltürme" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Merltürme" data-banned="">Merltürme</a>
-                                      <a href="/Kletterfels/Weisse_Wand" title="Link zum Klettergebiet: Weisse Wand" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Weisse Wand" data-banned="">Weisse Wand</a>
-                                      <a href="/Kletterfels/Fensterlwand" title="Link zum Klettergebiet: Fensterlwand" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Fensterlwand" data-banned="">Fensterlwand</a>
-                                      <a href="/Kletterfels/Oberlandwand" title="Link zum Klettergebiet: Oberlandwand" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Oberlandwand" data-banned="1">Oberlandwand</a>
-                                      <a href="/Kletterfels/Maerchenturm_Konstein" title="Link zum Klettergebiet: Maerchenturm" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Maerchenturm" data-banned="">Maerchenturm</a>
-                                      <a href="/Kletterfels/Hexenkessel" title="Link zum Klettergebiet: Hexenkessel" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Hexenkessel" data-banned="">Hexenkessel</a>
-                                      <a href="/Kletterfels/Muenchner_Wand" title="Link zum Klettergebiet: Münchner Wand" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Münchner Wand" data-banned="">Münchner Wand</a>
-                                      <a href="/Kletterfels/Dornroeschenturm" title="Link zum Klettergebiet: Dornröschenturm" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Dornröschenturm" data-banned="">Dornröschenturm</a>
-                                      <a href="/Kletterfels/Zahn" title="Link zum Klettergebiet: Zahn" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Zahn" data-banned="">Zahn</a>
-                                      <a href="/Kletterfels/Leinwandl" title="Link zum Klettergebiet: Leinwandl" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Leinwandl" data-banned="">Leinwandl</a>
-                                      <a href="/Kletterfels/Aichaer_Wand" title="Link zum Klettergebiet: Aichaer Wand" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Aichaer Wand" data-banned="">Aichaer Wand</a>
-                                      <a href="/Kletterfels/Backenzahn" title="Link zum Klettergebiet: Backenzahn" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Backenzahn" data-banned="">Backenzahn</a>
-                                      <a href="/Kletterfels/Pinwandl" title="Link zum Klettergebiet: Pinwandl" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Pinwandl" data-banned="">Pinwandl</a>
-                                      <a href="/Kletterfels/Lochwand" title="Link zum Klettergebiet: Lochwand" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Lochwand" data-banned="">Lochwand</a>
-                                      <a href="/Kletterfels/Oberlaender_Turm" title="Link zum Klettergebiet: Oberländer Turm" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Oberländer Turm" data-banned="">Oberländer Turm</a>
-                                      <a href="/Kletterfels/Oberlaender_Wand" title="Link zum Klettergebiet: Oberländer Wand" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Oberländer Wand" data-banned="">Oberländer Wand</a>
-                                      <a href="/Kletterfels/Felsengarten" title="Link zum Klettergebiet: Felsengarten" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="Felsengarten" data-banned="">Felsengarten</a>
-                                  </li>
-              </ul>
-          </li>
-                  <li class="sidenav-item">
-              <a class="sidenav-link collapsed ripple-surface" href="#sidenav-collapse-1-0-1" title="Klettergebiet Altmühltal" data-mdb-toggle="collapse" role="button" aria-expanded="false">
-                                    <picture>
-                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/altmuehltal.webp" type="image/webp">
-                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/altmuehltal.jpg" type="image/jpeg"> 
-                        <img src="https://www.munichclimbs.de/images/navigationThumbs/altmuehltal.jpg" alt="Übersicht Klettergebiete Altmühltal." class="rounded me-3" style="width: 18px; height: 18px;">
-                    </picture>
-                                    <span class="text-truncate">Altmühltal</span>
-              <i class="fas fa-angle-down rotate-icon"></i></a>
-              <ul class="sidenav-collapse collapse" id="sidenav-collapse-1-0-1">
-                <li class="sidenav-item">
-                                      <a href="/Kletterfels/Jachenhausen" title="Link zum Klettergebiet: Jachenhausen" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Jachenhausen" data-banned="">Jachenhausen</a>
-                                      <a href="/Kletterfels/Prunner_Turm" title="Link zum Klettergebiet: Prunner Turm" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Prunner Turm" data-banned="">Prunner Turm</a>
-                                      <a href="/Kletterfels/Prunner_Wand" title="Link zum Klettergebiet: Prunner Wand" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Prunner Wand" data-banned="">Prunner Wand</a>
-                                      <a href="/Kletterfels/Muehltor" title="Link zum Klettergebiet: Mühltor" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Mühltor" data-banned="">Mühltor</a>
-                                      <a href="/Kletterfels/Felskirchl" title="Link zum Klettergebiet: Felskirchl" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Felskirchl" data-banned="">Felskirchl</a>
-                                      <a href="/Kletterfels/Triangelturm" title="Link zum Klettergebiet: Triangelturm" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Triangelturm" data-banned="">Triangelturm</a>
-                                      <a href="/Kletterfels/Steinerne_Stadt" title="Link zum Klettergebiet: Steinerne Stadt" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Steinerne Stadt" data-banned="">Steinerne Stadt</a>
-                                      <a href="/Kletterfels/Friedrichsruh" title="Link zum Klettergebiet: Friedrichsruh" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Friedrichsruh" data-banned="">Friedrichsruh</a>
-                                      <a href="/Kletterfels/Schlossfels" title="Link zum Klettergebiet: Schloßfels" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Schloßfels" data-banned="1">Schloßfels</a>
-                                      <a href="/Kletterfels/Grosser_Keilstein" title="Link zum Klettergebiet: Großer Keilstein" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Großer Keilstein" data-banned="">Großer Keilstein</a>
-                                      <a href="/Kletterfels/Kleiner_Keilstein" title="Link zum Klettergebiet: Kleiner Keilstein" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Kleiner Keilstein" data-banned="">Kleiner Keilstein</a>
-                                      <a href="/Kletterfels/Quaderwand" title="Link zum Klettergebiet: Quaderwand" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Quaderwand" data-banned="">Quaderwand</a>
-                                      <a href="/Kletterfels/Baerenkopf" title="Link zum Klettergebiet: Bärenkopf" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Bärenkopf" data-banned="">Bärenkopf</a>
-                                      <a href="/Kletterfels/Waldkopf" title="Link zum Klettergebiet: Waldkopf" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Waldkopf" data-banned="0">Waldkopf</a>
-                                      <a href="/Kletterfels/Kastlwand" title="Link zum Klettergebiet: Kastlwand" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Kastlwand" data-banned="">Kastlwand</a>
-                                      <a href="/Kletterfels/Deutsch_Oesterreicher_Turm" title="Link zum Klettergebiet: Deutsch-Österreicher Turm" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Deutsch-Österreicher Turm" data-banned="1">Deutsch-Österreicher Turm</a>
-                                      <a href="/Kletterfels/Fels_X" title="Link zum Klettergebiet: Fels X" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Fels X" data-banned="">Fels X</a>
-                                      <a href="/Kletterfels/Ebola" title="Link zum Klettergebiet: Ebola" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Ebola" data-banned="">Ebola</a>
-                                      <a href="/Kletterfels/Vergessene_Welt" title="Link zum Klettergebiet: Vergessene Welt" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Vergessene Welt" data-banned="">Vergessene Welt</a>
-                                      <a href="/Kletterfels/Maerchenturm_Altmuehltal" title="Link zum Klettergebiet: Märchenturm" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Märchenturm" data-banned="">Märchenturm</a>
-                                      <a href="/Kletterfels/Klausfels" title="Link zum Klettergebiet: Klausfels" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Klausfels" data-banned="">Klausfels</a>
-                                      <a href="/Kletterfels/Schlafwandlerfels_Cavolution" title="Link zum Klettergebiet: Schlafwandlerfels und Cavolution" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Schlafwandlerfels und Cavolution" data-banned="">Schlafwandlerfels und Cavolution</a>
-                                      <a href="/Kletterfels/Mayfels" title="Link zum Klettergebiet: Mayfels" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Mayfels" data-banned="">Mayfels</a>
-                                      <a href="/Kletterfels/Wildwechsel" title="Link zum Klettergebiet: Wildwechsel" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Wildwechsel" data-banned="">Wildwechsel</a>
-                                      <a href="/Kletterfels/Homoeostase" title="Link zum Klettergebiet: Homöostase" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Homöostase" data-banned="">Homöostase</a>
-                                      <a href="/Kletterfels/Penthouse" title="Link zum Klettergebiet: Penthouse" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Penthouse" data-banned="">Penthouse</a>
-                                      <a href="/Kletterfels/Isostar" title="Link zum Klettergebiet: Isostar" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Isostar" data-banned="">Isostar</a>
-                                      <a href="/Kletterfels/Pinguin" title="Link zum Klettergebiet: Pinguin" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Pinguin" data-banned="">Pinguin</a>
-                                      <a href="/Kletterfels/Apostelkeller_Apostelbalkon_Gruft" title="Link zum Klettergebiet: Apostelkeller, Apostelbalkon und Gruft" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Apostelkeller, Apostelbalkon und Gruft" data-banned="">Apostelkeller, Apostelbalkon und Gruft</a>
-                                      <a href="/Kletterfels/Spielecke" title="Link zum Klettergebiet: Spielecke" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Spielecke" data-banned="">Spielecke</a>
-                                      <a href="/Kletterfels/Chefetage" title="Link zum Klettergebiet: Chefetage" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Chefetage" data-banned="">Chefetage</a>
-                                      <a href="/Kletterfels/Schwedenfels_Grantler" title="Link zum Klettergebiet: Schwedenfels und Grantler" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Schwedenfels und Grantler" data-banned="">Schwedenfels und Grantler</a>
-                                      <a href="/Kletterfels/Blauer_Klaus" title="Link zum Klettergebiet: Blauer Klaus" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Blauer Klaus" data-banned="">Blauer Klaus</a>
-                                      <a href="/Kletterfels/Schellneckkopf" title="Link zum Klettergebiet: Schellneckkopf" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Schellneckkopf" data-banned="1">Schellneckkopf</a>
-                                      <a href="/Kletterfels/Schellneckwand" title="Link zum Klettergebiet: Schellneckwand" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Schellneckwand" data-banned="1">Schellneckwand</a>
-                                      <a href="/Kletterfels/Kiefernzapfen" title="Link zum Klettergebiet: Kiefernzapfen" class="sidenav-link ripple-surface" data-area="Altmühltal" data-rocks-information="Kiefernzapfen" data-banned="">Kiefernzapfen</a>
-                                  </li>
-              </ul>
-          </li>
-                  <li class="sidenav-item">
-              <a class="sidenav-link collapsed ripple-surface" href="#sidenav-collapse-1-0-2" title="Klettergebiet Donaudurchbruch + Tal" data-mdb-toggle="collapse" role="button" aria-expanded="false">
-                                    <picture>
-                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/donaudurchbruch.webp" type="image/webp">
-                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/donaudurchbruch.jpg" type="image/jpeg"> 
-                        <img src="https://www.munichclimbs.de/images/navigationThumbs/donaudurchbruch.jpg" alt="Übersicht Klettergebiete Donaudurchbruch + Tal." class="rounded me-3" style="width: 18px; height: 18px;">
-                    </picture>
-                                    <span class="text-truncate">Donaudurchbruch + Tal</span>
-              <i class="fas fa-angle-down rotate-icon"></i></a>
-              <ul class="sidenav-collapse collapse" id="sidenav-collapse-1-0-2">
-                <li class="sidenav-item">
-                                      <a href="/Kletterfels/Loecherwand" title="Link zum Klettergebiet: Löcherwand" class="sidenav-link ripple-surface" data-area="Donaudurchbruch + Tal" data-rocks-information="Löcherwand" data-banned="">Löcherwand</a>
-                                      <a href="/Kletterfels/Castellwand" title="Link zum Klettergebiet: Castellwand" class="sidenav-link ripple-surface" data-area="Donaudurchbruch + Tal" data-rocks-information="Castellwand" data-banned="">Castellwand</a>
-                                      <a href="/Kletterfels/Bischofsbucht" title="Link zum Klettergebiet: Bischofsbucht" class="sidenav-link ripple-surface" data-area="Donaudurchbruch + Tal" data-rocks-information="Bischofsbucht" data-banned="">Bischofsbucht</a>
-                                      <a href="/Kletterfels/Roemerwand" title="Link zum Klettergebiet: Römerwand" class="sidenav-link ripple-surface" data-area="Donaudurchbruch + Tal" data-rocks-information="Römerwand" data-banned="1">Römerwand</a>
-                                      <a href="/Kletterfels/Hanslberg" title="Link zum Klettergebiet: Hanslberg" class="sidenav-link ripple-surface" data-area="Donaudurchbruch + Tal" data-rocks-information="Hanslberg" data-banned="">Hanslberg</a>
-                                      <a href="/Kletterfels/Walba" title="Link zum Klettergebiet: Walba" class="sidenav-link ripple-surface" data-area="Donaudurchbruch + Tal" data-rocks-information="Walba" data-banned="">Walba</a>
-                                      <a href="/Kletterfels/Wasserwacht" title="Link zum Klettergebiet: Wasserwacht" class="sidenav-link ripple-surface" data-area="Donaudurchbruch + Tal" data-rocks-information="Wasserwacht" data-banned="">Wasserwacht</a>
-                                  </li>
-              </ul>
-          </li>
-                  <li class="sidenav-item">
-              <a class="sidenav-link collapsed ripple-surface" href="#sidenav-collapse-1-0-3" title="Klettergebiet Labertal" data-mdb-toggle="collapse" role="button" aria-expanded="false">
-                                    <picture>
-                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/labertal.webp" type="image/webp">
-                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/labertal.jpg" type="image/jpeg"> 
-                        <img src="https://www.munichclimbs.de/images/navigationThumbs/labertal.jpg" alt="Übersicht Klettergebiete Labertal." class="rounded me-3" style="width: 18px; height: 18px;">
-                    </picture>
-                                    <span class="text-truncate">Labertal</span>
-              <i class="fas fa-angle-down rotate-icon"></i></a>
-              <ul class="sidenav-collapse collapse" id="sidenav-collapse-1-0-3">
-                <li class="sidenav-item">
-                                      <a href="/Kletterfels/Nixenwand" title="Link zum Klettergebiet: Nixenwand" class="sidenav-link ripple-surface" data-area="Labertal" data-rocks-information="Nixenwand" data-banned="">Nixenwand</a>
-                                      <a href="/Kletterfels/Labertalwand" title="Link zum Klettergebiet: Labertalwand" class="sidenav-link ripple-surface" data-area="Labertal" data-rocks-information="Labertalwand" data-banned="">Labertalwand</a>
-                                      <a href="/Kletterfels/Schwarze_Wand" title="Link zum Klettergebiet: Schwarze Wand" class="sidenav-link ripple-surface" data-area="Labertal" data-rocks-information="Schwarze Wand" data-banned="">Schwarze Wand</a>
-                                      <a href="/Kletterfels/Kletterblock" title="Link zum Klettergebiet: Kletterblock" class="sidenav-link ripple-surface" data-area="Labertal" data-rocks-information="Kletterblock" data-banned="">Kletterblock</a>
-                                      <a href="/Kletterfels/Eisenbahnerwand" title="Link zum Klettergebiet: Eisenbahnerwand" class="sidenav-link ripple-surface" data-area="Labertal" data-rocks-information="Eisenbahnerwand" data-banned="">Eisenbahnerwand</a>
-                                      <a href="/Kletterfels/Kuglerfels" title="Link zum Klettergebiet: Kuglerfels" class="sidenav-link ripple-surface" data-area="Labertal" data-rocks-information="Kuglerfels" data-banned="">Kuglerfels</a>
-                                  </li>
-              </ul>
-          </li>
-                  <li class="sidenav-item">
-              <a class="sidenav-link collapsed ripple-surface" href="#sidenav-collapse-1-0-4" title="Klettergebiet Reutte" data-mdb-toggle="collapse" role="button" aria-expanded="false">
-                                    <picture>
-                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/fuessen.webp" type="image/webp">
-                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/fuessen.jpg" type="image/jpeg"> 
-                        <img src="https://www.munichclimbs.de/images/navigationThumbs/fuessen.jpg" alt="Übersicht Klettergebiete Reutte." class="rounded me-3" style="width: 18px; height: 18px;">
-                    </picture>
-                                    <span class="text-truncate">Reutte</span>
-              <i class="fas fa-angle-down rotate-icon"></i></a>
-              <ul class="sidenav-collapse collapse" id="sidenav-collapse-1-0-4">
-                <li class="sidenav-item">
-                                      <a href="/Kletterfels/Kraftwerkwand" title="Link zum Klettergebiet: Kraftwerkwand" class="sidenav-link ripple-surface" data-area="Reutte" data-rocks-information="Kraftwerkwand" data-banned="">Kraftwerkwand</a>
-                                      <a href="/Kletterfels/Weissewand" title="Link zum Klettergebiet: Weißewand" class="sidenav-link ripple-surface" data-area="Reutte" data-rocks-information="Weißewand" data-banned="">Weißewand</a>
-                                  </li>
-              </ul>
-          </li>
-                  <li class="sidenav-item">
-              <a class="sidenav-link collapsed ripple-surface" href="#sidenav-collapse-1-0-5" title="Klettergebiet Tölzer Land" data-mdb-toggle="collapse" role="button" aria-expanded="false">
-                                    <picture>
-                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/tegernseer_berge.webp" type="image/webp">
-                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/tegernseer_berge.jpg" type="image/jpeg"> 
-                        <img src="https://www.munichclimbs.de/images/navigationThumbs/tegernseer_berge.jpg" alt="Übersicht Klettergebiete Tölzer Land." class="rounded me-3" style="width: 18px; height: 18px;">
-                    </picture>
-                                    <span class="text-truncate">Tölzer Land</span>
-              <i class="fas fa-angle-down rotate-icon"></i></a>
-              <ul class="sidenav-collapse collapse" id="sidenav-collapse-1-0-5">
-                <li class="sidenav-item">
-                                      <a href="/Kletterfels/Bad_Heilbrunn" title="Link zum Klettergebiet: Bad Heilbrunn" class="sidenav-link ripple-surface" data-area="Tölzer Land" data-rocks-information="Bad Heilbrunn" data-banned="">Bad Heilbrunn</a>
-                                      <a href="/Kletterfels/Ross_und_Buchstein" title="Link zum Klettergebiet: Roß- und Buchstein" class="sidenav-link ripple-surface" data-area="Tölzer Land" data-rocks-information="Roß- und Buchstein" data-banned="">Roß- und Buchstein</a>
-                                      <a href="/Kletterfels/Meilenstein" title="Link zum Klettergebiet: Meilenstein" class="sidenav-link ripple-surface" data-area="Tölzer Land" data-rocks-information="Meilenstein" data-banned="">Meilenstein</a>
-                                      <a href="/Kletterfels/Hohenburg" title="Link zum Klettergebiet: Hohenburg" class="sidenav-link ripple-surface" data-area="Tölzer Land" data-rocks-information="Hohenburg" data-banned="">Hohenburg</a>
-                                      <a href="/Kletterfels/Daffensteine" title="Link zum Klettergebiet: Daffensteine" class="sidenav-link ripple-surface" data-area="Tölzer Land" data-rocks-information="Daffensteine" data-banned="">Daffensteine</a>
-                                  </li>
-              </ul>
-          </li>
-                  <li class="sidenav-item">
-              <a class="sidenav-link collapsed ripple-surface" href="#sidenav-collapse-1-0-6" title="Klettergebiet Oberammergau" data-mdb-toggle="collapse" role="button" aria-expanded="false">
-                                    <picture>
-                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/oberammergau.webp" type="image/webp">
-                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/oberammergau.jpg" type="image/jpeg"> 
-                        <img src="https://www.munichclimbs.de/images/navigationThumbs/oberammergau.jpg" alt="Übersicht Klettergebiete Oberammergau." class="rounded me-3" style="width: 18px; height: 18px;">
-                    </picture>
-                                    <span class="text-truncate">Oberammergau</span>
-              <i class="fas fa-angle-down rotate-icon"></i></a>
-              <ul class="sidenav-collapse collapse" id="sidenav-collapse-1-0-6">
-                <li class="sidenav-item">
-                                      <a href="/Kletterfels/Frauenwasserl" title="Link zum Klettergebiet: Frauenwasserl" class="sidenav-link ripple-surface" data-area="Oberammergau" data-rocks-information="Frauenwasserl" data-banned="">Frauenwasserl</a>
-                                      <a href="/Kletterfels/Falkenwand" title="Link zum Klettergebiet: Falkenwand" class="sidenav-link ripple-surface" data-area="Oberammergau" data-rocks-information="Falkenwand" data-banned="">Falkenwand</a>
-                                      <a href="/Kletterfels/Kofel" title="Link zum Klettergebiet: Kofel" class="sidenav-link ripple-surface" data-area="Oberammergau" data-rocks-information="Kofel" data-banned="">Kofel</a>
-                                      <a href="/Kletterfels/Friedhofswand" title="Link zum Klettergebiet: Friedhofswand" class="sidenav-link ripple-surface" data-area="Oberammergau" data-rocks-information="Friedhofswand" data-banned="">Friedhofswand</a>
-                                      <a href="/Kletterfels/Baehrenhoehle" title="Link zum Klettergebiet: Bärenhöhle" class="sidenav-link ripple-surface" data-area="Oberammergau" data-rocks-information="Bärenhöhle" data-banned="">Bärenhöhle</a>
-                                      <a href="/Kletterfels/Kraxentrager" title="Link zum Klettergebiet: Kraxentrager" class="sidenav-link ripple-surface" data-area="Oberammergau" data-rocks-information="Kraxentrager" data-banned="">Kraxentrager</a>
-                                      <a href="/Kletterfels/Little_Paradise" title="Link zum Klettergebiet: Little Paradise" class="sidenav-link ripple-surface" data-area="Oberammergau" data-rocks-information="Little Paradise" data-banned="">Little Paradise</a>
-                                      <a href="/Kletterfels/Oberau" title="Link zum Klettergebiet: Oberau" class="sidenav-link ripple-surface" data-area="Oberammergau" data-rocks-information="Oberau" data-banned="">Oberau</a>
-                                  </li>
-              </ul>
-          </li>
-                  <li class="sidenav-item">
-              <a class="sidenav-link collapsed ripple-surface" href="#sidenav-collapse-1-0-7" title="Klettergebiet Mangfallgebirge" data-mdb-toggle="collapse" role="button" aria-expanded="false">
-                                    <picture>
-                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/mangfallgebirge.webp" type="image/webp">
-                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/mangfallgebirge.jpg" type="image/jpeg"> 
-                        <img src="https://www.munichclimbs.de/images/navigationThumbs/mangfallgebirge.jpg" alt="Übersicht Klettergebiete Mangfallgebirge." class="rounded me-3" style="width: 18px; height: 18px;">
-                    </picture>
-                                    <span class="text-truncate">Mangfallgebirge</span>
-              <i class="fas fa-angle-down rotate-icon"></i></a>
-              <ul class="sidenav-collapse collapse" id="sidenav-collapse-1-0-7">
-                <li class="sidenav-item">
-                                      <a href="/Kletterfels/Taubenstein" title="Link zum Klettergebiet: Taubenstein" class="sidenav-link ripple-surface" data-area="Mangfallgebirge" data-rocks-information="Taubenstein" data-banned="">Taubenstein</a>
-                                      <a href="/Kletterfels/Ruchenkoepfe" title="Link zum Klettergebiet: Ruchenköpfe" class="sidenav-link ripple-surface" data-area="Mangfallgebirge" data-rocks-information="Ruchenköpfe" data-banned="0">Ruchenköpfe</a>
-                                      <a href="/Kletterfels/Sebaldstein" title="Link zum Klettergebiet: Sebaldstein" class="sidenav-link ripple-surface" data-area="Mangfallgebirge" data-rocks-information="Sebaldstein" data-banned="">Sebaldstein</a>
-                                  </li>
-              </ul>
-          </li>
-                  <li class="sidenav-item">
-              <a class="sidenav-link collapsed ripple-surface" href="#sidenav-collapse-1-0-8" title="Klettergebiet Unteres Inntal" data-mdb-toggle="collapse" role="button" aria-expanded="false">
-                                    <picture>
-                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/inntal.webp" type="image/webp">
-                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/inntal.jpg" type="image/jpeg"> 
-                        <img src="https://www.munichclimbs.de/images/navigationThumbs/inntal.jpg" alt="Übersicht Klettergebiete Unteres Inntal." class="rounded me-3" style="width: 18px; height: 18px;">
-                    </picture>
-                                    <span class="text-truncate">Unteres Inntal</span>
-              <i class="fas fa-angle-down rotate-icon"></i></a>
-              <ul class="sidenav-collapse collapse" id="sidenav-collapse-1-0-8">
-                <li class="sidenav-item">
-                                      <a href="/Kletterfels/Weigend_Wall" title="Link zum Klettergebiet: Weigend Wall" class="sidenav-link ripple-surface" data-area="Unteres Inntal" data-rocks-information="Weigend Wall" data-banned="">Weigend Wall</a>
-                                      <a href="/Kletterfels/Flintsbach" title="Link zum Klettergebiet: Flintsbach" class="sidenav-link ripple-surface" data-area="Unteres Inntal" data-rocks-information="Flintsbach" data-banned="">Flintsbach</a>
-                                      <a href="/Kletterfels/Druidenwand" title="Link zum Klettergebiet: Druidenwand" class="sidenav-link ripple-surface" data-area="Unteres Inntal" data-rocks-information="Druidenwand" data-banned="">Druidenwand</a>
-                                      <a href="/Kletterfels/Bruecke_zur_Rosengasse" title="Link zum Klettergebiet: Brücke zur Rosengasse" class="sidenav-link ripple-surface" data-area="Unteres Inntal" data-rocks-information="Brücke zur Rosengasse" data-banned="">Brücke zur Rosengasse</a>
-                                      <a href="/Kletterfels/Bixlwand" title="Link zum Klettergebiet: Bixlwand" class="sidenav-link ripple-surface" data-area="Unteres Inntal" data-rocks-information="Bixlwand" data-banned="">Bixlwand</a>
-                                      <a href="/Kletterfels/Weberwand" title="Link zum Klettergebiet: Weberwand" class="sidenav-link ripple-surface" data-area="Unteres Inntal" data-rocks-information="Weberwand" data-banned="0">Weberwand</a>
-                                      <a href="/Kletterfels/Schlossberg" title="Link zum Klettergebiet: Schlossberg" class="sidenav-link ripple-surface" data-area="Unteres Inntal" data-rocks-information="Schlossberg" data-banned="0">Schlossberg</a>
-                                      <a href="/Kletterfels/Luegsteinsee" title="Link zum Klettergebiet: Luegsteinsee" class="sidenav-link ripple-surface" data-area="Unteres Inntal" data-rocks-information="Luegsteinsee" data-banned="">Luegsteinsee</a>
-                                      <a href="/Kletterfels/Ramserer_Stoa" title="Link zum Klettergebiet: Ramserer Stoa" class="sidenav-link ripple-surface" data-area="Unteres Inntal" data-rocks-information="Ramserer Stoa" data-banned="">Ramserer Stoa</a>
-                                      <a href="/Kletterfels/Idealwand" title="Link zum Klettergebiet: Idealwand" class="sidenav-link ripple-surface" data-area="Unteres Inntal" data-rocks-information="Idealwand" data-banned="">Idealwand</a>
-                                      <a href="/Kletterfels/Bruennstein" title="Link zum Klettergebiet: Brünnstein" class="sidenav-link ripple-surface" data-area="Unteres Inntal" data-rocks-information="Brünnstein" data-banned="">Brünnstein</a>
-                                      <a href="/Kletterfels/Morsbach" title="Link zum Klettergebiet: Morsbach" class="sidenav-link ripple-surface" data-area="Unteres Inntal" data-rocks-information="Morsbach" data-banned="">Morsbach</a>
-                                      <a href="/Kletterfels/Geisterschmiedwand" title="Link zum Klettergebiet: Geisterschmiedwand" class="sidenav-link ripple-surface" data-area="Unteres Inntal" data-rocks-information="Geisterschmiedwand" data-banned="">Geisterschmiedwand</a>
-                                      <a href="/Kletterfels/Sparchen" title="Link zum Klettergebiet: Sparchen" class="sidenav-link ripple-surface" data-area="Unteres Inntal" data-rocks-information="Sparchen" data-banned="">Sparchen</a>
-                                  </li>
-              </ul>
-          </li>
-                  <li class="sidenav-item">
-              <a class="sidenav-link collapsed ripple-surface" href="#sidenav-collapse-1-0-9" title="Klettergebiet Kufstein" data-mdb-toggle="collapse" role="button" aria-expanded="false">
-                                    <picture>
-                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/kufstein.webp" type="image/webp">
-                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/kufstein.jpg" type="image/jpeg"> 
-                        <img src="https://www.munichclimbs.de/images/navigationThumbs/kufstein.jpg" alt="Übersicht Klettergebiete Kufstein." class="rounded me-3" style="width: 18px; height: 18px;">
-                    </picture>
-                                    <span class="text-truncate">Kufstein</span>
-              <i class="fas fa-angle-down rotate-icon"></i></a>
-              <ul class="sidenav-collapse collapse" id="sidenav-collapse-1-0-9">
-                <li class="sidenav-item">
-                                      <a href="/Kletterfels/Achleiten" title="Link zum Klettergebiet: Achleiten" class="sidenav-link ripple-surface" data-area="Kufstein" data-rocks-information="Achleiten" data-banned="">Achleiten</a>
-                                      <a href="/Kletterfels/Schleierwasserfall" title="Link zum Klettergebiet: Schleierwasserfall" class="sidenav-link ripple-surface" data-area="Kufstein" data-rocks-information="Schleierwasserfall" data-banned="">Schleierwasserfall</a>
-                                  </li>
-              </ul>
-          </li>
-                  <li class="sidenav-item">
-              <a class="sidenav-link collapsed ripple-surface" href="#sidenav-collapse-1-0-10" title="Klettergebiet Eichenau" data-mdb-toggle="collapse" role="button" aria-expanded="false">
-                                    <picture>
-                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/eichenau.webp" type="image/webp">
-                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/eichenau.jpg" type="image/jpeg"> 
-                        <img src="https://www.munichclimbs.de/images/navigationThumbs/eichenau.jpg" alt="Übersicht Klettergebiete Eichenau." class="rounded me-3" style="width: 18px; height: 18px;">
-                    </picture>
-                                    <span class="text-truncate">Eichenau</span>
-              <i class="fas fa-angle-down rotate-icon"></i></a>
-              <ul class="sidenav-collapse collapse" id="sidenav-collapse-1-0-10">
-                <li class="sidenav-item">
-                                      <a href="/Kletterfels/Eichenau" title="Link zum Klettergebiet: Eichenau" class="sidenav-link ripple-surface" data-area="Eichenau" data-rocks-information="Eichenau" data-banned="">Eichenau</a>
-                                  </li>
-              </ul>
-          </li>
-                  <li class="sidenav-item">
-              <a class="sidenav-link collapsed ripple-surface" href="#sidenav-collapse-1-0-11" title="Klettergebiet Chiemgau" data-mdb-toggle="collapse" role="button" aria-expanded="false">
-                                    <picture>
-                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/chiemgau.webp" type="image/webp">
-                        <source srcset="https://www.munichclimbs.de/images/navigationThumbs/chiemgau.jpg" type="image/jpeg"> 
-                        <img src="https://www.munichclimbs.de/images/navigationThumbs/chiemgau.jpg" alt="Übersicht Klettergebiete Chiemgau." class="rounded me-3" style="width: 18px; height: 18px;">
-                    </picture>
-                                    <span class="text-truncate">Chiemgau</span>
-              <i class="fas fa-angle-down rotate-icon"></i></a>
-              <ul class="sidenav-collapse collapse" id="sidenav-collapse-1-0-11">
-                <li class="sidenav-item">
-                                      <a href="/Kletterfels/Auerwandl" title="Link zum Klettergebiet: Auerwandl" class="sidenav-link ripple-surface" data-area="Chiemgau" data-rocks-information="Auerwandl" data-banned="0">Auerwandl</a>
-                                      <a href="/Kletterfels/Siffwandl" title="Link zum Klettergebiet: Siffwandl" class="sidenav-link ripple-surface" data-area="Chiemgau" data-rocks-information="Siffwandl" data-banned="">Siffwandl</a>
-                                      <a href="/Kletterfels/Zellerwand" title="Link zum Klettergebiet: Zellerwand" class="sidenav-link ripple-surface" data-area="Chiemgau" data-rocks-information="Zellerwand" data-banned="0">Zellerwand</a>
-                                  </li>
-              </ul>
-          </li>
-              <li class="sidenav-item">
-          <a class="sidenav-link ripple-surface" href="/Datenschutz">
-            <i class="fas fa-chart-area fa-fw me-3"></i>
-            <span class="text-truncate">Datenschutz</span>
-          </a>
-      </li>
-      <li class="sidenav-item">
-          <a class="sidenav-link ripple-surface" href="/Impressum">
-            <i class="fas fa-chart-area fa-fw me-3"></i>
-            <span class="text-truncate">Impressum</span>
-          </a>
-      </li>
+                    <span class="text-truncate">{{ area.name }}</span>
+                    <i class="fas fa-angle-down rotate-icon"></i>
+                </a>
+                {% if area.rocks is not empty %}
+                    <ul class="sidenav-collapse collapse" id="sidenav-collapse-1-0-0">
+                        {% for rock in area.rocks %}
+                            <li class="sidenav-item"><a href="/Kletterfels/{{ rock.name }}" title="Link zum Klettergebiet: {{ rock.name }}" class="sidenav-link ripple-surface" data-area="Konstein" data-rocks-information="{{ rock.name }}" data-banned="0">{{ rock.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
+        <li class="sidenav-item">
+            <a class="sidenav-link ripple-surface" href="/Datenschutz">
+                <i class="fas fa-chart-area fa-fw me-3"></i>
+                <span class="text-truncate">Datenschutz</span>
+            </a>
+        </li>
+        <li class="sidenav-item">
+            <a class="sidenav-link ripple-surface" href="/Impressum">
+                <i class="fas fa-chart-area fa-fw me-3"></i>
+                <span class="text-truncate">Impressum</span>
+            </a>
+        </li>
     </ul>
   <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></nav>
 	<nav id="main-navbar" class="bg-white fixed-top">
