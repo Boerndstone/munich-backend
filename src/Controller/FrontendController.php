@@ -70,10 +70,9 @@ class FrontendController extends AbstractController
             $areaSearch = $doctrine->getRepository(Area::class)->findAllOrderedBy();
         }
 
-
         $searchTerm = $request->query->get('q');
 
-        $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
+        $areas = $areaRepository->getAreasFrontend();
         $areaName = $area->getName();
         $areaLat = $area->getLat();
         $areaLng = $area->getLng();
@@ -117,21 +116,11 @@ class FrontendController extends AbstractController
             $areaSearch = $doctrine->getRepository(Area::class)->findAllOrderedBy();
         }
 
-
-
-
-
         $searchTerm = $request->query->get('q');
 
         $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
         $rock = $doctrine->getRepository(Rock::class)->findRockName($slug);
 
-
-
-        // $belowSix = $doctrine->getRepository(Routes::class)->findRoutesBelowSixForRock($slug);
-        // $belowEight = $doctrine->getRepository(Routes::class)->findRoutesBelowEightForRock($slug);
-        // $greaterEight = $doctrine->getRepository(Routes::class)->findRoutesGreaterEightForRock($slug);
-        // $projects = $doctrine->getRepository(Routes::class)->findProjectForRock($slug);
 
         $routes = $doctrine->getRepository(Routes::class)->findRoutesRock($slug);
 
@@ -140,18 +129,14 @@ class FrontendController extends AbstractController
 
         $topos = $doctrine->getRepository(Topo::class)->getTopos($rockId);
 
-
-
+        $rocks = $rockRepository->getRockInformation($slug);
         $sideBar = $areaRepository->sidebarNavigation();
 
         return $this->render('frontend/rock.html.twig', [
             'areas' => $areas,
             'slug' => $slug,
             'rock' => $rock,
-            'belowSix' => $belowSix,
-            'belowEight' => $belowEight,
-            'greaterEight' => $greaterEight,
-            'projects' => $projects,
+            'rocks' => $rocks,
             'routes' => $routes,
             'searchTerm' => $searchTerm,
             'videoRepository' => $videoRepository,

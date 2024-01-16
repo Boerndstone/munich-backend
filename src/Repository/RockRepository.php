@@ -171,4 +171,42 @@ class RockRepository extends ServiceEntityRepository
 
         return $queryBuilder;
     }
+
+    public function getRockInformation($rockSlug)
+    {
+        $queryBuilder = $this->createQueryBuilder('rock')
+            ->select(
+                'rock.name as rockName',
+                'rock.slug as rockSlug',
+                'rock.height as rockHeight',
+                'rock.childFriendly as rockChild',
+                'rock.rain as rockRain',
+                'rock.lat as rockLat',
+                'rock.lng as rockLng',
+                'rock.zone as rockZone',
+                'rock.orientation as rockOrientation',
+                'rock.sunny as rockSunny',
+                'rock.image as rockImage',
+                'rock.season as rockSeason',
+                'rock.description as rockDescription',
+                'rock.access as rockAccess',
+                'rock.nature as rockNature',
+                'COUNT(DISTINCT route.id) AS amountRoutes',
+                'SUM(CASE WHEN route.gradeNo > 0 AND route.gradeNo <= 15 THEN 1 ELSE 0 END) AS amountEasy',
+                'SUM(CASE WHEN route.gradeNo > 15 AND route.gradeNo <= 29 THEN 1 ELSE 0 END) AS amountMiddle',
+                'SUM(CASE WHEN route.gradeNo > 29 AND route.gradeNo <= 60 THEN 1 ELSE 0 END) AS amountHard',
+                'SUM(CASE WHEN route.gradeNo = 0 OR route.gradeNo IS NULL THEN 1 ELSE 0 END) AS amountProjects'
+            )
+            ->orderBy('rock.id', 'ASC')
+            ->leftJoin('rock.area', 'area')
+            ->leftJoin('rock.routes', 'route')
+            ->where('rock.slug LIKE :rockSlug')
+            ->andWhere('rock.online = 1')
+            ->setParameter('rockSlug', $rockSlug)
+            ->groupBy('rock.id')
+            ->getQuery()
+            ->getResult();
+
+        return $queryBuilder;
+    }
 }
