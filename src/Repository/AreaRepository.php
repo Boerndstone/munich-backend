@@ -127,4 +127,20 @@ class AreaRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function getAreasFooter()
+    {
+        $qb = $this->createQueryBuilder('area')
+            ->select(
+                'area.id as areaId',
+                'area.name as name',
+                'area.slug as slug',
+            )
+            ->leftJoin('area.rocks', 'rock')
+            ->where('area.online = 1')
+            ->groupBy('area.id, area.name')
+            ->orderBy('area.sequence');
+
+        return $qb->getQuery()->getResult();
+    }
 }

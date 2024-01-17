@@ -124,19 +124,6 @@ class RoutesRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findRoutesRock($rockSlug)
-    {
-        return $this->createQueryBuilder('routes')
-            ->orderBy('routes.nr', 'ASC')
-            ->innerJoin('routes.rock', 'routes_rock')
-            ->andWhere('routes_rock.slug = :rockSlug')
-            ->setParameter('rockSlug', $rockSlug)
-            ->getQuery()
-            ->getResult();
-    }
-
-
-
     public function getGrades($area, $gradeLow, $gradeHigh)
     {
         return $this->createQueryBuilder('routes')
@@ -167,9 +154,6 @@ class RoutesRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
-
-
-
     public function getToposWithRoutes($rockName, $counter)
     {
         return $this->createQueryBuilder('routes')
@@ -182,43 +166,4 @@ class RoutesRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
-    // function getParamsWithTopo($felsname, $value)
-    // {
-    //     global $pdo;
-    //     $sql = 'SELECT  
-    // 			area.name as areaName,
-    // 			area.id as areaId,
-    // 			area.slug as areaSlug,
-    // 			rock.area_id as rockAreaId,
-    // 			routes.id as routesId,
-    // 			rock.id as rockId,
-    // 			rock.nr as rockNr,
-    // 			routes.nr as routesNr,
-    // 			routes.name as routesName,
-    // 			routes.grade as routesGrade,
-    // 			routes.first_ascent as routesFirstAscent,
-    // 			routes.year_first_ascent as routesYearFirstAscent,
-    // 			routes.protection as routesProtection,
-    // 			routes.description as routesDescription,
-    // 			routes.rating as routesRating,
-    // 			topo.with_sector as topoWithSector,
-    // 			topo.name as topoName,
-    // 			topo.image as topoImage,
-    // 			topo.svg as topoSVG
-    // 			FROM area 
-    // 			INNER JOIN rock ON area.id = rock.area_id 
-    // 			INNER JOIN routes ON rock.id = routes.rock_id 
-    // 			INNER JOIN topo ON routes.topo_id = topo.number 
-    // 			WHERE rock.name = :felsname 
-    // 			AND routes.rock_id = topo.rocks_id 
-    // 			AND routes.topo_id = topo.number 
-    // 			AND routes.topo_id = :value 
-    // 			ORDER BY routes.nr';
-    //     $query = $pdo->prepare($sql);
-    //     $query->bindParam(':felsname', $felsname);
-    //     $query->bindParam(':value', $value);
-    //     $query->execute();
-    //     return $query;
-    // }
 }

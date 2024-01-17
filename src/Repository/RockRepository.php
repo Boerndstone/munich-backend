@@ -191,6 +191,8 @@ class RockRepository extends ServiceEntityRepository
                 'rock.description as rockDescription',
                 'rock.access as rockAccess',
                 'rock.nature as rockNature',
+                'rock.headerImage as rockheaderImage',
+                'rock.banned as rockBanned',
                 'COUNT(DISTINCT route.id) AS amountRoutes',
                 'SUM(CASE WHEN route.gradeNo > 0 AND route.gradeNo <= 15 THEN 1 ELSE 0 END) AS amountEasy',
                 'SUM(CASE WHEN route.gradeNo > 15 AND route.gradeNo <= 29 THEN 1 ELSE 0 END) AS amountMiddle',
@@ -204,6 +206,40 @@ class RockRepository extends ServiceEntityRepository
             ->andWhere('rock.online = 1')
             ->setParameter('rockSlug', $rockSlug)
             ->groupBy('rock.id')
+            ->getQuery()
+            ->getResult();
+
+        return $queryBuilder;
+    }
+
+    public function getRoutesTopo($rockSlug)
+    {
+        $queryBuilder = $this->createQueryBuilder('rock')
+            ->select(
+                'area.id as areaId',
+                'rock.id as rockId',
+                'routes.id as routeId',
+                'routes.name as routeName',
+                'routes.grade as routeGrade',
+                'routes.topoId as routeTopoId',
+                'routes.rating as routeRating',
+                'routes.protection as routeProtection',
+                'routes.firstAscent as routefirstAscent',
+                'routes.yearFirstAscent as routeyearFirstAscent',
+                'routes.description as routeDescription',
+                'topo.name as topoName',
+                'topo.number as topoNumber',
+                'topo.svg as topoSvg',
+            )
+            ->orderBy('rock.id', 'ASC')
+            ->innerJoin('rock.area', 'area')
+            ->innerJoin('rock.routes', 'routes')
+            ->innerJoin('App\Entity\Topo', 'topo', 'WITH', 'topo.rocks = rock')
+            ->where('rock.slug LIKE :rockSlug')
+            ->andWhere('routes.rock = topo.rocks')
+            ->andWhere('routes.topoId = topo.number')
+            ->setParameter('rockSlug', $rockSlug)
+            ->orderBy('routes.nr')
             ->getQuery()
             ->getResult();
 

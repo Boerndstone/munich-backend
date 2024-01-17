@@ -13,15 +13,15 @@
                             {{ areaName }}							
                         </h1>
                         <div>
-                            <button type="button" class="btn btn-primary btn-floating" data-mdb-toggle="collapse" data-mdb-target="#collapseMap" aria-expanded="false" aria-controls="collapseMap">
+                            <button type="button" class="btn btn-primary btn-floating" data-mdb-toggle="collapse" data-mdb-target="#collapseAreaMap" aria-expanded="false" aria-controls="collapseAreaMap">
                                 <i class="fas fa-map-marked text-white"></i>
                             </button>
                         </div>
                     </div>
 				</div>
 
-                <div class="collapse mt-3" id="collapseMap">
-					<div id="map" class="z-10 mb-3" style="width: 100%; height: 500px;">
+                <div class="collapse mt-3" id="collapseAreaMap">
+					<div id="areaMap" class="z-10 mb-3" style="width: 100%; height: 500px;">
 						{{ include('pageParts/areaMap.html.twig') }}
 					</div>
 				</div>

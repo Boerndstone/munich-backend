@@ -21,6 +21,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+use App\Service\FooterAreas;
+
 
 class FrontendController extends AbstractController
 {
@@ -104,9 +106,10 @@ class FrontendController extends AbstractController
         VideosRepository $videoRepository,
         RoutesRepository $routesRepository,
         RockRepository $rockRepository,
+        TopoRepository $topoRepository,
         $slug,
-        CacheInterface $cache
-
+        CacheInterface $cache,
+        FooterAreas $footerAreas
     ): Response {
 
         $search = $request->query->get('q');
@@ -118,24 +121,19 @@ class FrontendController extends AbstractController
 
         $searchTerm = $request->query->get('q');
 
-        $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
-        $rock = $doctrine->getRepository(Rock::class)->findRockName($slug);
-
-
-        $routes = $doctrine->getRepository(Routes::class)->findRoutesRock($slug);
-
         $rockId = $rockRepository->getRockId($slug);
-        //dd($rockId);
 
-        $topos = $doctrine->getRepository(Topo::class)->getTopos($rockId);
+        $topos = $topoRepository->getTopos($rockId);
 
         $rocks = $rockRepository->getRockInformation($slug);
+        $routes = $rockRepository->getRoutesTopo($slug);
         $sideBar = $areaRepository->sidebarNavigation();
+
+        $areas = $footerAreas->getFooterAreas();
 
         return $this->render('frontend/rock.html.twig', [
             'areas' => $areas,
             'slug' => $slug,
-            'rock' => $rock,
             'rocks' => $rocks,
             'routes' => $routes,
             'searchTerm' => $searchTerm,
@@ -151,18 +149,32 @@ class FrontendController extends AbstractController
      */
     public function neuesteRouten(
         AreaRepository $areaRepository,
-        ManagerRegistry $doctrine
+        RoutesRepository $routesRepository,
+        Request $request,
+        ManagerRegistry $doctrine,
+        FooterAreas $footerAreas,
     ): Response {
-        $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
+
+        $search = $request->query->get('q');
+        if ($search) {
+            $areaSearch = $doctrine->getRepository(Area::class)->search($search);
+        } else {
+            $areaSearch = $doctrine->getRepository(Area::class)->findAllOrderedBy();
+        }
+
+        $searchTerm = $request->query->get('q');
+
+        $areas = $footerAreas->getFooterAreas();
 
         $getDate = date("Y");
         $calculateDate = $getDate - 2;
-        $latestRoutes = $doctrine->getRepository(Routes::class)->latestRoutesPage($calculateDate);
+        $latestRoutes = $routesRepository->latestRoutesPage($calculateDate);
 
         $sideBar = $areaRepository->sidebarNavigation();
 
         return $this->render('frontend/neuesteRouten.html.twig', [
             'areas' => $areas,
+            'searchTerm' => $searchTerm,
             'latestRoutes' => $latestRoutes,
             'sideBar' => $sideBar,
         ]);
@@ -213,6 +225,19 @@ class FrontendController extends AbstractController
 
         return $this->render('frontend/database-queries.html.twig', [
             'dummyData' => $dummyData,
+        ]);
+    }
+
+    /**
+     * @Route("/footer", name="footer")
+     */
+    public function footer(): Response
+    {
+
+
+
+        return $this->render('partials/_footer.html.twig', [
+            'message' => $message
         ]);
     }
 }

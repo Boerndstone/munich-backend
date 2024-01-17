@@ -4,6 +4,7 @@
 {% endblock %}
 
 {% block body %}
+    {{ include('pageParts/navigation.html.twig') }}
 	<main class="pt-3">
         <div class="container my-5">
             <section>
@@ -64,5 +65,5 @@
             </section>
         </div>		
     </main>
-    {{ include('pageParts/footer.html.twig') }}
+    {% include 'partials/_footer.html.twig' with {'areas': areas} %}
 {% endblock %}

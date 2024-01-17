@@ -13,21 +13,26 @@
     let markersArea = {{ marker|json_encode|raw }}
     let zoom = {{ intialZoom|json_encode|raw }}
 
-    let map = L.map('map').setView([ zoom[0], zoom[1]], zoom[2]);
+    let areaMap = L.map('areaMap').setView([ zoom[0], zoom[1]], zoom[2]);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
 		maxZoom: 18,
 		accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
-	}).addTo(map);
+	}).addTo(areaMap);
 
         
 	for (let i = 0; i < markersArea.length; i++) {
 		marker = new L.marker([markersArea[i][0],markersArea[i][1]])
-			.bindPopup(markersArea[i][2])
-			.addTo(map);
+		.bindPopup(markersArea[i][2])
+		.addTo(areaMap);
 	}
 
-	
+	let collapseAreaMap = document.getElementById('collapseAreaMap');
+		collapseAreaMap.addEventListener('shown.bs.collapse', (e) => {
+			setTimeout(function(){ 
+			areaMap.invalidateSize();
+		}, 40);
+	});
 
 </script>

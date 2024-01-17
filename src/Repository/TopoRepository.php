@@ -25,13 +25,30 @@ class TopoRepository extends ServiceEntityRepository
     public function getTopos($rockId): array
     {
         $queryBuilder = $this->createQueryBuilder('topo')
-            ->select('topo.name')
+            ->select(
+                'topo.name as topoName',
+                'topo.number as topoNumber'
+            )
             ->innerJoin('topo.rocks', 'rocks')
             ->where('rocks.id LIKE :rockId')
             ->andWhere('topo.withSector = 1')
             ->setParameter('rockId', $rockId)
+            ->orderBy('topo.number', 'ASC')
             ->getQuery()
             ->getResult();
         return $queryBuilder;
+    }
+
+
+    public function findRoutesByTopoNumber($topoNumber)
+    {
+        return $this->createQueryBuilder('topo')
+            ->select('route')
+            ->leftJoin('topo.rocks', 'rock')
+            ->leftJoin('rock.routes', 'routes')
+            ->where('topo.number = :topoNumber')
+            ->setParameter('topoNumber', $topoNumber)
+            ->getQuery()
+            ->getResult();
     }
 }
