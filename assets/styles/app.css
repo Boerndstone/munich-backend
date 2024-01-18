@@ -1,13 +1,4 @@
 @import '~mdb-ui-kit/css/mdb.min.css';
-
-body,
-.datatable table,
-.datatable.datatable-striped tbody tr:nth-of-type(odd),
-.table,
-.table-striped>tbody>tr:nth-of-type(odd)>* {
-    color: black !important;
-}
-
 .container {
     max-width: 1024px;
 }

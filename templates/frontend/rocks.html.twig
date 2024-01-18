@@ -28,10 +28,9 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="datatable" data-mdb-striped="true" data-mdb-pagination="false">
+                        <div class="bg-white">
                             <div class="table-responsive">
-                            
-                                <table class="table">
+                                <table class="table table-striped ">
                                     <thead>
                                         <tr>
                                             <th class="th-sm"><i class="fas fa-align-justify"></i></th>
@@ -49,10 +48,7 @@
                                             <tr>
                                                 <td>{{loop.index}}</td>
                                                 <td>
-                                                    <a 
-                                                        href="{{ path('show_rock', { slug: rock.rockSlug }) }}"
-                                                        class="flex text-sm p-3 {% if loop.index is not divisible by(2) %} bg-gray-200 {% endif %} hover:bg-gray-400"
-                                                    >{{rock.rockName}}</a>
+                                                    <a href="{{ path('show_rock', { slug: rock.rockSlug }) }}" class="flex text-sm d-inline-block text-truncate" style="max-width: 150px;">{{rock.rockName}}</a>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex align-items-center">

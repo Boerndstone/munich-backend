@@ -98,19 +98,10 @@
 																<td>{{loop.index}}</td>
 																<td>
 																	{{ route.routeName }} 
-																	{% set star = '<i class="fas fa-star" style="color: rgb(202 138 4)"></i>' %}
-																	{% if route.routeRating == 1 %}
-																		{{ star|raw }}
-																	{% elseif route.routeRating == 2 %}
-																		{{ star|raw }}{{ star|raw }}
-																	{% elseif route.routeRating == 3 %}
-																		{{ star|raw }}{{ star|raw }}{{ star|raw }}
-																	{% endif %}
-																	{% if route.routeProtection == 2 %}
-																		<i class="fa fa-exclamation-triangle text-danger"></i>
-																	{% elseif route.routeProtection == 3 %}
-																		<i class="fa fa-ambulance text-danger"></i>
-																	{% endif %}
+																	<span data-controller="routeparams" data-routeparams-rating="{{ route.routeRating }}" data-routeparams-protection="{{ route.routeProtection }}">
+																		<span data-routeparams-target="star"></span>
+																		<span data-routeparams-target="protection"></span>
+																	</span>
 																	{% set videos = videoRepository.findVideosByParams(route.areaId, route.rockId, route.routeId) %}
 																	{% if videos is not empty %}
 																		{% for video in videos %}
@@ -141,13 +132,10 @@
 																					<div class="modal-header">
 																						<h5 class="modal-title" id="infoModal{{ route.routeName|custom_replace }}Label">
 																							{{ route.routeName }} 
-																							{% if route.routeRating == 1 %}
-																								{{ star|raw }}
-																							{% elseif route.routeRating == 2 %}
-																								{{ star|raw }}{{ star|raw }}
-																							{% elseif route.routeRating == 3 %}
-																								{{ star|raw }}{{ star|raw }}{{ star|raw }}
-																							{% endif %}
+																							<span data-controller="routeparams" data-routeparams-rating="{{ route.routeRating }}" data-routeparams-protection="{{ route.routeProtection }}">
+																								<span data-routeparams-target="star"></span>
+																								<span data-routeparams-target="protection"></span>
+																							</span>
 																						</h5>
 																						<button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
 																					</div>
