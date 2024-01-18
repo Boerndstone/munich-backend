@@ -3,23 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\Area;
-use App\Entity\Rock;
-use App\Entity\Routes;
-use App\Entity\Topo;
 use App\Repository\AreaRepository;
 use App\Repository\RockRepository;
 use App\Repository\RoutesRepository;
 use App\Repository\VideosRepository;
 use App\Repository\TopoRepository;
 //use App\Form\RoutesAutocompleteField;
-use Doctrine\Persistence\ManagerRegistry;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\Cache\CacheInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 use App\Service\FooterAreas;
 
@@ -27,7 +20,7 @@ use App\Service\FooterAreas;
 class FrontendController extends AbstractController
 {
     /**
-     * @Route("/frontend", name="frontend")
+     * @Route("/", name="frontend")
      */
     public function index(
         AreaRepository $areaRepository,
