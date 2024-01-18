@@ -130,6 +130,6 @@
 				</div>
 			</section>
 		</div>
-		{{ include('pageParts/footer.html.twig') }}
+		{% include 'partials/_footer.html.twig' with {'areas': areas} %}
 	</main>
 {% endblock %}

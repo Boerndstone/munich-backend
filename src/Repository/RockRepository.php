@@ -27,21 +27,6 @@ class RockRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
-    /**
-     * @return Rock[] Returns an array of Rock objects
-     */
-    public function findByAreaId($amount_rocks): array
-    {
-        $conn = $this->getEntityManager()->getConnection();
-
-        $sql = 'SELECT * FROM area INNER JOIN rock ON area.id = rock.area_relation_id WHERE area_relation_id = :amountRocks';
-        $stmt = $conn->prepare($sql);
-        $stmt->execute(['amount_rocks' => $amount_rocks]);
-
-        // returns an array of arrays (i.e. a raw data set)
-        return $stmt->fetchAllAssociative();
-    }
-
     public function amountRocks($amount_rocks)
     {
         $sql = 'SELECT * FROM area INNER JOIN rock ON area.id = rock.area_relation_id WHERE area_relation_id = :amountRocks';

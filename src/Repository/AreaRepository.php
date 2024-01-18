@@ -108,24 +108,14 @@ class AreaRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('area')
             ->select(
-                // 'area.id as areaId',
-                // 'area.name as areaName',
-                // 'area.slug as areaSlug',
-                // 'rock.name as rockName',
-                //'COUNT(DISTINCT route.id) AS routeCount',
+                'PARTIAL area.{id, name, image}',
+                'PARTIAL rock.{id, name, slug}'
             )
-
-            ->leftJoin('area.routes', 'route')
             ->leftJoin('area.rocks', 'rock')
             ->where('area.online = 1')
-            //->groupBy('area.id, areaName')
-            //->groupBy('area.id, area.name')
-            //->groupBy('area.id, rock.id')
             ->orderBy('area.sequence');
 
-        //dd($qb->getQuery()->getResult());
-
-        return $qb->getQuery()->getResult();
+        return $qb->getQuery()->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
     }
 
     public function getAreasFooter()

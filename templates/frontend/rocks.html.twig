@@ -10,7 +10,7 @@
                 <div class="bg-image pb-3 rounded">
                     <div class="p-3 rounded shadow-3 alert-light d-flex align-items-center justify-content-between" style="background-color: rgba(255, 255, 255, 0.6);">
                         <h1 class="h3 mb-0 fw-bold text-black">
-                            {{ areaName }}							
+                            {{ areaName }}
                         </h1>
                         <div>
                             <button type="button" class="btn btn-primary btn-floating" data-mdb-toggle="collapse" data-mdb-target="#collapseAreaMap" aria-expanded="false" aria-controls="collapseAreaMap">
@@ -148,6 +148,6 @@
                 </div>
             </section>
         </div>
-        {{ include('pageParts/footer.html.twig') }}
+        {% include 'partials/_footer.html.twig' with {'areas': areas} %}
     </main>
 {% endblock %}

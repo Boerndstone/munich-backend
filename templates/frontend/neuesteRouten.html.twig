@@ -44,8 +44,19 @@
                                                                         class="text-primary"
                                                                     >{{ latestRoute.name }}
                                                                     </a>
-                                                                    {#{ latestRoute.protection }#}
-                                                                    {#{ latestRoute.rating }#}
+                                                                    {% set star = '<i class="fas fa-star" style="color: rgb(202 138 4)"></i>' %}
+																	{% if latestRoute.rating == 1 %}
+																		{{ star|raw }}
+																	{% elseif latestRoute.rating == 2 %}
+																		{{ star|raw }}{{ star|raw }}
+																	{% elseif latestRoute.rating == 3 %}
+																		{{ star|raw }}{{ star|raw }}{{ star|raw }}
+																	{% endif %}
+                                                                    {% if latestRoute.protection == 2 %}
+																		<i class="fa fa-exclamation-triangle text-danger"></i>
+																	{% elseif latestRoute.protection == 3 %}
+																		<i class="fa fa-ambulance text-danger"></i>
+																	{% endif %}
                                                                 </td>
                                                                 <td>{{ latestRoute.grade }}</td>
                                                                 <td>{{ latestRoute.firstAscent }} {{ latestRoute.yearFirstAscent }}</td>

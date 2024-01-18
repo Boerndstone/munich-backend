@@ -33,10 +33,8 @@ class FrontendController extends AbstractController
         AreaRepository $areaRepository,
         RockRepository $rockRepository,
         RoutesRepository $routesRepository,
-        Request $request,
     ): Response {
 
-        $searchTerm = $request->query->get('q');
         $latestRoutes = $routesRepository->latestRoutes();
         $banned = $rockRepository->saisonalGesperrt();
         $areas = $areaRepository->getAreasInformation();
@@ -46,7 +44,6 @@ class FrontendController extends AbstractController
             'areas' => $areas,
             'latestRoutes' => $latestRoutes,
             'banned' => $banned,
-            'searchTerm' => $searchTerm,
             'sideBar' => $sideBar,
         ]);
     }
@@ -56,25 +53,13 @@ class FrontendController extends AbstractController
      */
     public function showRocksArea(
         AreaRepository $areaRepository,
-        Request $request,
-        ManagerRegistry $doctrine,
-        RoutesRepository $routesRepository,
         RockRepository $rockRepository,
         Area $area,
         $slug,
-        CacheInterface $cache
+        FooterAreas $footerAreas
     ): Response {
 
-        $search = $request->query->get('q');
-        if ($search) {
-            $areaSearch = $doctrine->getRepository(Area::class)->search($search);
-        } else {
-            $areaSearch = $doctrine->getRepository(Area::class)->findAllOrderedBy();
-        }
-
-        $searchTerm = $request->query->get('q');
-
-        $areas = $areaRepository->getAreasFrontend();
+        $areas = $footerAreas->getFooterAreas();
         $areaName = $area->getName();
         $areaLat = $area->getLat();
         $areaLng = $area->getLng();
@@ -91,7 +76,6 @@ class FrontendController extends AbstractController
             'areaLng' => $areaLng,
             'areaZoom' => $areaZoom,
             'rocks' => $rocks,
-            'searchTerm' => $searchTerm,
             'sideBar' => $sideBar,
         ]);
     }
@@ -101,25 +85,13 @@ class FrontendController extends AbstractController
      */
     public function showRock(
         AreaRepository $areaRepository,
-        Request $request,
-        ManagerRegistry $doctrine,
         VideosRepository $videoRepository,
         RoutesRepository $routesRepository,
         RockRepository $rockRepository,
         TopoRepository $topoRepository,
         $slug,
-        CacheInterface $cache,
         FooterAreas $footerAreas
     ): Response {
-
-        $search = $request->query->get('q');
-        if ($search) {
-            $areaSearch = $doctrine->getRepository(Area::class)->search($search);
-        } else {
-            $areaSearch = $doctrine->getRepository(Area::class)->findAllOrderedBy();
-        }
-
-        $searchTerm = $request->query->get('q');
 
         $rockId = $rockRepository->getRockId($slug);
 
@@ -136,7 +108,6 @@ class FrontendController extends AbstractController
             'slug' => $slug,
             'rocks' => $rocks,
             'routes' => $routes,
-            'searchTerm' => $searchTerm,
             'videoRepository' => $videoRepository,
             'routesRepository' => $routesRepository,
             'topos' => $topos,
@@ -150,19 +121,8 @@ class FrontendController extends AbstractController
     public function neuesteRouten(
         AreaRepository $areaRepository,
         RoutesRepository $routesRepository,
-        Request $request,
-        ManagerRegistry $doctrine,
         FooterAreas $footerAreas,
     ): Response {
-
-        $search = $request->query->get('q');
-        if ($search) {
-            $areaSearch = $doctrine->getRepository(Area::class)->search($search);
-        } else {
-            $areaSearch = $doctrine->getRepository(Area::class)->findAllOrderedBy();
-        }
-
-        $searchTerm = $request->query->get('q');
 
         $areas = $footerAreas->getFooterAreas();
 
@@ -174,7 +134,6 @@ class FrontendController extends AbstractController
 
         return $this->render('frontend/neuesteRouten.html.twig', [
             'areas' => $areas,
-            'searchTerm' => $searchTerm,
             'latestRoutes' => $latestRoutes,
             'sideBar' => $sideBar,
         ]);
@@ -185,9 +144,9 @@ class FrontendController extends AbstractController
      */
     public function datenschutz(
         AreaRepository $areaRepository,
-        ManagerRegistry $doctrine
+        FooterAreas $footerAreas,
     ): Response {
-        $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
+        $areas = $footerAreas->getFooterAreas();
         $sideBar = $areaRepository->sidebarNavigation();
 
         return $this->render('frontend/datenschutz.html.twig', [
@@ -201,9 +160,9 @@ class FrontendController extends AbstractController
      */
     public function impressum(
         AreaRepository $areaRepository,
-        ManagerRegistry $doctrine
+        FooterAreas $footerAreas,
     ): Response {
-        $areas = $doctrine->getRepository(Area::class)->getAreasFrontend();
+        $areas = $footerAreas->getFooterAreas();
         $sideBar = $areaRepository->sidebarNavigation();
 
         return $this->render('frontend/impressum.html.twig', [
@@ -216,28 +175,14 @@ class FrontendController extends AbstractController
      * @Route("/Database", name="databasequeries")
      */
     public function databasequeries(
-        ManagerRegistry $doctrine,
         AreaRepository $areaRepository,
         RockRepository $rockRepository,
     ): Response {
 
-        $dummyData = $rockRepository->getRocksInformation('Konstein');
+        $dummyData = $areaRepository->sidebarNavigation();
 
         return $this->render('frontend/database-queries.html.twig', [
             'dummyData' => $dummyData,
-        ]);
-    }
-
-    /**
-     * @Route("/footer", name="footer")
-     */
-    public function footer(): Response
-    {
-
-
-
-        return $this->render('partials/_footer.html.twig', [
-            'message' => $message
         ]);
     }
 }

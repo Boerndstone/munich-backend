@@ -4,18 +4,19 @@
 {% endblock %}
 
 {% block body %}
+	{{ include('pageParts/navigation.html.twig') }}
 	<main class="pt-3">
-			<div class="container my-5">
-				<section>
-					<span class="dpl-newmdb-docs-alert-advanced">
-						<div class="alert shadow-3 d-flex justify-content-between alert-light" role="alert" data-mdb-color="light">
-							<h1 class="h2 mb-0 fw-bold text-black">Impressum</h1>
-						</div>
-					</span>
-				</section>
-				<section>
-					<div class="row">
-						<div class="col-12">
+		<div class="container my-5">
+			<section>
+				<span class="dpl-newmdb-docs-alert-advanced">
+					<div class="alert shadow-3 d-flex justify-content-between alert-light" role="alert" data-mdb-color="light">
+						<h1 class="h2 mb-0 fw-bold text-black">Impressum</h1>
+					</div>
+				</span>
+			</section>
+			<section>
+				<div class="row">
+					<div class="col-12">
 						<div class="card">
 							<div class="card-body">
 								<p class="card-text"><span class="font-semibold">Copyright:</span><br>
@@ -36,14 +37,10 @@
 								<p class="card-text">Klettern ist eine Risikosportart, Fehler beim Ausüben der Sportart können mit schweren Verletzungen oder sogar tödlich enden. <br> Die Informationen auf www.munichclimbs.de sind nach bestem Wissen recherchiert. Trotzdem können Fehler und Ungenauigkeiten NICHT vollständig ausgeschlossen werden. <br> Alle Angaben erfolgen ohne Gewähr. Eine Haftung für Schäden, die sich aus der Verwendung der veröffentlichten Inhalte ergeben, ist ausgeschlossen.<br> Die Website www.munichclimbs.de ist ein freiwilliges NICHT-kommerzielles Informationsangebot über die Klettergebiete rund um München.</p>
 							</div>
 						</div>
-							
-							
-						</div>
 					</div>
-				</section>
-			</div>		</main>
-
-			{{ include('pageParts/footer.html.twig') }}
-
-
-		{% endblock %}
+				</div>
+			</section>
+		</div>		
+	</main>
+	{% include 'partials/_footer.html.twig' with {'areas': areas} %}
+{% endblock %}
