@@ -1,4 +1,8 @@
 @import '~mdb-ui-kit/css/mdb.min.css';
+
+body {
+    color: black;
+}
 .container {
     max-width: 1024px;
 }

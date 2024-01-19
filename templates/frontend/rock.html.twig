@@ -117,34 +117,15 @@
 																</td>
 																<td style="padding-top: 0.2rem;">
 																	{% if route.routeDescription %}
-																		<button 
-																			type="button" 
-																			class="btn btn-sm btn-primary btn-floating"
-																			data-mdb-toggle="modal" 
-																			data-mdb-target="#infoModal{{ route.routeName|custom_replace }}"
-																			style="width: 1.125rem;height: 1.125rem; background: transparent;"
-																		>
-																			<i class="fas fa-info fa-xs " style="width: 1.125rem;line-height: 1.12rem;"></i>
-																		</button>
-																		<div class="modal fade" id="infoModal{{ route.routeName|custom_replace }}" tabindex="-1" aria-labelledby="infoModal{ route.routeName|custom_replace }}Label" aria-hidden="true">
-																			<div class="modal-dialog modal-dialog-centered">
-																				<div class="modal-content">
-																					<div class="modal-header">
-																						<h5 class="modal-title" id="infoModal{{ route.routeName|custom_replace }}Label">
-																							{{ route.routeName }} 
-																							<span data-controller="routeparams" data-routeparams-rating="{{ route.routeRating }}" data-routeparams-protection="{{ route.routeProtection }}">
-																								<span data-routeparams-target="star"></span>
-																								<span data-routeparams-target="protection"></span>
-																							</span>
-																						</h5>
-																						<button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-																					</div>
-																					<div class="modal-body">
-																						<p class="d-lg-none" style="font-size: .85rem;">Erstbegeher: {{ route.routefirstAscent }} {% if route.routeyearFirstAscent %}{{ route.routeyearFirstAscent }}{% endif %}</p>
-																						<p style="font-size: .85rem;">{{ route.routeDescription }}</p>
-																					</div>
-																				</div>
-																			</div>
+																		<div {{ stimulus_controller('modal-route-description') }}>
+																			<button 
+																				class="btn btn-sm btn-primary btn-floating"
+																				data-action="modal-route-description#openModal"
+																				style="width: 1.125rem;height: 1.125rem; background: transparent;"
+																			>
+																				<i class="fas fa-info fa-xs" style="width: 1.125rem;line-height: 1.12rem;"></i>
+																			</button>
+																			{{ include('partials/_modalRouteDescription.html.twig', [ route ]) }}
 																		</div>
 																	{% endif %}
 																</td>
