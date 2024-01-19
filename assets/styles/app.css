@@ -2,7 +2,9 @@
 
 body {
     color: black;
+    background-color: hsl(0, 0%, 97%);
 }
+
 .container {
     max-width: 1024px;
 }
@@ -52,10 +54,6 @@ body {
     .background-image-height {
         height: 120px;
     }
-}
-
-body {
-    background-color: hsl(0, 0%, 97%);
 }
 
 .btn-to-top {

@@ -1,11 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Munichclimbs{% endblock %}
+{% block meta_tags %}
+	<meta name="description" content="Klettern rund um München. Hier werden die Klettergebiete rund um München vorgestellt: {% for area in areas %}{{area.name}}{% if loop.last == false  %}, {% else %}{% endif%}{% endfor %}"/>
+	<meta name="robots" content="index,follow"/>
+	<meta property="og:site_name" content="Munichclimbs">
+	<meta property="og:title" content="Munichclimbs" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://munichclimbs.de/" />
+	<meta property="og:description" content="Klettern rund um München. Hier werden die Klettergebiete rund um München vorgestellt: {% for area in areas %}{{area.name}}{% if loop.last == false  %}, {% else %}{% endif%}{% endfor %}"/>
+{% endblock %}
 
 {% block body %}
 	{{ include('partials/_navigation.html.twig') }}
 	<main>
-		<div class="container my-5">
+		<div class="container my-3">
 			<section>
 				<div class="dpl-newmdb-docs-alert-advanced pb-3">
 					<div 
