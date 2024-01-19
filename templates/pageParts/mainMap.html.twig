@@ -23,7 +23,7 @@
 			.addTo(map);
 	}
 
-	let collapseMap = document.getElementById('collapseMap');
+	var collapseMap = document.getElementById('collapseMap');
 		collapseMap.addEventListener('shown.bs.collapse', (e) => {
 			setTimeout(function(){ 
 			map.invalidateSize();

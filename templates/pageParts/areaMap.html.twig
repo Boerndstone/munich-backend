@@ -10,10 +10,10 @@
 
 <script>
 
-    let markersArea = {{ marker|json_encode|raw }}
-    let zoom = {{ intialZoom|json_encode|raw }}
+    var markersArea = {{ marker|json_encode|raw }}
+    var zoom = {{ intialZoom|json_encode|raw }}
 
-    let areaMap = L.map('areaMap').setView([ zoom[0], zoom[1]], zoom[2]);
+    var areaMap = L.map('areaMap').setView([ zoom[0], zoom[1]], zoom[2]);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
@@ -22,13 +22,13 @@
 	}).addTo(areaMap);
 
         
-	for (let i = 0; i < markersArea.length; i++) {
+	for (var i = 0; i < markersArea.length; i++) {
 		marker = new L.marker([markersArea[i][0],markersArea[i][1]])
 		.bindPopup(markersArea[i][2])
 		.addTo(areaMap);
 	}
 
-	let collapseAreaMap = document.getElementById('collapseAreaMap');
+	var collapseAreaMap = document.getElementById('collapseAreaMap');
 		collapseAreaMap.addEventListener('shown.bs.collapse', (e) => {
 			setTimeout(function(){ 
 			areaMap.invalidateSize();
