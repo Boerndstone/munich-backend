@@ -79,61 +79,60 @@
 									<div class="card-body p-0 p-md-3" style="overflow: hidden;">
 										<section id="{{ topoName|custom_replace}}">
 											<h3 class="pb-md-1 px-2 pt-2 pt-md-0 px-md-0">{{ topoName }}</h3>
-												<div class="table-responsive">
-													<table class="table table-striped table-sm">
-														<tbody>
-														{% set hasPrinted = false %}
-														{% for route in routes %}
-															<tr>
-															{% if not hasPrinted %}
-																<td colspan="5" class="p-0">
-																	{% if route.topoSvg is not empty %}
-																		{{ route.topoSvg|raw }}
-																	{% endif %}
-																</td>
-																{% set hasPrinted = true %}
+											<div class="py-3">
+												{% set hasPrinted = false %}
+												{% for route in routes %}
+													{% if not hasPrinted %}
+															{% if route.topoSvg is not empty %}
+																{{ route.topoSvg|raw }}
 															{% endif %}
-															</tr>
-															<tr>
-																<td>{{loop.index}}</td>
-																<td>
-																	{{ route.routeName }} 
-																	<span data-controller="routeparams" data-routeparams-rating="{{ route.routeRating }}" data-routeparams-protection="{{ route.routeProtection }}">
-																		<span data-routeparams-target="star"></span>
-																		<span data-routeparams-target="protection"></span>
-																	</span>
-																	{% set videos = videoRepository.findVideosByParams(route.areaId, route.rockId, route.routeId) %}
-																	{% if videos is not empty %}
-																		{% for video in videos %}
-																			<a href="{{ video.videoLink }}" alt="Video von Route {{ route.routeName }} " target="_blank">
-																				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="text-black"><path fill="currentColor" d="M15 8v8H5V8h10m1-2H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4V7c0-.55-.45-1-1-1z"/></svg>
-																			</a>
-																		{% endfor %}
-																	{% endif %}
-																</td>
-																<td>{{ route.routeGrade }}</td>
-																<td class="d-none d-lg-table-cell" style="white-space: nowrap;">
-																	{{ route.routefirstAscent }} {% if route.routeyearFirstAscent %}{{ route.routeyearFirstAscent }}{% endif %}
-																</td>
-																<td style="padding-top: 0.2rem;">
-																	{% if route.routeDescription %}
-																		<div {{ stimulus_controller('modal-route-description') }}>
-																			<button 
-																				class="btn btn-sm btn-primary btn-floating"
-																				data-action="modal-route-description#openModal"
-																				style="width: 1.125rem;height: 1.125rem; background: transparent;"
-																			>
-																				<i class="fas fa-info fa-xs" style="width: 1.125rem;line-height: 1.12rem;"></i>
-																			</button>
-																			{{ include('partials/_modalRouteDescription.html.twig', [ route ]) }}
-																		</div>
-																	{% endif %}
-																</td>
-															</tr>
-														{% endfor %}
-														</tbody>
-													</table>
-												</div>
+														{% set hasPrinted = true %}
+													{% endif %}
+												{% endfor %}
+											</div>
+											<div class="table-responsive">
+												<table class="table table-striped table-sm">
+													<tbody>{% for route in routes %}
+														<tr>
+															<td>{{loop.index}}</td>
+															<td>
+																{{ route.routeName }} 
+																<span data-controller="routeparams" data-routeparams-rating="{{ route.routeRating }}" data-routeparams-protection="{{ route.routeProtection }}">
+																	<span data-routeparams-target="star"></span>
+																	<span data-routeparams-target="protection"></span>
+																</span>
+																{% set videos = videoRepository.findVideosByParams(route.areaId, route.rockId, route.routeId) %}
+																{% if videos is not empty %}
+																	{% for video in videos %}
+																		<a href="{{ video.videoLink }}" alt="Video von Route {{ route.routeName }} " target="_blank">
+																			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="text-black"><path fill="currentColor" d="M15 8v8H5V8h10m1-2H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4V7c0-.55-.45-1-1-1z"/></svg>
+																		</a>
+																	{% endfor %}
+																{% endif %}
+															</td>
+															<td>{{ route.routeGrade }}</td>
+															<td class="d-none d-lg-table-cell" style="white-space: nowrap;">
+																{{ route.routefirstAscent }} {% if route.routeyearFirstAscent %}{{ route.routeyearFirstAscent }}{% endif %}
+															</td>
+															<td style="padding-top: 0.2rem;">
+																{% if route.routeDescription %}
+																	<div {{ stimulus_controller('modal-route-description') }}>
+																		<button 
+																			class="btn btn-sm btn-primary btn-floating"
+																			data-action="modal-route-description#openModal"
+																			style="width: 1.125rem;height: 1.125rem; background: transparent;"
+																		>
+																			<i class="fas fa-info fa-xs" style="width: 1.125rem;line-height: 1.12rem;"></i>
+																		</button>
+																		{{ include('partials/_modalRouteDescription.html.twig', [ route ]) }}
+																	</div>
+																{% endif %}
+															</td>
+														</tr>
+													{% endfor %}
+													</tbody>
+												</table>
+											</div>
 										</section>
 									</div>
 								</div>
