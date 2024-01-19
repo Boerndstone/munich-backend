@@ -23,4 +23,10 @@
 			.addTo(map);
 	}
 
+	let collapseModal = document.getElementById('collapseMap');
+		collapseModal.addEventListener('shown.bs.collapse', (e) => {
+			setTimeout(function(){ 
+			areaMap.invalidateSize();
+		}, 40);
+	});
 </script>
