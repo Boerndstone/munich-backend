@@ -1,68 +1,78 @@
 {% extends 'base.html.twig' %}
 
+{% block meta_tags %}
+	<meta name="description" content="{% for rock in rocks %}{{ rock.rockDescription}}{% endfor %}"/>
+	<meta name="robots" content="index,follow"/>
+	<meta property="og:site_name" content="Munichclimbs | {{ rockName }}">
+	<meta property="og:title" content="Munichclimbs | {{ rockName }}" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://munichclimbs.de/Kletterfels/{{ slug }}" />
+	<meta property="og:description" content="{% for rock in rocks %}{{ rock.rockDescription}}{% endfor %}"/>
+	<meta name="keywords" content="Klettertouren Burgstein: {% for route in routes %}{{ route.routeName}} {{ route.routeGrade}}{% if loop.last == false  %}, {% else %}{% endif %}{% endfor %}"/>
+{% endblock %}
+
 {% block title %}Munichclimbs | {{ slug }}{% endblock %}
 
-{% block bodyclass %}{% endblock %}
 {% block body %}
 	{{ include('partials/_navigation.html.twig') }}
     <main>
 		<div class="container my-3">
-		{% for rock in rocks %}		
-			<section>
-				<div
-					class="bg-image py-3 rounded d-flex align-items-start background-image-height"
-					style="background-image: url('https://www.munichclimbs.de/images/headerImages/{{ rock.rockheaderImage }}.webp')"
-				>
-					<div 
-						class="p-3 shadow-3 alert-light d-flex justify-content-between w-100"
-						style="background-color: rgba(255, 255, 255, 0.6);"
+			{% for rock in rocks %}
+				<section>
+					<div
+						class="bg-image py-3 rounded d-flex align-items-start background-image-height"
+						style="background-image: url('https://www.munichclimbs.de/images/headerImages/{{ rock.rockheaderImage }}.webp')"
 					>
-						<h1 class="h2 mb-0 fw-bold text-black ">
-							{{ rock.rockName }}
-							<nav class="mt-1" aria-label="breadcrumb">
-								<ol class="breadcrumb text-black fw-normal mb-0" style="font-size: 12px">
-									<li class="breadcrumb-item"><a class="text-primary" href="{{path('frontend')}}"><i class="fas fa-home text-primary"></i></a></li>
-									<li class="breadcrumb-item"><a href="{{ path('show_rocks', { slug: rock.areaSlug }) }}">{{ rock.areaName }}</a></li>
-									<li class="breadcrumb-item active text-black" aria-current="page">{{ rock.rockName }}</li>
-								</ol>
-							</nav>
-						</h1>
-						<div class="d-flex items-center align-self-start">
-							<div {{ stimulus_controller('modal-form') }}>
-								<button 
-									class="btn btn-sm btn-primary btn-floating"
-									data-action="modal-form#openModal"
+						<div 
+							class="p-3 shadow-3 alert-light d-flex justify-content-between w-100"
+							style="background-color: rgba(255, 255, 255, 0.6);"
+						>
+							<h1 class="h2 mb-0 fw-bold text-black ">
+								{{ rock.rockName }} 
+								<nav class="mt-1" aria-label="breadcrumb">
+									<ol class="breadcrumb text-black fw-normal mb-0" style="font-size: 12px">
+										<li class="breadcrumb-item"><a class="text-primary" href="{{path('frontend')}}"><i class="fas fa-home text-primary"></i></a></li>
+										<li class="breadcrumb-item"><a href="{{ path('show_rocks', { slug: rock.areaSlug }) }}">{{ rock.areaName }}</a></li>
+										<li class="breadcrumb-item active text-black" aria-current="page">{{ rock.rockName }}</li>
+									</ol>
+								</nav>
+							</h1>
+							<div class="d-flex items-center align-self-start">
+								<div {{ stimulus_controller('modal-form') }}>
+									<button 
+										class="btn btn-sm btn-primary btn-floating"
+										data-action="modal-form#openModal"
+									>
+										<i class="fas fa-info text-white"></i>
+									</button>
+									{{ include('pageParts/_modal.html.twig', [ rocks ]) }}
+								</div>
+								{# <button 
+									type="button" 
+									class="btn btn-sm btn-primary btn-floating ms-2"
+									data-mdb-toggle="modal" 
+									data-mdb-target="#exampleModal" 
 								>
-									<i class="fas fa-info text-white"></i>
-								</button>
-								{{ include('pageParts/_modal.html.twig', [ rocks ]) }}
+									<i class="far fa-images text-white"></i>
+								</button> #}
 							</div>
-							{# <button 
-								type="button" 
-								class="btn btn-sm btn-primary btn-floating ms-2"
-								data-mdb-toggle="modal" 
-								data-mdb-target="#exampleModal" 
-							>
-								<i class="far fa-images text-white"></i>
-							</button> #}
 						</div>
 					</div>
-				</div>
-			</section>
-			<section>
-				<div class="row">
-					<div class="col-md-12">
-						{% set currentDate =  "now"|date("z") %}
-						{% if rock.rockBanned == 1 and currentDate < 181 %}
-							<div class="alert alert-danger my-3" role="alert" data-mdb-color="danger">
-								<strong class="font-bold">Jahreszeitliche Sperrung!</strong>
-								<span class="block sm:inline">{{ rock.rockName }} ist leider noch bis zum 30.06. gesperrt!</span>
-							</div>
-						{% endif %}
+				</section>
+				<section>
+					<div class="row">
+						<div class="col-md-12">
+							{% set currentDate =  "now"|date("z") %}
+							{% if rock.rockBanned == 1 and currentDate < 181 %}
+								<div class="alert alert-danger my-3" role="alert" data-mdb-color="danger">
+									<strong class="font-bold">Jahreszeitliche Sperrung!</strong>
+									<span class="block sm:inline">{{ rock.rockName }} ist leider noch bis zum 30.06. gesperrt!</span>
+								</div>
+							{% endif %}
+						</div>
 					</div>
-				</div>
-			</section>
-		{% endfor %} 
+				</section>
+			{% endfor %} 
 			<section>
 				<div class="row">
 					<div class="col-md-9">
@@ -72,15 +82,12 @@
 								{% set topoName = routeData.topoName %}
 								{% set topoNumber = routeData.topoNumber %}
 								{% set topoSvg = routeData.topoSvg %}
-
 								{% 
 									set groupedRoutes = groupedRoutes|merge({
 										(topoName): groupedRoutes[topoName]|default([])|merge([{'routeName': routeData.routeName, 'routeRating': routeData.routeRating, 'routeProtection': routeData.routeProtection, 'areaId': routeData.areaId, 'rockId': routeData.rockId, 'routeId': routeData.routeId, 'routefirstAscent': routeData.routefirstAscent, 'routeyearFirstAscent': routeData.routeyearFirstAscent, 'routeDescription': routeData.routeDescription, 'routeGrade': routeData.routeGrade, 'topoSvg': routeData.topoSvg}])
-										
 									}) 
 								%}
 							{% endfor %}
-
 							{% for topoName, routes in groupedRoutes %}
 								<div class="card mt-3" style="overflow: hidden;">
 									<div class="card-body p-0 p-md-3" style="overflow: hidden;">

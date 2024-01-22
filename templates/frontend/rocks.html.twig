@@ -1,5 +1,15 @@
 {% extends 'base.html.twig' %}
 
+{% block meta_tags %}
+	<meta name="description" content="Felsen im Klettergebiet: {% for rock in rocks %}{{ rock.rockName }}{% if loop.last == false  %}, {% else %} {% endif %} {% endfor %}"/>
+	<meta name="robots" content="index,follow"/>
+	<meta property="og:site_name" content="Munichclimbs | {{ areaName }}">
+	<meta property="og:title" content="Munichclimbs | {{ areaName }}" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://munichclimbs.de/Klettergebiet/{{ areaSlug }}" />
+	<meta property="og:description" content="Felsen im Klettergebiet: {% for rock in rocks %}{{ rock.rockName }}{% if loop.last == false  %}, {% else %} {% endif %} {% endfor %}"/>
+{% endblock %}
+
 {% block title %}Munichclimbs | {{ areaName }}{% endblock %}
 
 {% block body %}
@@ -19,13 +29,11 @@
                         </div>
                     </div>
 				</div>
-
                 <div class="collapse mt-3" id="collapseAreaMap">
 					<div id="areaMap" class="z-10 mb-3" style="width: 100%; height: 500px;">
 						{{ include('pageParts/areaMap.html.twig') }}
 					</div>
 				</div>
-
                 <div class="row">
                     <div class="col-md-12">
                         <div class="bg-white">

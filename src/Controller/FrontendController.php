@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Area;
+use App\Entity\Rock;
 use App\Repository\AreaRepository;
 use App\Repository\RockRepository;
 use App\Repository\RoutesRepository;
@@ -54,6 +55,7 @@ class FrontendController extends AbstractController
 
         $areas = $footerAreas->getFooterAreas();
         $areaName = $area->getName();
+        $areaSlug = $area->getSlug();
         $areaLat = $area->getLat();
         $areaLng = $area->getLng();
         $areaZoom = $area->getZoom();
@@ -65,6 +67,7 @@ class FrontendController extends AbstractController
         return $this->render('frontend/rocks.html.twig', [
             'areas' => $areas,
             'areaName' => $areaName,
+            'areaSlug' => $areaSlug,
             'areaLat' => $areaLat,
             'areaLng' => $areaLng,
             'areaZoom' => $areaZoom,
@@ -82,6 +85,7 @@ class FrontendController extends AbstractController
         RoutesRepository $routesRepository,
         RockRepository $rockRepository,
         TopoRepository $topoRepository,
+        Rock $rock,
         $slug,
         FooterAreas $footerAreas
     ): Response {
@@ -89,6 +93,9 @@ class FrontendController extends AbstractController
         $rockId = $rockRepository->getRockId($slug);
 
         $topos = $topoRepository->getTopos($rockId);
+
+        $rockName = $rock->getSlug();
+        $rockDescription = $rock->getDescription();
 
         $rocks = $rockRepository->getRockInformation($slug);
         $routes = $rockRepository->getRoutesTopo($slug);
@@ -100,6 +107,8 @@ class FrontendController extends AbstractController
             'areas' => $areas,
             'slug' => $slug,
             'rocks' => $rocks,
+            'rockName' => $rockName,
+            'rockDescription,' => $rockDescription,
             'routes' => $routes,
             'videoRepository' => $videoRepository,
             'routesRepository' => $routesRepository,
