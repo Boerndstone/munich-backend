@@ -27,12 +27,16 @@ class FrontendController extends AbstractController
         AreaRepository $areaRepository,
         RockRepository $rockRepository,
         RoutesRepository $routesRepository,
+        Request $request
     ): Response {
 
         $latestRoutes = $routesRepository->latestRoutes();
         $banned = $rockRepository->saisonalGesperrt();
         $areas = $areaRepository->getAreasInformation();
         $sideBar = $areaRepository->sidebarNavigation();
+        $searchTerm = $request->query->get('q');
+        $searchRoutes = $areaRepository->search($searchTerm);
+        //dd($searchRoutes);
 
         return $this->render('frontend/index.html.twig', [
             'areas' => $areas,

@@ -38,9 +38,11 @@ class AreaRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('area')
             // always use andWhere!!!!
-            ->andWhere('area.name LIKE :searchTerm OR area.orientation LIKE :searchTerm OR route.name LIKE :searchTerm')
-            ->leftJoin('area.routes', 'route')
-            ->addSelect('route')
+            // ->andWhere('area.name LIKE :searchTerm OR area.orientation LIKE :searchTerm OR route.name LIKE :searchTerm')
+            //->leftJoin('area.routes', 'route')
+            //->addSelect('route')
+            ->select('area.name as areaName')
+            ->andWhere('area.name LIKE :searchTerm')
             ->setParameter('searchTerm', '%' . $term . '%')
             ->getQuery()
             ->execute();

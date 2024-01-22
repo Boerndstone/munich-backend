@@ -119,6 +119,8 @@ class RockRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('rock')
             ->orderBy('rock.name', 'ASC')
             ->where('rock.banned = 1')
+            ->orWhere('rock.banned = 2')
+            ->orderBy('rock.banned')
             ->getQuery()
             ->getResult();
     }
