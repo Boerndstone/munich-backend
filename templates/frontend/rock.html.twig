@@ -130,17 +130,24 @@
 															</td>
 															<td style="padding-top: 0.2rem;">
 																{% if route.routeDescription %}
-																	<div {{ stimulus_controller('modal-route-description') }}>
-																		<button 
-																			class="btn btn-sm btn-primary btn-floating"
-																			data-action="modal-route-description#openModal"
-																			style="width: 1.125rem;height: 1.125rem; background: transparent;"
-																		>
-																			<i class="fas fa-info fa-xs" style="width: 1.125rem;line-height: 1.12rem;"></i>
-																		</button>
-																		{{ include('partials/_modalRouteDescription.html.twig', [ route ]) }}
-																	</div>
+																	<button 
+																		class="btn btn-sm btn-primary btn-floating"
+																		data-bs-toggle="collapse" 
+																		href="#{{ route.routeName|custom_replace }}"
+																		aria-expanded="false" 
+																		aria-controls="{{ route.routeName|custom_replace }}"
+																		style="width: 1.125rem;height: 1.125rem; background: transparent;"
+																	>
+																		<i class="fas fa-info fa-xs" style="width: 1.125rem;line-height: 1.12rem;"></i>
+																	</button>
+																	{{ include('partials/_modalRouteDescription.html.twig', [ route ]) }}
 																{% endif %}
+																<tr>
+																	<td class="collapse" id="{{ route.routeName|custom_replace }}" colspan="5">
+																		<p class="fw-bold mb-0 d-lg-none">{% if route.routefirstAscent %} Erstbegeher: {{ route.routefirstAscent }} {% endif %} {% if route.routeyearFirstAscent %}{{ route.routeyearFirstAscent }}{% endif %}</p>
+																		{{ route.routeDescription }}
+																	</td>
+																</tr>
 															</td>
 														</tr>
 													{% endfor %}
