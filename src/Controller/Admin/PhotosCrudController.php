@@ -73,6 +73,7 @@ class PhotosCrudController extends AbstractCrudController
         return parent::configureCrud($crud)
             ->setPageTitle(Crud::PAGE_INDEX, 'Übersicht der Fotos')
             ->setPageTitle(Crud::PAGE_NEW, 'Foto hinzufügen')
+            ->showEntityActionsInlined()
             ->setPageTitle(Crud::PAGE_EDIT, static function (Photos $photos) {
                 return sprintf($photos->getBelongsToRoute());
             })

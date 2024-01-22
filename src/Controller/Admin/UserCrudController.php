@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AvatarField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
@@ -32,8 +33,7 @@ class UserCrudController extends AbstractCrudController
             ->setBasePath('uploads/avatars')
             ->setUploadDir('public/uploads/avatars')
             ->setUploadedFileNamePattern('[slug]-[timestamp].[extension]')
-            ->onlyOnForms()
-        ;
+            ->onlyOnForms();
         yield EmailField::new('email');
         yield TextField::new('firstname');
         yield TextField::new('lastname');
@@ -44,5 +44,13 @@ class UserCrudController extends AbstractCrudController
             ->allowMultipleChoices()
             ->renderExpanded()
             ->renderAsBadges();
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return parent::configureCrud($crud)
+            ->setPageTitle(Crud::PAGE_INDEX, 'Übersicht der Nutzer')
+            ->setPageTitle(Crud::PAGE_NEW, 'Nutzer hinzufügen')
+            ->showEntityActionsInlined();
     }
 }

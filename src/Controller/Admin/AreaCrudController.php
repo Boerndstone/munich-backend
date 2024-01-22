@@ -25,55 +25,45 @@ class AreaCrudController extends AbstractCrudController
                 return $action
                     ->setIcon('fa fa-plus')
                     ->setLabel('Gebiet hinzufügen')
-                    ->setCssClass('btn btn-success')
-                ;
+                    ->setCssClass('btn btn-success');
             })
 
             ->update(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN, function (Action $action) {
                 return $action
                     ->setLabel('Änderungen speichern')
-                    ->setCssClass('btn btn-success')
-                ;
+                    ->setCssClass('btn btn-success');
             })
 
             ->update(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE, function (Action $action) {
                 return $action
-                    ->setLabel('Speichern und bearbeiten fortsetzen')
-                ;
+                    ->setLabel('Speichern und bearbeiten fortsetzen');
             })
 
             ->update(Crud::PAGE_NEW, Action::SAVE_AND_RETURN, function (Action $action) {
                 return $action
                     ->setLabel('Speichern')
-                    ->setCssClass('btn btn-success')
-                ;
+                    ->setCssClass('btn btn-success');
             })
 
             ->update(Crud::PAGE_NEW, Action::SAVE_AND_ADD_ANOTHER, function (Action $action) {
                 return $action
-                    ->setLabel('Speichern und ein weiteres Gebiet hinzufügen')
-                ;
+                    ->setLabel('Speichern und ein weiteres Gebiet hinzufügen');
             })
 
             ->update(Crud::PAGE_DETAIL, Action::EDIT, function (Action $action) {
                 return $action
                     ->setLabel('Bearbeiten')
-                    ->setCssClass('btn btn-success')
-                ;
+                    ->setCssClass('btn btn-success');
             })
 
             ->update(Crud::PAGE_DETAIL, Action::INDEX, function (Action $action) {
                 return $action
-                    ->setLabel('Zurück zur Liste')
-                ;
+                    ->setLabel('Zurück zur Liste');
             })
             ->update(Crud::PAGE_DETAIL, Action::DELETE, function (Action $action) {
                 return $action
-                    ->setLabel('Löschen')
-                ;
-            })
-
-        ;
+                    ->setLabel('Löschen');
+            });
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -81,11 +71,11 @@ class AreaCrudController extends AbstractCrudController
         return parent::configureCrud($crud)
             ->setPageTitle(Crud::PAGE_INDEX, 'Übersicht der Gebiete')
             ->setPageTitle(Crud::PAGE_NEW, 'Gebiete anlegen')
+            ->showEntityActionsInlined()
             ->setPageTitle(Crud::PAGE_EDIT, static function (Area $area) {
                 return sprintf($area->getName());
             })
-            ->setFormOptions(['attr' => ['novalidate' => null]])
-        ;
+            ->setFormOptions(['attr' => ['novalidate' => null]]);
     }
 
     public function configureFields(string $pageName): iterable
@@ -93,8 +83,7 @@ class AreaCrudController extends AbstractCrudController
         yield Field::new('name')
             ->setLabel('Name des Gebiet\'s')
             ->setHelp('Der Name des Gebiet\'s ist ein Pflichtfeld!')
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
 
         yield Field::new('slug')
             ->setLabel('URL des Gebiet\'s')
@@ -104,8 +93,7 @@ class AreaCrudController extends AbstractCrudController
                 $pageName !== Crud::PAGE_NEW
             )
             ->setHelp('Die URL darf keine Leerzeichen oder Umlaute beinhalten!')
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
 
         yield ChoiceField::new('orientation')
             ->setLabel('Lage')
@@ -118,13 +106,11 @@ class AreaCrudController extends AbstractCrudController
             ])
             ->hideOnIndex()
             ->setHelp('Die Lage beschreibt wo sich das Gebiet befindet.')
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
 
         yield Field::new('sequence')
             ->setLabel('Reihenfolge')
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
 
         yield ChoiceField::new('online')
             ->setLabel('Status:')
@@ -135,38 +121,32 @@ class AreaCrudController extends AbstractCrudController
             ])
             ->setTemplatePath('admin/field/status.html.twig')
             ->setHelp('Ob das Gebiet Online/Offline ist.')
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
 
         yield Field::new('image')
             ->setLabel('Bild')
             ->hideOnIndex()
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
 
         yield Field::new('header_image')
             ->setLabel('Header Bild')
             ->hideOnIndex()
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
 
         yield Field::new('lat')
             ->setLabel('Breitengrad')
             ->hideOnIndex()
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
 
         yield Field::new('lng')
             ->setLabel('Längengrad')
             ->hideOnIndex()
-            ->setColumns('col-12')
-        ;
+            ->setColumns('col-12');
 
         yield Field::new('zoom')
             ->setLabel('Zoomstufe')
             ->hideOnIndex()
             ->setColumns('col-12')
-            ->setHelp('Zoom Stufe relevant für Kartenansicht auf der Gebietsseite.')
-        ;
+            ->setHelp('Zoom Stufe relevant für Kartenansicht auf der Gebietsseite.');
     }
 }

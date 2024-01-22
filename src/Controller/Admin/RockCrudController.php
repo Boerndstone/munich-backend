@@ -83,6 +83,7 @@ class RockCrudController extends AbstractCrudController
         return parent::configureCrud($crud)
             ->setPageTitle(Crud::PAGE_INDEX, 'Übersicht der Felsen')
             ->setPageTitle(Crud::PAGE_NEW, 'Neuen Fels anlegen')
+            ->showEntityActionsInlined()
             ->setPageTitle(Crud::PAGE_EDIT, static function (Rock $rock) {
                 return sprintf($rock->getName());
             })
@@ -115,7 +116,6 @@ class RockCrudController extends AbstractCrudController
             ->setLabel(false)
             ->onlyOnDetail()
             ->setTemplatePath('admin/field/routes.html.twig')
-            ->setFormType(AddressType::class)
             ->addCssClass('field-address')
             ->setColumns('col-12 col-md-4');
 

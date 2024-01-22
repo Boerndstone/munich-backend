@@ -88,6 +88,7 @@ class RoutesCrudController extends AbstractCrudController
         return parent::configureCrud($crud)
             ->setPageTitle(Crud::PAGE_INDEX, 'Übersicht der Routen')
             ->setPageTitle(Crud::PAGE_NEW, 'Neue Route hinzufügen')
+            ->showEntityActionsInlined()
             ->setPageTitle(Crud::PAGE_EDIT, static function (Routes $routes) {
                 return sprintf($routes->getName());
             })
