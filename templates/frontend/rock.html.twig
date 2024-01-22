@@ -160,15 +160,12 @@
 										<div class="card-body">
 											<ul 
 												class="nav flex-column nav-pills menu-sidebar" 
-												data-mdb-allow-hashes="true"
 											>
 												{% for topo in topos %}
 													<li class="nav-item">
 														<a 
 															class="nav-link" 
 															href="#{{ topo.topoName|custom_replace }}"
-															data-mdb-smooth-scroll="smooth-scroll"
-															data-mdb-easing="easeInOutQuart"
 														>
 															{{ topo.topoName }}
 														</a>

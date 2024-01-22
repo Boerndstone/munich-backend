@@ -50,6 +50,10 @@
 // Utilities
 // @import "~bootstrap/scss/utilities/api";
 
+.modal {
+    z-index: 10000000;
+}
+
 
 
 
