@@ -1,6 +1,6 @@
 {% set marker = [] %}
 {% for area in areas %}
-    {% set areaName     = '<h6 class="font-semibold mb-2">' ~ area.name ~ '</h6><div style="background-image: url(https://www.munichclimbs.de/images/areas/' ~ area.image ~ '.webp);overflow: hidden; background-size: cover; background-position: center; width: 200px; height: 133px;"></div>' %}
+    {% set areaName     = '<h6 class="font-semibold mb-2">' ~ area.name ~ '</h6><div style="background-image: url(https://www.munichclimbs.de/images/areas/' ~ area.image ~ '.webp); background-size: cover; background-position: center; width: 200px; height: 133px;"></div>' %}
     {% set areaImage = '' %}
     {% set marker = marker|merge([[ area.lat, area.lng, areaName, areaImage ]]) %}
 {% endfor %}
