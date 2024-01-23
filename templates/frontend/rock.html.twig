@@ -19,14 +19,8 @@
 		<div class="container my-3">
 			{% for rock in rocks %}
 				<section>
-					<div
-						class="bg-image py-3 rounded d-flex align-items-start background-image-height"
-						style="background-image: url('https://www.munichclimbs.de/build/images/headerImages/{{ rock.rockheaderImage }}.webp')"
-					>
-						<div 
-							class="p-3 shadow-3 alert-light d-flex justify-content-between w-100"
-							style="background-color: rgba(255, 255, 255, 0.6);"
-						>
+					<div class="bg-image py-3 rounded d-flex align-items-start background-image-height" style="background-image: url('https://www.munichclimbs.de/build/images/headerImages/{{ rock.rockheaderImage }}.webp')">
+						<div class="p-3 shadow-3 alert-light d-flex justify-content-between w-100" style="background-color: rgba(255, 255, 255, 0.6);">
 							<h1 class="h2 mb-0 fw-bold text-black ">
 								{{ rock.rockName }} 
 								<nav class="mt-1" aria-label="breadcrumb">
@@ -47,6 +41,17 @@
 									</button>
 									{{ include('pageParts/_modal.html.twig', [ rocks ]) }}
 								</div>
+								<div class="ms-2">
+									<button 
+										class="btn btn-sm btn-primary btn-floating" 
+										data-bs-toggle="collapse" 
+										data-bs-target="#collapseRockMap" 
+										aria-expanded="false" 
+										aria-controls="collapseRockMap"
+									>
+										<i class="fas fa-map-marked text-white"></i>
+									</button>
+								</div>
 								{# <button 
 									type="button" 
 									class="btn btn-sm btn-primary btn-floating ms-2"
@@ -58,6 +63,11 @@
 							</div>
 						</div>
 					</div>
+					<div class="collapse mt-3" id="collapseRockMap">
+					<div id="rockMap" class="z-10 mb-3" style="width: 100%; height: 500px;">
+						{{ include('partials/_rockMap.html.twig') }}
+					</div>
+				</div>
 				</section>
 				<section>
 					<div class="row">
