@@ -11,7 +11,7 @@
                         {% for area in sideBar %}
                             <li class="nav-item">
                                 <a class="nav-link text-black" data-bs-toggle="collapse" href="#{{ area.name|custom_replace }}" title="Klettergebiet {{ area.name }}" role="button" aria-expanded="false" aria-controls="{{ area.name|custom_replace }}">
-                                    <img src="https://www.munichclimbs.de/images/navigationThumbs/{{ area.image }}.webp" alt="Übersicht Klettergebiete {{ area.name }}." class="rounded me-3" style="width: 18px; height: 18px;">
+                                    <img src="https://www.munichclimbs.de/build/images/navigationThumbs/{{ area.image }}.webp" alt="Übersicht Klettergebiete {{ area.name }}." class="rounded me-3" style="width: 18px; height: 18px;">
                                     <span class="text-truncate">{{ area.name }}</span>
                                 </a>
                                 <div class="collapse" id="{{ area.name|custom_replace }}">
