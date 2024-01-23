@@ -52,25 +52,25 @@
                         </div>
                     </div>
                     <div class="col-9 d-flex align-items-center justify-content-end">
-                        <form class="w-100">
+                        {# <form class="w-100">
                             <div
                                 class="input-group"
                                 {{ stimulus_controller('search-preview') }}
                             >
                                 <input
                                     name="q"
-                                    {# value="{{ searchTerm }}" #}
+                                    value="{{ searchTerm }}"
                                     placeholder="Finde Route..."
                                     type="search"
                                     class="form-control rounded"
                                     data-action="search-preview#onSearchInput"
                                 >
-                                {# <div
+                                <div
                                     class="search-preview"
                                     data-search-preview-target="result"
-                                ></div> #}
+                                ></div>
                             </div>
-                        </form>
+                        </form> #}
                         <a href="{{ path('app_login') }}" title="Login" class="text-black ms-3">
                             <i class="fas fa-user-circle fs-5" ></i>
                         </a>
