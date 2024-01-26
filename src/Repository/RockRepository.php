@@ -230,6 +230,7 @@ class RockRepository extends ServiceEntityRepository
             ->andWhere('routes.topoId = topo.number')
             ->setParameter('rockSlug', $rockSlug)
             ->orderBy('routes.nr')
+            ->orderBy('topo.number', 'ASC')
             ->getQuery()
             ->getResult();
 

@@ -5,7 +5,7 @@ import { Controller } from "stimulus";
 //import { useClickOutside, useDebounce } from "stimulus-use";
 export default class extends Controller {
   onSearchInput(event) {
-    console.log(event);
+    //console.log(event);
   }
 
   // static values = {

@@ -54,6 +54,15 @@
     z-index: 10000000;
 }
 
+.scroll-container::-webkit-scrollbar {
+    height: 2px;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    background-color: rgb(7, 89, 133) !important;
+    color: white;
+}
 
 
 
