@@ -114,3 +114,44 @@
         }
     }
 }
+
+// Consent Cookie
+// .ch-cookie-consent {
+//     max-width: 24.2em;
+// }
+.ch-cookie-consent__title, .ch-cookie-consent__category-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+.ch-cookie-consent__intro, .ch-cookie-consent__category-description {
+    font-size: .85rem;
+}
+
+.ch-cookie-consent__btn, .ch-cookie-consent__btn--secondary {
+    font-size: .85rem;
+    text-transform: none;
+    font-weight: 700;
+    
+}
+#cookie_consent_use_only_functional_cookies {
+    background: #075985;
+}
+
+.ch-cookie-consent--simplified .ch-cookie-consent__btn-group, .ch-cookie-consent__btn-wrapper, .ch-cookie-consent__btn-group .ch-cookie-consent__toggle-details {
+    margin-bottom: 0!important;
+}
+
+.ch-cookie-consent__form {
+    margin-top: 20px!important;
+}
+
+.ch-cookie-consent__category:first-child {
+    border-top: none!important;
+}
+.ch-cookie-consent__category {
+    border-bottom: none!important;
+}
+
+#cookie_consent_use_all_cookies {
+    display: none;
+}
