@@ -29,7 +29,7 @@
 								{{ rock.rockName }} 
 								<nav class="mt-1" aria-label="breadcrumb">
 									<ol class="breadcrumb text-black fw-normal mb-0" style="font-size: 12px">
-										<li class="breadcrumb-item"><a class="text-primary" href="{{path('frontend')}}"><i class="fas fa-home text-primary"></i></a></li>
+										<li class="breadcrumb-item"><a class="text-primary" href="{{path('index')}}"><i class="fas fa-home text-primary"></i></a></li>
 										<li class="breadcrumb-item"><a href="{{ path('show_rocks', { slug: rock.areaSlug }) }}">{{ rock.areaName }}</a></li>
 										<li class="breadcrumb-item active text-black" aria-current="page">{{ rock.rockName }}</li>
 									</ol>

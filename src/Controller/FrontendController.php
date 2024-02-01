@@ -21,7 +21,7 @@ use App\Service\FooterAreas;
 class FrontendController extends AbstractController
 {
     /**
-     * @Route("/", name="frontend")
+     * @Route("/", name="index")
      */
     public function index(
         AreaRepository $areaRepository,

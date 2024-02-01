@@ -26,7 +26,6 @@
         "file-loader": "^6.2.0",
         "font-awesome": "^4.7.0",
         "jquery": "^3.5.1",
-        "node-sass": "^4.14.0",
         "postcss": "^8.4.5",
         "postcss-import": "^14.0.2",
         "postcss-loader": "^6.0.0",

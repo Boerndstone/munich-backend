@@ -1,6 +1,6 @@
 <header>
 	<nav id="sidenav" class="sidenav sidenav-primary ps" data-mdb-hidden="true" data-mdb-accordion="true" style="width: 240px; height: 100vh; position: fixed; transition: all 0.3s linear 0s;">
-        <a class="ripple d-flex justify-content-left p-4 text-dark" style="font-family: 'Chelsea Market', cursive;" href="{{path('frontend')}}">munichclimbs</a>
+        <a class="ripple d-flex justify-content-left p-4 text-dark" style="font-family: 'Chelsea Market', cursive;" href="{{path('index')}}">munichclimbs</a>
         <ul class="sidenav-menu">
             {% for area in sideBar %}
                 <li class="sidenav-item">
@@ -44,7 +44,7 @@
 						<button data-mdb-toggle="sidenav" data-mdb-target="#sidenav" class="btn shadow-0 p-0 me-3" aria-controls="#sidenav" aria-haspopup="true">
 							<i class="fas fa-bars fa-xl text-black"></i>
 						</button>
-						<a class="d-none d-md-inline-block ripple pb-1 text-dark fs-5" style="font-family: 'Chelsea Market', cursive;" href="{{path('frontend')}}">munichclimbs</a>
+						<a class="d-none d-md-inline-block ripple pb-1 text-dark fs-5" style="font-family: 'Chelsea Market', cursive;" href="{{path('index')}}">munichclimbs</a>
 					</div>
 				</div>
 				<div class="col-9 d-flex justify-content-end">
@@ -52,7 +52,7 @@
 						<div 
                             class="input-group d-flex flex-nowrap"
                             {{ stimulus_controller('autocomplete', {
-                                url: path('frontend', { preview: 1 })
+                                url: path('index', { preview: 1 })
                             })}}
                         >
 							<input 
@@ -73,7 +73,7 @@
                         <div
                             class="input-group"
                             {{ stimulus_controller('search-preview', {
-                                url: path('frontend')
+                                url: path('index')
                             }) }}
                         >
                             <input
