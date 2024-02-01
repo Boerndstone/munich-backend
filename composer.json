@@ -29,20 +29,20 @@
         "symfony/debug-bundle": "^6.1",
         "symfony/dependency-injection": "^6.3",
         "symfony/dotenv": "^6.3",
-        "symfony/expression-language": "6.3.*",
+        "symfony/expression-language": "6.4.*",
         "symfony/flex": "^2.0",
         "symfony/form": "^6.3",
         "symfony/framework-bundle": "^6.1",
         "symfony/http-kernel": "^6.3",
         "symfony/mime": "^6.3",
         "symfony/monolog-bundle": "^3.0",
-        "symfony/property-access": "6.3.*",
-        "symfony/property-info": "6.3.*",
+        "symfony/property-access": "6.4.*",
+        "symfony/property-info": "6.4.*",
         "symfony/security-bundle": "^6.1",
         "symfony/security-csrf": "^5.4",
         "symfony/serializer": "^6.3",
         "symfony/stopwatch": "^6.3",
-        "symfony/translation": "6.3.*",
+        "symfony/translation": "6.4.*",
         "symfony/twig-bundle": "^6.1",
         "symfony/ux-autocomplete": "^2.7",
         "symfony/ux-chartjs": "^2.5",
@@ -112,7 +112,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "6.3.*"
+            "require": "6.4.*"
         }
     }
 }
