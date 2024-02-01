@@ -221,7 +221,7 @@ class RockRepository extends ServiceEntityRepository
                 'topo.number as topoNumber',
                 'topo.svg as topoSvg',
             )
-            ->orderBy('rock.id', 'ASC')
+
             ->innerJoin('rock.area', 'area')
             ->innerJoin('rock.routes', 'routes')
             ->innerJoin('App\Entity\Topo', 'topo', 'WITH', 'topo.rocks = rock')
@@ -229,8 +229,10 @@ class RockRepository extends ServiceEntityRepository
             ->andWhere('routes.rock = topo.rocks')
             ->andWhere('routes.topoId = topo.number')
             ->setParameter('rockSlug', $rockSlug)
-            ->orderBy('routes.nr')
-            ->orderBy('topo.number', 'ASC')
+            ->orderBy('rock.id', 'ASC')
+
+            ->addOrderBy('topo.number', 'ASC')
+            ->addOrderBy('routes.nr', 'ASC')
             ->getQuery()
             ->getResult();
 
