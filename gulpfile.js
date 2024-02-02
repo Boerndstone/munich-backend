@@ -44,6 +44,22 @@ gulp.task("areaImagesWebp", () => {
   return stream;
 });
 
+gulp.task("rocksForMap", () =>
+  gulp
+    .src("src/images/rocksmap/**/*.jpg")
+    .pipe(
+      imageResize({
+        width: 150,
+        height: 150,
+        crop: true,
+        upscale: false,
+        imageMagick: true,
+      })
+    )
+    .pipe(webp())
+    .pipe(gulp.dest("dist/images/rocksmap"))
+);
+
 gulp.task("navigationThumbsJPG", () =>
   gulp
     .src("src/images/areas/**/*.jpg")
@@ -158,22 +174,6 @@ gulp.task("delImagesMaps", async function () {
   const del = await import("del").then((mod) => mod.default);
   return del(["dist/images/rocksmap/**/*", "!dist/images/"]);
 });
-
-gulp.task("rocksForMap", () =>
-  gulp
-    .src("src/images/rocksmap/**/*.jpg")
-    .pipe(
-      imageResize({
-        width: 150,
-        height: 150,
-        crop: true,
-        upscale: false,
-        imageMagick: true,
-      })
-    )
-    .pipe(webp())
-    .pipe(gulp.dest("dist/images/rocksmap"))
-);
 
 gulp.task("generateImagesForMaps", gulp.series("delImagesMaps", "rocksForMap"));
 
