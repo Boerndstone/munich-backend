@@ -47,7 +47,7 @@
 													<img 
 														class="img-fluid rounded-start" 
 														src="{{ asset('build/images/areas/' ~ area.image ~ '.webp') }}" 
-														data-src="" 
+														srcset="{{ asset('build/images/areas/' ~ area.image ~ '.webp 1x') }}, {{ asset('build/images/areas/' ~ area.image ~ '@2x.webp 2x') }}, {{ asset('build/images/areas/' ~ area.image ~ '@3x.webp 3x') }}" 
 														alt="Übersicht Klettergebiete {{ area.name }}"
 													/>
 												{% else %}
