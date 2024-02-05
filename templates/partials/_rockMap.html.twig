@@ -2,18 +2,21 @@
 {% for rock in rocks %}
     {% set rockName     = '<h6 class="font-semibold mb-2">' ~ rock.rockName ~ '</h6><div style="background-image: url(https://www.munichclimbs.de/images/rocksmap/' ~ rock.rockImage ~ '.webp); background-size: cover; background-position: center; width: 150px; height: 150px;"></div><p class="fw-normal text-black mt-1 my-0">GPS:</p><p class="fw-normal text-black my-0">' ~ rock.rockLat ~ ', ' ~ rock.rockLng ~ '</p>' %}
     {% set rockImage = '' %}
-    {% set marker = marker|merge([[ rock.rockLat, rock.rockLng, rock.rockName, rock.rockImage ]]) %}
+    {% set marker = marker|merge([ rock.rockLat, rock.rockLng, rock.pathCoordinates, rock.rockName, rock.rockImage ]) %}
 {% endfor %}
 
 {% set intialZoom = [] %}
-{% set intialZoom = intialZoom|merge([rock.rockLat, rock.rockLng, 12]) %} 
+{% set intialZoom = intialZoom|merge([rock.rockLat, rock.rockLng, 17]) %} 
 
 <script>
 
     var markersRock = {{ marker|json_encode|raw }}
     var zoom = {{ intialZoom|json_encode|raw }}
 
-    var rockMap = L.map('rockMap').setView([ zoom[0], zoom[1]], zoom[2]);
+	var lat = Number(zoom[0])
+	var lng = Number(zoom[1])
+
+    var rockMap = L.map('rockMap').setView([ lat, lng], zoom[2]);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
@@ -21,12 +24,28 @@
 		accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
 	}).addTo(rockMap);
 
-        
-	for (var i = 0; i < markersRock.length; i++) {
-		marker = new L.marker([markersRock[i][0],markersRock[i][1]])
-		.bindPopup(markersRock[i][2])
-		.addTo(rockMap);
+	if(markersRock[2]) {
+		var markerObject = markersRock[2];
+		var coordinates = markerObject.coordinates;
+
+		var lineString = {
+			"type": "LineString",
+			"coordinates": coordinates
+		};
+
+		L.geoJSON(lineString).addTo(rockMap);
+
+		
 	}
+
+	var pointCoordinates = [lng, lat];
+
+	var point = {
+		"type": "Point",
+		"coordinates": pointCoordinates
+	};
+
+	L.geoJSON(point).addTo(rockMap);
 
 	var collapseRockMap = document.getElementById('collapseRockMap');
 		collapseRockMap.addEventListener('shown.bs.collapse', (e) => {

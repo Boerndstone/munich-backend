@@ -87,6 +87,9 @@ class Rock
     #[ORM\Column(type: Types::BOOLEAN)]
     private bool $online = false;
 
+    #[ORM\Column(nullable: true)]
+    private ?array $pathCoordinates = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -368,5 +371,17 @@ class Rock
     public function getRoutesDavid(): ArrayCollection|array
     {
         return $this->routes->toArray();
+    }
+
+    public function getPathCoordinates(): ?array
+    {
+        return $this->pathCoordinates;
+    }
+
+    public function setPathCoordinates(?array $pathCoordinates): static
+    {
+        $this->pathCoordinates = $pathCoordinates;
+
+        return $this;
     }
 }
