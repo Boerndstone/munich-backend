@@ -14,7 +14,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CodeEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
+use App\Form\Type\JsonFieldType;
 
 class RockCrudController extends AbstractCrudController
 {
@@ -281,6 +283,14 @@ class RockCrudController extends AbstractCrudController
         yield NumberField::new('lng')
             ->setLabel('Längengrad')
             ->setNumDecimals(6)
+            ->hideOnIndex()
+            ->hideOnDetail()
+            ->setColumns('col-12');
+
+        yield CodeEditorField::new('path_coordinates')
+            ->setFormType(JsonFieldType::class)
+            ->setLanguage('js')
+            ->setLabel('Pfad Koordinaten')
             ->hideOnIndex()
             ->hideOnDetail()
             ->setColumns('col-12');
