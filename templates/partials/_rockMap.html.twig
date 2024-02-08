@@ -26,27 +26,17 @@
 
 	if(markersRock[2]) {
 		var markerObject = markersRock[2];
-		var coordinates = markerObject.coordinates;
+		L.geoJSON(markerObject).addTo(rockMap); 
+	} else {
+		var pointCoordinates = [lng, lat];
 
-		var lineString = {
-			"type": "LineString",
-			"coordinates": coordinates
+		var point = {
+			"type": "Point",
+			"coordinates": pointCoordinates
 		};
 
-		L.geoJSON(lineString).addTo(rockMap);
-
-		
+		L.geoJSON(point).addTo(rockMap);
 	}
-
-	var pointCoordinates = [lng, lat];
-
-	var point = {
-		"type": "Point",
-		"coordinates": pointCoordinates
-	};
-
-	L.geoJSON(point).addTo(rockMap);
-
 	var collapseRockMap = document.getElementById('collapseRockMap');
 		collapseRockMap.addEventListener('shown.bs.collapse', (e) => {
 			setTimeout(function(){ 
