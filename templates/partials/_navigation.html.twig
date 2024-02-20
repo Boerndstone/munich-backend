@@ -9,7 +9,7 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         {% for area in sideBar %}
-                            <li class="nav-item">
+                            <li class="nav-item my-2">
                                 <a class="nav-link text-black" data-bs-toggle="collapse" href="#{{ area.name|custom_replace }}" title="Klettergebiet {{ area.name }}" role="button" aria-expanded="false" aria-controls="{{ area.name|custom_replace }}">
                                     <img src="https://www.munichclimbs.de/build/images/navigationThumbs/{{ area.image }}.webp" alt="Übersicht Klettergebiete {{ area.name }}." class="rounded me-3" style="width: 18px; height: 18px;">
                                     <span class="text-truncate">{{ area.name }}</span>
@@ -26,13 +26,13 @@
                                 </div>
                             </li>
                         {% endfor %}
-                        <li class="nav-item">
+                        <li class="nav-item my-2">
                             <a class="nav-link text-black " href="/Datenschutz">
                                 <i class="fas fa-chart-area fa-fw me-3"></i>
                                 <span class="text-truncate">Datenschutz</span>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item my-2">
                             <a class="nav-link text-black " href="/Impressum">
                                 <i class="fas fa-chart-area fa-fw me-3"></i>
                                 <span class="text-truncate">Impressum</span>
@@ -45,7 +45,7 @@
                 <div class="row">
                     <div class="col-3">
                         <div class="d-flex align-items-center">
-                            <button class="navbar-toggler p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                            <button class="navbar-toggler p-0 bg-none border-0 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                                 <i class="fas fa-bars fa-xl text-black"></i>
                             </button>
                             <a class="pb-lg-1 text-dark fs-5 ms-3" style="font-family: 'Chelsea Market', cursive;" href="{{path('index')}}">munichclimbs</a>
