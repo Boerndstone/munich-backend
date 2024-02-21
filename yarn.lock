@@ -6375,10 +6375,6 @@ matchdep@^2.0.0:
     resolve "^1.4.0"
     stack-trace "0.0.10"
 
-"mdb-ui-kit@git+https://oauth2:PZXxmv384tZzqP3jkmYs@git.mdbootstrap.com/mdb/standard/mdb-ui-kit-pro-advanced.git":
-  version "7.1.0"
-  resolved "git+https://oauth2:PZXxmv384tZzqP3jkmYs@git.mdbootstrap.com/mdb/standard/mdb-ui-kit-pro-advanced.git#c9c726ec1ebb8b767f99a97e632704ed2e652b32"
-
 mdn-data@2.0.14:
   version "2.0.14"
   resolved "https://registry.npmjs.org/mdn-data/-/mdn-data-2.0.14.tgz"

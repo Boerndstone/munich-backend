@@ -76,7 +76,6 @@
         "@popperjs/core": "^2.11.2",
         "babel-plugin-syntax-jsx": "^6.18.0",
         "gulp": "^4.0.2",
-        "mdb-ui-kit": "git+https://oauth2:PZXxmv384tZzqP3jkmYs@git.mdbootstrap.com/mdb/standard/mdb-ui-kit-pro-advanced.git",
         "natives": "^1.1.6",
         "node-sass-import": "^1.0.5",
         "prop-types": "^15.7.2"

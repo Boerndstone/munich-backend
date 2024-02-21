@@ -1,0 +1,20 @@
+
+<div
+    class="modal fade"
+    tabindex="-1"
+    aria-hidden="true"
+    data-modal-route-information-target="modal"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ route.routeName }} ({{ route.routeGrade }})</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="fw-bold mb-0 d-lg-none">{% if route.routefirstAscent %} Erstbegeher: {{ route.routefirstAscent }} {% endif %} {% if route.routeyearFirstAscent %}{{ route.routeyearFirstAscent }}{% endif %}</p>
+			    <p>{{ route.routeDescription }}</p>
+            </div>
+        </div>
+    </div>
+</div>

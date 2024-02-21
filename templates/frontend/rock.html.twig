@@ -38,7 +38,7 @@
 							<div class="d-flex items-center align-self-start">
 								<div {{ stimulus_controller('modal-form') }}>
 									<button 
-										class="btn btn-sm btn-primary btn-floating"
+										class="btn btn-sm btn-primary rounded-circle"
 										data-action="modal-form#openModal"
 									>
 										<i class="fas fa-info text-white"></i>
@@ -47,13 +47,13 @@
 								</div>
 								<div class="ms-2">
 									<button 
-										class="btn btn-sm btn-primary btn-floating" 
+										class="btn btn-sm btn-primary rounded-circle" 
 										data-bs-toggle="collapse" 
 										data-bs-target="#collapseRockMap" 
 										aria-expanded="false" 
 										aria-controls="collapseRockMap"
 									>
-										<i class="fas fa-map-marked text-white"></i>
+										<i class="fa fa-map-pin"></i>
 									</button>
 								</div>
 								{# <button 
@@ -75,13 +75,11 @@
 				</section>
 				{% if topos is not empty %}
 					<div id="topo-anker" class="px-3 py-0 my-2 sticky-top bg-white border-none" style="top: 52px; z-index: 1000;">
-						<ul class="nav nav-pills d-flex flex-nowrap mb-0 overflow-x-scroll scroll-container">
+						<div class="nav nav-pills d-flex flex-nowrap mb-0 overflow-x-scroll scroll-container list-group list-group-horizontal py-3">
 							{% for topo in topos %}
-								<li class="nav-item p-0">
-									<a class="nav-link text-nowrap px-3 py-2" href="#{{ topo.topoName|custom_replace }}">{{ topo.topoName }}</a>
-								</li>
+								<a class="list-group-item list-group-item-action text-nowrap text-center" href="#{{ topo.topoName|custom_replace }}">{{ topo.topoName }}</a>
 							{% endfor %}
-						</ul>
+						</div>
 					</div>
 				{% endif %}
 				<section>
@@ -130,51 +128,45 @@
 												{% endfor %}
 											</div>
 											<div class="table-responsive">
-												<table class="table table-striped table-sm">
-													<tbody>{% for route in routes %}
-														<tr>
-															<td>{{loop.index}}</td>
-															<td>
-																{{ route.routeName }} 
-																<span data-controller="routeparams" data-routeparams-rating="{{ route.routeRating }}" data-routeparams-protection="{{ route.routeProtection }}">
-																	<span data-routeparams-target="star"></span>
-																	<span data-routeparams-target="protection"></span>
-																</span>
-																{% set videos = videoRepository.findVideosByParams(route.areaId, route.rockId, route.routeId) %}
-																{% if videos is not empty %}
-																	{% for video in videos %}
-																		<a href="{{ video.videoLink }}" alt="Video von Route {{ route.routeName }} " target="_blank">
-																			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="text-black"><path fill="currentColor" d="M15 8v8H5V8h10m1-2H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4V7c0-.55-.45-1-1-1z"/></svg>
-																		</a>
-																	{% endfor %}
-																{% endif %}
-															</td>
-															<td>{{ route.routeGrade }}</td>
-															<td class="d-none d-lg-table-cell" style="white-space: nowrap;">
-																{{ route.routefirstAscent }} {% if route.routeyearFirstAscent %}{{ route.routeyearFirstAscent }}{% endif %}
-															</td>
-															<td style="padding-top: 0.2rem;">
-																{% if route.routeDescription %}
-																	<button 
-																		class="btn btn-sm btn-primary btn-floating"
-																		data-bs-toggle="collapse" 
-																		href="#{{ route.routeName|custom_replace }}"
-																		aria-expanded="false" 
-																		aria-controls="{{ route.routeName|custom_replace }}"
-																		style="width: 1.125rem;height: 1.125rem; background: transparent;"
-																	>
-																		<i class="fas fa-info fa-xs" style="width: 1.125rem;line-height: 1.12rem;"></i>
-																	</button>
-																{% endif %}
-																<tr>
-																	<td class="collapse" id="{{ route.routeName|custom_replace }}" colspan="5">
-																		<p class="fw-bold mb-0 d-lg-none">{% if route.routefirstAscent %} Erstbegeher: {{ route.routefirstAscent }} {% endif %} {% if route.routeyearFirstAscent %}{{ route.routeyearFirstAscent }}{% endif %}</p>
-																		{{ route.routeDescription }}
-																	</td>
-																</tr>
-															</td>
-														</tr>
-													{% endfor %}
+												<table class="table table-striped">
+													<tbody>
+														{% for route in routes %}
+															<tr>
+																<td>{{loop.index}}</td>
+																<td>
+																	{{ route.routeName }} 
+																	<span data-controller="routeparams" data-routeparams-rating="{{ route.routeRating }}" data-routeparams-protection="{{ route.routeProtection }}">
+																		<span data-routeparams-target="star"></span>
+																		<span data-routeparams-target="protection"></span>
+																	</span>
+																	{% set videos = videoRepository.findVideosByParams(route.areaId, route.rockId, route.routeId) %}
+																	{% if videos is not empty %}
+																		{% for video in videos %}
+																			<a href="{{ video.videoLink }}" alt="Video von Route {{ route.routeName }} " target="_blank">
+																				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="text-black"><path fill="currentColor" d="M15 8v8H5V8h10m1-2H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4V7c0-.55-.45-1-1-1z"/></svg>
+																			</a>
+																		{% endfor %}
+																	{% endif %}
+																</td>
+																<td>{{ route.routeGrade }}</td>
+																<td class="d-none d-lg-table-cell" style="white-space: nowrap;">
+																	{{ route.routefirstAscent }} {% if route.routeyearFirstAscent %}{{ route.routeyearFirstAscent }}{% endif %}
+																</td>
+																<td style="padding-top: 0.2rem;">
+																	{% if route.routeDescription %}
+																		<div {{ stimulus_controller('modal-route-information') }}>
+																			<button 
+																				class="btn btn-sm btn-primary rounded-circle"
+																				data-action="modal-route-information#openModal"
+																			>
+																				<i class="fas fa-info text-white" style="font-size: 10px;"></i>
+																			</button>
+																			{{ include('partials/_modal-route-information.html.twig') }}
+																		</div>
+																	{% endif %}
+																</td>
+															</tr>
+														{% endfor %}
 													</tbody>
 												</table>
 											</div>
@@ -183,34 +175,10 @@
 								</div>
 							{% endfor %}
 						</section>
-					</div>
-						{# {% if topos is not empty %}
-							<div class="col-md-3 d-none d-lg-block position-relative">
-								<div id="scrollspy-collapsible" class="sticky-top" style="top: 80px;">
-									<div class="card mt-3">
-										<div class="card-body">
-											<ul 
-												class="nav flex-column nav-pills menu-sidebar" 
-											>
-												{% for topo in topos %}
-													<li class="nav-item">
-														<a 
-															class="nav-link" 
-															href="#{{ topo.topoName|custom_replace }}"
-														>
-															{{ topo.topoName }}
-														</a>
-													</li>
-												{% endfor %}
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						{% endif %} #}
-					</div>
+					</div>						
 				</div>
 			</section>
+		</div>
 		{% include 'partials/_footer.html.twig' with {'areas': areas} %}
     </main>
 {% endblock %}

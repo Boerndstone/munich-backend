@@ -36,10 +36,6 @@ body {
     color: rgb(161 98 7) !important;
 }
 
-.accordion-button:not(.collapsed) {
-    color: rgb(7 89 133) !important;
-}
-
 .nav-pills.menu-sidebar .nav-link.active,
 .nav-pills.menu-sidebar .show>.nav-link {
     color: rgb(7 89 133) !important;

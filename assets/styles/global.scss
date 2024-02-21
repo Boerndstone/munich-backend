@@ -1,8 +1,6 @@
 // @import "~bootstrap/scss/~bootstrap/scss/bootstrap";
 // @import "~mdb-ui-kit/src/mdb/scss/mdb.free.scss";
 
-
-
 // Configuration
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
@@ -18,7 +16,7 @@
 @import "~bootstrap/scss/images";
 @import "~bootstrap/scss/containers";
 @import "~bootstrap/scss/grid";
-// @import "~bootstrap/scss/tables";
+@import "~bootstrap/scss/tables";
 // @import "~bootstrap/scss/forms";
 @import "~bootstrap/scss/buttons";
 @import "~bootstrap/scss/transitions";
@@ -27,8 +25,8 @@
 // @import "~bootstrap/scss/nav";
 @import "~bootstrap/scss/navbar";
 @import "~bootstrap/scss/card";
-// @import "~bootstrap/scss/accordion";
-// @import "~bootstrap/scss/breadcrumb";
+@import "~bootstrap/scss/accordion";
+@import "~bootstrap/scss/breadcrumb";
 // @import "~bootstrap/scss/pagination";
 @import "~bootstrap/scss/badge";
 // @import "~bootstrap/scss/alert";
@@ -45,15 +43,44 @@
 // @import "~bootstrap/scss/placeholders";
 
 // Helpers
-// @import "~bootstrap/scss/helpers";
+@import "~bootstrap/scss/helpers";
 
 // Utilities
 @import "~bootstrap/scss/utilities/api";
 
 // General
+
+$primary: #075985;
 a {
     text-decoration: none;
+    color: $primary;
 }
+.btn-primary {
+    border-color: $primary;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: white;
+    box-shadow: none;
+    color: black;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+}
+
+.accordion-button::after {
+    color: white;
+}
+.list-group-item.active {
+    color: white;
+    background-color: $primary;
+    border-color: $primary;
+}
+th, td {
+    padding: 1rem!important;
+}
+
 
 .modal {
     z-index: 10000000;
