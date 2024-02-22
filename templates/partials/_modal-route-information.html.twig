@@ -1,8 +1,10 @@
 
 <div
+    id="{{ route.routeName|custom_replace }}"
     class="modal fade"
     tabindex="-1"
     aria-hidden="true"
+    aria-labelledby="{{ route.routeName|custom_replace }}"
     data-modal-route-information-target="modal"
 >
     <div class="modal-dialog">
