@@ -146,17 +146,17 @@
 																</td>
 																<td style="padding-top: 0.2rem;">
 																	{% if route.routeDescription %}
-																		<div {{ stimulus_controller('modal-route-information') }}>
+																		{# <div {{ stimulus_controller('modal-route-information') }}> #}
 																			<button 
 																				class="btn btn-sm btn-primary rounded-circle"
-																				data-action="modal-route-information#openModal"
+																				{# data-action="modal-route-information#openModal" #}
 																				data-bs-toggle="modal" 
 																				data-bs-target="#{{ route.routeName|custom_replace }}"
 																			>
 																				<i class="fas fa-info text-white" style="font-size: 10px;"></i>
 																			</button>
 																			{{ include('partials/_modal-route-information.html.twig') }}
-																		</div>
+																		{# </div> #}
 																	{% endif %}
 																</td>
 															</tr>
