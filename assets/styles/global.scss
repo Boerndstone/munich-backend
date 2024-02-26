@@ -55,7 +55,14 @@ a {
     text-decoration: none;
     color: $primary;
 }
-.btn-primary {
+.btn-primary, .btn-outline-primary {
+    border-color: $primary;
+}
+.btn-outline-primary {
+    color: $primary;
+}
+.btn:hover {
+    background-color: $primary;
     border-color: $primary;
 }
 

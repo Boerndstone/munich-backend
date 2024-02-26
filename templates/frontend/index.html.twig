@@ -15,27 +15,9 @@
 	<main>
 		<div class="container my-3">
 			<section>
-				<div class="dpl-newmdb-docs-alert-advanced pb-3">
-					<div 
-						class="p-3 rounded shadow-3 alert-light d-flex align-items-center justify-content-between" 
-						style="background-color: rgba(255, 255, 255, 0.6);"
-						role="alert" 
-						data-mdb-color="light"
-					>
-						<h1 class="h2 mb-0 fw-bold text-black">Klettergebiete um München</h1>
-						<div>
-							<button 
-								type="button" 
-								class="btn btn-sm btn-primary rounded-circle" 
-								data-bs-toggle="collapse" 
-								data-bs-target="#collapseMap" 
-								aria-expanded="false" 
-								aria-controls="collapseMap"
-							>
-								<i class="fa fa-map-pin"></i>
-							</button>
-						</div>
-					</div>
+				<div class="p-3 mb-3 rounded shadow-3 alert-light d-flex align-items-center justify-content-between bg-white">
+					<h1 class="h2 mb-0 fw-bold text-black">Klettergebiete um München</h1>
+					{{ include('partials/_collapseMap.html.twig') }}
 				</div>
 				<div class="collapse mt-3" id="collapseMap">
 					<div id="map" class="z-10 mb-3" style="width: 100%; height: 500px;">
