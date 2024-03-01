@@ -22,16 +22,7 @@
                         <h1 class="h3 mb-0 fw-bold text-black">
                             {{ areaName }}
                         </h1>
-                        <button 
-                            type="button" 
-                            class="btn btn-sm btn-primary rounded-circle" 
-                            data-bs-toggle="collapse" 
-                            data-bs-target="#collapseAreaMap" 
-                            aria-expanded="false" 
-                            aria-controls="collapseAreaMap"
-                        >
-                            <i class="fa fa-map-pin"></i>
-                        </button>
+                        {% include 'partials/_collapseMap.html.twig' with { collapseId: 'collapseAreaMap', ariaControls: 'collapseAreaMap' } %}
                     </div>
 				</div>
                 <div class="collapse mt-3" id="collapseAreaMap">
@@ -46,7 +37,9 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th><i class="fas fa-align-justify"></i></th>
+                                            <th>
+                                                <div class="list"></div>
+                                            </th>
                                             <th>Fels</th>
                                             <th>Routen</th>
                                             <th>Höhe</th>
@@ -113,39 +106,28 @@
                                                     {{ rock.rockHeight }} m
                                                 </td>
                                                 <td>
-                                                    <i 
-                                                        class="fas fa-baby-carriage fa-lg" 
-                                                        {% if rock.rockChild == 2 %} 
-                                                            style="transform: rotate(45deg) scaleX(-1);" 
-                                                        {% elseif rock.rockChild == 3 %} 
-                                                            style="transform: rotate(90deg) scaleX(-1);" 
-                                                        {% else %} 
-                                                            style="transform: rotate(0deg) scaleX(-1);" 
-                                                        {% endif %}
-                                                        
-                                                    ></i>
+                                                    {% if rock.rockChild == 1  %} 
+                                                        <div class="child-friendly"></div>
+                                                    {% elseif rock.rockChild == 2 %} 
+                                                        <div class="child-middle"></div>
+                                                    {% else %}
+                                                        <div class="child-danger"></div>
+                                                    {% endif %}
                                                 </td>
                                                 <td>
-                                                    <i 
-                                                        {% if rock.rockRain < 2 %} 
-                                                            class="fas fa-umbrella fa-lg" 
-                                                            style="color: rgb(20 83 45);" 
-                                                        {% else %} 
-                                                            class="far fa-thumbs-down fa-lg" 
-                                                            style="color: rgb(185 28 28);" 
-                                                        {% endif %}
-                                                    ></i>
+                                                    {% if rock.rockRain < 2 %} 
+                                                        <div class="umbrella"></div>
+                                                    {% else %} 
+                                                        <div class="thumb-down"></div>
+                                                    {% endif %}
                                                 </td>
                                                 <td>{{ rock.rockOrientation }}</td>
                                                 <td>
-                                                    <i 
-                                                        {% if rock.rockSunny >= 1 %} 
-                                                            class="fas fa-sun fa-lg" 
-                                                            style="color: rgb(161 98 7);" 
-                                                        {% else %} 
-                                                            class="fas fa-umbrella-beach fa-lg" 
-                                                        {% endif %}
-                                                    ></i>
+                                                    {% if rock.rockSunny >= 1 %} 
+                                                        <div class="sun"></div>
+                                                    {% else %} 
+                                                        <div class="no-sun"></div>
+                                                    {% endif %}
                                                 </td>
                                             </tr>
                                         {% endfor %}

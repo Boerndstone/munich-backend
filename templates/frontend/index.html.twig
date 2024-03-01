@@ -17,7 +17,7 @@
 			<section>
 				<div class="p-3 mb-3 rounded shadow-3 alert-light d-flex align-items-center justify-content-between bg-white">
 					<h1 class="h2 mb-0 fw-bold text-black">Klettergebiete um München</h1>
-					{{ include('partials/_collapseMap.html.twig') }}
+					{% include 'partials/_collapseMap.html.twig' with { collapseId: 'collapseMap', ariaControls: 'collapseMap' } %}
 				</div>
 				<div class="collapse mt-3" id="collapseMap">
 					<div id="map" class="z-10 mb-3" style="width: 100%; height: 500px;">
@@ -63,7 +63,7 @@
 																>1 - 5</div>
 																<div class="text-center text-white bg-gray-400 mt-1" style="font-size: .75rem;">
 																	<div style="background-color:#15803d;" class="px-2 py-1">
-																		{{ area.amountEasy }}													
+																		{{ area.amountEasy }}
 																	</div>
 																</div>
 															</div>

@@ -29,7 +29,7 @@
 								{{ rock.rockName }} 
 								<nav class="mt-1" aria-label="breadcrumb">
 									<ol class="breadcrumb text-black fw-normal mb-0" style="font-size: 12px">
-										<li class="breadcrumb-item"><a class="text-primary" href="{{path('index')}}"><i class="fas fa-home text-primary"></i></a></li>
+										<li class="breadcrumb-item"><a class="text-primary" href="{{path('index')}}"><span class="home d-inline-block"></span></a></li>
 										<li class="breadcrumb-item"><a href="{{ path('show_rocks', { slug: rock.areaSlug }) }}">{{ rock.areaName }}</a></li>
 										<li class="breadcrumb-item active text-black" aria-current="page">{{ rock.rockName }}</li>
 									</ol>
@@ -38,23 +38,15 @@
 							<div class="d-flex items-center align-self-start">
 								<div {{ stimulus_controller('modal-form') }}>
 									<button 
-										class="btn btn-sm btn-primary rounded-circle"
+										class="btn btn-sm btn-white bg-white p-0 border-0 shadow-none rounded-circle"
 										data-action="modal-form#openModal"
 									>
-										<i class="fas fa-info text-white"></i>
+										<div class="info"></div>
 									</button>
 									{{ include('pageParts/_modal.html.twig', [ rocks ]) }}
 								</div>
 								<div class="ms-2">
-									<button 
-										class="btn btn-sm btn-primary rounded-circle" 
-										data-bs-toggle="collapse" 
-										data-bs-target="#collapseRockMap" 
-										aria-expanded="false" 
-										aria-controls="collapseRockMap"
-									>
-										<i class="fa fa-map-pin"></i>
-									</button>
+									{% include 'partials/_collapseMap.html.twig' with { collapseId: 'collapseRockMap', ariaControls: 'collapseRockMap' } %}
 								</div>
 							</div>
 						</div>
@@ -125,19 +117,21 @@
 														<tr>
 															<td>{{loop.index}}</td>
 															<td>
-																{{ route.routeName }} 
-																<span data-controller="routeparams" data-routeparams-rating="{{ route.routeRating }}" data-routeparams-protection="{{ route.routeProtection }}">
-																	<span data-routeparams-target="star"></span>
-																	<span data-routeparams-target="protection"></span>
-																</span>
-																{% set videos = videoRepository.findVideosByParams(route.areaId, route.rockId, route.routeId) %}
-																{% if videos is not empty %}
-																	{% for video in videos %}
-																		<a href="{{ video.videoLink }}" alt="Video von Route {{ route.routeName }} " target="_blank">
-																			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="text-black"><path fill="currentColor" d="M15 8v8H5V8h10m1-2H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4V7c0-.55-.45-1-1-1z"/></svg>
-																		</a>
-																	{% endfor %}
-																{% endif %}
+																<div class="d-flex items-bottom">
+																	<span class="me-1">{{ route.routeName }} </span>
+																	<span data-controller="routeparams" data-routeparams-rating="{{ route.routeRating }}" data-routeparams-protection="{{ route.routeProtection }}">
+																		<span data-routeparams-target="star"></span>
+																		<span data-routeparams-target="protection"></span>
+																	</span>
+																	{% set videos = videoRepository.findVideosByParams(route.areaId, route.rockId, route.routeId) %}
+																	{% if videos is not empty %}
+																		{% for video in videos %}
+																			<a href="{{ video.videoLink }}" alt="Video von Route {{ route.routeName }} " target="_blank">
+																				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="text-black"><path fill="currentColor" d="M15 8v8H5V8h10m1-2H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4V7c0-.55-.45-1-1-1z"/></svg>
+																			</a>
+																		{% endfor %}
+																	{% endif %}
+																</div>
 															</td>
 															<td>{{ route.routeGrade }}</td>
 															<td class="d-none d-lg-table-cell" style="white-space: nowrap;">
@@ -147,12 +141,13 @@
 																{% if route.routeDescription %}
 																	<div {{ stimulus_controller('modal-route-information') }}>
 																		<button 
-																			class="btn btn-sm btn-primary rounded-circle"
+																			class="btn btn-sm btn-white bg-white p-0 border-0 shadow-none rounded-circle"
+																			
 																			data-action="modal-route-information#openModal"
 																			data-bs-toggle="modal" 
 																			data-bs-target="#{{ route.routeName|custom_replace }}"
 																		>
-																			<i class="fas fa-info text-white" style="font-size: 10px;"></i>
+																			<div class="info" style="width: 22px; height: 22px"></div>
 																		</button>
 																		{{ include('partials/_modal-route-information.html.twig') }}
 																	</div>
