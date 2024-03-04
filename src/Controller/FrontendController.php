@@ -115,14 +115,10 @@ class FrontendController extends AbstractController
         foreach ($galleryItems as $item) {
             $jsonData[] = [
                 'src' =>
-                //$assetPackages->getUrl('build/images/areas/konstein.webp'),
-                $assetPackages->getUrl('build/images/galerie/' . $item->getName()),
+                $assetPackages->getUrl('https://www.munichclimbs.de/build/images/galerie/' . $item->getName() . '.webp'),
                 'subHtml' => $item->getDescription(),
             ];
         }
-
-        // http: //127.0.0.1:8000/build/images/areas/konstein.webp
-        // http: //127.0.0.1:8000/build/images/areas/konstein.webp
 
         $sideBar = $areaRepository->sidebarNavigation();
 

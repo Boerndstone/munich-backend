@@ -17,18 +17,6 @@
     data-bs-spy="scroll" data-bs-target="#topo-anker" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0" 
 {% endblock %}
 
-{% block javascripts %}
-	{{ parent() }}
-	{{ encore_entry_script_tags('gallery') }}
-	<script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var galleryData = {{ jsonData|json_encode|raw }};
-            initializeGallery(galleryData);
-        });
-    </script>
-	
-{% endblock %}
-
 {% block body %}
 	{{ include('partials/_navigation.html.twig') }}
     <main>
@@ -60,14 +48,18 @@
 								<div class="ms-2">
 									{% include 'partials/_collapseMap.html.twig' with { collapseId: 'collapseRockMap', ariaControls: 'collapseRockMap' } %}
 								</div>
-								<button 
-									id="open-gallery-btn"
-									type="button" 
-									class="btn btn-sm btn-primary btn-floating ms-2"
-									aria-label="Open Gallery"
-								>
-									<i class="far fa-images text-white"></i>
-								</button>
+								{% if jsonData %}
+									<div data-controller="gallery" data-gallery-data="{{ jsonData|json_encode }}">
+										<button 
+											id="open-gallery-btn"
+											type="button" 
+											class="btn btn-sm btn-primary btn-floating ms-2"
+											aria-label="Open Gallery"
+										>
+											<i class="far fa-images text-white"></i>
+										</button>
+									</div>
+								{% endif %}
 							</div>
 						</div>
 					</div>
@@ -100,7 +92,6 @@
 					</div>
 				</section>
 			{% endfor %} 
-			<section>
 				<div class="row">
 					<div class="col-md-9">
 						<section>
