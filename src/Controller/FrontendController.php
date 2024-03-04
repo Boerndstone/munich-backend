@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Area;
 use App\Entity\Rock;
 use App\Repository\AreaRepository;
+use App\Repository\PhotosRepository;
 use App\Repository\RockRepository;
 use App\Repository\RoutesRepository;
 use App\Repository\VideosRepository;
@@ -14,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Asset\Packages;
 
 use App\Service\FooterAreas;
 
@@ -89,9 +91,11 @@ class FrontendController extends AbstractController
         RoutesRepository $routesRepository,
         RockRepository $rockRepository,
         TopoRepository $topoRepository,
+        PhotosRepository $photosRepository,
         Rock $rock,
         $slug,
-        FooterAreas $footerAreas
+        FooterAreas $footerAreas,
+        Packages $assetPackages
     ): Response {
 
         $rockId = $rockRepository->getRockId($slug);
@@ -103,6 +107,23 @@ class FrontendController extends AbstractController
 
         $rocks = $rockRepository->getRockInformation($slug);
         $routes = $rockRepository->getRoutesTopo($slug);
+
+        $galleryItems = $photosRepository->findPhotosForRock($rockId);
+
+        // Serialize data to JSON format
+        $jsonData = [];
+        foreach ($galleryItems as $item) {
+            $jsonData[] = [
+                'src' =>
+                //$assetPackages->getUrl('build/images/areas/konstein.webp'),
+                $assetPackages->getUrl('build/images/galerie/' . $item->getName()),
+                'subHtml' => $item->getDescription(),
+            ];
+        }
+
+        // http: //127.0.0.1:8000/build/images/areas/konstein.webp
+        // http: //127.0.0.1:8000/build/images/areas/konstein.webp
+
         $sideBar = $areaRepository->sidebarNavigation();
 
         $areas = $footerAreas->getFooterAreas();
@@ -118,6 +139,7 @@ class FrontendController extends AbstractController
             'routesRepository' => $routesRepository,
             'topos' => $topos,
             'sideBar' => $sideBar,
+            'jsonData' => $jsonData
         ]);
     }
 

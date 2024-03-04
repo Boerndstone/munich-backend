@@ -91,9 +91,9 @@ gulp.task("navigationThumbsWebP", () =>
     .pipe(gulp.dest("dist/images/navigationThumbs"))
 );
 
-gulp.task("galerieImagesNew", () =>
+gulp.task("galerieImages", () =>
   gulp
-    .src(["src/images/galerie/**/*.jpg", "src/images/galerie/**/*.JPG"])
+    .src(["assets/images/galerie/**/*.jpg", "assets/images/galerie/**/*.JPG"])
     .pipe(
       imageResize({
         width: 1000,
@@ -104,7 +104,7 @@ gulp.task("galerieImagesNew", () =>
       })
     )
     .pipe(webp())
-    .pipe(gulp.dest("dist/images/galerie-new"))
+    .pipe(gulp.dest("public/build/images/galerie"))
 );
 gulp.task("convertImages", () => {
   const sizes = [
@@ -157,15 +157,15 @@ gulp.task("delImages", async function () {
   return del(["public/build/images/areas/**/*", "!public/build/images/"]);
 });
 gulp.task(
-  "generateImages",
+  "galerieImages",
   gulp.series(
     "delImages",
     // "convertImages",
     "imagesWebp",
     // "navigationThumbsJPG",
     // "navigationThumbsWebP",
-    "areaImagesWebp"
-    // "galerieImagesNew"
+    "areaImagesWebp",
+    "galerieImages"
   )
 );
 
