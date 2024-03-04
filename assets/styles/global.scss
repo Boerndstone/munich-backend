@@ -29,7 +29,7 @@
 @import "~bootstrap/scss/breadcrumb";
 // @import "~bootstrap/scss/pagination";
 @import "~bootstrap/scss/badge";
-// @import "~bootstrap/scss/alert";
+@import "~bootstrap/scss/alert";
 // @import "~bootstrap/scss/progress";
 @import "~bootstrap/scss/list-group";
 @import "~bootstrap/scss/close";
@@ -144,12 +144,17 @@ $success: rgb(20 83 45);
     @extend .icon-content-size;
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a9 9 0 0 0-9 9a8.99 8.99 0 0 0 4 7.47V22h2v-3h2v3h2v-3h2v3h2v-3.54c2.47-1.65 4-4.46 4-7.46a9 9 0 0 0-9-9m-4 9a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2m8 0a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2m-4 3l1.5 3h-3z" /></svg>');
 }
-
 .chart {
     width: 18px;
     height: 18px;
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M17.45 15.18L22 7.31V21H2V3h2v12.54L9.5 6L16 9.78l4.24-7.33l1.73 1l-5.23 9.05l-6.51-3.75L4.31 19h2.26l4.39-7.56z" /></svg>');
 }
+.image-gallery {
+    @extend .icon-content-size;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="rgb(255 255 255)" d="M22 16V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2m-11-4l2.03 2.71L16 11l4 5H8M2 6v14a2 2 0 0 0 2 2h14v-2H4V6" /></svg>');
+}
+
+
 
 a {
     text-decoration: none;

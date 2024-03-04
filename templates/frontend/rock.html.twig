@@ -49,14 +49,12 @@
 									{% include 'partials/_collapseMap.html.twig' with { collapseId: 'collapseRockMap', ariaControls: 'collapseRockMap' } %}
 								</div>
 								{% if jsonData %}
-									<div data-controller="gallery" data-gallery-data="{{ jsonData|json_encode }}">
+									<div data-controller="gallery" data-gallery-data="{{ jsonData|json_encode }}" class="ms-2 d-inline-block">
 										<button 
 											id="open-gallery-btn"
-											type="button" 
-											class="btn btn-sm btn-primary btn-floating ms-2"
-											aria-label="Open Gallery"
+											class="btn btn-sm btn-primary p-1 rounded-circle shadow"
 										>
-											<i class="far fa-images text-white"></i>
+											<div class="image-gallery"></div>
 										</button>
 									</div>
 								{% endif %}
