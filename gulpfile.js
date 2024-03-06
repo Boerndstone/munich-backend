@@ -17,8 +17,11 @@ const del = require("del");
 // /////////////////////////////////////////
 gulp.task("areaImagesWebp", () => {
   const sizes = [
+    { width: 400, quality: 10, suffix: "-low" },
     { width: 400, quality: 100, suffix: "" },
     { width: 800, quality: 100, suffix: "@2x" },
+    { width: 800, quality: 10, suffix: "@2x-low" },
+    { width: 1200, quality: 10, suffix: "@3x-low" },
     { width: 1200, quality: 80, suffix: "@3x" },
   ];
   let stream;
