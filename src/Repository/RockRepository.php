@@ -147,7 +147,7 @@ class RockRepository extends ServiceEntityRepository
                 'SUM(CASE WHEN route.gradeNo > 29 AND route.gradeNo <= 60 THEN 1 ELSE 0 END) AS amountHard',
                 'SUM(CASE WHEN route.gradeNo = 0 OR route.gradeNo IS NULL THEN 1 ELSE 0 END) AS amountProjects'
             )
-            ->orderBy('rock.id', 'ASC')
+            ->orderBy('rock.nr', 'ASC')
             ->leftJoin('rock.area', 'area')
             ->leftJoin('rock.routes', 'route')
             ->where('area.slug LIKE :areaSlug')
