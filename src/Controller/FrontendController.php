@@ -98,11 +98,14 @@ class FrontendController extends AbstractController
         Packages $assetPackages
     ): Response {
 
+
         $rockId = $rockRepository->getRockId($slug);
 
         $topos = $topoRepository->getTopos($rockId);
 
         $rockName = $rock->getSlug();
+        $areaName = $rock->getArea();
+
         $rockDescription = $rock->getDescription();
 
         $rocks = $rockRepository->getRockInformation($slug);
@@ -125,6 +128,7 @@ class FrontendController extends AbstractController
         $areas = $footerAreas->getFooterAreas();
 
         return $this->render('frontend/rock.html.twig', [
+            'areaName' => $areaName,
             'areas' => $areas,
             'slug' => $slug,
             'rocks' => $rocks,

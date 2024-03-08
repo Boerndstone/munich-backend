@@ -3,44 +3,51 @@
 {% block meta_tags %}
 	<meta name="description" content="{% for rock in rocks %}{{ rock.rockDescription}}{% endfor %}"/>
 	<meta name="robots" content="index,follow"/>
-	<meta property="og:site_name" content="Munichclimbs | {{ rockName }}">
-	<meta property="og:title" content="Munichclimbs | {{ rockName }}" />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://munichclimbs.de/Kletterfels/{{ slug }}" />
+	<meta property="og:site_name" content="Munichclimbs | {{ areaName }} | {{ rockName }}">
+	<meta property="og:title" content="Munichclimbs | {{ areaName }} | {{ rockName }}"/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:url" content="https://munichclimbs.de/Kletterfels/{{ slug }}"/>
 	<meta property="og:description" content="{% for rock in rocks %}{{ rock.rockDescription}}{% endfor %}"/>
 	<meta name="keywords" content="Klettertouren Burgstein: {% for route in routes %}{{ route.routeName}} {{ route.routeGrade}}{% if loop.last == false  %}, {% else %}{% endif %}{% endfor %}"/>
 {% endblock %}
 
-{% block title %}Munichclimbs | {{ slug }}{% endblock %}
+{% block title %}Munichclimbs |
+	{{ areaName }}
+	|
+	{{ slug|custom_replace }}
+{% endblock %}
 
 {% block body_attributes %}
-    data-bs-spy="scroll" data-bs-target="#topo-anker" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0" 
+	data-bs-spy="scroll" data-bs-target="#topo-anker" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0"
 {% endblock %}
 
 {% block body %}
 	{{ include('partials/_navigation.html.twig') }}
-    <main>
+	<main>
 		<div class="container my-3">
 			{% for rock in rocks %}
 				<section>
 					<div class="bg-image py-3 rounded d-flex align-items-start background-image-height" style="background-image: url('https://www.munichclimbs.de/build/images/headerImages/{{ rock.rockheaderImage }}.webp')">
 						<div class="p-3 shadow-3 alert-light d-flex justify-content-between w-100" style="background-color: rgba(255, 255, 255, 0.6);">
 							<h1 class="h2 mb-0 fw-bold text-black ">
-								{{ rock.rockName }} 
+								{{ rock.rockName }}
 								<nav class="mt-1" aria-label="breadcrumb">
 									<ol class="breadcrumb text-black fw-normal mb-0" style="font-size: 12px">
-										<li class="breadcrumb-item"><a class="text-primary" href="{{path('index')}}"><span class="home d-inline-block"></span></a></li>
-										<li class="breadcrumb-item"><a href="{{ path('show_rocks', { slug: rock.areaSlug }) }}">{{ rock.areaName }}</a></li>
+										<li class="breadcrumb-item">
+											<a class="text-primary" href="{{path('index')}}">
+												<span class="home d-inline-block"></span>
+											</a>
+										</li>
+										<li class="breadcrumb-item">
+											<a href="{{ path('show_rocks', { slug: rock.areaSlug }) }}">{{ rock.areaName }}</a>
+										</li>
 										<li class="breadcrumb-item active text-black" aria-current="page">{{ rock.rockName }}</li>
 									</ol>
 								</nav>
 							</h1>
 							<div class="d-flex items-center align-self-start">
 								<div {{ stimulus_controller('modal-form') }}>
-									<button 
-										class="btn btn-sm btn-white bg-white p-0 border-0 shadow-none rounded-circle"
-										data-action="modal-form#openModal"
-									>
+									<button class="btn btn-sm btn-white bg-white p-0 border-0 shadow-none rounded-circle" data-action="modal-form#openModal">
 										<div class="info"></div>
 									</button>
 									{{ include('pageParts/_modal.html.twig', [ rocks ]) }}
@@ -50,10 +57,7 @@
 								</div>
 								{% if jsonData %}
 									<div data-controller="gallery" data-gallery-data="{{ jsonData|json_encode }}" class="ms-2 d-inline-block">
-										<button 
-											id="open-gallery-btn"
-											class="btn btn-sm btn-primary p-1 rounded-circle shadow"
-										>
+										<button id="open-gallery-btn" class="btn btn-sm btn-primary p-1 rounded-circle shadow">
 											<div class="image-gallery"></div>
 										</button>
 									</div>
@@ -83,99 +87,96 @@
 							{% if rock.rockBanned == 1 and currentDate < 181 %}
 								<div class="alert alert-danger my-3" role="alert">
 									<strong class="font-bold">Jahreszeitliche Sperrung!</strong>
-									<span class="block sm:inline">{{ rock.rockName }} ist leider noch bis zum 30.06. gesperrt!</span>
+									<span class="block sm:inline">{{ rock.rockName }}
+										ist leider noch bis zum 30.06. gesperrt!</span>
 								</div>
 							{% endif %}
 						</div>
 					</div>
 				</section>
-			{% endfor %} 
-				<div class="row">
-					<div class="col-md-9">
-						<section>
-							{% set groupedRoutes = {} %}
-							{% for routeData in routes %}
-								{% set topoName = routeData.topoName %}
-								{% set topoNumber = routeData.topoNumber %}
-								{% set topoSvg = routeData.topoSvg %}
-								{% 
+			{% endfor %}
+			<div class="row">
+				<div class="col-md-9">
+					<section>
+						{% set groupedRoutes = {} %}
+						{% for routeData in routes %}
+							{% set topoName = routeData.topoName %}
+							{% set topoNumber = routeData.topoNumber %}
+							{% set topoSvg = routeData.topoSvg %}
+							{% 
 									set groupedRoutes = groupedRoutes|merge({
 										(topoName): groupedRoutes[topoName]|default([])|merge([{'routeName': routeData.routeName, 'routeRating': routeData.routeRating, 'routeProtection': routeData.routeProtection, 'areaId': routeData.areaId, 'rockId': routeData.rockId, 'routeId': routeData.routeId, 'routefirstAscent': routeData.routefirstAscent, 'routeyearFirstAscent': routeData.routeyearFirstAscent, 'routeDescription': routeData.routeDescription, 'routeGrade': routeData.routeGrade, 'topoSvg': routeData.topoSvg}])
 									}) 
 								%}
-							{% endfor %}
-							{% for topoName, routes in groupedRoutes %}
-								<div class="card mt-3" id="{{ topoName|custom_replace}}" class="anchored-section">
-									<div class="card-body p-0 p-md-3">
-										<section>
-											<h3 class="pb-md-1 px-2 pt-2 pt-md-0 px-md-0">{{ topoName }}</h3>
-											<div class="py-3">
-												{% set hasPrinted = false %}
-												{% for route in routes %}
-													{% if not hasPrinted %}
-															{% if route.topoSvg is not empty %}
-																{{ route.topoSvg|raw }}
-															{% endif %}
-														{% set hasPrinted = true %}
+						{% endfor %}
+						{% for topoName, routes in groupedRoutes %}
+							<div class="card mt-3" id="{{ topoName|custom_replace}}" class="anchored-section">
+								<div class="card-body p-0 p-md-3">
+									<section>
+										<h3 class="pb-md-1 px-2 pt-2 pt-md-0 px-md-0">{{ topoName }}</h3>
+										<div class="py-3">
+											{% set hasPrinted = false %}
+											{% for route in routes %}
+												{% if not hasPrinted %}
+													{% if route.topoSvg is not empty %}
+														{{ route.topoSvg|raw }}
 													{% endif %}
-												{% endfor %}
-											</div>
-											<table class="table table-striped">
-												<tbody>
-													{% for route in routes %}
-														<tr>
-															<td>{{loop.index}}</td>
-															<td>
-																<div class="d-flex items-bottom">
-																	<span class="me-1">{{ route.routeName }} </span>
-																	<span data-controller="routeparams" data-routeparams-rating="{{ route.routeRating }}" data-routeparams-protection="{{ route.routeProtection }}">
-																		<span data-routeparams-target="star"></span>
-																		<span data-routeparams-target="protection"></span>
-																	</span>
-																	{% set videos = videoRepository.findVideosByParams(route.areaId, route.rockId, route.routeId) %}
-																	{% if videos is not empty %}
-																		{% for video in videos %}
-																			<a href="{{ video.videoLink }}" alt="Video von Route {{ route.routeName }} " target="_blank">
-																				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="text-black"><path fill="currentColor" d="M15 8v8H5V8h10m1-2H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4V7c0-.55-.45-1-1-1z"/></svg>
-																			</a>
-																		{% endfor %}
-																	{% endif %}
-																</div>
-															</td>
-															<td>{{ route.routeGrade }}</td>
-															<td class="d-none d-lg-table-cell" style="white-space: nowrap;">
-																{{ route.routefirstAscent }} {% if route.routeyearFirstAscent %}{{ route.routeyearFirstAscent }}{% endif %}
-															</td>
-															<td style="padding-top: 0.2rem;">
-																{% if route.routeDescription %}
-																	<div {{ stimulus_controller('modal-route-information') }}>
-																		<button 
-																			class="btn btn-sm btn-white bg-white p-0 border-0 shadow-none rounded-circle"
-																			
-																			data-action="modal-route-information#openModal"
-																			data-bs-toggle="modal" 
-																			data-bs-target="#{{ route.routeName|custom_replace }}"
-																		>
-																			<div class="info" style="width: 22px; height: 22px"></div>
-																		</button>
-																		{{ include('partials/_modal-route-information.html.twig') }}
-																	</div>
+													{% set hasPrinted = true %}
+												{% endif %}
+											{% endfor %}
+										</div>
+										<table class="table table-striped">
+											<tbody>
+												{% for route in routes %}
+													<tr>
+														<td>{{loop.index}}</td>
+														<td>
+															<div class="d-flex items-bottom">
+																<span class="me-1">{{ route.routeName }}
+																</span>
+																<span data-controller="routeparams" data-routeparams-rating="{{ route.routeRating }}" data-routeparams-protection="{{ route.routeProtection }}">
+																	<span data-routeparams-target="star"></span>
+																	<span data-routeparams-target="protection"></span>
+																</span>
+																{% set videos = videoRepository.findVideosByParams(route.areaId, route.rockId, route.routeId) %}
+																{% if videos is not empty %}
+																	{% for video in videos %}
+																		<a href="{{ video.videoLink }}" alt="Video von Route {{ route.routeName }} " target="_blank">
+																			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 24 24" class="text-black"><path fill="currentColor" d="M15 8v8H5V8h10m1-2H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4V7c0-.55-.45-1-1-1z"/></svg>
+																		</a>
+																	{% endfor %}
 																{% endif %}
-															</td>
-														</tr>
-													{% endfor %}
-												</tbody>
-											</table>
-										</section>
-									</div>
+															</div>
+														</td>
+														<td>{{ route.routeGrade }}</td>
+														<td class="d-none d-lg-table-cell" style="white-space: nowrap;">
+															{{ route.routefirstAscent }}
+															{% if route.routeyearFirstAscent %}
+																{{ route.routeyearFirstAscent }}
+															{% endif %}
+														</td>
+														<td style="padding-top: 0.2rem;">
+															{% if route.routeDescription %}
+																<div {{ stimulus_controller('modal-route-information') }}>
+																	<button class="btn btn-sm btn-white bg-white p-0 border-0 shadow-none rounded-circle" data-action="modal-route-information#openModal" data-bs-toggle="modal" data-bs-target="#{{ route.routeName|custom_replace }}">
+																		<div class="info" style="width: 22px; height: 22px"></div>
+																	</button>
+																	{{ include('partials/_modal-route-information.html.twig') }}
+																</div>
+															{% endif %}
+														</td>
+													</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</section>
 								</div>
-							{% endfor %}
-						</section>
-					</div>						
+							</div>
+						{% endfor %}
+					</section>
 				</div>
-			</section>
-		</div>
-		{% include 'partials/_footer.html.twig' with {'areas': areas} %}
-    </main>
-{% endblock %}
-
+			</div>
+		</section>
+	</div>
+	{% include 'partials/_footer.html.twig' with {'areas': areas} %}
+</main>{% endblock %}
