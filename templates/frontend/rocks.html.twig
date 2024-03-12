@@ -4,141 +4,114 @@
 	<meta name="description" content="Felsen im Klettergebiet: {% for rock in rocks %}{{ rock.rockName }}{% if loop.last == false  %}, {% else %} {% endif %} {% endfor %}"/>
 	<meta name="robots" content="index,follow"/>
 	<meta property="og:site_name" content="Munichclimbs | {{ areaName }}">
-	<meta property="og:title" content="Munichclimbs | {{ areaName }}" />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://munichclimbs.de/Klettergebiet/{{ areaSlug }}" />
+	<meta property="og:title" content="Munichclimbs | {{ areaName }}"/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:url" content="https://munichclimbs.de/Klettergebiet/{{ areaSlug }}"/>
 	<meta property="og:description" content="Felsen im Klettergebiet: {% for rock in rocks %}{{ rock.rockName }}{% if loop.last == false  %}, {% else %} {% endif %} {% endfor %}"/>
 {% endblock %}
 
-{% block title %}Munichclimbs | {{ areaName }}{% endblock %}
+{% block title %}Munichclimbs |
+	{{ areaName }}
+{% endblock %}
 
 {% block body %}
-    {{ include('partials/_navigation.html.twig') }}
-    <main>
-        <div class="container my-3">
-            <section>
-                <div class="bg-image pb-3 rounded">
-                    <div class="p-3 rounded shadow-3 alert-light d-flex align-items-center justify-content-between" style="background-color: rgba(255, 255, 255, 0.6);">
-                        <h1 class="h3 mb-0 fw-bold text-black">
-                            {{ areaName }}
-                        </h1>
-                        {% include 'partials/_collapseMap.html.twig' with { collapseId: 'collapseAreaMap', ariaControls: 'collapseAreaMap' } %}
-                    </div>
+	{{ include('partials/_navigation.html.twig') }}
+	<main>
+		<div class="container my-3">
+			<section>
+				<div class="bg-image pb-3 rounded">
+					<div class="p-3 rounded shadow-3 alert-light d-flex align-items-center justify-content-between" style="background-color: rgba(255, 255, 255, 0.6);">
+						<h1 class="h3 mb-0 fw-bold text-black">
+							{{ areaName }}
+						</h1>
+						{% include 'partials/_collapseMap.html.twig' with { collapseId: 'collapseAreaMap', ariaControls: 'collapseAreaMap' } %}
+					</div>
 				</div>
-                <div class="collapse mt-3" id="collapseAreaMap">
+				<div class="collapse mt-3" id="collapseAreaMap">
 					<div id="areaMap" class="z-10 mb-3" style="width: 100%; height: 500px;">
 						{{ include('pageParts/areaMap.html.twig') }}
 					</div>
 				</div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="bg-white">
-                            <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>
-                                                <div class="list"></div>
-                                            </th>
-                                            <th>Fels</th>
-                                            <th>Routen</th>
-                                            <th>Höhe</th>
-                                            <th>Kinder</th>
-                                            <th>Regensicher</th>
-                                            <th>Ausrichtung</th>
-                                            <th>Sonnig</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for rock in rocks %}
-                                            <tr>
-                                                <td>{{loop.index}}</td>
-                                                <td>
-                                                    <a href="{{ path('show_rock', { slug: rock.rockSlug }) }}" class="flex text-sm d-inline-block text-truncate" style="max-width: 150px;">{{rock.rockName}}</a>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <span class="text-end me-3" style="width: 1rem;">
-                                                            {{ rock.amountRoutes }} 
-                                                            {% set percent = 100 / rock.amountRoutes %}
-                                                            {% set easy = percent * rock.amountEasy %}
-                                                            {% set middle = percent * rock.amountMiddle %}
-                                                            {% set hard = percent * rock.amountHard %}
-                                                            {% set project = percent * rock.amountProjects %}
-                                                        </span>
-                                                        <div class="progress" style="height: 1rem; width: 6rem;">
-                                                            <div 
-                                                                class="progress-bar" 
-                                                                role="progressbar" 
-                                                                style="width: {{ easy }}%; background-color: #15803d" 
-                                                                aria-valuenow="{{ easy }}" 
-                                                                aria-valuemin="0" 
-                                                                aria-valuemax="100"
-                                                            ></div>
-                                                            <div 
-                                                                class="progress-bar" 
-                                                                role="progressbar" 
-                                                                style="width: {{ middle }}%; background-color: #075985" 
-                                                                aria-valuenow="{{ middle }}" 
-                                                                aria-valuemin="0" 
-                                                                aria-valuemax="100"
-                                                            ></div>
-                                                            <div 
-                                                                class="progress-bar" 
-                                                                role="progressbar" 
-                                                                style="width: {{ hard }}%; background-color: #b91c1c" 
-                                                                aria-valuenow="{{ hard }}" 
-                                                                aria-valuemin="0" 
-                                                                aria-valuemax="100"
-                                                            ></div>
-                                                            <div 
-                                                                class="progress-bar" 
-                                                                role="progressbar" 
-                                                                style="width: {{ project }}%; background-color: black" 
-                                                                aria-valuenow="{{ project }}" 
-                                                                aria-valuemin="0" 
-                                                                aria-valuemax="100"
-                                                            ></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    {{ rock.rockHeight }} m
-                                                </td>
-                                                <td>
-                                                    {% if rock.rockChild == 1  %} 
-                                                        <div class="child-friendly"></div>
-                                                    {% elseif rock.rockChild == 2 %} 
-                                                        <div class="child-middle"></div>
-                                                    {% else %}
-                                                        <div class="child-danger"></div>
-                                                    {% endif %}
-                                                </td>
-                                                <td>
-                                                    {% if rock.rockRain < 2 %} 
-                                                        <div class="umbrella"></div>
-                                                    {% else %} 
-                                                        <div class="thumb-down"></div>
-                                                    {% endif %}
-                                                </td>
-                                                <td>{{ rock.rockOrientation }}</td>
-                                                <td>
-                                                    {% if rock.rockSunny >= 1 %} 
-                                                        <div class="sun"></div>
-                                                    {% else %} 
-                                                        <div class="no-sun"></div>
-                                                    {% endif %}
-                                                </td>
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-        {% include 'partials/_footer.html.twig' with {'areas': areas} %}
-    </main>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="bg-white">
+							<div class="table-responsive">
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>
+												<div class="list"></div>
+											</th>
+											<th>Fels</th>
+											<th>Routen</th>
+											<th>Höhe</th>
+											<th>Kinder</th>
+											<th>Regensicher</th>
+											<th>Ausrichtung</th>
+											<th>Sonnig</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for rock in rocks %}
+											<tr>
+												<td>{{loop.index}}</td>
+												<td>
+													<a href="{{ path('show_rock', { slug: rock.rockSlug }) }}" class="flex fw-medium d-inline-block text-truncate" style="max-width: 150px;">{{rock.rockName}}</a>
+												</td>
+												<td>
+													<div class="d-flex align-items-center">
+														<span class="text-end me-3" style="width: 1rem;">
+															{{ rock.amountRoutes }}
+															{% set percent = 100 / rock.amountRoutes %}
+															{% set easy = percent * rock.amountEasy %}
+															{% set middle = percent * rock.amountMiddle %}
+															{% set hard = percent * rock.amountHard %}
+															{% set project = percent * rock.amountProjects %}
+														</span>
+														<div class="progress" style="height: 1rem; width: 6rem;">
+															<div class="progress-bar" role="progressbar" style="width: {{ easy }}%; background-color: #15803d" aria-valuenow="{{ easy }}" aria-valuemin="0" aria-valuemax="100"></div>
+															<div class="progress-bar" role="progressbar" style="width: {{ middle }}%; background-color: #075985" aria-valuenow="{{ middle }}" aria-valuemin="0" aria-valuemax="100"></div>
+															<div class="progress-bar" role="progressbar" style="width: {{ hard }}%; background-color: #b91c1c" aria-valuenow="{{ hard }}" aria-valuemin="0" aria-valuemax="100"></div>
+															<div class="progress-bar" role="progressbar" style="width: {{ project }}%; background-color: black" aria-valuenow="{{ project }}" aria-valuemin="0" aria-valuemax="100"></div>
+														</div>
+													</div>
+												</td>
+												<td>{{ rock.rockHeight }}
+													m</td>
+												<td>
+													{% if rock.rockChild == 1  %}
+														<div class="child-friendly"></div>
+													{% elseif rock.rockChild == 2 %}
+														<div class="child-middle"></div>
+													{% else %}
+														<div class="child-danger"></div>
+													{% endif %}
+												</td>
+												<td>
+													{% if rock.rockRain < 2 %}
+														<div class="umbrella"></div>
+													{% else %}
+														<div class="thumb-down"></div>
+													{% endif %}
+												</td>
+												<td>{{ rock.rockOrientation }}</td>
+												<td>
+													{% if rock.rockSunny >= 1 %}
+														<div class="sun"></div>
+													{% else %}
+														<div class="no-sun"></div>
+													{% endif %}
+												</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		{% include 'partials/_footer.html.twig' with {'areas': areas} %}
+	</main>
 {% endblock %}

@@ -72,11 +72,25 @@
 					</div>
 				</section>
 				{% if topos is not empty %}
-					<div id="topo-anker" class="px-3 py-0 my-2 sticky-top bg-white border-none" style="top: 52px; z-index: 1000;">
-						<div class="nav nav-pills d-flex flex-nowrap mb-0 overflow-x-scroll scroll-container list-group list-group-horizontal py-3">
+					{# <div id="topo-anker" class="px-1 py-0 my-2 sticky-top bg-white border-none d-flex align-items-center" style="top: 52px; z-index: 1000;"> #}
+					<div class="tab-navigation" {{ stimulus_controller('tabs') }}>
+						<div class="left-arrow">
+							<svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+							</svg>
+						</div>
+						{# <div class="nav nav-pills d-flex flex-nowrap mb-0 overflow-x-scroll scroll-container list-group list-group-horizontal"> #}
+						<ul>
 							{% for topo in topos %}
-								<a class="list-group-item list-group-item-action text-nowrap text-center" href="#{{ topo.topoName|custom_replace }}">{{ topo.topoName }}</a>
+								<li>
+									<a class="" href="#{{ topo.topoName|custom_replace }}">{{ topo.topoName }}</a>
+								</li>
 							{% endfor %}
+						</ul>
+						<div class="right-arrow active">
+							<svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+								<path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
+							</svg>
 						</div>
 					</div>
 				{% endif %}
@@ -178,5 +192,4 @@
 			</div>
 		</section>
 	</div>
-	{% include 'partials/_footer.html.twig' with {'areas': areas} %}
-</main>{% endblock %}
+	{% include 'partials/_footer.html.twig' with {'areas': areas} %}</main>{% endblock %}
