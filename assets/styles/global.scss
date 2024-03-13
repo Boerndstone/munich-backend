@@ -205,55 +205,57 @@ $success: rgb(20 83 45);
     }
 }
 
-.tab-navigation {
+.scrollable-tabs-container {
     max-width: 1024px;
-    margin: 16px auto;
     z-index: 1000;
-    background-color: white;
     overflow: hidden;
-    position: relative;
-    background-color: #000;
-    border-radius: 4px;
+    
+    background: white;
 }
-.tab-navigation a.active {
+.scrollable-tabs-container a.active {
    border-bottom: 2px solid $primary;
 }
-.tab-navigation svg {
-    width: 35px;
-    height: 35px;
-    padding: 8px;
+.scrollable-tabs-container svg {
+    width: 30px;
+    height: 30px;
+    padding: 4px;
     cursor: pointer;
     border-radius: 50%;
     color: #fff;
+    pointer-events: auto;
+    background: $primary;
 }
 
-.tab-navigation ul {
+.scrollable-tabs-container ul {
     display: flex;
-    gap: 16px;
-    padding: 12px 24;
+    gap: 24px;
     margin: 0;
     list-style: none;
     overflow-x: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    scroll-behavior: smooth;
 }
 
-.tab-navigation ul::-webkit-scrollbar {
+.scrollable-tabs-container ul.dragging {
+    scroll-behavior: auto;
+}
+.scrollable-tabs-container ul.dragging a {
+    pointer-events: none;
+}
+
+.scrollable-tabs-container ul::-webkit-scrollbar {
     display: none;
 }
 
-.tab-navigation a {
+.scrollable-tabs-container a {
     text-decoration: none;
-    background: #333;
-    padding: 4px 24px;
-    display: inline-block;
-    border-radius: 4px;
     user-select: none;
     white-space: nowrap;
-    color: white;
+    font-size: 14px;
 }
 
-.tab-navigation .right-arrow, .tab-navigation .left-arrow {
+.scrollable-tabs-container .right-arrow, .scrollable-tabs-container .left-arrow {
     position: absolute;
     height: 100%;
     width: 100px;
@@ -262,24 +264,25 @@ $success: rgb(20 83 45);
     align-items: center;
     padding: 0 10px;
     display: none;
+    pointer-events: none;
 }
 
-.tab-navigation .right-arrow.active,
-.tab-navigation .left-arrow.active {
+.scrollable-tabs-container .right-arrow.active,
+.scrollable-tabs-container .left-arrow.active {
     display: flex;
 }
 
-.tab-navigation .right-arrow {
+.scrollable-tabs-container .right-arrow {
     right: 0;
-    background: linear-gradient(to left, #000 50%, transparent);
+    background: linear-gradient(to left, #fff 50%, transparent);
     justify-content: flex-end;
 }
 
-.tab-navigation .left-arrow {
-    background: linear-gradient(to right, #000 50% transparent);
+.scrollable-tabs-container .left-arrow {
+    background: linear-gradient(to right, #fff 50%, transparent);
 }
 
-.tab-navigation svg:hover {
+.scrollable-tabs-container svg:hover {
     background-color: #333;
 }
 

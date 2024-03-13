@@ -17,15 +17,15 @@
 	{{ slug|custom_replace }}
 {% endblock %}
 
-{% block body_attributes %}
+{# {% block body_attributes %}
 	data-bs-spy="scroll" data-bs-target="#topo-anker" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0"
-{% endblock %}
+{% endblock %} #}
 
 {% block body %}
 	{{ include('partials/_navigation.html.twig') }}
 	<main>
-		<div class="container my-3">
-			{% for rock in rocks %}
+		{% for rock in rocks %}
+			<div class="container my-3">
 				<section>
 					<div class="bg-image py-3 rounded d-flex align-items-start background-image-height" style="background-image: url('https://www.munichclimbs.de/build/images/headerImages/{{ rock.rockheaderImage }}.webp')">
 						<div class="p-3 shadow-3 alert-light d-flex justify-content-between w-100" style="background-color: rgba(255, 255, 255, 0.6);">
@@ -71,19 +71,21 @@
 						</div>
 					</div>
 				</section>
-				{% if topos is not empty %}
-					{# <div id="topo-anker" class="px-1 py-0 my-2 sticky-top bg-white border-none d-flex align-items-center" style="top: 52px; z-index: 1000;"> #}
-					<div class="tab-navigation" {{ stimulus_controller('tabs') }}>
+			</div>
+			{% if topos is not empty %}
+
+				<div class="bg-white border-top border-bottom sticky-top" style="top: 50px;">
+
+					<div class="scrollable-tabs-container container " {{ stimulus_controller('tabs') }}>
 						<div class="left-arrow">
 							<svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 								<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"></path>
 							</svg>
 						</div>
-						{# <div class="nav nav-pills d-flex flex-nowrap mb-0 overflow-x-scroll scroll-container list-group list-group-horizontal"> #}
-						<ul>
+						<ul class="p-0">
 							{% for topo in topos %}
 								<li>
-									<a class="" href="#{{ topo.topoName|custom_replace }}">{{ topo.topoName }}</a>
+									<a class="d-inline-block py-2 text-black fw-medium" href="#{{ topo.topoName|custom_replace }}">{{ topo.topoName }}</a>
 								</li>
 							{% endfor %}
 						</ul>
@@ -93,22 +95,26 @@
 							</svg>
 						</div>
 					</div>
-				{% endif %}
-				<section>
-					<div class="row">
-						<div class="col-md-12">
-							{% set currentDate =  "now"|date("z") %}
-							{% if rock.rockBanned == 1 and currentDate < 181 %}
-								<div class="alert alert-danger my-3" role="alert">
-									<strong class="font-bold">Jahreszeitliche Sperrung!</strong>
-									<span class="block sm:inline">{{ rock.rockName }}
-										ist leider noch bis zum 30.06. gesperrt!</span>
-								</div>
-							{% endif %}
-						</div>
+
+				</div>
+			{% endif %}
+
+			<section class="container">
+				<div class="row">
+					<div class="col-md-12">
+						{% set currentDate =  "now"|date("z") %}
+						{% if rock.rockBanned == 1 and currentDate < 181 %}
+							<div class="alert alert-danger my-3" role="alert">
+								<strong class="font-bold">Jahreszeitliche Sperrung!</strong>
+								<span class="block sm:inline">{{ rock.rockName }}
+									ist leider noch bis zum 30.06. gesperrt!</span>
+							</div>
+						{% endif %}
 					</div>
-				</section>
-			{% endfor %}
+				</div>
+			</section>
+		{% endfor %}
+		<div class="container">
 			<div class="row">
 				<div class="col-md-9">
 					<section>
@@ -190,6 +196,7 @@
 					</section>
 				</div>
 			</div>
-		</section>
+		</div>
 	</div>
-	{% include 'partials/_footer.html.twig' with {'areas': areas} %}</main>{% endblock %}
+	{% include 'partials/_footer.html.twig' with {'areas': areas} %}
+</main>{% endblock %}
