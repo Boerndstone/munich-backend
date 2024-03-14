@@ -216,14 +216,12 @@ $success: rgb(20 83 45);
    border-bottom: 2px solid $primary;
 }
 .scrollable-tabs-container svg {
-    width: 30px;
-    height: 30px;
-    padding: 4px;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
     border-radius: 50%;
-    color: #fff;
+    color: $primary;
     pointer-events: auto;
-    background: $primary;
 }
 
 .scrollable-tabs-container ul {
@@ -252,7 +250,7 @@ $success: rgb(20 83 45);
     text-decoration: none;
     user-select: none;
     white-space: nowrap;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .scrollable-tabs-container .right-arrow, .scrollable-tabs-container .left-arrow {
@@ -280,10 +278,6 @@ $success: rgb(20 83 45);
 
 .scrollable-tabs-container .left-arrow {
     background: linear-gradient(to right, #fff 50%, transparent);
-}
-
-.scrollable-tabs-container svg:hover {
-    background-color: #333;
 }
 
 a {
