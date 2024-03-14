@@ -203,6 +203,9 @@ $success: rgb(20 83 45);
     th {
         font-weight: 600;
     }
+    th, td {
+        padding: .65rem;
+    }
 }
 
 .scrollable-tabs-container {
@@ -318,9 +321,7 @@ a {
     background-color: $primary;
     border-color: $primary;
 }
-th, td {
-    padding: 1rem!important;
-}
+
 
 .scroll-container::-webkit-scrollbar {
     height: 2px;
