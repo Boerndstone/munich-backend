@@ -21,7 +21,7 @@ class AppExtension extends AbstractExtension
         $value = str_replace($replacements, '', $value);
 
         // Additional replacement for 'ö'
-        $value = str_replace(['ö', 'ä', 'ü', '_'], ['oe', 'ae', 'ue', ' '], $value);
+        $value = str_replace(['ö', 'ä', 'ü', '_', 'ß'], ['oe', 'ae', 'ue', ' ', 'ss'], $value);
 
         return $value;
     }
