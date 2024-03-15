@@ -1,17 +1,18 @@
 {% extends 'base.html.twig' %}
+{% set setTitle = 'Munichclimbs | Klettergebiet ' ~ areaName %}
 
 {% block meta_tags %}
 	<meta name="description" content="Felsen im Klettergebiet: {% for rock in rocks %}{{ rock.rockName }}{% if loop.last == false  %}, {% else %} {% endif %} {% endfor %}"/>
 	<meta name="robots" content="index,follow"/>
-	<meta property="og:site_name" content="Munichclimbs | {{ areaName }}">
-	<meta property="og:title" content="Munichclimbs | {{ areaName }}"/>
+	<meta property="og:site_name" content="{{ setTitle }}"/>
+	<meta property="og:title" content="{{ setTitle }}"/>
 	<meta property="og:type" content="website"/>
 	<meta property="og:url" content="https://munichclimbs.de/Klettergebiet/{{ areaSlug }}"/>
 	<meta property="og:description" content="Felsen im Klettergebiet: {% for rock in rocks %}{{ rock.rockName }}{% if loop.last == false  %}, {% else %} {% endif %} {% endfor %}"/>
 {% endblock %}
 
-{% block title %}Munichclimbs | Klettergebiet
-	{{ areaName }}
+{% block title %}
+	{{ setTitle }}
 {% endblock %}
 
 {% block body %}
