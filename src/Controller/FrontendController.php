@@ -118,7 +118,7 @@ class FrontendController extends AbstractController
         foreach ($galleryItems as $item) {
             $jsonData[] = [
                 'src' =>
-                $assetPackages->getUrl('https://www.munichclimbs.de/build/images/galerie/' . $item->getName() . '.webp'),
+                $assetPackages->getUrl('https://www.munichclimbs.de/uploads/galerie/' . $item->getName() . '.webp'),
                 'subHtml' => $item->getDescription(),
             ];
         }
