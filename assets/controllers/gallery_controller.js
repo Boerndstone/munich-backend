@@ -13,6 +13,12 @@ export default class extends Controller {
       const galleryItem = document.createElement("a");
       galleryItem.setAttribute("href", item.src);
       galleryItem.setAttribute("data-sub-html", item.subHtml);
+
+      // Add srcset attribute for different resolutions
+      galleryItem.setAttribute("srcset", `${item.src} @1x, ${item.src2x} @2x`);
+
+      // Append the anchor element to the gallery container
+      $dynamicGallery.appendChild(galleryItem);
     });
     const dynamicGallery = lightGallery($dynamicGallery, {
       dynamic: true,
