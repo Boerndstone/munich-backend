@@ -16,9 +16,6 @@ export default class extends Controller {
     tabsList.querySelectorAll("li").forEach((li) => {
       totalWidth += li.offsetWidth;
     });
-    console.log(tabsList.clientWidth);
-    console.log(container.clientWidth);
-    console.log("Total width of all li elements:", totalWidth);
 
     const leftArrowContainer = document.querySelector(
       ".scrollable-tabs-container .left-arrow"

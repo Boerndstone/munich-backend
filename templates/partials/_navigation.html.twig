@@ -1,83 +1,71 @@
 <header style="height: 50px;">
-    <nav class="navbar bg-white fixed-top" style="">
-        <div class="container">
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                <div class="offcanvas-header">
-                    <a class="offcanvas-title text-black" id="offcanvasNavbarLabel" style="font-family: 'Chelsea Market', cursive;" href="{{path('index')}}">munichclimbs</a>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                        {% for area in sideBar %}
-                            <li class="nav-item my-2">
-                                <a class="nav-link text-black" data-bs-toggle="collapse" href="#{{ area.name|custom_replace }}" title="Klettergebiet {{ area.name }}" role="button" aria-expanded="false" aria-controls="{{ area.name|custom_replace }}">
-                                    <img src="https://www.munichclimbs.de/build/images/navigationThumbs/{{ area.image }}.webp" alt="Übersicht Klettergebiete {{ area.name }}." class="rounded me-3" style="width: 18px; height: 18px;">
-                                    <span class="text-truncate">{{ area.name }}</span>
-                                </a>
-                                <div class="collapse" id="{{ area.name|custom_replace }}">
-                                {% if area.rocks is not empty %}
-                                    <ol class="list-group list-group-numbered" style="margin-left: 30px">
-                                        {% for rock in area.rocks %}
-                                            <li class="list-group-item list-group-item-action d-flex border-0 px-2">
-                                                <a href="{{ path('show_rock', { slug: rock.slug } ) }}" title="Link zum Klettergebiet: {{ rock.name }}" class="nav-link text-black py-0 d-flex justify-content-between align-items-center w-100 ms-2" data-area="Konstein" data-rocks-information="{{ rock.name }}" data-banned="0">{{ rock.name }}</a>
-                                            </li>
-                                        {% endfor %}
-                                    </ol>
-                                {% endif %}
-                                </div>
-                            </li>
-                        {% endfor %}
-                        <li class="nav-item my-2">
-                            <a class="nav-link text-black d-flex align-items-center" href="/Datenschutz">
-                                <div class="chart d-inline-block me-3"></div>
-                                <span class="text-truncate">Datenschutz</span>
-                            </a>
-                        </li>
-                        <li class="nav-item my-2">
-                            <a class="nav-link text-black d-flex align-items-center" href="/Impressum">
-                                <div class="chart d-inline-block me-3"></div>
-                                <div class="text-truncate">Impressum</div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="container p-0">
-                <div class="row">
-                    <div class="col-3">
-                        <div class="d-flex align-items-center">
-                            <button class="navbar-toggler p-0 bg-none border-0 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                                <div class="menu"></div>
-                            </button>
-                            <a class="pb-lg-1 text-dark fs-5 ms-3" style="font-family: 'Chelsea Market', cursive;" href="{{path('index')}}">munichclimbs</a>
-                        </div>
-                    </div>
-                    <div class="col-9 d-flex align-items-center justify-content-end">
-                        {# <form class="w-100">
-                            <div
-                                class="input-group"
-                                {{ stimulus_controller('search-preview') }}
-                            >
-                                <input
-                                    name="q"
-                                    value="{{ searchTerm }}"
-                                    placeholder="Finde Route..."
-                                    type="search"
-                                    class="form-control rounded"
-                                    data-action="search-preview#onSearchInput"
-                                >
-                                <div
-                                    class="search-preview"
-                                    data-search-preview-target="result"
-                                ></div>
-                            </div>
-                        </form> #}
-                        <a href="{{ path('app_login') }}" title="Login">
-                            <div class="user"></div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+	<nav class="navbar bg-white fixed-top" style="height: 50px;">
+		<div class="container">
+			<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+				<div class="offcanvas-header">
+					<a class="offcanvas-title text-black" id="offcanvasNavbarLabel" style="font-family: 'Chelsea Market', cursive;" href="{{path('index')}}">munichclimbs</a>
+					<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+				</div>
+				<div class="offcanvas-body">
+					<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+						{% for area in sideBar %}
+							<li class="nav-item my-2">
+								<a class="nav-link text-black" data-bs-toggle="collapse" href="#{{ area.name|custom_replace }}" title="Klettergebiet {{ area.name }}" role="button" aria-expanded="false" aria-controls="{{ area.name|custom_replace }}">
+									<img src="https://www.munichclimbs.de/build/images/navigationThumbs/{{ area.image }}.webp" alt="Übersicht Klettergebiete {{ area.name }}." class="rounded me-3" style="width: 18px; height: 18px;">
+									<span class="text-truncate">{{ area.name }}</span>
+								</a>
+								<div class="collapse" id="{{ area.name|custom_replace }}">
+									{% if area.rocks is not empty %}
+										<ol class="list-group list-group-numbered" style="margin-left: 30px">
+											{% for rock in area.rocks %}
+												<li class="list-group-item list-group-item-action d-flex border-0 px-2">
+													<a href="{{ path('show_rock', { slug: rock.slug } ) }}" title="Link zum Klettergebiet: {{ rock.name }}" class="nav-link text-black py-0 d-flex justify-content-between align-items-center w-100 ms-2" data-area="Konstein" data-rocks-information="{{ rock.name }}" data-banned="0">{{ rock.name }}</a>
+												</li>
+											{% endfor %}
+										</ol>
+									{% endif %}
+								</div>
+							</li>
+						{% endfor %}
+						<li class="nav-item my-2">
+							<a class="nav-link text-black d-flex align-items-center" href="/Datenschutz">
+								<div class="chart d-inline-block me-3"></div>
+								<span class="text-truncate">Datenschutz</span>
+							</a>
+						</li>
+						<li class="nav-item my-2">
+							<a class="nav-link text-black d-flex align-items-center" href="/Impressum">
+								<div class="chart d-inline-block me-3"></div>
+								<div class="text-truncate">Impressum</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="container p-0">
+				<div class="row">
+					<div class="col-3">
+						<div class="d-flex align-items-center">
+							<button class="navbar-toggler p-0 bg-none border-0 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+								<div class="menu"></div>
+							</button>
+							<a class="pb-lg-1 text-dark fs-5 ms-3" style="font-family: 'Chelsea Market', cursive;" href="{{path('index')}}">munichclimbs</a>
+						</div>
+					</div>
+					<div class="col-9 d-flex align-items-center justify-content-end">
+						{% if app.request.attributes.get('_route') == 'show_rock' and rocks is defined and rocks is not empty %}
+							<button class="btn btn-sm btn-primary me-3 d-flex align-items-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 24 24"><path fill="currentColor" d="M11 7v2h2V7zm3 10v-2h-1v-4h-3v2h1v2h-1v2zm8-5c0 5.5-4.5 10-10 10S2 17.5 2 12S6.5 2 12 2s10 4.5 10 10m-2 0c0-4.42-3.58-8-8-8s-8 3.58-8 8s3.58 8 8 8s8-3.58 8-8"/></svg>
+								<span class="ms-1 d-none d-md-block">Fels</span>
+							</button>
+							{{ include('partials/_offcanvasRockInfo.html.twig', [ rocks ]) }}
+						{% endif %}
+						<a href="{{ path('app_login') }}" title="Login">
+							<div class="user"></div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
 </header>
