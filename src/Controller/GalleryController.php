@@ -9,9 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class GalleryController extends AbstractController
 {
-    /**
-     * @Route("/gallery-data/{rock}", name="gallery_data")
-     */
+    #[Route('/gallery-data/{rock}', name: 'gallery_data')]
     public function galleryData(PhotosRepository $photosRepository, $rock): JsonResponse
     {
         $galleryItems = $photosRepository->findPhotosForRock($rock);

@@ -22,9 +22,7 @@ use App\Service\FooterAreas;
 
 class FrontendController extends AbstractController
 {
-    /**
-     * @Route("/", name="index")
-     */
+    #[Route('/', name: 'index')]
     public function index(
         AreaRepository $areaRepository,
         RockRepository $rockRepository,
@@ -48,9 +46,7 @@ class FrontendController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/Klettergebiet/{slug}", name="show_rocks")
-     */
+    #[Route('/Klettergebiet/{slug}', name: 'show_rocks')]
     public function showRocksArea(
         AreaRepository $areaRepository,
         RockRepository $rockRepository,
@@ -82,12 +78,9 @@ class FrontendController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/Kletterfels/{slug}", name="show_rock")
-     */
+    #[Route('/Kletterfels/{slug}', name: 'show_rock')]
     public function showRock(
         AreaRepository $areaRepository,
-        VideosRepository $videoRepository,
         RoutesRepository $routesRepository,
         RockRepository $rockRepository,
         TopoRepository $topoRepository,
@@ -139,7 +132,6 @@ class FrontendController extends AbstractController
             'rockName' => $rockName,
             'rockDescription,' => $rockDescription,
             'routes' => $routes,
-            'videoRepository' => $videoRepository,
             'routesRepository' => $routesRepository,
             'topos' => $topos,
             'sideBar' => $sideBar,
@@ -147,9 +139,7 @@ class FrontendController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/neuesteRouten", name="neuesteRouten")
-     */
+    #[Route('/neuesteRouten', name: 'neuesteRouten')]
     public function neuesteRouten(
         AreaRepository $areaRepository,
         RoutesRepository $routesRepository,
@@ -171,9 +161,7 @@ class FrontendController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/Datenschutz", name="datenschutz")
-     */
+    #[Route('/Datenschutz', name: 'datenschutz')]
     public function datenschutz(
         AreaRepository $areaRepository,
         FooterAreas $footerAreas,
@@ -187,9 +175,7 @@ class FrontendController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/Impressum", name="impressum")
-     */
+    #[Route('/Impressum', name: 'impressum')]
     public function impressum(
         AreaRepository $areaRepository,
         FooterAreas $footerAreas,
@@ -203,9 +189,7 @@ class FrontendController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/Database", name="databasequeries")
-     */
+    #[Route('/Database', name: 'databasequeries')]
     public function databasequeries(
         AreaRepository $areaRepository,
         RockRepository $rockRepository,
