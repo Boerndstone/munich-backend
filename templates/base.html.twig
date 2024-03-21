@@ -1,38 +1,39 @@
-<html>
+<html></html>
 <html lang="de">
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		{% block meta_tags %}{% endblock %}
-		<title>{% block title %}Munichclimbs{% endblock %}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> {% block meta_tags %}{% endblock %}
+		<title>
+			{% block title %}Munichclimbs
+			{% endblock %}
+		</title>
 		{% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
+			{{ encore_entry_link_tags('app') }}
 			<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spartan&display=swap">
-			<link href='https://fonts.googleapis.com/css?family=Chelsea+Market' rel='stylesheet' type='text/css'>
+			<link
+			href='https://fonts.googleapis.com/css?family=Chelsea+Market' rel='stylesheet' type='text/css'>
 			{# <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous"/> #}
-			{{ encore_entry_link_tags('app') }}		
+			{{ encore_entry_link_tags('app') }}
 		{% endblock %}
 
 		{% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
+			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 
 		<link href="{{ asset('build/images/favicon/favicon.png') }}" rel="icon" type="image/png">
-        <link href="{{ asset('build/images/favicon/favicon.png') }}" rel="shortcut icon" type="image/x-icon">
-        <link href="{{ asset('build/images/favicon/favicon.png') }}" rel="apple-touch-icon" sizes="256x256">
-        <link href="{{ asset('build/images/favicon/favicon.png') }}" rel="apple-touch-startup-image">
+		<link href="{{ asset('build/images/favicon/favicon.png') }}" rel="shortcut icon" type="image/x-icon">
+		<link href="{{ asset('build/images/favicon/favicon.png') }}" rel="apple-touch-icon" sizes="256x256">
+		<link href="{{ asset('build/images/favicon/favicon.png') }}" rel="apple-touch-startup-image">
 
 		<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
 
-		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
 		<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 
-		{% include "@CHCookieConsent/cookie_consent_styling.html.twig" %}
-		{{ render(path('ch_cookie_consent.show_if_cookie_consent_not_set')) }}
-		
+
 	</head>
-	<body id="body" {% block body_attributes %}{% endblock %}class="{% block bodyclass %}{% endblock %}"> 
+	<body id="body" {% block body_attributes %} {% endblock %} class="{% block bodyclass %}{% endblock %}">
 		{% for message in app.flashes('success') %}
 			<div class="alert-banner w-full fixed top-0">
 				<input type="checkbox" class="hidden" id="banneralert">
@@ -49,13 +50,7 @@
 
 		{% block body %}{% endblock %}
 
-		<a 
-			href="#body" 
-			data-controller="scrolltop"
-			data-action="scroll@window->scrolltop#scrollFunction"
-			data-scrolltop-target="top"
-			class="btn btn-sm btn-primary btn-to-top border border-white"
-		>
+		<a href="#body" data-controller="scrolltop" data-action="scroll@window->scrolltop#scrollFunction" data-scrolltop-target="top" class="btn btn-sm btn-primary btn-to-top border border-white">
 			<div class="chevron-up "></div>
 		</a>
 	</body>

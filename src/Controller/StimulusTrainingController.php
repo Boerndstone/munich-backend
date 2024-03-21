@@ -2,14 +2,14 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\RoutesRepository;
-use App\Repository\RockRepository;
-use App\Entity\Routes;
 use App\Entity\Rock;
+use App\Entity\Routes;
+use App\Repository\RockRepository;
+use App\Repository\RoutesRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class StimulusTrainingController extends AbstractController
 {

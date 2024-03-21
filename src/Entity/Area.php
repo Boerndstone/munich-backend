@@ -10,7 +10,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 #[ORM\Entity(repositoryClass: AreaRepository::class)]
 #[ApiResource]
@@ -235,17 +234,5 @@ class Area
         $this->zoom = $zoom;
 
         return $this;
-    }
-
-    /**
-     * @Assert\Callback
-     */
-    public function validate(ExecutionContextInterface $context, $payload)
-    {
-        if (stripos($this->getName(), 'the borg') !== false) {
-            $context->buildViolation('Um.. the Bork kinda makes us nervous')
-                ->atPath('name')
-                ->addViolation();
-        }
     }
 }

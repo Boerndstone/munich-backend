@@ -4,20 +4,19 @@ namespace App\Controller;
 
 use App\Entity\Area;
 use App\Entity\Rock;
-use App\Repository\AreaRepository;
-use App\Repository\PhotosRepository;
-use App\Repository\RockRepository;
-use App\Repository\RoutesRepository;
-use App\Repository\VideosRepository;
-use App\Repository\TopoRepository;
-//use App\Form\RoutesAutocompleteField;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Asset\Packages;
-
 use App\Service\FooterAreas;
+use App\Repository\AreaRepository;
+use App\Repository\RockRepository;
+use App\Repository\TopoRepository;
+use App\Repository\PhotosRepository;
+use App\Repository\RoutesRepository;
+//use App\Form\RoutesAutocompleteField;
+use App\Repository\VideosRepository;
+use Symfony\Component\Asset\Packages;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 class FrontendController extends AbstractController

@@ -5,10 +5,10 @@ namespace App\Controller;
 use App\Entity\Photos;
 use App\Form\PhotosType;
 use App\Repository\PhotosRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/photos')]
 class PhotosController extends AbstractController
@@ -70,7 +70,7 @@ class PhotosController extends AbstractController
     #[Route('/{id}', name: 'app_photos_delete', methods: ['POST'])]
     public function delete(Request $request, Photos $photo, PhotosRepository $photosRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$photo->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $photo->getId(), $request->request->get('_token'))) {
             $photosRepository->remove($photo, true);
         }
 
