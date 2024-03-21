@@ -220,18 +220,20 @@ class RockRepository extends ServiceEntityRepository
                 'routes.description as routeDescription',
                 'topo.name as topoName',
                 'topo.number as topoNumber',
-                'topo.svg as topoSvg',
+                'videos.videoLink as videoLink',
+                'topo.svg as topoSvg'
+
             )
 
             ->innerJoin('rock.area', 'area')
             ->innerJoin('rock.routes', 'routes')
             ->innerJoin('App\Entity\Topo', 'topo', 'WITH', 'topo.rocks = rock')
+            ->leftJoin('App\Entity\Videos', 'videos', 'WITH', 'videos.videoRoutes = routes.id')
             ->where('rock.slug LIKE :rockSlug')
             ->andWhere('routes.rock = topo.rocks')
             ->andWhere('routes.topoId = topo.number')
             ->setParameter('rockSlug', $rockSlug)
             ->orderBy('rock.id', 'ASC')
-
             ->addOrderBy('topo.number', 'ASC')
             ->addOrderBy('routes.nr', 'ASC')
             ->getQuery()
