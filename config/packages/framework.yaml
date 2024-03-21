@@ -1,6 +1,5 @@
 # see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
-<<<<<<< ours
   secret: "%env(APP_SECRET)%"
   #csrf_protection: true
   http_method_override: false
@@ -17,16 +16,6 @@ framework:
   #fragments: true
   php_errors:
     log: true
-=======
-    secret: '%env(APP_SECRET)%'
-    #csrf_protection: true
-
-    # Note that the session will be started ONLY if you read or write from it.
-    session: true
-
-    #esi: true
-    #fragments: true
->>>>>>> theirs
 
   # Custom error pages
   error_controller: App\Controller\ErrorController::showError
