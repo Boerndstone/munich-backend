@@ -11,40 +11,19 @@
 			{{ encore_entry_link_tags('app') }}
 			<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spartan&display=swap">
 			<link href='https://fonts.googleapis.com/css?family=Chelsea+Market' rel='stylesheet' type='text/css'>
-
 			{{ encore_entry_link_tags('app') }}
 		{% endblock %}
-
 		{% block javascripts %}
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
-
 		<link href="{{ asset('build/images/favicon/favicon.png') }}" rel="icon" type="image/png">
 		<link href="{{ asset('build/images/favicon/favicon.png') }}" rel="shortcut icon" type="image/x-icon">
 		<link href="{{ asset('build/images/favicon/favicon.png') }}" rel="apple-touch-icon" sizes="256x256">
 		<link href="{{ asset('build/images/favicon/favicon.png') }}" rel="apple-touch-startup-image">
-
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
 		<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
-
-
 	</head>
-	<body id="body" {% block body_attributes %} {% endblock %} class="{% block bodyclass %}{% endblock %}">
-		{% for message in app.flashes('success') %}
-			<div class="alert-banner w-full fixed top-0">
-				<input type="checkbox" class="hidden" id="banneralert">
-
-				<label class="close cursor-pointer flex items-center justify-between w-full p-2 bg-green-500 shadow text-white" title="close" for="banneralert">
-					{{ message }}
-
-					<svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 18 18">
-						<path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
-					</svg>
-				</label>
-			</div>
-		{% endfor %}
-
-		{% block body %}{% endblock %}
+	<body id="body" {% block body_attributes %} {% endblock %} class="{% block bodyclass %}{% endblock %}"> {% block body %}{% endblock %}
 
 		<a href="#body" data-controller="scrolltop" data-action="scroll@window->scrolltop#scrollFunction" data-scrolltop-target="top" class="btn btn-sm btn-primary btn-to-top border border-white">
 			<div class="chevron-up "></div>

@@ -80,6 +80,7 @@
         "lightgallery": "^2.7.2",
         "natives": "^1.1.6",
         "node-sass-import": "^1.0.5",
-        "prop-types": "^15.7.2"
+        "prop-types": "^15.7.2",
+        "vanilla-cookieconsent": "3.0.0"
     }
 }

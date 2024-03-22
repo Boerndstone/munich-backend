@@ -133,15 +133,6 @@ class RockCrudController extends AbstractCrudController
             ->setLabel('Beschreibung')
             ->hideOnIndex()
             ->hideOnDetail()
-            /*->setFormTypeOptions([
-                'row_attr' => [
-                    'data-controller' => 'snarkdown',
-                ],
-                'attr' => [
-                    'data-snarkdown-target' => 'input',
-                    'data-action' => 'snarkdown#render',
-                ],
-            ])*/
             ->setHelp('Beschreibung zum Fels.')
             ->setColumns('col-12');
 
