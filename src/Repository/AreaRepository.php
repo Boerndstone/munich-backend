@@ -115,7 +115,8 @@ class AreaRepository extends ServiceEntityRepository
             )
             ->leftJoin('area.rocks', 'rock')
             ->where('area.online = 1')
-            ->orderBy('area.sequence');
+            ->orderBy('area.sequence')
+            ->addOrderBy('rock.nr', 'ASC');
 
         return $qb->getQuery()->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
     }
