@@ -115,6 +115,7 @@ class AreaRepository extends ServiceEntityRepository
             )
             ->leftJoin('area.rocks', 'rock')
             ->where('area.online = 1')
+            ->andWhere('rock.online = 1')
             ->orderBy('area.sequence')
             ->addOrderBy('rock.nr', 'ASC');
 
