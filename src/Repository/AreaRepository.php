@@ -110,7 +110,7 @@ class AreaRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('area')
             ->select(
-                'PARTIAL area.{id, name, image}',
+                'PARTIAL area.{id, name, slug, image}',
                 'PARTIAL rock.{id, name, slug}'
             )
             ->leftJoin('area.rocks', 'rock')

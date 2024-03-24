@@ -141,6 +141,7 @@ class RockRepository extends ServiceEntityRepository
                 'rock.sunny as rockSunny',
                 'rock.image as rockImage',
                 'area.name as areaName',
+                'area.slug as areaSlug',
                 'COUNT(DISTINCT route.id) AS amountRoutes',
                 'SUM(CASE WHEN route.gradeNo > 0 AND route.gradeNo <= 15 THEN 1 ELSE 0 END) AS amountEasy',
                 'SUM(CASE WHEN route.gradeNo > 15 AND route.gradeNo <= 29 THEN 1 ELSE 0 END) AS amountMiddle',

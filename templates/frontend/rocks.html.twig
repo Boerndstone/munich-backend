@@ -57,7 +57,7 @@
 											<tr>
 												<td>{{loop.index}}</td>
 												<td>
-													<a href="{{ path('show_rock', { slug: rock.rockSlug }) }}" class="flex fw-medium d-inline-block text-truncate" style="max-width: 150px;">{{rock.rockName}}</a>
+													<a href="{{ path('show_rock', { 'areaSlug': rock.areaSlug, slug: rock.rockSlug }) }}" class="flex fw-medium d-inline-block text-truncate" style="max-width: 150px;">{{rock.rockName}}</a>
 												</td>
 												<td>
 													<div class="d-flex align-items-center">

@@ -7,3 +7,23 @@ controllers:
 gallery_data:
   path: /gallery-data
   controller: App\Controller\GalleryController::galleryData
+
+login:
+  path: /login
+  controller: App\Controller\SecurityController::app_login
+
+datenschutz:
+  path: /Datenschutz
+  controller: App\Controller\FrontendController::datenschutz
+
+impressum:
+  path: /Impressum
+  controller: App\Controller\FrontendController::impressum
+
+show_rock:
+  path: /{areaSlug}/{slug}
+  controller: App\Controller\FrontendController::showRock
+
+show_rocks:
+  path: /{slug}
+  controller: App\Controller\FrontendController::showRocksArea
