@@ -67,9 +67,16 @@ class Routes
     #[ORM\ManyToOne(inversedBy: 'realtion')]
     private ?FirstAscencionist $relatesToRoute = null;
 
+    #[ORM\OneToMany(mappedBy: 'route', targetEntity: Comment::class)]
+    private Collection $comments;
+
+    #[ORM\ManyToOne(inversedBy: 'routes', fetch: 'EXTRA_LAZY')]
+    private ?Topo $topo = null;
+
     public function __construct()
     {
         $this->climbedRoutes = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -285,6 +292,48 @@ class Routes
     public function setRelatesToRoute(?FirstAscencionist $relatesToRoute): static
     {
         $this->relatesToRoute = $relatesToRoute;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): static
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setRoute($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): static
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getRoute() === $this) {
+                $comment->setRoute(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getTopo(): ?Topo
+    {
+        return $this->topo;
+    }
+
+    public function setTopo(?Topo $topo): self
+    {
+        $this->topo = $topo;
 
         return $this;
     }

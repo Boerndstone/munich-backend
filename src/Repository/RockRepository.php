@@ -205,6 +205,42 @@ class RockRepository extends ServiceEntityRepository
         return $queryBuilder;
     }
 
+    // public function getRoutesTopo($rockSlug)
+    // {
+    //     $queryBuilder = $this->createQueryBuilder('rock')
+    //         ->select(
+    //             'area.id as areaId',
+    //             'rock.id as rockId',
+    //             'routes.id as routeId',
+    //             'routes.name as routeName',
+    //             'routes.grade as routeGrade',
+    //             'routes.topoId as routeTopoId',
+    //             'routes.rating as routeRating',
+    //             'routes.protection as routeProtection',
+    //             'routes.firstAscent as routefirstAscent',
+    //             'routes.yearFirstAscent as routeyearFirstAscent',
+    //             'routes.description as routeDescription',
+    //             'topo.name as topoName',
+    //             'topo.number as topoNumber',
+    //             'topo.svg as topoSvg',
+    //         )
+
+    //         ->innerJoin('rock.area', 'area')
+    //         ->innerJoin('rock.routes', 'routes')
+    //         ->innerJoin('App\Entity\Topo', 'topo', 'WITH', 'topo.rocks = rock')
+    //         ->where('rock.slug LIKE :rockSlug')
+    //         ->andWhere('routes.rock = topo.rocks')
+    //         ->andWhere('routes.topoId = topo.number')
+    //         ->setParameter('rockSlug', $rockSlug)
+    //         ->orderBy('rock.id', 'ASC')
+
+    //         ->addOrderBy('topo.number', 'ASC')
+    //         ->addOrderBy('routes.nr', 'ASC')
+    //         ->getQuery()
+    //         ->getResult();
+
+    //     return $queryBuilder;
+    // }
     public function getRoutesTopo($rockSlug)
     {
         $queryBuilder = $this->createQueryBuilder('rock')
@@ -226,9 +262,9 @@ class RockRepository extends ServiceEntityRepository
                 'topo.svg as topoSvg'
 
             )
-
             ->innerJoin('rock.area', 'area')
             ->innerJoin('rock.routes', 'routes')
+
             ->innerJoin('App\Entity\Topo', 'topo', 'WITH', 'topo.rocks = rock')
             ->leftJoin('App\Entity\Videos', 'videos', 'WITH', 'videos.videoRoutes = routes.id')
             ->where('rock.slug LIKE :rockSlug')

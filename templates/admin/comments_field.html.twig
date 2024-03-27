@@ -1,0 +1,10 @@
+{% if comments.getComments is not empty %}
+
+	<ul>
+		{% for comment in comments %}
+			<li>{{ comment.comment }}</li>
+		{% endfor %}
+	</ul>
+{% else %}
+	<p>No comments available</p>
+{% endif %}

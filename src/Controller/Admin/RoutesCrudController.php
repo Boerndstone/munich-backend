@@ -172,5 +172,9 @@ class RoutesCrudController extends AbstractCrudController
             ->setLabel('Reihenfolge')
             ->setColumns('col-12')
             ->hideOnIndex();
+        yield AssociationField::new('comments')
+            ->setLabel('Comments')
+            ->setTemplatePath('admin/comments_field.html.twig')
+            ->onlyOnDetail();
     }
 }
