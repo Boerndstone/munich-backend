@@ -50,7 +50,7 @@ class Area
     #[ORM\Column(type: Types::STRING, length: 25, nullable: true)]
     private ?string $image = null;
 
-    #[ORM\Column(type: Types::STRING, length: 25, nullable: true)]
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private ?string $headerImage = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 4, scale: 2, nullable: true)]

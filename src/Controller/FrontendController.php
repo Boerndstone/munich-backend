@@ -124,6 +124,7 @@ class FrontendController extends AbstractController
         $areaLat = $area->getLat();
         $areaLng = $area->getLng();
         $areaZoom = $area->getZoom();
+        $areaImage = $area->getHeaderImage();
 
         $sideBar = $areaRepository->sidebarNavigation();
         $rocks = $rockRepository->getRocksInformation($slug);
@@ -136,6 +137,7 @@ class FrontendController extends AbstractController
             'areaLat' => $areaLat,
             'areaLng' => $areaLng,
             'areaZoom' => $areaZoom,
+            'areaImage' => $areaImage,
             'rocks' => $rocks,
             'sideBar' => $sideBar,
         ]);

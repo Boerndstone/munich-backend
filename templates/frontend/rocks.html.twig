@@ -19,7 +19,11 @@
 	{{ include('partials/_navigation.html.twig') }}
 	<main>
 		<div class="image-container position-relative">
-			<img src="https://www.munichclimbs.de/uploads/areaImages/full-screen-konstein.webp" alt="Full Screen Image">
+			{% if areaImage is not empty %}
+				<img alt="{{ setTitle }}" src="{{ asset('https://www.munichclimbs.de/uploads/areaImages/' ~ areaImage ~ '-low.webp') }}" {{ stimulus_controller('symfony/ux-lazy-image/lazy-image', { src: asset('https://www.munichclimbs.de/uploads/areaImages/' ~ areaImage ~ '-high.webp'), srcset: { '1x': asset('https://www.munichclimbs.de/uploads/areaImages/' ~ areaImage ~ '-high.webp') } }) }}/>
+			{% else %}
+				<div style="height: 100px"></div>
+			{% endif %}
 			<div class="container my-3 position-absolute" style="top: 0; right: 0; left:0;">
 				<div class="bg-image pb-3 rounded ">
 					<div class="p-3 rounded shadow-3 alert-light d-flex align-items-center justify-content-between" style="background-color: rgba(255, 255, 255, 0.6);">
