@@ -62,6 +62,9 @@ class Area
     #[ORM\Column(type: Types::SMALLINT, nullable: true)]
     private int $zoom;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $rockResponsibility = null;
+
     public function __construct()
     {
         $this->rocks = new ArrayCollection();
@@ -232,6 +235,18 @@ class Area
     public function setZoom(int $zoom): self
     {
         $this->zoom = $zoom;
+
+        return $this;
+    }
+
+    public function getRockResponsibility(): ?string
+    {
+        return $this->rockResponsibility;
+    }
+
+    public function setRockResponsibility(?string $rockResponsibility): static
+    {
+        $this->rockResponsibility = $rockResponsibility;
 
         return $this;
     }

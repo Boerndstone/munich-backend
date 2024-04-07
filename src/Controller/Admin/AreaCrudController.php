@@ -148,5 +148,11 @@ class AreaCrudController extends AbstractCrudController
             ->hideOnIndex()
             ->setColumns('col-12')
             ->setHelp('Zoom Stufe relevant für Kartenansicht auf der Gebietsseite.');
+
+        yield Field::new('rock_responsibility')
+            ->setLabel('Verantwortlicher Felsbetreuer')
+            ->hideOnIndex()
+            ->setColumns('col-12')
+            ->setHelp('Wenn es einen verantwortlichen Felsbetreuer gibt, dann wird dieser bei der Gebietsübersicht angezeigt.');
     }
 }
