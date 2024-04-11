@@ -42,8 +42,6 @@
 																<td>{{loop.index}}</td>
 																<td>
 																	<a href="{{ path('show_rock', { 'areaSlug': latestRoute.area.name, slug: latestRoute.rock.slug }) }}" title="Tourenname: {{ latestRoute.name }}, Fels: {{ latestRoute.rock }}" class="text-primary">{{ latestRoute.name }}
-
-
 																	</a>
 																	{% set star = '<i class="fas fa-star" style="color: rgb(202 138 4)"></i>' %}
 																	{% if latestRoute.rating == 1 %}
