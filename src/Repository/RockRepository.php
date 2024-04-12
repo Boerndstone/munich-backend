@@ -242,4 +242,13 @@ class RockRepository extends ServiceEntityRepository
 
         return $queryBuilder;
     }
+
+    public function search($query)
+    {
+        return $this->createQueryBuilder('r')
+            ->where('r.name LIKE :query')
+            ->setParameter('query', "%$query%")
+            ->getQuery()
+            ->getResult();
+    }
 }

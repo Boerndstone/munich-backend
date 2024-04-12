@@ -1,0 +1,5 @@
+{% for rock in rocks %}
+	<div data-action="autocomplete#goToResult" data-url="{{ path('rock_show', { 'slug': rock.slug }) }}">
+		{{ rock.name }}
+	</div>
+{% endfor %}

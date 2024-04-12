@@ -45,29 +45,32 @@
 			</div>
 			<div class="container p-0">
 				<div class="row">
-					<div class="col-3">
-						<div class="d-flex align-items-center">
-							<button class="navbar-toggler p-0 bg-none border-0 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-								<div class="menu"></div>
-							</button>
-							<a class="pb-lg-1 text-dark fs-5 ms-3" style="font-family: 'Chelsea Market', cursive;" href="{{path('index')}}">munichclimbs</a>
-						</div>
+					<div class="col-1 col-md-3 d-flex align-items-center">
+
+						<button class="navbar-toggler p-0 bg-none border-0 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+							<div class="menu"></div>
+						</button>
+						<a class="pb-lg-1 text-dark fs-5 ms-3" style="font-family: 'Chelsea Market', cursive;" href="{{path('index')}}">
+							<span class="d-none d-md-inline-block">munichclimbs</span>
+						</a>
 					</div>
-					<div class="col-9 d-flex align-items-center justify-content-end">
-						<form class="w-100">
-							<div class="input-group d-flex flex-nowrap">
-								<input name="q" class="form-control" palceholder="Finde Route...." type="search" data-autocomplete-target="input"/>
-								<div class="search-preview" data-autocomplete-target="results"></div>
+					<div class="col-8 col-md-6">
+						<form class="w-100 mb-0">
+							<div data-controller="autocomplete" data-autocomplete-url-value="/search" style="position: relative;">
+								<input data-autocomplete-target="input" data-action="input->autocomplete#search" name="q" placeholder="Felssuche ..." type="search" class="form-control form-control-sm border-black text-black w-100">
+								<ul class="list-group" data-autocomplete-target="results" style="max-height: 200px; max-height: 200px; display: block; position: absolute; width: 100%;"></ul>
 							</div>
-						</from>
+						</form>
+					</div>
+					<div class="col-3 d-flex align-items-center justify-content-end">
 						{% if app.request.attributes.get('_route') == 'show_rock' and rocks is defined and rocks is not empty %}
-							<button class="btn btn-sm btn-primary me-3 d-flex align-items-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+							<button class="btn btn-sm btn-primary d-flex me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
 								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 24 24"><path fill="currentColor" d="M11 7v2h2V7zm3 10v-2h-1v-4h-3v2h1v2h-1v2zm8-5c0 5.5-4.5 10-10 10S2 17.5 2 12S6.5 2 12 2s10 4.5 10 10m-2 0c0-4.42-3.58-8-8-8s-8 3.58-8 8s3.58 8 8 8s8-3.58 8-8"/></svg>
 								<span class="ms-1 d-none d-md-block">Fels</span>
 							</button>
 							{{ include('partials/_offcanvasRockInfo.html.twig', [ rocks ]) }}
 						{% endif %}
-						<a href="{{ path('app_login') }}" title="Login">
+						<a href="{{ path('app_login') }}" title="Login" class="d-flex align-items-center">
 							<div class="user"></div>
 						</a>
 					</div>

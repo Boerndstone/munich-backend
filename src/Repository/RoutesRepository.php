@@ -29,30 +29,6 @@ class RoutesRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
-    /**
-     * Search by rock and/or term
-     *
-     * @return Routes[]
-     */
-    public function search(?Rock $rock, ?string $term)
-    {
-        $qb = $this->createQueryBuilder('routes');
-
-        if ($rock) {
-            $qb->andWhere('routes.rock = :rock')
-                ->setParameter('rock', $rock);
-        }
-
-        if ($term) {
-            $qb->andWhere('routes.name LIKE :term')
-                ->setParameter('term', '%' . $term . '%');
-        }
-
-        return $qb
-            ->getQuery()
-            ->execute();
-    }
-
     public function findAllRoutesBelowSix()
     {
         return $this->createQueryBuilder('routes')
@@ -163,6 +139,15 @@ class RoutesRepository extends ServiceEntityRepository
             // ->innerJoin('routes.rock', 'routes_rock')
             ->setParameter('rockName', $rockName)
             ->setParameter('counter', $counter)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function search($query)
+    {
+        return $this->createQueryBuilder('r')
+            ->where('r.name LIKE :query')
+            ->setParameter('query', "%$query%")
             ->getQuery()
             ->getResult();
     }

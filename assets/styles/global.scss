@@ -14,7 +14,7 @@
 @import "~bootstrap/scss/containers";
 @import "~bootstrap/scss/grid";
 @import "~bootstrap/scss/tables";
-// @import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/forms";
 @import "~bootstrap/scss/buttons";
 @import "~bootstrap/scss/transitions";
 @import "~bootstrap/scss/dropdown";
@@ -393,4 +393,20 @@ a {
     width: 100%;
     height: auto;
     object-fit: contain;
+}
+
+input[data-autocomplete-target="input"]:focus {
+    border: 2px solid $primary;
+    box-shadow: none;
+}
+.list-group-item {
+    li:focus-visible {
+        outline: none;
+    }
+    a:-webkit-any-link:focus-visible {
+        outline-offset: 0px;
+    }
+    :focus-visible {
+        outline: none;
+    }
 }

@@ -1,5 +1,5 @@
 import { startStimulusApp } from "@symfony/stimulus-bridge";
-import { Autocomplete } from "stimulus-autocomplete";
+// import { Autocomplete } from "stimulus-autocomplete";
 
 // Registers Stimulus controllers from controllers.json and in the controllers/ directory
 const app = startStimulusApp(
@@ -9,7 +9,6 @@ const app = startStimulusApp(
     /\.[jt]sx?$/
   )
 );
-app.register("autocomplete", Autocomplete);
 
 export { app };
 

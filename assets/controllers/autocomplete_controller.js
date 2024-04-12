@@ -1,31 +1,41 @@
+// assets/controllers/autocomplete_controller.js
 import { Controller } from "stimulus";
 
 export default class extends Controller {
   static targets = ["input", "results"];
 
   connect() {
-    // Initialize the autocomplete behavior
-    this.inputTarget.addEventListener("input", this.search.bind(this));
+    document.addEventListener("click", this.closeDropdown.bind(this));
+  }
+
+  disconnect() {
+    document.removeEventListener("click", this.closeDropdown.bind(this));
   }
 
   search() {
-    const query = this.inputTarget.value;
-
-    // Send an AJAX request to the Symfony backend with the search query
-    fetch(`/autocomplete?q=${query}`)
+    fetch(`/search?query=${this.inputTarget.value}`)
       .then((response) => response.json())
-      .then((data) => {
-        // Update the UI with the autocomplete results
-        this.resultsTarget.innerHTML = ""; // Clear previous results
-
-        data.forEach((result) => {
-          const option = document.createElement("option");
-          option.value = result.value;
-          this.resultsTarget.appendChild(option);
-        });
-      })
-      .catch((error) => {
-        console.error("Autocomplete request failed", error);
+      .then((rocks) => {
+        this.resultsTarget.innerHTML = rocks
+          .map(
+            (rock) => `
+          <li class="list-group-item" data-action="autocomplete#goToResult" data-url="${rock.url}">
+            <a class="d-block" href="${rock.url}">${rock.name}</a>
+          </li>
+        `
+          )
+          .join("");
       });
+  }
+
+  closeDropdown(event) {
+    if (!this.element.contains(event.target)) {
+      this.resultsTarget.innerHTML = "";
+      this.inputTarget.value = "";
+    }
+  }
+
+  goToResult(event) {
+    window.location.href = event.target.dataset.url;
   }
 }
