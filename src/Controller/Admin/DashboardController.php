@@ -20,6 +20,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
@@ -27,19 +28,23 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class DashboardController extends AbstractDashboardController
 {
     private RoutesRepository $routesRepository;
-
+    private AreaRepository $areaRepository;
+    private RockRepository $rockRepository;
     private ChartBuilderInterface $chartBuilder;
+    private RequestStack $requestStack;
 
-    public function __construct(RoutesRepository $routesRepository, AreaRepository $areaRepository, RockRepository $rockRepository, ChartBuilderInterface $chartBuilder)
+    public function __construct(RoutesRepository $routesRepository, AreaRepository $areaRepository, RockRepository $rockRepository, ChartBuilderInterface $chartBuilder, RequestStack $requestStack)
     {
         $this->areaRepository = $areaRepository;
         $this->rockRepository = $rockRepository;
         $this->routesRepository = $routesRepository;
         $this->chartBuilder = $chartBuilder;
+        $this->requestStack = $requestStack;
     }
 
     // Have to to make user in db + user form!!!
@@ -68,6 +73,16 @@ class DashboardController extends AbstractDashboardController
         $getAreas = $this->areaRepository->getAllAreas();
         $getRocks = $this->rockRepository->getAllRocks();
 
+        $request = $this->requestStack->getCurrentRequest();
+        $areaId = $request->query->get('areaId');
+        if ($areaId !== null) {
+            $area = $this->areaRepository->find($areaId);
+            $climbedRoutesInArea = $this->routesRepository->findClimbedRoutesByArea($area);
+        } else {
+            $climbedRoutesInArea = $this->routesRepository->findAllClimbedRoutes();
+        }
+
+
         return $this->render('admin/index.html.twig', [
             'chart' => $this->createChart(),
             'chartBernd' => $this->createChartBernd(),
@@ -75,7 +90,18 @@ class DashboardController extends AbstractDashboardController
             'getAreas' => $getAreas,
             'getRocks' => $getRocks,
             'getRoutes' => $getRoutes,
+            'climbedRoutesInArea' => $climbedRoutesInArea,
+            'climbedRoutesCount' => count($climbedRoutesInArea),
         ]);
+    }
+
+    #[Route('/climbed-routes-count/{areaId}', name: 'climbed_routes_count')]
+    public function climbedRoutesCount(int $areaId): Response
+    {
+        $area = $this->areaRepository->find($areaId);
+        $climbedRoutesInArea = $this->routesRepository->findClimbedRoutesByArea($area);
+
+        return new JsonResponse(['count' => count($climbedRoutesInArea)]);
     }
 
     public function configureDashboard(): Dashboard
@@ -97,21 +123,12 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Photos', 'fa fa-camera-retro', Photos::class)->setPermission('ROLE_SUPER_ADMIN');
         yield MenuItem::linkToCrud('Videos', 'fa fa-video', Videos::class);
         yield MenuItem::linkToCrud('User', 'fa fa-user', User::class)->setPermission('ROLE_SUPER_ADMIN');
-        yield MenuItem::section('Live Seite')->setPermission('ROLE_SUPER_ADMIN');
-        yield MenuItem::linkToUrl('munichclimbs', 'fa fa-link', 'https://munichclimbs.de')->setLinkTarget('_blank')->setPermission('ROLE_SUPER_ADMIN');
-        yield MenuItem::section('Topo')->setPermission('ROLE_SUPER_ADMIN');
-        yield MenuItem::linkToUrl('Topo erstellen', 'fa fa-link', 'https://www.munichclimbs.de/draw-topo/src/')
-            ->setLinkTarget('_blank')
-            ->setPermission('ROLE_SUPER_ADMIN');
-        yield MenuItem::section('Tools')->setPermission('ROLE_SUPER_ADMIN');
-        yield MenuItem::linkToUrl('Generiere UIAA Grade', 'fa fa-arrow-right-arrow-left', 'https://munichclimbs.de/calculateGradesUIAA.php')->setLinkTarget('_blank')->setPermission('ROLE_SUPER_ADMIN');
-        yield MenuItem::linkToUrl('Generiere FRENCH Grade', 'fa fa-arrow-right-arrow-left', 'https://munichclimbs.de/calculateGradesFRENCH.php')->setLinkTarget('_blank')->setPermission('ROLE_SUPER_ADMIN');
     }
 
     public function configureUserMenu(UserInterface $user): UserMenu
     {
         return parent::configureUserMenu($user)
-            ->setAvatarUrl($user->getAvatarUrl());
+            ->setAvatarUrl($user->getAvatarUrl() ?? '');
     }
 
     // This is the setup for a global Show Action

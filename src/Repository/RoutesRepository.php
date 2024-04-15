@@ -151,4 +151,22 @@ class RoutesRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAllClimbedRoutes(): array
+    {
+        return $this->createQueryBuilder('r')
+            ->where('r.climbed = true')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findClimbedRoutesByArea(Area $area): array
+    {
+        return $this->createQueryBuilder('r')
+            ->where('r.area = :area')
+            ->andWhere('r.climbed = true')
+            ->setParameter('area', $area)
+            ->getQuery()
+            ->getResult();
+    }
 }
