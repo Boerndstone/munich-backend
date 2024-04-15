@@ -285,5 +285,10 @@ class RockCrudController extends AbstractCrudController
             ->hideOnIndex()
             ->hideOnDetail()
             ->setColumns('col-12');
+        yield NumberField::new('zoom')
+            ->setLabel('Zoomfaktor für die Karte')
+            ->hideOnIndex()
+            ->hideOnDetail()
+            ->setColumns('col-12');
     }
 }
