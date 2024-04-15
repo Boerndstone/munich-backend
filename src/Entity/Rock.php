@@ -90,6 +90,9 @@ class Rock
     #[ORM\Column(nullable: true)]
     private ?array $pathCoordinates = null;
 
+    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
+    private ?int $zoom = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -381,6 +384,18 @@ class Rock
     public function setPathCoordinates(?array $pathCoordinates): static
     {
         $this->pathCoordinates = $pathCoordinates;
+
+        return $this;
+    }
+
+    public function getZoom(): ?int
+    {
+        return $this->zoom;
+    }
+
+    public function setZoom(?int $zoom): static
+    {
+        $this->zoom = $zoom;
 
         return $this;
     }
