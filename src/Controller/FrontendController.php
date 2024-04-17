@@ -177,11 +177,13 @@ class FrontendController extends AbstractController
             $extension = pathinfo($item->getName(), PATHINFO_EXTENSION);
             $filenameWithoutExtension = pathinfo($item->getName(), PATHINFO_FILENAME);
             $newName = $filenameWithoutExtension . "@2x." . $extension;
+            $thumbName = $filenameWithoutExtension . "_thumb." . $extension;
             $jsonData[] = [
                 'src' =>
                 $assetPackages->getUrl('https://www.munichclimbs.de/uploads/galerie/' . $item->getName()),
                 'subHtml' => $item->getDescription(),
-                'srcset' => 'https://www.munichclimbs.de/uploads/galerie/' . $newName
+                'srcset' => 'https://www.munichclimbs.de/uploads/galerie/' . $newName,
+                'thumb' => 'https://www.munichclimbs.de/uploads/galerie/' . $thumbName
             ];
         }
 
