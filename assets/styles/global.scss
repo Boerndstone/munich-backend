@@ -411,3 +411,10 @@ input[data-autocomplete-target="input"]:focus {
         outline: none;
     }
 }
+
+.lg-img-wrap { 
+    .lg-object{
+        max-width: 750px;
+        max-height: 750px;
+    } 
+}
