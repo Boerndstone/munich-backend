@@ -1,23 +1,23 @@
-<div id="{{ routeData.routeName|custom_replace }}" class="modal fade" tabindex="-1" aria-hidden="true" aria-labelledby="{{ routeData.routeName|custom_replace }}" data-modal-route-information-target="modal">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">{{ routeData.routeName }}
-					({{ routeData.routeGrade }})</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<p class="fw-bold mb-0 d-lg-none">
-					{% if routeData.routefirstAscent %}
-						Erstbegeher:
-						{{ routeData.routefirstAscent }}
-					{% endif %}
-					{% if routeData.routeyearFirstAscent %}
-						{{ routeData.routeyearFirstAscent }}
-					{% endif %}
-				</p>
-				<p>{{ routeData.routeDescription }}</p>
-			</div>
-		</div>
-	</div>
+<div
+	id="{{ routeData.routeName|custom_replace }}" class="modal fade" tabindex="-1" aria-hidden="true" aria-labelledby="{{ routeData.routeName|custom_replace }}" data-modal-route-information-target="modal">{# <div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">{{ routeData.routeName }}
+							({{ routeData.routeGrade }})</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p class="fw-bold mb-0 d-lg-none">
+							{% if routeData.routefirstAscent %}
+								Erstbegeher:
+								{{ routeData.routefirstAscent }}
+							{% endif %}
+							{% if routeData.routeyearFirstAscent %}
+								{{ routeData.routeyearFirstAscent }}
+							{% endif %}
+						</p>
+						<p>{{ routeData.routeDescription }}</p>
+					</div>
+				</div>
+			</div> #}
 </div>

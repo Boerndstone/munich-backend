@@ -37,7 +37,7 @@ class CommentCrudController extends AbstractCrudController
             ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
                 return $action
                     ->setIcon('fa fa-plus')
-                    ->setLabel('Tour hinzufügen')
+                    ->setLabel('Kommentar hinzufügen')
                     ->setCssClass('btn btn-success');
             })
 
@@ -89,8 +89,8 @@ class CommentCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return parent::configureCrud($crud)
-            ->setPageTitle(Crud::PAGE_INDEX, 'Übersicht der Routen')
-            ->setPageTitle(Crud::PAGE_NEW, 'Neue Route hinzufügen')
+            ->setPageTitle(Crud::PAGE_INDEX, 'Kommentare zu Routen')
+            ->setPageTitle(Crud::PAGE_NEW, 'Kommentare zur Route hinzufügen')
             ->showEntityActionsInlined()
             ->setPageTitle(Crud::PAGE_EDIT, static function (Comment $comment) {
                 return sprintf($comment->getComment());
@@ -107,11 +107,11 @@ class CommentCrudController extends AbstractCrudController
         /** @var \Symfony\Component\Security\Core\User\UserInterface|null $user */
         $user = $this->security->getUser();
 
-        // dd($user->getId());
+        // dd($user->getFirstname());
 
-        yield NumberField::new('user')
+        yield TextField::new('user')
             ->setLabel('User')
-            ->setFormattedValue($user ? $user->getId() : '')
+            ->setFormattedValue('servus')
             ->setDisabled()
             ->setColumns('col-12')
             ->hideOnIndex();

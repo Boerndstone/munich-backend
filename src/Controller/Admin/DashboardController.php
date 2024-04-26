@@ -11,6 +11,7 @@ use App\Entity\Routes;
 use App\Entity\Videos;
 use App\Entity\ToDoListe;
 use App\Entity\ClimbedRoutes;
+use App\Entity\Comment;
 use App\Repository\AreaRepository;
 use App\Repository\RockRepository;
 use Symfony\UX\Chartjs\Model\Chart;
