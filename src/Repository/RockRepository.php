@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Rock;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Repository\RoutesRepository;
 
 /**
  * @method Rock|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,9 +15,11 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class RockRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $routesRepository;
+    public function __construct(ManagerRegistry $registry, RoutesRepository $routesRepository)
     {
         parent::__construct($registry, Rock::class);
+        $this->routesRepository = $routesRepository;
     }
 
     public function getAllRocks()
@@ -256,6 +259,7 @@ class RockRepository extends ServiceEntityRepository
                 'routes.firstAscent as routefirstAscent',
                 'routes.yearFirstAscent as routeyearFirstAscent',
                 'routes.description as routeDescription',
+                // 'comments.comment as routeComment',
                 'topo.name as topoName',
                 'topo.number as topoNumber',
                 'videos.videoLink as videoLink',
@@ -264,7 +268,7 @@ class RockRepository extends ServiceEntityRepository
             )
             ->innerJoin('rock.area', 'area')
             ->innerJoin('rock.routes', 'routes')
-
+            // ->leftJoin('routes.comments', 'comments')
             ->innerJoin('App\Entity\Topo', 'topo', 'WITH', 'topo.rocks = rock')
             ->leftJoin('App\Entity\Videos', 'videos', 'WITH', 'videos.videoRoutes = routes.id')
             ->where('rock.slug LIKE :rockSlug')
@@ -278,6 +282,18 @@ class RockRepository extends ServiceEntityRepository
             ->getResult();
 
         return $queryBuilder;
+    }
+
+    public function getCommentsForRoutes($rockSlug)
+    {
+        return $this->routesRepository->createQueryBuilder('routes')
+            ->select('routes.id as routeId', 'comments.comment as routeComment')
+            ->innerJoin('routes.comments', 'comments')
+            ->innerJoin('routes.rock', 'rock')
+            ->where('rock.slug LIKE :rockSlug')
+            ->setParameter('rockSlug', $rockSlug)
+            ->getQuery()
+            ->getResult();
     }
 
     public function search($query)

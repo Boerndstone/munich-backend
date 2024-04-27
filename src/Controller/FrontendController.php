@@ -168,6 +168,18 @@ class FrontendController extends AbstractController
 
         $rocks = $rockRepository->getRockInformation($slug);
         $routes = $rockRepository->getRoutesTopo($slug);
+        $comments = $rockRepository->getCommentsForRoutes($slug);
+
+
+        foreach ($routes as &$route) {
+            $route['routeComment'] = [];
+            foreach ($comments as $comment) {
+                if ($comment['routeId'] === $route['routeId']) {
+                    $route['routeComment'][] = $comment['routeComment'];
+                }
+            }
+        }
+
 
         $galleryItems = $photosRepository->findPhotosForRock($rockId);
 
