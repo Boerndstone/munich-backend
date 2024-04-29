@@ -107,21 +107,28 @@ class CommentCrudController extends AbstractCrudController
         /** @var \Symfony\Component\Security\Core\User\UserInterface|null $user */
         $user = $this->security->getUser();
 
-        // dd($user->getFirstname());
+        // dd($user->getUserIdentifier());
 
         yield TextField::new('user')
             ->setLabel('User')
-            ->setFormattedValue('servus')
+            ->setFormattedValue($user->getUserIdentifier())
             ->setDisabled()
             ->setColumns('col-12')
             ->hideOnIndex();
         yield AssociationField::new('route')
             ->setLabel('Route')
-            ->setColumns('col-12')
-            ->hideOnIndex();
+            ->setColumns('col-12');
         yield TextEditorField::new('comment')
             ->setLabel('Kommentar zur Route')
             ->setColumns('col-12')
             ->hideOnIndex();
+    }
+
+    public function createEntity(string $entityFqcn)
+    {
+        $comment = new Comment();
+        $comment->setUser($this->getUser()); // set the user
+
+        return $comment;
     }
 }
