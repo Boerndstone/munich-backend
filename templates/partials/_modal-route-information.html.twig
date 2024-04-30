@@ -20,10 +20,10 @@
 				{% if route.routeComment %}
 					{% for commentData in route.routeComment %}
 						<p>
-							{{ commentData.comment }}
+							{{ commentData.comment|raw }}
 							{# {% if commentData.lastname %}
-															({{ commentData.lastname }})
-														{% endif %} #}
+																						({{ commentData.lastname }})
+																					{% endif %} #}
 						</p>
 						{% if not loop.last %}
 							<hr/>
