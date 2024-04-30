@@ -170,12 +170,15 @@ class FrontendController extends AbstractController
         $routes = $rockRepository->getRoutesTopo($slug);
         $comments = $rockRepository->getCommentsForRoutes($slug);
 
-
         foreach ($routes as &$route) {
             $route['routeComment'] = [];
             foreach ($comments as $comment) {
                 if ($comment['routeId'] === $route['routeId']) {
-                    $route['routeComment'][] = $comment['routeComment'];
+                    $route['routeComment'][]
+                        = [
+                            'comment' => $comment['routeComment'],
+                            'lastname' => $comment['lastname'],
+                        ];
                 }
             }
         }

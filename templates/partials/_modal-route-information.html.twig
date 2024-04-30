@@ -16,17 +16,20 @@
 						{{ route.routeyearFirstAscent }}
 					{% endif %}
 				</p>
-				<p>{{ route.routeDescription }}</p>
+				{# <p>{{ route.routeDescription }}</p> #}
 				{% if route.routeComment %}
-					{% for comment in route.routeComment %}
-						<p>{{ comment }}</p>
+					{% for commentData in route.routeComment %}
+						<p>
+							{{ commentData.comment }}
+							{% if commentData.lastname %}
+								({{ commentData.lastname }})
+							{% endif %}
+						</p>
 						{% if not loop.last %}
 							<hr/>
 						{% endif %}
-
 					{% endfor %}
 				{% endif %}
-
 			</div>
 		</div>
 	</div>

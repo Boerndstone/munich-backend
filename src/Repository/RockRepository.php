@@ -287,8 +287,9 @@ class RockRepository extends ServiceEntityRepository
     public function getCommentsForRoutes($rockSlug)
     {
         return $this->routesRepository->createQueryBuilder('routes')
-            ->select('routes.id as routeId', 'comments.comment as routeComment')
+            ->select('routes.id as routeId', 'comments.comment as routeComment', 'user.lastname as lastname')
             ->innerJoin('routes.comments', 'comments')
+            ->leftJoin('comments.user', 'user')
             ->innerJoin('routes.rock', 'rock')
             ->where('rock.slug LIKE :rockSlug')
             ->setParameter('rockSlug', $rockSlug)
