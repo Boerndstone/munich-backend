@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
+#[ORM\HasLifecycleCallbacks()]
 class Comment
 {
     #[ORM\Id]
@@ -22,6 +23,9 @@ class Comment
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $comment = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $datetime = null;
 
     public function getId(): ?int
     {
@@ -62,5 +66,23 @@ class Comment
         $this->comment = $comment;
 
         return $this;
+    }
+
+    public function getDatetime(): ?\DateTimeInterface
+    {
+        return $this->datetime;
+    }
+
+    public function setDatetime(?\DateTimeInterface $datetime): static
+    {
+        $this->datetime = $datetime;
+
+        return $this;
+    }
+
+    #[ORM\PrePersist]
+    public function setCreatedAtValue(): void
+    {
+        $this->datetime = new \DateTime();
     }
 }

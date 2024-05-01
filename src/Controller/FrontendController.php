@@ -177,7 +177,8 @@ class FrontendController extends AbstractController
                     $route['routeComment'][]
                         = [
                             'comment' => $comment['routeComment'],
-                            'lastname' => $comment['lastname'],
+                            'username' => $comment['username'],
+                            'date' => $comment['date'],
                         ];
                 }
             }

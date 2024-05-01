@@ -81,7 +81,11 @@ class Routes
 
     public function __toString(): string
     {
-        return $this->name;
+        $rockName = $this->getRock() ? $this->getRock()->getName() : 'No rock';
+        $areaName = $this->getArea() ? $this->getArea()->getName() : 'No area';
+        $routeName = $this->getName() ? $this->getName() : 'No route';
+
+        return $routeName . ' - ' . $rockName . ' - ' . $areaName;
     }
 
     public function getId(): ?int

@@ -112,7 +112,7 @@
 						{% set topoNumber = routeData.topoNumber %}
 						{% set topoSvg = routeData.topoSvg %}
 						{% set groupedRoutes = groupedRoutes|merge({
-(topoName): groupedRoutes[topoName]|default([])|merge([{'routeName': routeData.routeName, 'routeRating': routeData.routeRating, 'routeProtection': routeData.routeProtection, 'areaId': routeData.areaId, 'rockId': routeData.rockId, 'routeId': routeData.routeId, 'routefirstAscent': routeData.routefirstAscent, 'routeyearFirstAscent': routeData.routeyearFirstAscent, 'routeDescription': routeData.routeDescription,'routeComment': routeData.routeComment, 'routeGrade': routeData.routeGrade, 'topoSvg': routeData.topoSvg, 'videoLink': routeData.videoLink}]) }) %}
+(topoName): groupedRoutes[topoName]|default([])|merge([{'routeName': routeData.routeName, 'routeRating': routeData.routeRating, 'routeProtection': routeData.routeProtection, 'areaId': routeData.areaId, 'rockId': routeData.rockId, 'routeId': routeData.routeId, 'routefirstAscent': routeData.routefirstAscent, 'routeyearFirstAscent': routeData.routeyearFirstAscent, 'routeDescription': routeData.routeDescription, 'routeComment': routeData.routeComment, 'routeGrade': routeData.routeGrade, 'topoSvg': routeData.topoSvg, 'videoLink': routeData.videoLink}]) }) %}
 
 
 					{% endfor %}
