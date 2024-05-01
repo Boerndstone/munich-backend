@@ -24,7 +24,7 @@ final class Version20240425121101 extends AbstractMigration
         //$this->addSql('ALTER TABLE comment ADD CONSTRAINT FK_9474526CA76ED395 FOREIGN KEY (user_id) REFERENCES `user` (id)');
         //$this->addSql('ALTER TABLE comment ADD CONSTRAINT FK_9474526C34ECB4E6 FOREIGN KEY (route_id) REFERENCES routes (id)');
         //$this->addSql('ALTER TABLE routes ADD CONSTRAINT FK_32D5C2B37F7E8D71 FOREIGN KEY (topo_id) REFERENCES topo (id)');
-        $this->addSql('CREATE INDEX IDX_32D5C2B37F7E8D71 ON routes (topo_id)');
+        //$this->addSql('CREATE INDEX IDX_32D5C2B37F7E8D71 ON routes (topo_id)');
     }
 
     public function down(Schema $schema): void
@@ -34,6 +34,6 @@ final class Version20240425121101 extends AbstractMigration
         //$this->addSql('ALTER TABLE comment DROP FOREIGN KEY FK_9474526C34ECB4E6');
         $this->addSql('DROP TABLE comment');
         //$this->addSql('ALTER TABLE routes DROP FOREIGN KEY FK_32D5C2B37F7E8D71');
-        $this->addSql('DROP INDEX IDX_32D5C2B37F7E8D71 ON routes');
+        //$this->addSql('DROP INDEX IDX_32D5C2B37F7E8D71 ON routes');
     }
 }
