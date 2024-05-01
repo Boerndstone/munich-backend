@@ -20,7 +20,7 @@ final class Version20240430164640 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP TABLE ch_cookieconsent_log');
+        //$this->addSql('DROP TABLE ch_cookieconsent_log');
         $this->addSql('ALTER TABLE comment ADD datetime DATETIME DEFAULT NULL');
     }
 
