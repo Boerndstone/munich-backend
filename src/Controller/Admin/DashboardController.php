@@ -125,6 +125,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Kommentare', 'fa fa-comment', Comment::class)->setPermission('ROLE_MODERATOR');
         yield MenuItem::linkToCrud('Videos', 'fa fa-video', Videos::class);
         yield MenuItem::linkToCrud('User', 'fa fa-user', User::class)->setPermission('ROLE_SUPER_ADMIN');
+        yield MenuItem::linkToRoute('Geolocation', 'fa fa-map-marker', 'admin_geolocation')->setPermission('ROLE_SUPER_ADMIN');
     }
 
     public function configureUserMenu(UserInterface $user): UserMenu
