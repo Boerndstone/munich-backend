@@ -1,1 +1,4 @@
-<img class="img-fluid" src="{{ asset('https://www.munichclimbs.de/uploads/areas/' ~ area.image ~ '.webp') }}" {{ stimulus_controller('symfony/ux-lazy-image/lazy-image', { src: asset('https://www.munichclimbs.de/uploads/areas/' ~ area.image ~ '.webp'), srcset: { '1x': asset('https://www.munichclimbs.de/uploads/areas/' ~ area.image ~ '@2x.webp'), '2x': asset('https://www.munichclimbs.de/uploads/areas/' ~ area.image ~ '@3x.webp') } }) }}/>
+<picture>
+	<source type="image/webp" srcset="{{ asset('https://www.munichclimbs.de/uploads/areas/' ~ area.image ~ '.webp') }}, {{ asset('https://www.munichclimbs.de/uploads/areas/' ~ area.image ~ '@2x.webp') }} 2x, {{ asset('https://www.munichclimbs.de/uploads/areas/' ~ area.image ~ '@3x.webp') }} 3x" loading=" lazy">
+	<img class="img-fluid" src="{{ asset('https://www.munichclimbs.de/uploads/areas/' ~ area.image ~ '.webp') }}" alt="Klettergebiet {{ area.name }}" loading="lazy">
+</picture>

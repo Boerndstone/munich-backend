@@ -23,7 +23,8 @@
 				<picture>
 					<source media="(min-width: 1200px)" srcset="{{ asset('https://www.munichclimbs.de/uploads/header/' ~ areaImage ~ '-large-@1x.webp') }}, {{ asset('https://www.munichclimbs.de/uploads/header/' ~ areaImage ~ '-large-@2x.webp') }} 2x, {{ asset('https://www.munichclimbs.de/uploads/header/' ~ areaImage ~ '-large-@3x.webp') }} 3x">
 					<source media="(min-width: 800px)" srcset="{{ asset('https://www.munichclimbs.de/uploads/header/' ~ areaImage ~ '-medium-@1x.webp') }}, {{ asset('https://www.munichclimbs.de/uploads/header/' ~ areaImage ~ '-medium-@2x.webp') }} @2, {{ asset('https://www.munichclimbs.de/uploads/header/' ~ areaImage ~ '-medium-@3x.webp') }} 3x">
-					<img src="{{ asset('https://www.munichclimbs.de/uploads/header/' ~ areaImage ~ '-small-@1x.webp') }}" srcset="{{ asset('https://www.munichclimbs.de/uploads/header/' ~ areaImage ~ '-small-@2x.webp 2x') }}, {{ asset('https://www.munichclimbs.de/uploads/header/' ~ areaImage ~ '-small-@3x.webp 3x') }}" alt=" {{ setTitle }} ">
+					<img src="{{ asset('https://www.munichclimbs.de/uploads/header/' ~ areaImage ~ '-small-@1x.webp') }}" srcset="{{ asset('https://www.munichclimbs.de/uploads/header/' ~ areaImage ~ '-small-@2x.webp 2x') }}, {{ asset('https://www.munichclimbs.de/uploads/header/' ~ areaImage ~ '-small-@3x.webp 3x') }}" alt="{{ setTitle }}" loading="lazy">
+
 				</picture>
 			{% else %}
 				<div style="height: 100px"></div>

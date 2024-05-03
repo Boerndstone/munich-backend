@@ -45,7 +45,6 @@
         "symfony/twig-bundle": "^7.0",
         "symfony/ux-autocomplete": "^2.7",
         "symfony/ux-chartjs": "^2.5",
-        "symfony/ux-lazy-image": "^2.16",
         "symfony/ux-turbo": "^2.9",
         "symfony/validator": "^7.0",
         "symfony/var-dumper": "^7.0",
