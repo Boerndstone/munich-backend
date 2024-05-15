@@ -9,7 +9,9 @@
 	<meta property="og:type" content="website"/>
 	<meta property="og:url" content="https://munichclimbs.de/Kletterfels/{{ slug }}"/>
 	<meta property="og:description" content="{% for rock in rocks %}{{ rock.rockDescription}}{% endfor %}"/>
-	<meta name="keywords" content="Klettertouren Burgstein: {% for route in routes %}{{ route.routeName}} {{ route.routeGrade}}{% if loop.last == false  %}, {% else %}{% endif %}{% endfor %}"/>
+	<meta name="keywords" content="Klettertouren {{ slug|custom_replace }}: {% for route in routes %}{{ route.routeName}} {{ route.routeGrade}}{% if loop.last == false  %}, {% else %}{% endif %}{% endfor %}"/>
+
+
 {% endblock %}
 
 {% block title %}
