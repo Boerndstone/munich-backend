@@ -33,7 +33,14 @@
 										<div class="card mb-4 p-0 overflow-hidden">
 											<div class="row g-0">
 												<div class="col-md-6">
-													{% include 'partials/_lazy-load-images.html.twig' with {'areas': areas} %}
+													{% set url = 'https://www.munichclimbs.de/uploads/areas/' %}
+													{% include 'partials/_lazy-load-images.html.twig' with {
+														'area': area,
+														'media': {
+															'(min-width: 1200px)': url ~ area.image,
+															'(min-width: 800px)': url ~ area.image,
+														},
+													} %}
 												</div>
 												<div class="col-md-6">
 													<div class="card-body p-3">

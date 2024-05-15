@@ -11,7 +11,7 @@
 						{% for area in sideBar %}
 							<li class="nav-item my-2">
 								<a class="nav-link text-black" data-bs-toggle="collapse" href="#{{ area.name|custom_replace }}" title="Klettergebiet {{ area.name }}" role="button" aria-expanded="false" aria-controls="{{ area.name|custom_replace }}">
-									<img src="https://www.munichclimbs.de/build/images/navigationThumbs/{{ area.image }}.webp" alt="Übersicht Klettergebiete {{ area.name }}." class="rounded me-3" style="width: 18px; height: 18px;">
+									<img src="https://www.munichclimbs.de/build/images/navigationThumbs/{{ area.image }}.webp" alt="Übersicht Klettergebiete {{ area.name }}." class="rounded me-3" style="width: 18px; height: 18px;" loading="lazy">
 									<span class="text-truncate">{{ area.name }}</span>
 								</a>
 								<div class="collapse" id="{{ area.name|custom_replace }}">
@@ -20,7 +20,6 @@
 											{% for rock in area.rocks %}
 												<li class="list-group-item list-group-item-action d-flex border-0 px-2">
 													<a href="{{ path('show_rock', { 'areaSlug': area.slug, slug: rock.slug } ) }}" title="Link zum Klettergebiet: {{ rock.name }}" class="nav-link text-black py-0 d-flex justify-content-between align-items-center w-100 ms-2" data-area="Konstein" data-rocks-information="{{ rock.name }}" data-banned="0">{{ rock.name }}</a>
-
 												</li>
 											{% endfor %}
 										</ol>
