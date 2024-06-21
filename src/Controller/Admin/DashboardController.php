@@ -30,6 +30,8 @@ use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Doctrine\DBAL\Connection;
+
 
 class DashboardController extends AbstractDashboardController
 {
@@ -103,6 +105,13 @@ class DashboardController extends AbstractDashboardController
         $climbedRoutesInArea = $this->routesRepository->findClimbedRoutesByArea($area);
 
         return new JsonResponse(['count' => count($climbedRoutesInArea)]);
+    }
+    #[Route('/update-grades', name: 'update_grades')]
+    public function updateGrades(): Response
+    {
+        $this->routesRepository->updateGrades();
+
+        return new JsonResponse(['status' => 'success']);
     }
 
     public function configureDashboard(): Dashboard

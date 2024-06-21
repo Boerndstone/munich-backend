@@ -29,6 +29,10 @@
 		</div>
 		<div class="col-12 col-md-4">{{ render_chart(chartBernd) }}
 		</div>
+		<div class="col-12 col-md-4">
+			<button id="update-grades-button" class="btn btn-primary">Update Grades</button>
+		</div>
+
 		<div class="col-12 my-5">
 			<select class="form-select mb-3" id="areaSelect" data-controller="backend-climbed-routes">
 				<option value="">Alle</option>
@@ -40,4 +44,13 @@
 			<span id="climbedRoutesCount">{{ climbedRoutesInArea|length }}</span>
 		</div>
 	</div>
+
+	 <script>
+			document.getElementById('update-grades-button').addEventListener('click', function() {
+			    fetch('/update-grades')
+			        .then(response => response.json())
+			        .then(data => console.log(data));
+			});
+			</script>
+
 {% endblock %}
