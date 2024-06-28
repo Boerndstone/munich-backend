@@ -111,22 +111,23 @@
 												</td>
 												<td>{{ rock.rockOrientation }}</td>
 												<td>
-													{% if rock.rockSunny >= 1 %}
-														<div class="sun"></div>
+													{% if rock.rockSunny == 3 %}
+														<div class="sun" role="img" aria-label="sonnig" title="sonnig"></div>
+													{% elseif rock.rockSunny == 2 %}
+														<div class="partly-sun" role="img" aria-label="teils Sonne" title="teils Sonne"></div>
 													{% else %}
-														<div class="no-sun"></div>
+														<div class="no-sun" role="img" aria-label="keine Sonne" title="keine Sonne"></div>
 													{% endif %}
 												</td>
 											</tr>
-										{% endfor %}
+										</td>
 									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
 				</div>
-			</section>
+			</div>
 		</div>
-		{% include 'partials/_footer.html.twig' with {'areas': areas} %}
-	</main>
-{% endblock %}
+	</div>
+</section></div>{% include 'partials/_footer.html.twig' with {'areas': areas} %}</main>{% endblock %}
