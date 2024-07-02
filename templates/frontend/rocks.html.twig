@@ -120,14 +120,14 @@
 													{% endif %}
 												</td>
 											</tr>
-										</td>
+										{% endfor %}
 									</tbody>
-								</tr>
-							{% endfor %}
-						</tbody>
-					</table>
+								</table>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
+			</section>
 		</div>
-	</div>
-</section></div>{% include 'partials/_footer.html.twig' with {'areas': areas} %}</main>{% endblock %}
+		{% include 'partials/_footer.html.twig' with {'areas': areas} %}</main>
+{% endblock %}
