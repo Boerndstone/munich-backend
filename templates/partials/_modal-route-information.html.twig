@@ -23,7 +23,8 @@
 							{% if commentData.username %}
 								{{ commentData.username }}
 								{% if commentData.date %}
-									{{ commentData.date|date("F j, Y") }}
+									{{ commentData.date|date("d/m/Y", "Europe/Berlin") }}
+
 								{% endif %}
 							{% endif %}
 						</p>
