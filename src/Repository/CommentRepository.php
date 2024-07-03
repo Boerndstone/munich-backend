@@ -31,6 +31,7 @@ class CommentRepository extends ServiceEntityRepository
                 'user.firstname AS username',
                 'route.name AS routeName',
                 'rock.slug AS rockSlug',
+                'rock.name AS rockName',
                 'area.slug AS areaSlug',
                 'comment.comment AS commentComment',
                 'comment.datetime AS commentDate'
