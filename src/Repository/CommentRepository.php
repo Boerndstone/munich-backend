@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Comment;
+use App\Entity\User;
+use App\Entity\Routes;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -21,28 +23,26 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
-//    /**
-//     * @return Comment[] Returns an array of Comment objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Comment
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function latestComments()
+    {
+        return $this->createQueryBuilder('comment')
+            ->select(
+                'comment',
+                'user.firstname AS username',
+                'route.name AS routeName',
+                'rock.slug AS rockSlug',
+                'area.slug AS areaSlug',
+                'comment.comment AS commentComment',
+                'comment.datetime AS commentDate'
+            )
+            ->innerJoin('comment.user', 'user')
+            ->innerJoin('comment.route', 'route')
+            ->innerJoin('route.rock', 'rock')
+            ->innerJoin('route.area', 'area')
+            ->where('comment.datetime IS NOT NULL') // Ensure datetime is not null
+            ->orderBy('comment.datetime', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult();
+    }
 }

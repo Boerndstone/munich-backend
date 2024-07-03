@@ -10,6 +10,7 @@ use App\Repository\RockRepository;
 use App\Repository\TopoRepository;
 use App\Repository\PhotosRepository;
 use App\Repository\RoutesRepository;
+use App\Repository\CommentRepository;
 //use App\Form\RoutesAutocompleteField;
 use App\Repository\VideosRepository;
 use Symfony\Component\Asset\Packages;
@@ -90,10 +91,12 @@ class FrontendController extends AbstractController
         AreaRepository $areaRepository,
         RockRepository $rockRepository,
         RoutesRepository $routesRepository,
+        CommentRepository $commentRepository,
         Request $request
     ): Response {
 
         $latestRoutes = $routesRepository->latestRoutes();
+        $latestComments = $commentRepository->latestComments();
         $banned = $rockRepository->saisonalGesperrt();
         $areas = $areaRepository->getAreasInformation();
         $sideBar = $areaRepository->sidebarNavigation();
@@ -104,6 +107,7 @@ class FrontendController extends AbstractController
         return $this->render('frontend/index.html.twig', [
             'areas' => $areas,
             'latestRoutes' => $latestRoutes,
+            'latestComments' => $latestComments,
             'banned' => $banned,
             'sideBar' => $sideBar,
         ]);
