@@ -4,20 +4,26 @@ namespace App\Controller;
 
 use App\Entity\Area;
 use App\Entity\Rock;
+use App\Entity\Contact;
 use App\Service\FooterAreas;
+use App\Form\ContactFormType;
+use Doctrine\ORM\Mapping\Entity;
 use App\Repository\AreaRepository;
 use App\Repository\RockRepository;
 use App\Repository\TopoRepository;
+//use App\Form\RoutesAutocompleteField;
 use App\Repository\PhotosRepository;
 use App\Repository\RoutesRepository;
-use App\Repository\CommentRepository;
-//use App\Form\RoutesAutocompleteField;
 use App\Repository\VideosRepository;
+use App\Repository\CommentRepository;
 use Symfony\Component\Asset\Packages;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 
 
 class FrontendController extends AbstractController
@@ -63,13 +69,41 @@ class FrontendController extends AbstractController
     public function impressum(
         AreaRepository $areaRepository,
         FooterAreas $footerAreas,
+        Request $request,
+        EntityManagerInterface $entityManager,
+        MailerInterface $mailer
     ): Response {
         $areas = $footerAreas->getFooterAreas();
         $sideBar = $areaRepository->sidebarNavigation();
 
+        $form = $this->createForm(ContactFormType::class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Contact $contact */
+            $contact = $form->getData();
+
+            $entityManager->persist($contact);
+            $entityManager->flush();
+
+            // Prepare and send the email
+            $email = (new Email())
+                ->from('admin@munichclimbs.de') // Sender's email
+                ->to('admin@munichclimbs.de') // Recipient's email
+                ->subject('New Contact Form Submission')
+                ->html('<p>Here is the message: ' . $form->getData() . '</p>'); // Customize the email body
+
+            $mailer->send($email);
+
+            $this->addFlash('success', 'Ihre Nachricht wurde erfolgreich versendet!');
+
+            return $this->redirectToRoute('impressum');
+        }
+
         return $this->render('frontend/impressum.html.twig', [
             'areas' => $areas,
             'sideBar' => $sideBar,
+            'contactForm' => $form->createView(),
         ]);
     }
 

@@ -20,13 +20,17 @@
 		<link href="{{ asset('build/images/favicon/favicon.png') }}" rel="shortcut icon" type="image/x-icon">
 		<link href="{{ asset('build/images/favicon/favicon.png') }}" rel="apple-touch-icon" sizes="256x256">
 		<link href="{{ asset('build/images/favicon/favicon.png') }}" rel="apple-touch-startup-image">
-		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
-		<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+		<link
+		rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+	 <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 	</head>
 	<body id="body" {% block body_attributes %} {% endblock %} class="{% block bodyclass %}{% endblock %}"> {% block body %}{% endblock %}
+
 		<div {{ stimulus_controller('cookie-consent') }}></div>
+
 		<a href="#body" data-controller="scrolltop" data-action="scroll@window->scrolltop#scrollFunction" data-scrolltop-target="top" class="btn btn-sm btn-primary btn-to-top border border-white">
 			<div class="chevron-up "></div>
 		</a>
+
 	</body>
 </html>

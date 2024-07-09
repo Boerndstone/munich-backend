@@ -1,4 +1,6 @@
 {% extends 'base.html.twig' %}
+{% form_theme contactForm 'bootstrap_5_layout.html.twig' %}
+
 
 {% block title %}Klettergebiete um München
 {% endblock %}
@@ -7,6 +9,10 @@
 	{{ include('partials/_navigation.html.twig') }}
 	<main>
 		<div class="container my-3">
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success">{{ message }}</div>
+			{% endfor %}
+
 			<section>
 				<span class="dpl-newmdb-docs-alert-advanced">
 					<div class="alert shadow-3 d-flex justify-content-between alert-light" role="alert" data-mdb-color="light">
@@ -19,28 +25,44 @@
 					<div class="col-12">
 						<div class="card">
 							<div class="card-body">
-								<p class="card-text"><span class="font-semibold">Copyright:</span><br>
-								© 2013 munichclimbs.com<br>
-								Alle Rechte vorbehalten.</p>
+								<p class="card-text">
+									<span class="font-semibold">Copyright:</span><br>
+									© 2013 munichclimbs.com<br>
+									Alle Rechte vorbehalten.</p>
 								<p class="card-text">Inhaltlich verantwortlich gemäß § 6 MDStV:</p>
 								<p class="card-text">Bernd Ullmann<br>
-								Petra-Kelly-Str. 29<br>
-								80797 München<br>
-								admin@munichclimbs.de</p>
+									Petra-Kelly-Str. 29<br>
+									80797 München<br>
+									admin@munichclimbs.de</p>
 								<p class="card-text">Konzeption und Design:<br>
-								Bernd Ullmann</p>
+									Bernd Ullmann</p>
 
 								<p class="card-text">Technische Umsetzung:<br>
-								Bernd Ullmann | www.berndullmann.de<br>
+									Bernd Ullmann | www.berndullmann.de<br>
 								</p><hr class="my-5">
 								<h5 class="card-title">WICHTIGE HINWEISE:</h5>
-								<p class="card-text">Klettern ist eine Risikosportart, Fehler beim Ausüben der Sportart können mit schweren Verletzungen oder sogar tödlich enden. <br> Die Informationen auf www.munichclimbs.de sind nach bestem Wissen recherchiert. Trotzdem können Fehler und Ungenauigkeiten NICHT vollständig ausgeschlossen werden. <br> Alle Angaben erfolgen ohne Gewähr. Eine Haftung für Schäden, die sich aus der Verwendung der veröffentlichten Inhalte ergeben, ist ausgeschlossen.<br> Die Website www.munichclimbs.de ist ein freiwilliges NICHT-kommerzielles Informationsangebot über die Klettergebiete rund um München.</p>
+								<p class="card-text">Klettern ist eine Risikosportart, Fehler beim Ausüben der Sportart können mit schweren Verletzungen oder sogar tödlich enden.
+									<br>
+									Die Informationen auf www.munichclimbs.de sind nach bestem Wissen recherchiert. Trotzdem können Fehler und Ungenauigkeiten NICHT vollständig ausgeschlossen werden.
+									<br>
+									Alle Angaben erfolgen ohne Gewähr. Eine Haftung für Schäden, die sich aus der Verwendung der veröffentlichten Inhalte ergeben, ist ausgeschlossen.<br>
+									Die Website www.munichclimbs.de ist ein freiwilliges NICHT-kommerzielles Informationsangebot über die Klettergebiete rund um München.</p>
+							</div>
+						</div>
+						<div class="card my-3">
+							<div class="card-body">
+								<h5 class="card-title">Kontakt</h5>
+								<h6 class="card-subtitle mb-4 text-body-secondary">Du hast Fragen, Anregungen, Ergänzungen? Bitte schreib uns!</h6>
+								{{ form_start(contactForm) }}
+								{{ form_widget(contactForm) }}
+								<button type="submit" class="btn btn-success">Nachricht senden!</button>
+								{{ form_end(contactForm) }}
 							</div>
 						</div>
 					</div>
 				</div>
 			</section>
-		</div>		
+		</div>
 	</main>
 	{% include 'partials/_footer.html.twig' with {'areas': areas} %}
 {% endblock %}

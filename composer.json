@@ -32,7 +32,8 @@
         "symfony/form": "^7.0",
         "symfony/framework-bundle": "^7.0",
         "symfony/http-kernel": "^7.0",
-        "symfony/mime": "^7.0",
+        "symfony/mailer": "7.0.*",
+        "symfony/mime": "7.0.*",
         "symfony/monolog-bundle": "^3.0",
         "symfony/property-access": "7.0.*",
         "symfony/property-info": "7.0.*",
@@ -111,7 +112,9 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "7.0.*"
+            "require": "7.0.*",
+            "docker": false
         }
     }
+
 }
