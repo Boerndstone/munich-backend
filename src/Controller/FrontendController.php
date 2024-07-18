@@ -18,6 +18,7 @@ use App\Repository\VideosRepository;
 use App\Repository\CommentRepository;
 use Symfony\Component\Asset\Packages;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -79,25 +80,33 @@ class FrontendController extends AbstractController
         $form = $this->createForm(ContactFormType::class);
 
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @var Contact $contact */
-            $contact = $form->getData();
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                /** @var Contact $contact */
+                $contact = $form->getData();
 
-            $entityManager->persist($contact);
-            $entityManager->flush();
+                $entityManager->persist($contact);
+                $entityManager->flush();
 
-            // Prepare and send the email
-            $email = (new Email())
-                ->from('admin@munichclimbs.de') // Sender's email
-                ->to('admin@munichclimbs.de') // Recipient's email
-                ->subject('New Contact Form Submission')
-                ->html('<p>Here is the message: ' . $form->getData() . '</p>'); // Customize the email body
+                // Prepare and send the email
+                $email = (new TemplatedEmail())
+                    ->from('admin@munichclimbs.de') // Sender's email
+                    ->to('admin@munichclimbs.de') // Recipient's email
+                    ->subject('New Contact Form Submission')
+                    ->htmlTemplate('emails/contact.html.twig')
+                    ->context([
+                        'name' => $contact->getName(),
+                        'emailAdress' => $contact->getEmail(),
+                    ]);
 
-            $mailer->send($email);
+                $mailer->send($email);
+                $this->addFlash('success', 'Ihre Nachricht wurde erfolgreich versendet!');
 
-            $this->addFlash('success', 'Ihre Nachricht wurde erfolgreich versendet!');
-
-            return $this->redirectToRoute('impressum');
+                return $this->redirectToRoute('impressum');
+            } else {
+                // This block now only executes if the form is submitted but not valid
+                $this->addFlash('error', 'Ihre Nachricht konnte nicht versendet werden!');
+            }
         }
 
         return $this->render('frontend/impressum.html.twig', [

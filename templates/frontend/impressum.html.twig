@@ -9,9 +9,7 @@
 	{{ include('partials/_navigation.html.twig') }}
 	<main>
 		<div class="container my-3">
-			{% for message in app.flashes('success') %}
-				<div class="alert alert-success">{{ message }}</div>
-			{% endfor %}
+
 
 			<section>
 				<span class="dpl-newmdb-docs-alert-advanced">
@@ -53,7 +51,16 @@
 							<div class="card-body">
 								<h5 class="card-title">Kontakt</h5>
 								<h6 class="card-subtitle mb-4 text-body-secondary">Du hast Fragen, Anregungen, Ergänzungen? Bitte schreib uns!</h6>
-								{{ form_start(contactForm) }}
+								{% for message in app.flashes('success') %}
+									<div class="alert alert-success">{{ message }}</div>
+								{% endfor %}
+								{% for message in app.flashes('error') %}
+									<div class="alert alert-danger" role="alert">
+										{{ message }}
+									</div>
+								{% endfor %}
+
+								{{ form_start(contactForm, {'attr': {'novalidate': 'novalidate', 'data-turbo': 'false'}}) }}
 								{{ form_widget(contactForm) }}
 								<button type="submit" class="btn btn-success">Nachricht senden!</button>
 								{{ form_end(contactForm) }}
