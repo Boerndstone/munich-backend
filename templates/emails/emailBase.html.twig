@@ -1,0 +1,48 @@
+{% apply inky_to_html|inline_css(source('@styles/foundation-emails.css'), source('@styles/email.css')) %}
+
+<container>
+	<row class="header">
+		<columns>
+			<a href="{{ url('index') }}">
+				<img src="{{ absolute_url(asset('build/images/favicon/favicon.png')) }}" class="logo" alt="SpaceBar Logo">
+			</a>
+		</columns>
+	</row>
+	{% block content %}{% endblock %}
+	<row class="footer">
+		{% set total_areas = getAreas()|length %}
+		{% set half_point = (total_areas / 2)|round(0, 'ceil') %}
+		<columns large="6">
+			{% for area in getAreas() %}
+				{% if loop.index <= half_point %}
+					<menu class="vertical">
+						<item href="{{ path('show_rocks', { slug: area.slug }) }}" title="Klettergebiet {{ area.name }}">{{ area.name }}</item>
+					</menu>
+				{% endif %}
+			{% endfor %}
+		</div>
+		<columns large="6">
+			{% for area in getAreas() %}
+				{% if loop.index > half_point %}
+					<menu class="vertical">
+						<item href="{{ path('show_rocks', { slug: area.slug }) }}" title="Klettergebiet {{ area.name }}">{{ area.name }}</item>
+					</menu>
+				{% endif %}
+			{% endfor %}
+		</div>
+	</row>
+	<row class="bottom">
+		<columns>
+			<center>
+				<spacer size="20"></spacer>
+				<div>
+					<p class="text-center">
+						<small class="text-white">Copyright © 2024 munichclimbs. Alle Rechte vorbehalten.</small>
+					</p>
+				</div>
+			</center>
+		</columns>
+	</row>
+</container>
+
+{% endapply %}

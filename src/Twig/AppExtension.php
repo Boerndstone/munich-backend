@@ -4,9 +4,31 @@ namespace App\Twig;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
+use Twig\TwigFunction;
+use App\Service\FooterAreas;
 
 class AppExtension extends AbstractExtension
 {
+
+    private $footerAreas;
+
+    public function __construct(FooterAreas $footerAreas)
+    {
+        $this->footerAreas = $footerAreas;
+    }
+
+    public function getFunctions()
+    {
+        return [
+            new TwigFunction('getAreas', [$this, 'getAreas']),
+        ];
+    }
+
+    public function getAreas()
+    {
+        return $this->footerAreas->getFooterAreas();
+    }
+
     public function getFilters()
     {
         return [

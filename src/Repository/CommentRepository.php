@@ -46,4 +46,33 @@ class CommentRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * @return Comment[]
+     */
+    public function findAllPublishedComments(User $user): array
+    {
+        $results = $this->createQueryBuilder('comment')
+            ->select(
+                'comment',
+                'comment.comment AS commentComment',
+                'route.name AS routeName'
+            )
+            ->innerJoin('comment.route', 'route')
+            ->andWhere('comment.user = :user')
+            ->andWhere('comment.datetime > :week_ago')
+            ->setParameter('user', $user)
+            ->setParameter('week_ago', new \DateTime('-1 week'))
+            ->getQuery()
+            ->getResult();
+
+        $structuredResults = array_map(function ($result) {
+            return [
+                'commentComment' => $result['commentComment'],
+                'routeName' => $result['routeName'],
+            ];
+        }, $results);
+
+        return $structuredResults;
+    }
 }

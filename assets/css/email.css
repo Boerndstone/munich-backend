@@ -12,6 +12,10 @@ h1 {
     font-weight: normal;
 }
 
+.text-white {
+    color: #ffffff;
+}
+
 hr {
     border: none;
     border-top: 3px solid #264459;
@@ -25,12 +29,30 @@ hr {
 }
 
 .bottom {
-    background-color: #efefee;
+    border-top: 1px solid white;
+}
+
+.bottom, .footer, .welcome {
+    background-color: rgb(7 89 133);;
+}
+
+.footer a {
+    color: #ffffff !important;
+    text-decoration: none
+}
+
+.h-line {
+    height: 2px;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
 }
 
 .block {
     margin: 0;
     padding: 10px 20px 20px;
+   
 }
 
 .logo {
