@@ -112,6 +112,11 @@ $success: rgb(20 83 45);
     width: 22px;
     height: 22px;
 }
+
+.height {
+    @extend .icon-content-size;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewbox="0 0 24 24"><path fill="currentColor" d="M13 9v6h3l-4 4l-4-4h3V9H8l4-4l4 4zM4 2h16v2H4zm0 18h16v2H4z" /></svg>');
+}
 .sun {
     @extend .icon-content-size;
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="rgb(161 98 7)" d="m3.55 19.09l1.41 1.41l1.8-1.79l-1.42-1.42M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6s6-2.69 6-6c0-3.32-2.69-6-6-6m8 7h3v-2h-3m-2.76 7.71l1.8 1.79l1.41-1.41l-1.79-1.8M20.45 5l-1.41-1.4l-1.8 1.79l1.42 1.42M13 1h-2v3h2M6.76 5.39L4.96 3.6L3.55 5l1.79 1.81zM1 13h3v-2H1m12 9h-2v3h2" /></svg>');
@@ -428,3 +433,16 @@ input[data-autocomplete-target="input"]:focus {
     }
 }
 
+.text-truncate-rock-name {
+    max-width: 150px;
+}
+@include media-breakpoint-up(lg) {
+    .text-truncate-rock-name {
+        max-width: 100%;
+    }
+    .sticky-filter {
+        position: sticky;
+        top: 55px;
+        z-index: 1000;
+    }
+}

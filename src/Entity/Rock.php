@@ -93,6 +93,9 @@ class Rock
     #[ORM\Column(type: Types::SMALLINT, nullable: true)]
     private ?int $zoom = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $previewImage = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -396,6 +399,18 @@ class Rock
     public function setZoom(?int $zoom): static
     {
         $this->zoom = $zoom;
+
+        return $this;
+    }
+
+    public function getPreviewImage(): ?string
+    {
+        return $this->previewImage;
+    }
+
+    public function setPreviewImage(?string $previewImage): static
+    {
+        $this->previewImage = $previewImage;
 
         return $this;
     }
