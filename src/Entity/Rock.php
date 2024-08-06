@@ -96,6 +96,9 @@ class Rock
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $previewImage = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $train = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -411,6 +414,18 @@ class Rock
     public function setPreviewImage(?string $previewImage): static
     {
         $this->previewImage = $previewImage;
+
+        return $this;
+    }
+
+    public function isTrain(): ?bool
+    {
+        return $this->train;
+    }
+
+    public function setTrain(?bool $train): static
+    {
+        $this->train = $train;
 
         return $this;
     }

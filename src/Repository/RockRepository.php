@@ -138,6 +138,7 @@ class RockRepository extends ServiceEntityRepository
                 'rock.height as rockHeight',
                 'rock.childFriendly as rockChild',
                 'rock.rain as rockRain',
+                'rock.train as rockTrain',
                 'rock.lat as rockLat',
                 'rock.lng as rockLng',
                 'rock.orientation as rockOrientation',

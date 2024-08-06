@@ -1,7 +1,7 @@
 import { Controller } from "stimulus";
 
 export default class extends Controller {
-  static targets = ["childFriendly", "sunny", "rain"];
+  static targets = ["childFriendly", "sunny", "rain", "train"];
 
   connect() {
     this.filterItems();
@@ -10,13 +10,15 @@ export default class extends Controller {
   filterItems() {
     const showChildFriendly = this.childFriendlyTarget.checked;
     const showSunny = this.sunnyTarget.checked;
-    const showRain = this.rainTarget.checked; // Added line
+    const showRain = this.rainTarget.checked;
+    const showTrain = this.trainTarget.checked;
     let visibleCount = 0;
 
     document.querySelectorAll(".rock-item").forEach((item) => {
       const isChildFriendly = item.dataset.childFriendly === "true";
       const isSunny = item.dataset.rockSunny === "true";
-      const isRain = item.dataset.rockRain === "true"; // Assuming you have this data attribute
+      const isRain = item.dataset.rockRain === "true";
+      const isTrain = item.dataset.rockTrain === "true";
 
       let shouldShow = true;
       if (showChildFriendly && !isChildFriendly) {
@@ -26,7 +28,9 @@ export default class extends Controller {
         shouldShow = false;
       }
       if (showRain && !isRain) {
-        // New condition for "rain"
+        shouldShow = false;
+      }
+      if (showTrain && !isTrain) {
         shouldShow = false;
       }
 
