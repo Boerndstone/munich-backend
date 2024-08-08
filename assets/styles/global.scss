@@ -84,6 +84,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: "Chelsea Market", system-ui;
+    src: url('../fonts/ChelseaMarket-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
 body {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
@@ -102,6 +109,12 @@ $success: rgb(20 83 45);
     height: 1rem;
 }
 
+.chelsea-market-regular {
+    font-family: "Chelsea Market", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+}
 
 // Icons
 .icon-content-size {

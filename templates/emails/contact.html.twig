@@ -2,58 +2,31 @@
 
 {% block content %}
 
-
-	<row class="welcome">
+	<row>
 		<columns>
-			<spacer size="35"></spacer>
+			<spacer size="20"></spacer>
 			<h1>
-				<center>
-					Nice to meet you
-					{{ name }}!
-				</center>
+				Neue Nachricht von:
+				<strong>{{ name }}</strong>,
 			</h1>
-			<spacer size="10"></spacer>
-		</columns>
-	</row>
-	<spacer size="30"></spacer>
-	<row>
-		<columns>
-			<p>
-				Welcome to
-				<strong>the Space Bar</strong>, we can't wait to read what you have to write.
-																																																																																																																																									                Get started on your first article and connect with the space bar community.
-			</p>
-		</columns>
-	</row>
-	<row>
-		<columns>
-			<center>
-				<button href="{{ url('index') }}">Get writing!</button>
-			</center>
 		</columns>
 	</row>
 	<row>
 		<columns>
 			<p>
-				Check out our existing articles and share your thoughts in the comments!
+				Email-Adresse:
+				<strong>{{ emailAdress }}</strong>
 			</p>
-		</columns>
-	</row>
-	<row>
-		<columns>
-			<center>
-				<button href="{{ url('index') }}">Get reading!</button>
-			</center>
 		</columns>
 	</row>
 	<row>
 		<columns>
 			<p>
-				We're so excited that you've decided to join us in our corner of the universe,
-																																																																																																														                it's a friendly one with other creative and insightful writers just like you!
-																																																																																																														                Need help from a friend? We're always just a message away.
+				{{ comment }}
 			</p>
+			<spacer size="20"></spacer>
 		</columns>
 	</row>
+
 
 {% endblock %}

@@ -90,13 +90,15 @@ class FrontendController extends AbstractController
 
                 // Prepare and send the email
                 $email = (new TemplatedEmail())
-                    ->from('admin@munichclimbs.de') // Sender's email
+                    ->from($contact->getEmail()) // Sender's email
                     ->to('admin@munichclimbs.de') // Recipient's email
-                    ->subject('New Contact Form Submission')
+                    ->subject('Kontaktformular munichclimbs. Betreff:' . $contact->getSubject())
                     ->htmlTemplate('emails/contact.html.twig')
                     ->context([
                         'name' => $contact->getName(),
                         'emailAdress' => $contact->getEmail(),
+                        'subject' => $contact->getSubject(),
+                        'comment' => $contact->getComment(),
                     ]);
 
                 $mailer->send($email);

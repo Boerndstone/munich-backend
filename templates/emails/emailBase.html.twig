@@ -3,33 +3,53 @@
 <container>
 	<row class="header">
 		<columns>
-			<a href="{{ url('index') }}">
-				<img src="{{ absolute_url(asset('build/images/favicon/favicon.png')) }}" class="logo" alt="SpaceBar Logo">
+			<spacer size="20"></spacer>
+			<a href="{{ url('index') }}" class="chelsea-market-regular" href="/">
+				munichclimbs
 			</a>
+			<spacer size="20"></spacer>
 		</columns>
 	</row>
 	{% block content %}{% endblock %}
 	<row class="footer">
-		{% set total_areas = getAreas()|length %}
-		{% set half_point = (total_areas / 2)|round(0, 'ceil') %}
-		<columns large="6">
-			{% for area in getAreas() %}
-				{% if loop.index <= half_point %}
+		{% set areas = getAreas() %}
+		{% set total_areas = areas|length %}
+		{% set third_point = (total_areas / 3)|round(0, 'ceil') %}
+		{% set two_third_point = (2 * total_areas / 3)|round(0, 'ceil') %}
+
+		<columns large="4">
+			<spacer size="20"></spacer>
+			{% for area in areas %}
+				{% if loop.index <= third_point %}
 					<menu class="vertical">
-						<item href="{{ path('show_rocks', { slug: area.slug }) }}" title="Klettergebiet {{ area.name }}">{{ area.name }}</item>
+						<item href="{{ url('show_rocks', { slug: area.slug }) }}" title="Klettergebiet {{ area.name }}">{{ area.name }}</item>
 					</menu>
 				{% endif %}
 			{% endfor %}
-		</div>
-		<columns large="6">
-			{% for area in getAreas() %}
-				{% if loop.index > half_point %}
+		</columns>
+
+		<columns large="4">
+			<spacer size="20"></spacer>
+			{% for area in areas %}
+				{% if loop.index > third_point and loop.index <= two_third_point %}
 					<menu class="vertical">
-						<item href="{{ path('show_rocks', { slug: area.slug }) }}" title="Klettergebiet {{ area.name }}">{{ area.name }}</item>
+						<item href="{{ url('show_rocks', { slug: area.slug }) }}" title="Klettergebiet {{ area.name }}">{{ area.name }}</item>
 					</menu>
 				{% endif %}
 			{% endfor %}
-		</div>
+		</columns>
+
+		<columns large="4">
+			<spacer size="20"></spacer>
+			{% for area in areas %}
+				{% if loop.index > two_third_point %}
+					<menu class="vertical">
+						<item href="{{ url('show_rocks', { slug: area.slug }) }}" title="Klettergebiet {{ area.name }}">{{ area.name }}</item>
+					</menu>
+				{% endif %}
+			{% endfor %}
+		</columns>
+
 	</row>
 	<row class="bottom">
 		<columns>
