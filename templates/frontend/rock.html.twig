@@ -10,8 +10,6 @@
 	<meta property="og:url" content="https://munichclimbs.de/Kletterfels/{{ slug }}"/>
 	<meta property="og:description" content="{% for rock in rocks %}{{ rock.rockDescription}}{% endfor %}"/>
 	<meta name="keywords" content="Klettertouren {{ slug|custom_replace }}: {% for route in routes %}{{ route.routeName}} {{ route.routeGrade}}{% if loop.last == false  %}, {% else %}{% endif %}{% endfor %}"/>
-
-
 {% endblock %}
 
 {% block title %}
@@ -26,7 +24,6 @@
 				{% if rock.rockheaderImage is not empty %}
 					<div class="container my-3">
 						<img class="rounded" src="{{ asset('https://www.munichclimbs.de/build/images/headerImages/' ~ rock.rockheaderImage ~ '.webp') }}" loading="lazy"/>
-
 					</div>
 				{% else %}
 					<picture>
@@ -38,8 +35,10 @@
 				<div class="container my-3 position-absolute" style="top: 0; right: 0; left:0;">
 					<div class="bg-image pb-3 rounded ">
 						<div class="p-3 rounded shadow-3 alert-light d-flex align-items-center justify-content-between" style="background-color: rgba(255, 255, 255, 0.6);">
-							<h1 class="h2 mb-0 fw-bold text-black ">
-								{{ rock.rockName }}
+							<div class="d-flex flex-column">
+								<h1 class="h2 mb-0 fw-bold text-black ">
+									{{ rock.rockName }}
+								</h1>
 								<nav class="mt-1" aria-label="breadcrumb">
 									<ol class="breadcrumb text-black fw-normal mb-0" style="font-size: 12px">
 										<li class="breadcrumb-item">
@@ -53,7 +52,7 @@
 										<li class="breadcrumb-item active text-black" aria-current="page">{{ rock.rockName }}</li>
 									</ol>
 								</nav>
-							</h1>
+							</div>
 							<div class="d-flex items-center align-self-start">
 								{% if jsonData %}
 									<div data-controller="gallery" data-gallery-data="{{ jsonData|json_encode }}" class="ms-2 d-inline-block">
@@ -115,15 +114,18 @@
 						{% set topoNumber = routeData.topoNumber %}
 						{% set topoSvg = routeData.topoSvg %}
 						{% set groupedRoutes = groupedRoutes|merge({
-(topoName): groupedRoutes[topoName]|default([])|merge([{'routeName': routeData.routeName, 'routeRating': routeData.routeRating, 'routeProtection': routeData.routeProtection, 'areaId': routeData.areaId, 'rockId': routeData.rockId, 'routeId': routeData.routeId, 'routefirstAscent': routeData.routefirstAscent, 'routeyearFirstAscent': routeData.routeyearFirstAscent, 'routeDescription': routeData.routeDescription, 'routeComment': routeData.routeComment, 'routeGrade': routeData.routeGrade, 'topoSvg': routeData.topoSvg, 'videoLink': routeData.videoLink}]) }) %}
+(topoName): groupedRoutes[topoName]|default([])|merge([{'routeName': routeData.routeName, 'routeRating': routeData.routeRating, 'routeProtection': routeData.routeProtection, 'areaId': routeData.areaId, 'rockId': routeData.rockId, 'routeId': routeData.routeId, 'routefirstAscent': routeData.routefirstAscent, 'routeyearFirstAscent': routeData.routeyearFirstAscent, 'routeDescription': routeData.routeDescription, 'routeComment': routeData.routeComment, 'routeGrade': routeData.routeGrade, 'topoSvg': routeData.topoSvg, 'withSector': routeData.withSector, 'videoLink': routeData.videoLink}]) })
 
 
+						%}
 					{% endfor %}
 					{% for topoName, routes in groupedRoutes %}
 						<div class="card mt-3 overflow-hidden" id="{{ topoName|custom_replace}}">
 							<div class="card-body p-0">
 								<section>
-									<h3 class="pb-md-1 px-2 py-3">{{ topoName }}</h3>
+									{% if route.withSector is defined %}
+										<h3 class="pb-md-1 px-2 py-3">{{ topoName }}</h3>
+									{% endif %}
 									{% set hasPrinted = false %}
 									{% for route in routes %}
 										{% if not hasPrinted %}
@@ -163,7 +165,6 @@
 														{% endif %}
 													</td>
 													<td>
-
 														{% if route.routeDescription or route.routeComment %}
 
 															<div {{ stimulus_controller('modal-route-information') }}>

@@ -265,7 +265,8 @@ class RockRepository extends ServiceEntityRepository
                 'topo.name as topoName',
                 'topo.number as topoNumber',
                 'videos.videoLink as videoLink',
-                'topo.svg as topoSvg'
+                'topo.svg as topoSvg',
+                'topo.withSector as withSector'
 
             )
             ->innerJoin('rock.area', 'area')
