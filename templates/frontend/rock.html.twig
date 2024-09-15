@@ -145,15 +145,14 @@
 									{% endfor %}
 
 
-									<table class="table table-striped mb-0">
+									<table class="table table-striped mb-0 small fw-medium">
 										<tbody>
 											{% for route in routes %}
 												<tr>
-													<td>{{loop.index}}</td>
-													<td>
+													<td class="py-2">{{loop.index}}</td>
+													<td class="py-2">
 														<div class="d-flex items-bottom">
-															<span class="me-1 fw-medium">{{ route.routeName }}
-															</span>
+															<span class="me-1 fw-semibold">{{ route.routeName }}</span>
 															<span data-controller="routeparams" data-routeparams-rating="{{ route.routeRating }}" data-routeparams-protection="{{ route.routeProtection }}">
 																<span data-routeparams-target="star"></span>
 																<span data-routeparams-target="protection"></span>
@@ -165,18 +164,17 @@
 															{% endif %}
 														</div>
 													</td>
-													<td>
-														<span class="fw-medium">{{ route.routeGrade }}</span>
+													<td class="py-2">
+														<span>{{ route.routeGrade }}</span>
 													</td>
-													<td class="d-none d-lg-table-cell" style="white-space: nowrap;">
+													<td class="d-none d-lg-table-cell py-2" style="white-space: nowrap;">
 														{{ route.routefirstAscent }}
 														{% if route.routeyearFirstAscent %}
 															{{ route.routeyearFirstAscent }}
 														{% endif %}
 													</td>
-													<td>
+													<td class="py-2">
 														{% if route.routeDescription or route.routeComment %}
-
 															<div {{ stimulus_controller('modal-route-information') }}>
 																<button class="btn btn-sm btn-white bg-white p-0 border-0 shadow-none rounded-circle" data-action="modal-route-information#openModal" data-bs-toggle="modal" data-bs-target="#{{ route.routeName|custom_replace }}">
 																	<div class="info" style="width: 22px; height: 22px"></div>
