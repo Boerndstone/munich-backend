@@ -131,7 +131,7 @@
 									{% endfor %}
 
 									{% if hasWithSector %}
-										<h3 class="pb-md-1 px-2 py-3">{{ topoName }}</h3>
+										<h2 class="fs-4 pb-md-1 px-2 py-3">{{ topoName }}</h2>
 									{% endif %}
 
 									{% set hasPrinted = false %}
@@ -144,16 +144,17 @@
 										{% endif %}
 									{% endfor %}
 
-
 									<table class="table table-striped mb-0 small fw-medium">
 										<tbody>
 											{% for route in routes %}
 												<tr>
-													<td class="py-2">{{loop.index}}</td>
+													<td class="py-2">
+														<span class="mb-0 pb-0" style="line-height: 0;">{{loop.index}}</span>
+													</td>
 													<td class="py-2">
 														<div class="d-flex items-bottom">
-															<span class="me-1 fw-semibold">{{ route.routeName }}</span>
-															<span data-controller="routeparams" data-routeparams-rating="{{ route.routeRating }}" data-routeparams-protection="{{ route.routeProtection }}">
+															<span class="me-1 mb-0 pb-0">{{ route.routeName }}</span>
+															<span class="mb-0 pb-0" style="line-height: 0;" data-controller="routeparams" data-routeparams-rating="{{ route.routeRating }}" data-routeparams-protection="{{ route.routeProtection }}">
 																<span data-routeparams-target="star"></span>
 																<span data-routeparams-target="protection"></span>
 															</span>
@@ -165,18 +166,19 @@
 														</div>
 													</td>
 													<td class="py-2">
-														<span>{{ route.routeGrade }}</span>
+														<span class="mb-0 pb-0" style="line-height: 0;">{{ route.routeGrade }}</span>
 													</td>
 													<td class="d-none d-lg-table-cell py-2" style="white-space: nowrap;">
-														{{ route.routefirstAscent }}
-														{% if route.routeyearFirstAscent %}
-															{{ route.routeyearFirstAscent }}
-														{% endif %}
+														<span class="mb-0 pb-0" style="line-height: 0;">{{ route.routefirstAscent }}
+															{% if route.routeyearFirstAscent %}
+																{{ route.routeyearFirstAscent }}
+															{% endif %}
+														</span>
 													</td>
 													<td class="py-2">
 														{% if route.routeDescription or route.routeComment %}
 															<div {{ stimulus_controller('modal-route-information') }}>
-																<button class="btn btn-sm btn-white bg-white p-0 border-0 shadow-none rounded-circle" data-action="modal-route-information#openModal" data-bs-toggle="modal" data-bs-target="#{{ route.routeName|custom_replace }}">
+																<button class="btn btn-sm btn-white bg-white mb-0 p-0 border-0 shadow-none rounded-circle" data-action="modal-route-information#openModal" data-bs-toggle="modal" data-bs-target="#{{ route.routeName|custom_replace }}">
 																	<div class="info" style="width: 22px; height: 22px"></div>
 																</button>
 																{{ include('partials/_modal-route-information.html.twig') }}
