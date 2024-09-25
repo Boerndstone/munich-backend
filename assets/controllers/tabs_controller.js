@@ -34,25 +34,29 @@ export default class extends Controller {
       });
     };
 
+    const centerTab = (tab) => {
+      const tabRect = tab.getBoundingClientRect();
+      const containerRect = tabsList.getBoundingClientRect();
+      const offset =
+        tabRect.left -
+        containerRect.left -
+        containerRect.width / 2 +
+        tabRect.width / 2;
+
+      tabsList.scrollBy({
+        left: offset,
+        behavior: "smooth",
+      });
+    };
+
     tabs.forEach((tab) => {
       tab.addEventListener("click", (event) => {
         event.preventDefault(); // Prevent default anchor behavior
         removeAllActiveClasses();
         tab.classList.add("active");
 
-        // Scroll the tab into view
-        const tabRect = tab.getBoundingClientRect();
-        const containerRect = tabsList.getBoundingClientRect();
-        const offset =
-          tabRect.left -
-          containerRect.left -
-          containerRect.width / 2 +
-          tabRect.width / 2;
-
-        tabsList.scrollBy({
-          left: offset,
-          behavior: "smooth",
-        });
+        // Center the clicked tab
+        centerTab(tab);
 
         // Scroll to the corresponding content
         const targetId = tab.getAttribute("href").slice(1);
@@ -64,46 +68,29 @@ export default class extends Controller {
       });
     });
 
-    const manageIcons = () => {
-      if (tabsList.scrollLeft >= 20) {
-        leftArrowContainer.classList.add("active");
-      } else {
-        leftArrowContainer.classList.remove("active");
-      }
-      let maxScrollValue = tabsList.scrollWidth - tabsList.clientWidth - 20;
+    const onScroll = () => {
+      const scrollPos = window.scrollY;
 
-      if (tabsList.scrollLeft >= maxScrollValue) {
-        rightArrowContainer.classList.remove("active");
-      } else {
-        rightArrowContainer.classList.add("active");
-      }
+      tabs.forEach((tab) => {
+        const targetId = tab.getAttribute("href").slice(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          const top = targetElement.offsetTop - 200;
+          const height = targetElement.offsetHeight;
+          if (scrollPos >= top && scrollPos < top + height) {
+            // Remove active class from all tabs
+            removeAllActiveClasses();
+
+            // Add active class to the current tab
+            tab.classList.add("active");
+
+            // Center the current tab
+            centerTab(tab);
+          }
+        }
+      });
     };
 
-    rightArrow.addEventListener("click", () => {
-      tabsList.scrollLeft += 200;
-      manageIcons();
-    });
-
-    leftArrow.addEventListener("click", () => {
-      tabsList.scrollLeft -= 200;
-      manageIcons();
-    });
-
-    tabsList.addEventListener("scroll", manageIcons);
-
-    let dragging = false;
-    const drag = (e) => {
-      if (!dragging) return;
-      tabsList.classList.add("dragging");
-      tabsList.scrollLeft -= e.movementX;
-    };
-    tabsList.addEventListener("mousedown", () => {
-      dragging = true;
-    });
-    tabsList.addEventListener("mousemove", drag);
-    document.addEventListener("mouseup", () => {
-      dragging = false;
-      tabsList.classList.remove("dragging");
-    });
+    window.addEventListener("scroll", onScroll);
   }
 }
