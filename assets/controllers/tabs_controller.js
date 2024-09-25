@@ -35,14 +35,31 @@ export default class extends Controller {
     };
 
     tabs.forEach((tab) => {
-      tab.addEventListener("click", () => {
+      tab.addEventListener("click", (event) => {
+        event.preventDefault(); // Prevent default anchor behavior
         removeAllActiveClasses();
         tab.classList.add("active");
+
+        // Scroll the tab into view
+        const tabRect = tab.getBoundingClientRect();
+        const containerRect = tabsList.getBoundingClientRect();
+        const offset =
+          tabRect.left -
+          containerRect.left -
+          containerRect.width / 2 +
+          tabRect.width / 2;
+
+        tabsList.scrollBy({
+          left: offset,
+          behavior: "smooth",
+        });
+
+        // Scroll to the corresponding content
         const targetId = tab.getAttribute("href").slice(1);
         const targetCard = document.getElementById(targetId);
         if (targetCard) {
           const cardOffset = targetCard.offsetTop;
-          tabsList.scrollTo({ top: cardOffset, behavior: "smooth" });
+          window.scrollTo({ top: cardOffset, behavior: "smooth" });
         }
       });
     });
