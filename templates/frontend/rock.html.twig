@@ -129,11 +129,6 @@
 											{% set hasWithSector = true %}
 										{% endif %}
 									{% endfor %}
-
-									{# {% if hasWithSector %}
-																			<h2 class="fs-4 pb-md-1 px-2 py-3">{{ topoName }}</h2>
-																		{% endif %} #}
-
 									{% set hasPrinted = false %}
 									{% for route in routes %}
 										{% if not hasPrinted %}
@@ -143,7 +138,6 @@
 											{% set hasPrinted = true %}
 										{% endif %}
 									{% endfor %}
-
 									<table class="table table-striped mb-0 small fw-medium">
 										<tbody>
 											{% for route in routes %}
