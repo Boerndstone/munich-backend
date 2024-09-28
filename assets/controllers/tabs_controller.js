@@ -11,6 +11,9 @@ export default class extends Controller {
     );
     const tabsList = document.querySelector(".scrollable-tabs-container ul");
     const container = document.querySelector(".container");
+    const navigationHeight =
+      document.querySelector(".navbar").offsetHeight + 41;
+    console.log(navigationHeight); // Adjust this selector to match your navigation bar
 
     let totalWidth = 0;
     tabsList.querySelectorAll("li").forEach((li) => {
@@ -58,11 +61,11 @@ export default class extends Controller {
         // Center the clicked tab
         centerTab(tab);
 
-        // Scroll to the corresponding content
+        // Scroll to the corresponding content with offset
         const targetId = tab.getAttribute("href").slice(1);
         const targetCard = document.getElementById(targetId);
         if (targetCard) {
-          const cardOffset = targetCard.offsetTop;
+          const cardOffset = targetCard.offsetTop - navigationHeight; // Adjust for navigation height
           window.scrollTo({ top: cardOffset, behavior: "smooth" });
         }
       });
@@ -75,7 +78,7 @@ export default class extends Controller {
         const targetId = tab.getAttribute("href").slice(1);
         const targetElement = document.getElementById(targetId);
         if (targetElement) {
-          const top = targetElement.offsetTop - 200;
+          const top = targetElement.offsetTop - navigationHeight - 200; // Adjust for navigation height
           const height = targetElement.offsetHeight;
           if (scrollPos >= top && scrollPos < top + height) {
             // Remove active class from all tabs
