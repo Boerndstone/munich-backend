@@ -175,6 +175,26 @@
 						</div>
 					</div>
 				{% endif %}
+				{% if jsonData %}
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="headingBilder">
+							<button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBilder" aria-expanded="false" aria-controls="collapseBilder">
+								Bilder
+							</button>
+						</h2>
+						<div id="collapseBilder" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+							<div class="accordion-body row mx-0" data-controller="off-canvas-gallery">
+								{% for data in jsonData %}
+									<div class="col-3 col-md-4 mb-1">
+										<a class="lg-item" data-target="lg-item" data-src="{{ data.src }}">
+											<img src="{{ data.thumb }}" class="w-100 shadow-1-strong mb-3" alt="{{ data.subHtml }}"/>
+										</a>
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+				{% endif %}
 			</div>
 		</div>
 	</div>

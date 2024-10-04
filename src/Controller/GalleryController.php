@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Repository\PhotosRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
 
 class GalleryController extends AbstractController
 {
