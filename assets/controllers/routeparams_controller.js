@@ -1,14 +1,21 @@
 import { Controller } from "stimulus";
 
 export default class extends Controller {
-  static targets = ["star", "protection", "route-rock-quality"];
+  static targets = ["rating", "protection", "route-rock-quality"];
 
   connect() {
-    const ratingValue = this.data.get("rating");
+    const ratingValue = parseInt(this.data.get("rating"), 10);
     const rockQuality = this.data.get("route-rock-quality");
     const protectionValue = this.data.get("protection");
-    this.starTarget.innerHTML =
-      '<div class="star d-inline-block"></div>'.repeat(ratingValue);
+    if (ratingValue === -1) {
+      this.ratingTarget.innerHTML = '<div class="trash d-inline-block"></div>';
+    } else if (ratingValue > 0) {
+      this.ratingTarget.innerHTML =
+        '<div class="star d-inline-block"></div>'.repeat(ratingValue);
+    } else {
+      this.ratingTarget.innerHTML = "";
+    }
+    console.log(typeof ratingValue);
     if (protectionValue == 2) {
       this.protectionTarget.innerHTML =
         '<div class="exclamation d-inline-block"></div>';

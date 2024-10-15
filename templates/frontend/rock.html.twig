@@ -53,15 +53,6 @@
 									</ol>
 								</nav>
 							</div>
-							{# <div class="d-flex items-center align-self-start">
-																																																																																					{% if jsonData %}
-																																																																																						<div data-controller="gallery" data-gallery-data="{{ jsonData|json_encode }}" class="ms-2 d-inline-block">
-																																																																																							<button id="open-gallery-btn" class="btn btn-sm btn-primary p-1 rounded-circle shadow">
-																																																																																								<div class="image-gallery"></div>
-																																																																																							</button>
-																																																																																						</div>
-																																																																																					{% endif %}
-																																																																																				</div> #}
 						</div>
 					</div>
 				</div>
@@ -114,11 +105,6 @@
 						{% set topoSvg = routeData.topoSvg %}
 						{% set groupedRoutes = groupedRoutes|merge({
 (topoName): groupedRoutes[topoName]|default([])|merge([{'routeName': routeData.routeName, 'routeRating': routeData.routeRating, 'routeProtection': routeData.routeProtection, 'rockQuality': routeData.rockQuality, 'areaId': routeData.areaId, 'rockId': routeData.rockId, 'routeId': routeData.routeId, 'routefirstAscent': routeData.routefirstAscent, 'routeyearFirstAscent': routeData.routeyearFirstAscent, 'routeDescription': routeData.routeDescription, 'routeComment': routeData.routeComment, 'routeGrade': routeData.routeGrade, 'topoSvg': routeData.topoSvg, 'withSector': routeData.withSector, 'videoLink': routeData.videoLink}]) })
-
-
-
-
-
 						%}
 					{% endfor %}
 
@@ -152,7 +138,7 @@
 														<div class="d-flex items-bottom">
 															<span class="me-1 mb-0 pb-0">{{ route.routeName }}</span>
 															<span class="mb-0 pb-0" style="line-height: 0;" data-controller="routeparams" data-routeparams-rating="{{ route.routeRating }}" data-routeparams-protection="{{ route.routeProtection }}" data-routeparams-route-rock-quality="{{ route.rockQuality }}">
-																<span data-routeparams-target="star"></span>
+																<span data-routeparams-target="rating"></span>
 																<span data-routeparams-target="protection"></span>
 																<span data-routeparams-target="route-rock-quality"></span>
 															</span>
