@@ -15,7 +15,6 @@ export default class extends Controller {
     } else {
       this.ratingTarget.innerHTML = "";
     }
-    console.log(typeof ratingValue);
     if (protectionValue == 2) {
       this.protectionTarget.innerHTML =
         '<div class="exclamation d-inline-block"></div>';
