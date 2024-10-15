@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 
 class RoutesCrudController extends AbstractCrudController
@@ -142,6 +143,13 @@ class RoutesCrudController extends AbstractCrudController
                     'gefährlich' => '3',
                 ]
             );
+        yield BooleanField::new('rock_quality')
+            ->setLabel('Felsqualität')
+            ->hideOnIndex()
+            ->setColumns('col-12')
+            ->setHelp('Wenn aktiv, dann wird die Felsqualität zweifelhaft!')
+            ->setTemplatePath('admin/field/votes.html.twig');
+
         yield Field::new('description')
             ->setLabel('Beschreibung')
             ->setColumns('col-12')

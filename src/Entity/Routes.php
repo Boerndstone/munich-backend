@@ -73,6 +73,9 @@ class Routes
     #[ORM\ManyToOne(inversedBy: 'routes', fetch: 'EXTRA_LAZY')]
     private ?Topo $topo = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $rockQuality = null;
+
     public function __construct()
     {
         $this->climbedRoutes = new ArrayCollection();
@@ -338,6 +341,18 @@ class Routes
     public function setTopo(?Topo $topo): self
     {
         $this->topo = $topo;
+
+        return $this;
+    }
+
+    public function isRockQuality(): ?bool
+    {
+        return $this->rockQuality;
+    }
+
+    public function setRockQuality(?bool $rockQuality): static
+    {
+        $this->rockQuality = $rockQuality;
 
         return $this;
     }
