@@ -256,6 +256,10 @@ class FrontendController extends AbstractController
 
         $areas = $footerAreas->getFooterAreas();
 
+        if ($rock->getOnline() == 0) {
+            throw $this->createNotFoundException('The rock does not exist');
+        }
+
         return $this->render('frontend/rock.html.twig', [
             'areaName' => $areaName,
             'areas' => $areas,
