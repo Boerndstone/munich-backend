@@ -75,9 +75,6 @@ class Rock
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private ?string $headerImage = null;
 
-    #[ORM\Column(type: Types::INTEGER, nullable: true)]
-    protected ?int $topo = null;
-
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 6, nullable: true)]
     private ?string $lat = null;
 
@@ -309,18 +306,6 @@ class Rock
     public function setHeaderImage(?string $headerImage): self
     {
         $this->headerImage = $headerImage;
-
-        return $this;
-    }
-
-    public function getTopo(): ?int
-    {
-        return $this->topo;
-    }
-
-    public function setTopo(?int $topo): self
-    {
-        $this->topo = $topo;
 
         return $this;
     }

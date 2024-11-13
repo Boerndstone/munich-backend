@@ -70,9 +70,6 @@ class Routes
     #[ORM\OneToMany(mappedBy: 'route', targetEntity: Comment::class)]
     private Collection $comments;
 
-    #[ORM\ManyToOne(inversedBy: 'routes', fetch: 'EXTRA_LAZY')]
-    private ?Topo $topo = null;
-
     #[ORM\Column(nullable: true)]
     private ?bool $rockQuality = null;
 
@@ -329,18 +326,6 @@ class Routes
                 $comment->setRoute(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getTopo(): ?Topo
-    {
-        return $this->topo;
-    }
-
-    public function setTopo(?Topo $topo): self
-    {
-        $this->topo = $topo;
 
         return $this;
     }

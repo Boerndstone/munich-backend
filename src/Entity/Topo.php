@@ -14,7 +14,8 @@ class Topo
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'topo')]
+    #[ORM\ManyToOne(targetEntity: Rock::class)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Rock $rocks = null;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
