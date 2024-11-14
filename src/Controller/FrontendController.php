@@ -7,7 +7,7 @@ use App\Entity\Rock;
 use App\Entity\Contact;
 use App\Service\FooterAreas;
 use App\Form\ContactFormType;
-use Doctrine\ORM\Mapping\Entity;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use App\Repository\AreaRepository;
 use App\Repository\RockRepository;
 use App\Repository\TopoRepository;
@@ -162,7 +162,7 @@ class FrontendController extends AbstractController
     public function showRocksArea(
         AreaRepository $areaRepository,
         RockRepository $rockRepository,
-        Area $area,
+        #[MapEntity] Area $area,
         string $slug,
         FooterAreas $footerAreas
     ): Response {
@@ -199,7 +199,7 @@ class FrontendController extends AbstractController
         RockRepository $rockRepository,
         TopoRepository $topoRepository,
         PhotosRepository $photosRepository,
-        Rock $rock,
+        #[MapEntity] Rock $rock,
         $areaSlug,
         $slug,
         FooterAreas $footerAreas,

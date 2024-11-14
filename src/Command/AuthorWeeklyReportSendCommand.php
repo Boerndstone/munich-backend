@@ -36,7 +36,7 @@ class AuthorWeeklyReportSendCommand extends Command
         $this->mailer = $mailer;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setDescription('Send weekly reports to authors');
