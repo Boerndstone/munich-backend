@@ -268,12 +268,6 @@ class RockCrudController extends AbstractCrudController
             ->hideOnDetail()
             ->setColumns('col-12');
 
-        yield Field::new('topo')
-            ->setLabel('Topo')
-            ->hideOnIndex()
-            ->hideOnDetail()
-            ->setColumns('col-12');
-
         yield NumberField::new('lat')
             ->setLabel('Breitengrad')
             ->setNumDecimals(6)
