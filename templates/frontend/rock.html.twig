@@ -69,7 +69,7 @@
 						<ul class="p-0">
 							{% for topo in topos %}
 								<li>
-									<a class="d-inline-block py-2 text-black fw-medium" href="#{{ topo.topoName|custom_replace }}">{{ topo.topoName }}</a>
+									<a class="d-inline-block py-2 text-black fw-medium" href="#{{ topo.topoName|custom_replace|lower }}">{{ topo.topoName }}</a>
 								</li>
 							{% endfor %}
 						</ul>
@@ -110,7 +110,7 @@
 					{% endfor %}
 
 					{% for topoName, routes in groupedRoutes %}
-						<div class="card mt-3 overflow-hidden" id="{{ topoName|custom_replace}}">
+						<div class="card mt-3 overflow-hidden" id="{{ topoName|custom_replace|lower }}">
 							<div class="card-body p-0">
 								<section>
 									{% set hasWithSector = false %}
