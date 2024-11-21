@@ -12,14 +12,6 @@ login:
   path: /login
   controller: App\Controller\SecurityController::app_login
 
-datenschutz:
-  path: /Datenschutz
-  controller: App\Controller\FrontendController::datenschutz
-
-impressum:
-  path: /Impressum
-  controller: App\Controller\FrontendController::impressum
-
 show_rock:
   path: /{areaSlug}/{slug}
   controller: App\Controller\FrontendController::showRock

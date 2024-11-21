@@ -17,7 +17,7 @@ class AppExtension extends AbstractExtension
         $this->footerAreas = $footerAreas;
     }
 
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('getAreas', [$this, 'getAreas']),
@@ -29,7 +29,7 @@ class AppExtension extends AbstractExtension
         return $this->footerAreas->getFooterAreas();
     }
 
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('custom_replace', [$this, 'customReplaceFilter']),
