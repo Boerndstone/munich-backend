@@ -73,13 +73,6 @@ class CommentCrudController extends AbstractCrudController
                 return $action
                     ->setLabel('Löschen');
             });
-
-        return parent::configureActions($actions)
-            ->setPermission(Action::INDEX, 'ROLE_SUPER_ADMIN')
-            ->setPermission(Action::DETAIL, 'ROLE_SUPER_ADMIN')
-            ->setPermission(Action::EDIT, 'ROLE_SUPER_ADMIN')
-            ->setPermission(Action::NEW, 'ROLE_SUPER_ADMIN')
-            ->setPermission(Action::DELETE, 'ROLE_SUPER_ADMIN');
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -89,10 +82,10 @@ class CommentCrudController extends AbstractCrudController
             ->setPageTitle(Crud::PAGE_NEW, 'Kommentare zur Route hinzufügen')
             ->showEntityActionsInlined()
             ->setPageTitle(Crud::PAGE_EDIT, static function (Comment $comment) {
-                return sprintf($comment->getComment());
+                return $comment->getComment();
             })
             ->setPageTitle(Crud::PAGE_DETAIL, static function (Comment $comment) {
-                return sprintf($comment->getComment());
+                return $comment->getComment();
             })
             ->setFormOptions(['attr' => ['novalidate' => null]]);
     }

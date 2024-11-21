@@ -75,13 +75,6 @@ class RoutesCrudController extends AbstractCrudController
                 return $action
                     ->setLabel('Löschen');
             });
-
-        return parent::configureActions($actions)
-            ->setPermission(Action::INDEX, 'ROLE_MODERATOR')
-            ->setPermission(Action::DETAIL, 'ROLE_MODERATOR')
-            ->setPermission(Action::EDIT, 'ROLE_MODERATOR')
-            ->setPermission(Action::NEW, 'ROLE_SUPER_ADMIN')
-            ->setPermission(Action::DELETE, 'ROLE_SUPER_ADMIN');
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -91,10 +84,10 @@ class RoutesCrudController extends AbstractCrudController
             ->setPageTitle(Crud::PAGE_NEW, 'Neue Route hinzufügen')
             ->showEntityActionsInlined()
             ->setPageTitle(Crud::PAGE_EDIT, static function (Routes $routes) {
-                return sprintf($routes->getName());
+                return $routes->getName();
             })
             ->setPageTitle(Crud::PAGE_DETAIL, static function (Routes $routes) {
-                return sprintf($routes->getName());
+                return $routes->getName();
             })
             ->setFormOptions(['attr' => ['novalidate' => null]]);
     }

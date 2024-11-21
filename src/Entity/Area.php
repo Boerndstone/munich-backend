@@ -140,11 +140,9 @@ class Area
 
     public function removeRock(Rock $rock): self
     {
-        if ($this->rocks->removeElement($rock)) {
-            // set the owning side to null (unless already changed)
-            if ($rock->getarea() === $this) {
-                $rock->setarea(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->rocks->removeElement($rock) && $rock->getarea() === $this) {
+            $rock->setarea(null);
         }
 
         return $this;

@@ -73,7 +73,7 @@ class AreaCrudController extends AbstractCrudController
             ->setPageTitle(Crud::PAGE_NEW, 'Gebiete anlegen')
             ->showEntityActionsInlined()
             ->setPageTitle(Crud::PAGE_EDIT, static function (Area $area) {
-                return sprintf($area->getName());
+                return $area->getName();
             })
             ->setFormOptions(['attr' => ['novalidate' => null]]);
     }

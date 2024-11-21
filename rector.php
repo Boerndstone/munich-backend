@@ -2,15 +2,22 @@
 
 declare(strict_types=1);
 
-use Rector\Symfony\Set\SymfonySetList;
 use Rector\Config\RectorConfig;
+use Rector\Set\ValueObject\SetList;
+use Rector\Symfony\Set\SymfonySetList;
 
 return static function (RectorConfig $rectorConfig): void {
-    $rectorConfig->symfonyContainerXml(__DIR__ . '/var/cache/dev/App_KernelDevDebugContainer.xml');
-
-    $rectorConfig->sets([
-        SymfonySetList::SYMFONY_62,
-        SymfonySetList::SYMFONY_CODE_QUALITY,
-        SymfonySetList::SYMFONY_CONSTRUCTOR_INJECTION,
+    $rectorConfig->paths([
+        __DIR__ . '/src',
+        __DIR__ . '/tests',
     ]);
+
+    // Define the sets of rules to apply
+    $rectorConfig->sets([
+        SetList::CODE_QUALITY,
+        SetList::DEAD_CODE,
+        SymfonySetList::SYMFONY_60,
+    ]);
+
+    // Additional rules can be added here
 };

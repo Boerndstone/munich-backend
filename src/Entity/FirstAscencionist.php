@@ -78,11 +78,9 @@ class FirstAscencionist
 
     public function removeRealtion(Routes $realtion): static
     {
-        if ($this->realtion->removeElement($realtion)) {
-            // set the owning side to null (unless already changed)
-            if ($realtion->getRelatesToRoute() === $this) {
-                $realtion->setRelatesToRoute(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->realtion->removeElement($realtion) && $realtion->getRelatesToRoute() === $this) {
+            $realtion->setRelatesToRoute(null);
         }
 
         return $this;

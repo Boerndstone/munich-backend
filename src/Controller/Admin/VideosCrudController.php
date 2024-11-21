@@ -64,13 +64,6 @@ class VideosCrudController extends AbstractCrudController
                 return $action
                     ->setLabel('Löschen');
             });
-
-        return parent::configureActions($actions)
-            ->setPermission(Action::INDEX, 'ROLE_MODERATOR')
-            ->setPermission(Action::DETAIL, 'ROLE_MODERATOR')
-            ->setPermission(Action::EDIT, 'ROLE_MODERATOR')
-            ->setPermission(Action::NEW, 'ROLE_SUPER_ADMIN')
-            ->setPermission(Action::DELETE, 'ROLE_SUPER_ADMIN');
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -80,10 +73,10 @@ class VideosCrudController extends AbstractCrudController
             ->setPageTitle(Crud::PAGE_NEW, 'Video hinzufügen')
             ->showEntityActionsInlined()
             ->setPageTitle(Crud::PAGE_EDIT, static function (Videos $videos) {
-                return sprintf($videos->getVideoRoutes());
+                return $videos->getVideoRoutes();
             })
             ->setPageTitle(Crud::PAGE_DETAIL, static function (Videos $videos) {
-                return sprintf($videos->getVideoRoutes());
+                return $videos->getVideoRoutes();
             })
             ->setFormOptions(['attr' => ['novalidate' => null]]);
     }

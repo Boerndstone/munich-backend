@@ -75,10 +75,10 @@ class TopoCrudController extends AbstractCrudController
             ->setPageTitle(Crud::PAGE_NEW, 'Topo hinzufügen')
             ->showEntityActionsInlined()
             ->setPageTitle(Crud::PAGE_EDIT, static function (Topo $topo) {
-                return sprintf($topo->getName());
+                return $topo->getName();
             })
             ->setPageTitle(Crud::PAGE_DETAIL, static function (Topo $topo) {
-                return sprintf($topo->getName());
+                return $topo->getName();
             })
             ->setFormOptions(['attr' => ['novalidate' => null]]);
     }

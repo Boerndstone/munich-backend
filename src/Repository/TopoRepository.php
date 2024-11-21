@@ -24,7 +24,7 @@ class TopoRepository extends ServiceEntityRepository
      */
     public function getTopos($rockId): array
     {
-        $queryBuilder = $this->createQueryBuilder('topo')
+        return $this->createQueryBuilder('topo')
             ->select(
                 'topo.name as topoName',
                 'topo.number as topoNumber'
@@ -36,7 +36,6 @@ class TopoRepository extends ServiceEntityRepository
             ->orderBy('topo.number', 'ASC')
             ->getQuery()
             ->getResult();
-        return $queryBuilder;
     }
 
 

@@ -75,10 +75,10 @@ class PhotosCrudController extends AbstractCrudController
             ->setPageTitle(Crud::PAGE_NEW, 'Foto hinzufügen')
             ->showEntityActionsInlined()
             ->setPageTitle(Crud::PAGE_EDIT, static function (Photos $photos) {
-                return sprintf($photos->getBelongsToRoute());
+                return $photos->getBelongsToRoute();
             })
             ->setPageTitle(Crud::PAGE_DETAIL, static function (Photos $photos) {
-                return sprintf($photos->getBelongsToRoute());
+                return $photos->getBelongsToRoute();
             })
             ->setFormOptions(['attr' => ['novalidate' => null]]);
     }

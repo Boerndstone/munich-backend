@@ -81,8 +81,8 @@ class Routes
 
     public function __toString(): string
     {
-        $rockName = $this->getRock() ? $this->getRock()->getName() : 'No rock';
-        $areaName = $this->getArea() ? $this->getArea()->getName() : 'No area';
+        $rockName = $this->getRock() instanceof \App\Entity\Rock ? $this->getRock()->getName() : 'No rock';
+        $areaName = $this->getArea() instanceof \App\Entity\Area ? $this->getArea()->getName() : 'No area';
         $routeName = $this->getName() ? $this->getName() : 'No route';
 
         return $routeName . ' - ' . $rockName . ' - ' . $areaName;
@@ -320,11 +320,9 @@ class Routes
 
     public function removeComment(Comment $comment): static
     {
-        if ($this->comments->removeElement($comment)) {
-            // set the owning side to null (unless already changed)
-            if ($comment->getRoute() === $this) {
-                $comment->setRoute(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->comments->removeElement($comment) && $comment->getRoute() === $this) {
+            $comment->setRoute(null);
         }
 
         return $this;

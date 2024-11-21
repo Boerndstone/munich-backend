@@ -146,7 +146,7 @@ class FrontendController extends AbstractController
         $areas = $areaRepository->getAreasInformation();
         $sideBar = $areaRepository->sidebarNavigation();
         $searchTerm = $request->query->get('q');
-        $searchRoutes = $areaRepository->search($searchTerm);
+        $areaRepository->search($searchTerm);
         //dd($searchRoutes);
 
         return $this->render('frontend/index.html.twig', [

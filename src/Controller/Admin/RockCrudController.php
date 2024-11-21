@@ -88,10 +88,10 @@ class RockCrudController extends AbstractCrudController
             ->setPageTitle(Crud::PAGE_NEW, 'Neuen Fels anlegen')
             ->showEntityActionsInlined()
             ->setPageTitle(Crud::PAGE_EDIT, static function (Rock $rock) {
-                return sprintf($rock->getName());
+                return $rock->getName();
             })
             ->setPageTitle(Crud::PAGE_DETAIL, static function (Rock $rock) {
-                return sprintf($rock->getName());
+                return $rock->getName();
             });
     }
 

@@ -66,13 +66,11 @@ class CommentRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
 
-        $structuredResults = array_map(function ($result) {
+        return array_map(function ($result) {
             return [
                 'commentComment' => $result['commentComment'],
                 'routeName' => $result['routeName'],
             ];
         }, $results);
-
-        return $structuredResults;
     }
 }

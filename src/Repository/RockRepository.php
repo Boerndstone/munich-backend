@@ -36,9 +36,8 @@ class RockRepository extends ServiceEntityRepository
         $query = $this->pdo->prepare($sql);
         $query->bindParam(':amountRocks', $amount_rocks);
         $query->execute();
-        $rocks = $query->rowCount();
 
-        return $rocks;
+        return $query->rowCount();
     }
 
     /**
@@ -67,7 +66,7 @@ class RockRepository extends ServiceEntityRepository
      */
     public function findRocksAreaName($areaSlug): array
     {
-        $queryBuilder = $this->createQueryBuilder('rock')
+        return $this->createQueryBuilder('rock')
             // ->orderBy('rock.id', 'ASC')
             ->leftJoin('rock.area', 'area')
             ->addSelect('rock')
@@ -75,8 +74,6 @@ class RockRepository extends ServiceEntityRepository
             ->setParameter('areaSlug', $areaSlug)
             ->getQuery()
             ->getResult();
-
-        return $queryBuilder;
     }
 
     /**
@@ -95,26 +92,22 @@ class RockRepository extends ServiceEntityRepository
      */
     public function findRockName($rockSlug): array
     {
-        $queryBuilder = $this->createQueryBuilder('rock')
+        return $this->createQueryBuilder('rock')
             ->select('rock')
             ->where('rock.slug LIKE :rockSlug')
             ->setParameter('rockSlug', $rockSlug)
             ->getQuery()
             ->getResult();
-
-        return $queryBuilder;
     }
 
     public function getRockId($rockSlug)
     {
-        $queryBuilder = $this->createQueryBuilder('rock')
+        return $this->createQueryBuilder('rock')
             ->select('rock.id')
             ->where('rock.slug LIKE :rockSlug')
             ->setParameter('rockSlug', $rockSlug)
             ->getQuery()
             ->getSingleScalarResult();
-
-        return $queryBuilder;
     }
 
     public function saisonalGesperrt()
@@ -131,7 +124,7 @@ class RockRepository extends ServiceEntityRepository
 
     public function getRocksInformation($areaSlug)
     {
-        $queryBuilder = $this->createQueryBuilder('rock')
+        return $this->createQueryBuilder('rock')
             ->select(
                 'rock.name as rockName',
                 'rock.slug as rockSlug',
@@ -162,13 +155,11 @@ class RockRepository extends ServiceEntityRepository
             ->groupBy('rock.id')
             ->getQuery()
             ->getResult();
-
-        return $queryBuilder;
     }
 
     public function getRockInformation($rockSlug)
     {
-        $queryBuilder = $this->createQueryBuilder('rock')
+        return $this->createQueryBuilder('rock')
             ->select(
                 'rock.name as rockName',
                 'rock.slug as rockSlug',
@@ -206,13 +197,11 @@ class RockRepository extends ServiceEntityRepository
             ->groupBy('rock.id')
             ->getQuery()
             ->getResult();
-
-        return $queryBuilder;
     }
 
     public function getRoutesTopo($rockSlug)
     {
-        $queryBuilder = $this->createQueryBuilder('rock')
+        return $this->createQueryBuilder('rock')
             ->select(
                 'area.id as areaId',
                 'rock.id as rockId',
@@ -248,8 +237,6 @@ class RockRepository extends ServiceEntityRepository
             ->addOrderBy('routes.nr', 'ASC')
             ->getQuery()
             ->getResult();
-
-        return $queryBuilder;
     }
 
     public function getCommentsForRoutes($rockSlug)
