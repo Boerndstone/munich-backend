@@ -28,4 +28,4 @@ yarn-error.log
 composer.lock
 symfony.lock
 
-.DS_Store
+**/.DS_Store
