@@ -1,0 +1,41 @@
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Dependencies
+node_modules
+vendor
+
+# Cache and logs
+var/cache/*
+var/log/*
+var/sessions/*
+!var/cache/.gitkeep
+!var/log/.gitkeep
+!var/sessions/.gitkeep
+
+# Built assets
+public/build/*
+
+# Environment files
+.env.local
+.env.local.php
+.env.*.local
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+phpunit.xml

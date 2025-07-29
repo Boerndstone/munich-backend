@@ -16,3 +16,30 @@
 ### Rebase
 
 - git pull origin main --rebase
+
+# General container management
+
+make up # Start all containers
+make down # Stop all containers  
+make restart # Restart all containers
+make logs # View all logs
+make shell # Access application container
+
+# Development commands
+
+make composer # Install/update PHP dependencies
+make yarn # Install/update Node dependencies
+make build-assets # Build frontend assets
+make cache-clear # Clear Symfony cache
+
+# Database commands
+
+make migration-diff # Generate new migration
+make migration-migrate # Run pending migrations
+make db-reset # Reset database (⚠️ deletes all data)
+make db-import # Import SQL dump (requires munich.sql file)
+
+# Or use docker-compose directly:
+
+docker-compose exec app php bin/console [command]
+docker-compose exec app bash

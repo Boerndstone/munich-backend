@@ -1,0 +1,11 @@
+twig:
+  file_name_pattern: "*.twig"
+  paths:
+    "assets/css": styles
+
+when@test:
+  twig:
+    strict_variables: true
+    form_themes:
+      - "bootstrap_5_layout.html.twig"
+      # - "FormThemes/bootstrap_5_layout.html.twig"

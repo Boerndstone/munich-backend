@@ -29,3 +29,10 @@ composer.lock
 symfony.lock
 
 **/.DS_Store
+
+###> Docker ###
+.env.docker
+munich.sql
+munich.sql.backup
+munich_fixed.sql
+###< Docker ###
